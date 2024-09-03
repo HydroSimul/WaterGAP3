@@ -43,15 +43,15 @@ EDCHM_WaterGAP3(
   basin_cellNumberStep_int,
   basin_inflowCellNumberStep_int,
   param_atmos_thr_Ts,
-  param_baseflow_grf_gamma,
+  param_snow_fac_f,
+  param_snow_fac_Tmelt,
   param_evatrans_tur_k,
   param_evatrans_ubc_gamma,
   param_evatrans_vic_gamma,
   param_infilt_hbv_beta,
   param_percola_arn_k,
   param_percola_arn_thresh,
-  param_snow_fac_f,
-  param_snow_fac_Tmelt,
+  param_baseflow_grf_gamma,
   param_lake_acp_storeFactor,
   param_lake_acp_gamma,
   param_riverlake_lin_storeFactor,
@@ -134,7 +134,9 @@ EDCHM_WaterGAP3(
 
 \item{param_atmos_thr_Ts}{<-1, 3> (Cel) threshold air temperature that snow, parameter for [atmosSnow_ThresholdT()]}
 
-\item{param_baseflow_grf_gamma}{<2, 7> exponential parameter for [baseflow_GR4Jfix()]}
+\item{param_snow_fac_f}{<0.05, 2> (mm/m2/h/Cel) potential melt volum per Cel per hour parameter for [snowMelt_Factor()]}
+
+\item{param_snow_fac_Tmelt}{<0, 3> (Cel) snow melt temperature parameter for [snowMelt_Factor()]}
 
 \item{param_evatrans_tur_k}{<0.6, 1> parameter for [evatransPotential_TurcWendling()], higher value when closer to the sea}
 
@@ -148,9 +150,7 @@ EDCHM_WaterGAP3(
 
 \item{param_percola_arn_thresh}{<0.1, 0.9> coefficient parameter for [percola_ThreshPow()]}
 
-\item{param_snow_fac_f}{<0.05, 2> (mm/m2/h/Cel) potential melt volum per Cel per hour parameter for [snowMelt_Factor()]}
-
-\item{param_snow_fac_Tmelt}{<0, 3> (Cel) snow melt temperature parameter for [snowMelt_Factor()]}
+\item{param_baseflow_grf_gamma}{<2, 7> exponential parameter for [baseflow_GR4Jfix()]}
 
 \item{param_lake_acp_storeFactor}{<uknow> parameter for [lake_AcceptPow()],}
 
