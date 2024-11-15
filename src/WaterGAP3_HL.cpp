@@ -169,20 +169,20 @@ List WaterGAP3_HL(
    // out_snowice(i, _) = snow_ice_mm;
    // out_snowmelt(i, _) = snow_melt_mm;
    out_land_outflow(i, _) = land_outflow_m3;
-   // out_river_water(i, _) = river_water_m3;
-   // out_riverlake_water(i, _) = riverlake_water_m3;
+   out_river_water(i, _) = river_water_m3;
+   out_riverlake_water(i, _) = riverlake_water_m3;
    out_lake_evatrans(i, _) = lake_evatrans_mm;
    out_riverlake_evatrans(i, _) = riverlake_evatrans_mm;
 
  }
 
  return List::create(
-   _["precipitation_mm"] = atmos_precipitation_mm,
+   // _["precipitation_mm"] = atmos_precipitation_mm,
    // _["temperature_Cel"] = atmos_temperature_Cel,
    // _["solarRadiat_MJ"] = atmos_solarRadiat_MJ,
    // _["snowFall_mm"] = out_snow,
    // _["evatransPot_mm"] = out_evatransPot,
-   _["evatrans_mm"] = out_evatrans,
+   // _["evatrans_mm"] = out_evatrans,
    // _["soilwater_mm"] = out_soilwater,
    // _["groundwater_mm"] = out_groundwater,
    // _["snowice_mm"] = out_snowice,
@@ -190,8 +190,8 @@ List WaterGAP3_HL(
    _["runoff_mm"] = land_runoff_mm,
    _["runoff_m3"] = out_land_outflow,
    _["baseflow_mm"] = ground_baseflow_mm,
-   // _["river_water_m3"] = out_river_water,
-   // _["riverlake_water_m3"] = out_riverlake_water,
+   _["river_water_m3"] = out_river_water,
+   _["riverlake_water_m3"] = out_riverlake_water,
    _["lake_evatrans_mm"] = out_lake_evatrans,
    _["riverlake_evatrans_mm"] = out_riverlake_evatrans,
    _["streamflow_m3"] = river_outflow_m3
