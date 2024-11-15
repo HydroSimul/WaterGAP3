@@ -188,10 +188,10 @@ List WaterGAP3_HL(
    _["runoff_mm"] = land_runoff_mm,
    _["runoff_m3"] = out_land_outflow,
    _["baseflow_mm"] = ground_baseflow_mm,
-   _["river_water_m3"] = river_water_m3,
-   _["riverlake_water_m3"] = riverlake_water_m3,
-   _["lake_evatrans_mm"] = lake_evatrans_mm,
-   _["riverlake_evatrans_mm"] = riverlake_evatrans_mm,
+   _["river_water_m3"] = out_river_water,
+   _["riverlake_water_m3"] = out_riverlake_water,
+   _["lake_evatrans_mm"] = out_lake_evatrans,
+   _["riverlake_evatrans_mm"] = out_riverlake_evatrans,
    _["streamflow_m3"] = river_outflow_m3
  );
 }
