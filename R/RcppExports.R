@@ -173,14 +173,14 @@ reservoir_Hanasaki <- function(reservoir_water_m3, reservoir_inflow_m3, reservoi
 
 #' @rdname process
 #' @export
-confluen_WaterGAP3_L <- function(confluen_cellInflow_m3, river_water_m3, river_length_km, river_velocity_km, riverlake_cellNumber_int, riverlake_water_m3, riverlake_capacity_m3, basin_cellNumberStep_int, basin_inflowCellNumberStep_int, param_lake_acp_storeFactor, param_lake_acp_gamma, param_riverlake_lin_storeFactor) {
-    .Call(`_WaterGAP3_confluen_WaterGAP3_L`, confluen_cellInflow_m3, river_water_m3, river_length_km, river_velocity_km, riverlake_cellNumber_int, riverlake_water_m3, riverlake_capacity_m3, basin_cellNumberStep_int, basin_inflowCellNumberStep_int, param_lake_acp_storeFactor, param_lake_acp_gamma, param_riverlake_lin_storeFactor)
+confluen_WaterGAP3_L <- function(confluen_cellInflow_m3, river_water_m3, river_length_km, river_velocity_km, riverlake_cellNumber_int, riverlake_water_m3, riverlake_capacity_m3, basin_cellNumberStep_int, basin_inflowCellNumberStep_int, param_riverlake_lin_storeFactor) {
+    .Call(`_WaterGAP3_confluen_WaterGAP3_L`, confluen_cellInflow_m3, river_water_m3, river_length_km, river_velocity_km, riverlake_cellNumber_int, riverlake_water_m3, riverlake_capacity_m3, basin_cellNumberStep_int, basin_inflowCellNumberStep_int, param_riverlake_lin_storeFactor)
 }
 
 #' @rdname process
 #' @export
-confluen_WaterGAP3_LR <- function(confluen_cellInflow_m3, river_water_m3, river_length_km, river_velocity_km, riverlake_cellNumber_int, riverlake_water_m3, riverlake_capacity_m3, reservoir_cellNumber_int, reservoir_water_m3, reservoir_capacity_m3, reservoir_demand_m3, reservoir_yearInflow_m3, reservoir_yearDemand_m3, reservoir_yearRelase_m3, reservoir_isOperateStart_01, reservoir_isIrrigate_01, basin_cellNumberStep_int, basin_inflowCellNumberStep_int, param_lake_acp_storeFactor, param_lake_acp_gamma, param_riverlake_lin_storeFactor, param_reservoir_han_alpha, param_reservoir_han_kDemand) {
-    .Call(`_WaterGAP3_confluen_WaterGAP3_LR`, confluen_cellInflow_m3, river_water_m3, river_length_km, river_velocity_km, riverlake_cellNumber_int, riverlake_water_m3, riverlake_capacity_m3, reservoir_cellNumber_int, reservoir_water_m3, reservoir_capacity_m3, reservoir_demand_m3, reservoir_yearInflow_m3, reservoir_yearDemand_m3, reservoir_yearRelase_m3, reservoir_isOperateStart_01, reservoir_isIrrigate_01, basin_cellNumberStep_int, basin_inflowCellNumberStep_int, param_lake_acp_storeFactor, param_lake_acp_gamma, param_riverlake_lin_storeFactor, param_reservoir_han_alpha, param_reservoir_han_kDemand)
+confluen_WaterGAP3_LR <- function(confluen_cellInflow_m3, river_water_m3, river_length_km, river_velocity_km, riverlake_cellNumber_int, riverlake_water_m3, riverlake_capacity_m3, reservoir_cellNumber_int, reservoir_water_m3, reservoir_capacity_m3, reservoir_demand_m3, reservoir_yearInflow_m3, reservoir_yearDemand_m3, reservoir_yearRelase_m3, reservoir_isOperateStart_01, reservoir_isIrrigate_01, basin_cellNumberStep_int, basin_inflowCellNumberStep_int, param_riverlake_lin_storeFactor, param_reservoir_han_alpha, param_reservoir_han_kDemand) {
+    .Call(`_WaterGAP3_confluen_WaterGAP3_LR`, confluen_cellInflow_m3, river_water_m3, river_length_km, river_velocity_km, riverlake_cellNumber_int, riverlake_water_m3, riverlake_capacity_m3, reservoir_cellNumber_int, reservoir_water_m3, reservoir_capacity_m3, reservoir_demand_m3, reservoir_yearInflow_m3, reservoir_yearDemand_m3, reservoir_yearRelase_m3, reservoir_isOperateStart_01, reservoir_isIrrigate_01, basin_cellNumberStep_int, basin_inflowCellNumberStep_int, param_riverlake_lin_storeFactor, param_reservoir_han_alpha, param_reservoir_han_kDemand)
 }
 
 # Register entry points for exported C++ functions

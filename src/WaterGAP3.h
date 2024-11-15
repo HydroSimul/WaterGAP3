@@ -77,8 +77,6 @@ NumericVector confluen_WaterGAP3_L(
     NumericVector riverlake_capacity_m3,
     List basin_cellNumberStep_int,
     List basin_inflowCellNumberStep_int,
-    NumericVector param_lake_acp_storeFactor,
-    NumericVector param_lake_acp_gamma,
     NumericVector param_riverlake_lin_storeFactor
 );
 
@@ -102,8 +100,6 @@ NumericVector confluen_WaterGAP3_LR(
     LogicalVector reservoir_isIrrigate_01,
     List basin_cellNumberStep_int,
     List basin_inflowCellNumberStep_int,
-    NumericVector param_lake_acp_storeFactor,
-    NumericVector param_lake_acp_gamma,
     NumericVector param_riverlake_lin_storeFactor,
     NumericVector param_reservoir_han_alpha,
     NumericVector param_reservoir_han_kDemand

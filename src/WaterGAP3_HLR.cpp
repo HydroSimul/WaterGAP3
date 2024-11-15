@@ -185,8 +185,6 @@ List WaterGAP3_HLR(
      reservoir_isIrrigate_01,
      basin_cellNumberStep_int,
      basin_inflowCellNumberStep_int,
-     param_lake_acp_storeFactor,
-     param_lake_acp_gamma,
      param_riverlake_lin_storeFactor,
      param_reservoir_han_alpha,
      param_reservoir_han_kDemand

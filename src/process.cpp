@@ -216,14 +216,15 @@ NumericVector riverlake_LinearResorvoir(
    NumericVector param_riverlake_lin_storeFactor
 )
 {
- riverlake_water_m3 += riverlake_inflow_m3;
+
+
 
  NumericVector riverlake_outflow_m3 = riverlake_water_m3 * (1 - exp(-1. / param_riverlake_lin_storeFactor)) + riverlake_inflow_m3 * (1 - param_riverlake_lin_storeFactor * (1 - exp(-1. / param_riverlake_lin_storeFactor)));
 
- NumericVector riverlake_overflow_m3 = pmax(riverlake_water_m3 -  riverlake_capacity_m3, 0);
- riverlake_water_m3 = pmin(riverlake_water_m3, riverlake_capacity_m3);
 
- riverlake_outflow_m3 += riverlake_overflow_m3;
+ NumericVector riverlake_water_New = pmin(riverlake_water_m3 + riverlake_inflow_m3 - riverlake_outflow_m3, riverlake_capacity_m3);
+ riverlake_water_New = pmax(riverlake_water_New, 0);
+ riverlake_outflow_m3 = riverlake_water_m3 + riverlake_inflow_m3 - riverlake_water_New;
 
  return (riverlake_outflow_m3);
 }
@@ -323,21 +324,16 @@ NumericVector confluen_WaterGAP3_L(
    NumericVector riverlake_capacity_m3,
    List basin_cellNumberStep_int,
    List basin_inflowCellNumberStep_int,
-   NumericVector param_lake_acp_storeFactor,
-   NumericVector param_lake_acp_gamma,
    NumericVector param_riverlake_lin_storeFactor
 )
 {
 
  int n_Cell = confluen_cellInflow_m3.size();
- NumericVector confluen_outflow_m3(n_Cell), waterbody_Evatrans_mm, step_RiverOutflow_m3,
- step_RiverlakeOutflow_m3, step_ReservoirOutflow_m3,
- lake_Outflow_m3, lake_Evatrans_mm,
- step_Inflow_Riverlake_m3;
+ NumericVector confluen_outflow_m3(n_Cell),
+ step_RiverOutflow_m3, step_RiverlakeOutflow_m3;
 
  IntegerVector idx_Cell_Step,
- idx_Riverlake_Step, idx_Step_Riverlake,
- idx_Reservoir_Step, idx_Step_Reservoir;
+ idx_Riverlake_Step, idx_Step_Riverlake;
  int n_Step = basin_cellNumberStep_int.size();
 
  // Step i later with Inflow
@@ -359,7 +355,7 @@ NumericVector confluen_WaterGAP3_L(
 
    // river segment
    NumericVector step_CellInflow = subset_get(confluen_cellInflow_m3, idx_Cell_Step),
-     step_RiverWater= subset_get(river_water_m3, idx_Cell_Step),
+     step_RiverWater = subset_get(river_water_m3, idx_Cell_Step),
      step_RiverInflow = step_UpstreamInflow_m3 + step_CellInflow;
 
    step_RiverOutflow_m3 = river_LinearResorvoir(
@@ -368,9 +364,10 @@ NumericVector confluen_WaterGAP3_L(
      subset_get(river_velocity_km, idx_Cell_Step),
      subset_get(river_length_km, idx_Cell_Step)
    );
-   NumericVector step_RiverInOut = pmax(step_RiverInflow - step_RiverOutflow_m3, 0.0);
-   subset_put(confluen_outflow_m3, idx_Cell_Step, step_RiverOutflow_m3);
-   subset_put(river_water_m3, idx_Cell_Step, step_RiverWater + step_RiverInOut);
+   NumericVector step_River_Water_New = pmax(step_RiverWater + step_RiverInflow - step_RiverOutflow_m3, 0.0);
+   NumericVector step_River_Outflow_New = step_RiverWater + step_RiverInflow - step_River_Water_New;
+   subset_put(confluen_outflow_m3, idx_Cell_Step, step_River_Outflow_New);
+   subset_put(river_water_m3, idx_Cell_Step,  step_River_Water_New);
 
    // global lake (riverlake)
    idx_Riverlake_Step = get_idx_cell(riverlake_cellNumber_int, idx_Cell_Step);
@@ -386,9 +383,8 @@ NumericVector confluen_WaterGAP3_L(
        subset_get(riverlake_capacity_m3, idx_Riverlake_Step),
        subset_get(param_riverlake_lin_storeFactor, idx_Riverlake_Step)
      );
-     NumericVector step_RiverlakeInOut = pmax(step_RiverlakeInflow - step_RiverlakeOutflow_m3, 0.0);
      subset_put(confluen_outflow_m3, idx_Riverlake_Step, step_RiverlakeOutflow_m3);
-     subset_put(riverlake_water_m3, idx_Riverlake_Step, step_RiverlakeWater + step_RiverlakeInOut);
+     subset_put(riverlake_water_m3, idx_Riverlake_Step,  step_RiverlakeWater + step_RiverlakeInflow - step_RiverlakeOutflow_m3);
    }
 
 
@@ -425,8 +421,6 @@ NumericVector confluen_WaterGAP3_LR(
    LogicalVector reservoir_isIrrigate_01,
    List basin_cellNumberStep_int,
    List basin_inflowCellNumberStep_int,
-   NumericVector param_lake_acp_storeFactor,
-   NumericVector param_lake_acp_gamma,
    NumericVector param_riverlake_lin_storeFactor,
    NumericVector param_reservoir_han_alpha,
    NumericVector param_reservoir_han_kDemand
@@ -434,10 +428,8 @@ NumericVector confluen_WaterGAP3_LR(
 {
 
  int n_Cell = confluen_cellInflow_m3.size();
- NumericVector confluen_outflow_m3(n_Cell), waterbody_Evatrans_mm, step_RiverOutflow_m3,
- step_RiverlakeOutflow_m3, step_ReservoirOutflow_m3,
- lake_Outflow_m3, lake_Evatrans_mm,
- step_Inflow_Riverlake_m3;
+ NumericVector confluen_outflow_m3(n_Cell), step_RiverOutflow_m3,
+ step_RiverlakeOutflow_m3, step_ReservoirOutflow_m3;
 
  IntegerVector idx_Cell_Step,
  idx_Riverlake_Step, idx_Step_Riverlake,

@@ -158,8 +158,6 @@ List WaterGAP3_HL(
      riverlake_capacity_m3,
      basin_cellNumberStep_int,
      basin_inflowCellNumberStep_int,
-     param_lake_acp_storeFactor,
-     param_lake_acp_gamma,
      param_riverlake_lin_storeFactor
    );
 
