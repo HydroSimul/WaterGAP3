@@ -379,9 +379,9 @@ NumericVector confluen_WaterGAP3(
      subset_get(river_velocity_km, idx_Cell_Step),
      subset_get(river_length_km, idx_Cell_Step)
    );
-
+   NumericVector step_RiverInOut = pmax(step_RiverInflow - step_RiverOutflow_m3, 0.0);
    subset_put(confluen_outflow_m3, idx_Cell_Step, step_RiverOutflow_m3);
-   subset_put(river_water_m3, idx_Cell_Step, step_RiverWater + step_RiverInflow - step_RiverOutflow_m3);
+   subset_put(river_water_m3, idx_Cell_Step, step_RiverWater + step_RiverInOut);
 
    // global lake (riverlake)
    idx_Riverlake_Step = get_idx_cell(riverlake_cellNumber_int, idx_Cell_Step);
@@ -397,8 +397,9 @@ NumericVector confluen_WaterGAP3(
        subset_get(riverlake_capacity_m3, idx_Riverlake_Step),
        subset_get(param_riverlake_lin_storeFactor, idx_Riverlake_Step)
      );
+     NumericVector step_RiverlakeInOut = pmax(step_RiverlakeInflow - step_RiverlakeOutflow_m3, 0.0);
      subset_put(confluen_outflow_m3, idx_Riverlake_Step, step_RiverlakeOutflow_m3);
-     subset_put(riverlake_water_m3, idx_Riverlake_Step, step_RiverlakeWater + step_RiverlakeInflow - step_RiverlakeOutflow_m3);
+     subset_put(riverlake_water_m3, idx_Riverlake_Step, step_RiverlakeWater + step_RiverlakeInOut);
    }
 
 
@@ -422,9 +423,10 @@ NumericVector confluen_WaterGAP3(
        subset_get(param_reservoir_han_alpha, idx_Reservoir_Step),
        subset_get(param_reservoir_han_kDemand, idx_Reservoir_Step)
      );
+     NumericVector step_ReservoirInOut = pmax(step_ReservoirInflow - step_ReservoirOutflow_m3, 0.0);
      subset_put(reservoir_yearRelase_m3, idx_Reservoir_Step, step_ReservoirYearRealse);
      subset_put(confluen_outflow_m3, idx_Reservoir_Step, step_ReservoirOutflow_m3);
-     subset_put(reservoir_water_m3, idx_Reservoir_Step, step_ReservoirWater + step_ReservoirInflow - step_ReservoirOutflow_m3);
+     subset_put(reservoir_water_m3, idx_Reservoir_Step, step_ReservoirWater + step_ReservoirInOut);
    }
 
 
