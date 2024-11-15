@@ -1,4 +1,4 @@
-#include "EDCHM_WaterGAP3.h"
+#include "WaterGAP3.h"
 
 //' WaterGAP3
 //' @name WaterGAP3
@@ -7,7 +7,7 @@
 //' @return streamflow m3
 //' @export
 // [[Rcpp::export]]
-List EDCHM_WaterGAP3(
+List WaterGAP3_HLR(
    int n_time,
    int n_spat,
    NumericMatrix atmos_precipitation_mm,
@@ -32,16 +32,6 @@ List EDCHM_WaterGAP3(
    NumericVector riverlake_water_m3,
    NumericVector riverlake_area_km2,
    NumericVector riverlake_capacity_m3,
-   IntegerVector reservoir_cellNumber_int,
-   NumericVector reservoir_water_m3,
-   NumericVector reservoir_area_km2,
-   NumericVector reservoir_capacity_m3,
-   NumericVector reservoir_demand_m3,
-   NumericVector reservoir_yearInflow_m3,
-   NumericVector reservoir_yearDemand_m3,
-   NumericVector reservoir_yearRelase_m3,
-   LogicalMatrix reservoir_isOperateStart_01,
-   LogicalVector reservoir_isIrrigate_01,
    List basin_cellNumberStep_int,
    List basin_inflowCellNumberStep_int,
    NumericVector param_atmos_thr_Ts,
@@ -56,28 +46,24 @@ List EDCHM_WaterGAP3(
    NumericVector param_baseflow_grf_gamma,
    NumericVector param_lake_acp_storeFactor,
    NumericVector param_lake_acp_gamma,
-   NumericVector param_riverlake_lin_storeFactor,
-   NumericVector param_reservoir_han_alpha,
-   NumericVector param_reservoir_han_kDemand
+   NumericVector param_riverlake_lin_storeFactor
 )
 {
 
  NumericVector atmos_potentialEvatrans_mm, atmos_rain_mm, atmos_snow_mm,
  snow_melt_mm, land_water_mm,
  soil_evatrans_mm, soil_infilt_mm, soil_percol_mm,
- lake_evatrans_mm,
- riverlake_evatrans_mm,
- reservoir_evatrans_mm,
+ lake_evatrans_mm, riverlake_evatrans_mm,
  waterbody_verticalInflow_m3(n_spat, 0.),
  land_outflow_m3;
  NumericMatrix land_runoff_mm(n_time, n_spat), ground_baseflow_mm(n_time, n_spat), river_outflow_m3(n_time, n_spat);
- int n_Lake = lake_cellNumber_int.size(), n_Riverlake = riverlake_cellNumber_int.size(), n_Reservoir = reservoir_cellNumber_int.size();
+ int n_Lake = lake_cellNumber_int.size(), n_Riverlake = riverlake_cellNumber_int.size();
  NumericMatrix out_snow(n_time, n_spat), out_evatransPot(n_time, n_spat), out_evatrans(n_time, n_spat),
                out_soilwater(n_time, n_spat), out_groundwater(n_time, n_spat),
                out_snowice(n_time, n_spat), out_snowmelt(n_time, n_spat),
                out_land_outflow(n_time, n_spat),
-               out_river_water(n_time, n_spat), out_riverlake_water(n_time, n_Riverlake), out_reservior_water(n_time, n_Reservoir),
-               out_lake_evatrans(n_time, n_Lake), out_riverlake_evatrans(n_time, n_Riverlake), out_reservoir_evatrans(n_time, n_Reservoir);
+               out_river_water(n_time, n_spat), out_riverlake_water(n_time, n_Riverlake),
+               out_lake_evatrans(n_time, n_Lake), out_riverlake_evatrans(n_time, n_Riverlake);
 
 
  for (int i = 0; i < n_time; i++) {
@@ -137,18 +123,11 @@ List EDCHM_WaterGAP3(
      riverlake_capacity_m3,
      subset_get(param_evatrans_vic_gamma, riverlake_cellNumber_int)
    );
-   reservoir_evatrans_mm = evatransActual_VIC(
-     subset_get(atmos_potentialEvatrans_mm, reservoir_cellNumber_int),
-     reservoir_water_m3,
-     reservoir_capacity_m3,
-     subset_get(param_evatrans_vic_gamma, reservoir_cellNumber_int)
-   );
 
    // // Net vertical Inflow
    NumericVector lake_verticalInflow_m3, riverlake_verticalInflow_m3, reservoir_verticalInflow_m3;
    lake_verticalInflow_m3 = (subset_get(atmos_precipitation_mm, lake_cellNumber_int) - lake_evatrans_mm) * lake_area_km2 * 1000;
    riverlake_verticalInflow_m3 = (subset_get(atmos_precipitation_mm, riverlake_cellNumber_int) - riverlake_evatrans_mm) * riverlake_area_km2 * 1000;
-   reservoir_verticalInflow_m3 = (subset_get(atmos_precipitation_mm, reservoir_cellNumber_int) - reservoir_evatrans_mm) * reservoir_area_km2 * 1000;
 
    // Local Lake runoff
    NumericVector lake_Outflow_m3 = lake_AcceptPow(
@@ -162,11 +141,10 @@ List EDCHM_WaterGAP3(
    // Sum Inflow to water net
    subset_put(land_outflow_m3, lake_cellNumber_int, lake_Outflow_m3);
    subset_put(land_outflow_m3, riverlake_cellNumber_int, subset_get(land_outflow_m3, riverlake_cellNumber_int) + riverlake_verticalInflow_m3);
-   subset_put(land_outflow_m3, reservoir_cellNumber_int, subset_get(land_outflow_m3, reservoir_cellNumber_int) + reservoir_verticalInflow_m3);
 
 
 
-   river_outflow_m3(i, _) = confluen_WaterGAP3(
+   river_outflow_m3(i, _) = confluen_WaterGAP3_L(
      land_outflow_m3,
      river_water_m3,
      river_length_km,
@@ -174,22 +152,11 @@ List EDCHM_WaterGAP3(
      riverlake_cellNumber_int,
      riverlake_water_m3,
      riverlake_capacity_m3,
-     reservoir_cellNumber_int,
-     reservoir_water_m3,
-     reservoir_capacity_m3,
-     reservoir_demand_m3,
-     reservoir_yearInflow_m3,
-     reservoir_yearDemand_m3,
-     reservoir_yearRelase_m3,
-     reservoir_isOperateStart_01(i, _),
-     reservoir_isIrrigate_01,
      basin_cellNumberStep_int,
      basin_inflowCellNumberStep_int,
      param_lake_acp_storeFactor,
      param_lake_acp_gamma,
-     param_riverlake_lin_storeFactor,
-     param_reservoir_han_alpha,
-     param_reservoir_han_kDemand
+     param_riverlake_lin_storeFactor
    );
 
    // out_snow(i, _) = atmos_snow_mm;
@@ -202,10 +169,8 @@ List EDCHM_WaterGAP3(
    out_land_outflow(i, _) = land_outflow_m3;
    out_river_water(i, _) = river_water_m3;
    out_riverlake_water(i, _) = riverlake_water_m3;
-   out_reservior_water(i, _) = reservoir_water_m3;
    out_lake_evatrans(i, _) = lake_evatrans_mm;
    out_riverlake_evatrans(i, _) = riverlake_evatrans_mm;
-   out_reservoir_evatrans(i, _) = reservoir_evatrans_mm;
 
  }
 
@@ -225,10 +190,8 @@ List EDCHM_WaterGAP3(
    _["baseflow_mm"] = ground_baseflow_mm,
    _["river_water_m3"] = river_water_m3,
    _["riverlake_water_m3"] = riverlake_water_m3,
-   _["reservoir_water_m3"] = reservoir_water_m3,
    _["lake_evatrans_mm"] = lake_evatrans_mm,
    _["riverlake_evatrans_mm"] = riverlake_evatrans_mm,
-   _["reservoir_evatrans_mm"] = reservoir_evatrans_mm,
    _["streamflow_m3"] = river_outflow_m3
  );
 }

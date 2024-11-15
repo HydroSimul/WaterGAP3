@@ -1,6 +1,6 @@
-// Defines a header file containing function for EDCHM_snow/
-#ifndef EDCHM_WATERGAP3_H
-#define EDCHM_WATERGAP3_H
+// Defines a header file containing function for WaterGAP3_HL/
+#ifndef WATERGAP3_H
+#define WATERGAP3_H
 
 #include "00utilis.h"
 
@@ -65,7 +65,25 @@ NumericVector lake_AcceptPow(
   NumericVector param_lake_acp_storeFactor,
   NumericVector param_lake_acp_gamma
 );
-NumericVector confluen_WaterGAP3(
+
+
+NumericVector confluen_WaterGAP3_L(
+    NumericVector confluen_cellInflow_m3,
+    NumericVector &river_water_m3,
+    NumericVector river_length_km,
+    NumericVector river_velocity_km,
+    IntegerVector riverlake_cellNumber_int,
+    NumericVector &riverlake_water_m3,
+    NumericVector riverlake_capacity_m3,
+    List basin_cellNumberStep_int,
+    List basin_inflowCellNumberStep_int,
+    NumericVector param_lake_acp_storeFactor,
+    NumericVector param_lake_acp_gamma,
+    NumericVector param_riverlake_lin_storeFactor
+);
+
+
+NumericVector confluen_WaterGAP3_LR(
     NumericVector confluen_cellInflow_m3,
     NumericVector &river_water_m3,
     NumericVector river_length_km,
