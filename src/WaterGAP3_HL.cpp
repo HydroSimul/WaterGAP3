@@ -126,8 +126,12 @@ List WaterGAP3_HL(
 
    // // Net vertical Inflow
    NumericVector lake_verticalInflow_m3, riverlake_verticalInflow_m3, reservoir_verticalInflow_m3;
-   lake_verticalInflow_m3 = (subset_get(atmos_precipitation_mm, lake_cellNumber_int) - lake_evatrans_mm) * lake_area_km2 * 1000;
-   riverlake_verticalInflow_m3 = (subset_get(atmos_precipitation_mm, riverlake_cellNumber_int) - riverlake_evatrans_mm) * riverlake_area_km2 * 1000;
+
+   NumericVector lake_verticalInflow_mm = pmax((subset_get(atmos_precipitation_mm, lake_cellNumber_int) - lake_evatrans_mm), 0.0);
+   lake_verticalInflow_m3 = lake_verticalInflow_mm * lake_area_km2 * 1000;
+
+   NumericVector riverlake_verticalInflow_mm = pmax((subset_get(atmos_precipitation_mm, riverlake_cellNumber_int) - riverlake_evatrans_mm), 0.0);
+   riverlake_verticalInflow_m3 = riverlake_verticalInflow_mm * riverlake_area_km2 * 1000;
 
    // Local Lake runoff
    NumericVector lake_Outflow_m3 = lake_AcceptPow(
@@ -187,11 +191,11 @@ List WaterGAP3_HL(
    // _["snowmelt_mm"] = out_snowmelt,
    _["runoff_mm"] = land_runoff_mm,
    _["runoff_m3"] = out_land_outflow,
-   _["baseflow_mm"] = ground_baseflow_mm,
-   _["river_water_m3"] = out_river_water,
-   _["riverlake_water_m3"] = out_riverlake_water,
-   _["lake_evatrans_mm"] = out_lake_evatrans,
-   _["riverlake_evatrans_mm"] = out_riverlake_evatrans,
+   // _["baseflow_mm"] = ground_baseflow_mm,
+   // _["river_water_m3"] = out_river_water,
+   // _["riverlake_water_m3"] = out_riverlake_water,
+   // _["lake_evatrans_mm"] = out_lake_evatrans,
+   // _["riverlake_evatrans_mm"] = out_riverlake_evatrans,
    _["streamflow_m3"] = river_outflow_m3
  );
 }
