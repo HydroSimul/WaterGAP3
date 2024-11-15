@@ -1,13 +1,13 @@
 #include "WaterGAP3.h"
 
 //' WaterGAP3
-//' @name WaterGAP3
+//' @name WaterGAP3_HL
 //' @inheritParams all_vari
 //' @inheritParams process
 //' @return streamflow m3
 //' @export
 // [[Rcpp::export]]
-List WaterGAP3_HLR(
+List WaterGAP3_HL(
    int n_time,
    int n_spat,
    NumericMatrix atmos_precipitation_mm,

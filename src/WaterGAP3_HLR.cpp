@@ -1,7 +1,7 @@
 #include "WaterGAP3.h"
 
 //' WaterGAP3
-//' @name WaterGAP3
+//' @name WaterGAP3_HLR
 //' @inheritParams all_vari
 //' @inheritParams process
 //' @return streamflow m3

@@ -404,131 +404,131 @@ NumericVector confluen_WaterGAP3_L(
 
 
 //' @rdname process
- //' @export
- // [[Rcpp::export]]
- NumericVector confluen_WaterGAP3_LR(
-     NumericVector confluen_cellInflow_m3,
-     NumericVector &river_water_m3,
-     NumericVector river_length_km,
-     NumericVector river_velocity_km,
-     IntegerVector riverlake_cellNumber_int,
-     NumericVector &riverlake_water_m3,
-     NumericVector riverlake_capacity_m3,
-     IntegerVector reservoir_cellNumber_int,
-     NumericVector &reservoir_water_m3,
-     NumericVector reservoir_capacity_m3,
-     NumericVector reservoir_demand_m3,
-     NumericVector reservoir_yearInflow_m3,
-     NumericVector reservoir_yearDemand_m3,
-     NumericVector &reservoir_yearRelase_m3,
-     LogicalVector reservoir_isOperateStart_01,
-     LogicalVector reservoir_isIrrigate_01,
-     List basin_cellNumberStep_int,
-     List basin_inflowCellNumberStep_int,
-     NumericVector param_lake_acp_storeFactor,
-     NumericVector param_lake_acp_gamma,
-     NumericVector param_riverlake_lin_storeFactor,
-     NumericVector param_reservoir_han_alpha,
-     NumericVector param_reservoir_han_kDemand
- )
+//' @export
+// [[Rcpp::export]]
+NumericVector confluen_WaterGAP3_LR(
+   NumericVector confluen_cellInflow_m3,
+   NumericVector &river_water_m3,
+   NumericVector river_length_km,
+   NumericVector river_velocity_km,
+   IntegerVector riverlake_cellNumber_int,
+   NumericVector &riverlake_water_m3,
+   NumericVector riverlake_capacity_m3,
+   IntegerVector reservoir_cellNumber_int,
+   NumericVector &reservoir_water_m3,
+   NumericVector reservoir_capacity_m3,
+   NumericVector reservoir_demand_m3,
+   NumericVector reservoir_yearInflow_m3,
+   NumericVector reservoir_yearDemand_m3,
+   NumericVector &reservoir_yearRelase_m3,
+   LogicalVector reservoir_isOperateStart_01,
+   LogicalVector reservoir_isIrrigate_01,
+   List basin_cellNumberStep_int,
+   List basin_inflowCellNumberStep_int,
+   NumericVector param_lake_acp_storeFactor,
+   NumericVector param_lake_acp_gamma,
+   NumericVector param_riverlake_lin_storeFactor,
+   NumericVector param_reservoir_han_alpha,
+   NumericVector param_reservoir_han_kDemand
+)
+{
+
+ int n_Cell = confluen_cellInflow_m3.size();
+ NumericVector confluen_outflow_m3(n_Cell), waterbody_Evatrans_mm, step_RiverOutflow_m3,
+ step_RiverlakeOutflow_m3, step_ReservoirOutflow_m3,
+ lake_Outflow_m3, lake_Evatrans_mm,
+ step_Inflow_Riverlake_m3;
+
+ IntegerVector idx_Cell_Step,
+ idx_Riverlake_Step, idx_Step_Riverlake,
+ idx_Reservoir_Step, idx_Step_Reservoir;
+ int n_Step = basin_cellNumberStep_int.size();
+
+ // Step i later with Inflow
+ for (int i_Step = 0; i_Step < n_Step; i_Step++)
  {
 
-   int n_Cell = confluen_cellInflow_m3.size();
-   NumericVector confluen_outflow_m3(n_Cell), waterbody_Evatrans_mm, step_RiverOutflow_m3,
-   step_RiverlakeOutflow_m3, step_ReservoirOutflow_m3,
-   lake_Outflow_m3, lake_Evatrans_mm,
-   step_Inflow_Riverlake_m3;
+   idx_Cell_Step = basin_cellNumberStep_int[i_Step];
+   NumericVector step_UpstreamInflow_m3(idx_Cell_Step.size(), 0.);
+   // Inflow upstream
+   if (i_Step > 0) {
 
-   IntegerVector idx_Cell_Step,
-   idx_Riverlake_Step, idx_Step_Riverlake,
-   idx_Reservoir_Step, idx_Step_Reservoir;
-   int n_Step = basin_cellNumberStep_int.size();
-
-   // Step i later with Inflow
-   for (int i_Step = 0; i_Step < n_Step; i_Step++)
-   {
-
-     idx_Cell_Step = basin_cellNumberStep_int[i_Step];
-     NumericVector step_UpstreamInflow_m3(idx_Cell_Step.size(), 0.);
-     // Inflow upstream
-     if (i_Step > 0) {
-
-       step_UpstreamInflow_m3 = inflow_add(
-         confluen_outflow_m3,
-         basin_inflowCellNumberStep_int[i_Step]
-       );
-
-     }
-
-
-     // river segment
-     NumericVector step_CellInflow = subset_get(confluen_cellInflow_m3, idx_Cell_Step),
-       step_RiverWater= subset_get(river_water_m3, idx_Cell_Step),
-       step_RiverInflow = step_UpstreamInflow_m3 + step_CellInflow;
-
-     step_RiverOutflow_m3 = river_LinearResorvoir(
-       step_RiverWater,
-       step_RiverInflow,
-       subset_get(river_velocity_km, idx_Cell_Step),
-       subset_get(river_length_km, idx_Cell_Step)
+     step_UpstreamInflow_m3 = inflow_add(
+       confluen_outflow_m3,
+       basin_inflowCellNumberStep_int[i_Step]
      );
-     NumericVector step_RiverInOut = pmax(step_RiverInflow - step_RiverOutflow_m3, 0.0);
-     subset_put(confluen_outflow_m3, idx_Cell_Step, step_RiverOutflow_m3);
-     subset_put(river_water_m3, idx_Cell_Step, step_RiverWater + step_RiverInOut);
-
-     // global lake (riverlake)
-     idx_Riverlake_Step = get_idx_cell(riverlake_cellNumber_int, idx_Cell_Step);
-     idx_Step_Riverlake = get_idx_step(riverlake_cellNumber_int, idx_Cell_Step);
-     if (idx_Riverlake_Step.size() > 0) {
-       NumericVector step_RiverlakeWater= subset_get(riverlake_water_m3, idx_Riverlake_Step),
-         step_RiverlakeInflow = subset_get(step_UpstreamInflow_m3 + step_CellInflow, idx_Step_Riverlake);
-
-
-       step_RiverlakeOutflow_m3 = riverlake_LinearResorvoir(
-         step_RiverlakeWater,
-         step_RiverlakeInflow,
-         subset_get(riverlake_capacity_m3, idx_Riverlake_Step),
-         subset_get(param_riverlake_lin_storeFactor, idx_Riverlake_Step)
-       );
-       NumericVector step_RiverlakeInOut = pmax(step_RiverlakeInflow - step_RiverlakeOutflow_m3, 0.0);
-       subset_put(confluen_outflow_m3, idx_Riverlake_Step, step_RiverlakeOutflow_m3);
-       subset_put(riverlake_water_m3, idx_Riverlake_Step, step_RiverlakeWater + step_RiverlakeInOut);
-     }
-
-
-     // Reservior
-     idx_Reservoir_Step = get_idx_cell(reservoir_cellNumber_int, idx_Cell_Step);
-     idx_Step_Reservoir = get_idx_step(reservoir_cellNumber_int, idx_Cell_Step);
-     if (idx_Reservoir_Step.size() > 0 ) {
-       NumericVector step_ReservoirYearRealse = subset_get(reservoir_yearRelase_m3, idx_Reservoir_Step),
-         step_ReservoirWater= subset_get(reservoir_water_m3, idx_Reservoir_Step),
-         step_ReservoirInflow = subset_get(step_UpstreamInflow_m3 + step_CellInflow, idx_Step_Reservoir);
-       step_ReservoirOutflow_m3 = reservoir_Hanasaki(
-         step_ReservoirWater,
-         step_ReservoirInflow,
-         subset_get(reservoir_capacity_m3, idx_Reservoir_Step),
-         subset_get(reservoir_demand_m3, idx_Reservoir_Step),
-         subset_get(reservoir_yearInflow_m3, idx_Reservoir_Step),
-         subset_get(reservoir_yearDemand_m3, idx_Reservoir_Step),
-         step_ReservoirYearRealse,
-         subset_get_logical(reservoir_isOperateStart_01, idx_Reservoir_Step),
-         subset_get_logical(reservoir_isIrrigate_01, idx_Reservoir_Step),
-         subset_get(param_reservoir_han_alpha, idx_Reservoir_Step),
-         subset_get(param_reservoir_han_kDemand, idx_Reservoir_Step)
-       );
-       NumericVector step_ReservoirInOut = pmax(step_ReservoirInflow - step_ReservoirOutflow_m3, 0.0);
-       subset_put(reservoir_yearRelase_m3, idx_Reservoir_Step, step_ReservoirYearRealse);
-       subset_put(confluen_outflow_m3, idx_Reservoir_Step, step_ReservoirOutflow_m3);
-       subset_put(reservoir_water_m3, idx_Reservoir_Step, step_ReservoirWater + step_ReservoirInOut);
-     }
-
 
    }
 
 
-   return confluen_outflow_m3;
+   // river segment
+   NumericVector step_CellInflow = subset_get(confluen_cellInflow_m3, idx_Cell_Step),
+     step_RiverWater= subset_get(river_water_m3, idx_Cell_Step),
+     step_RiverInflow = step_UpstreamInflow_m3 + step_CellInflow;
+
+   step_RiverOutflow_m3 = river_LinearResorvoir(
+     step_RiverWater,
+     step_RiverInflow,
+     subset_get(river_velocity_km, idx_Cell_Step),
+     subset_get(river_length_km, idx_Cell_Step)
+   );
+   NumericVector step_RiverInOut = pmax(step_RiverInflow - step_RiverOutflow_m3, 0.0);
+   subset_put(confluen_outflow_m3, idx_Cell_Step, step_RiverOutflow_m3);
+   subset_put(river_water_m3, idx_Cell_Step, step_RiverWater + step_RiverInOut);
+
+   // global lake (riverlake)
+   idx_Riverlake_Step = get_idx_cell(riverlake_cellNumber_int, idx_Cell_Step);
+   idx_Step_Riverlake = get_idx_step(riverlake_cellNumber_int, idx_Cell_Step);
+   if (idx_Riverlake_Step.size() > 0) {
+     NumericVector step_RiverlakeWater= subset_get(riverlake_water_m3, idx_Riverlake_Step),
+       step_RiverlakeInflow = subset_get(step_UpstreamInflow_m3 + step_CellInflow, idx_Step_Riverlake);
+
+
+     step_RiverlakeOutflow_m3 = riverlake_LinearResorvoir(
+       step_RiverlakeWater,
+       step_RiverlakeInflow,
+       subset_get(riverlake_capacity_m3, idx_Riverlake_Step),
+       subset_get(param_riverlake_lin_storeFactor, idx_Riverlake_Step)
+     );
+     NumericVector step_RiverlakeInOut = pmax(step_RiverlakeInflow - step_RiverlakeOutflow_m3, 0.0);
+     subset_put(confluen_outflow_m3, idx_Riverlake_Step, step_RiverlakeOutflow_m3);
+     subset_put(riverlake_water_m3, idx_Riverlake_Step, step_RiverlakeWater + step_RiverlakeInOut);
+   }
+
+
+   // Reservior
+   idx_Reservoir_Step = get_idx_cell(reservoir_cellNumber_int, idx_Cell_Step);
+   idx_Step_Reservoir = get_idx_step(reservoir_cellNumber_int, idx_Cell_Step);
+   if (idx_Reservoir_Step.size() > 0 ) {
+     NumericVector step_ReservoirYearRealse = subset_get(reservoir_yearRelase_m3, idx_Reservoir_Step),
+       step_ReservoirWater= subset_get(reservoir_water_m3, idx_Reservoir_Step),
+       step_ReservoirInflow = subset_get(step_UpstreamInflow_m3 + step_CellInflow, idx_Step_Reservoir);
+     step_ReservoirOutflow_m3 = reservoir_Hanasaki(
+       step_ReservoirWater,
+       step_ReservoirInflow,
+       subset_get(reservoir_capacity_m3, idx_Reservoir_Step),
+       subset_get(reservoir_demand_m3, idx_Reservoir_Step),
+       subset_get(reservoir_yearInflow_m3, idx_Reservoir_Step),
+       subset_get(reservoir_yearDemand_m3, idx_Reservoir_Step),
+       step_ReservoirYearRealse,
+       subset_get_logical(reservoir_isOperateStart_01, idx_Reservoir_Step),
+       subset_get_logical(reservoir_isIrrigate_01, idx_Reservoir_Step),
+       subset_get(param_reservoir_han_alpha, idx_Reservoir_Step),
+       subset_get(param_reservoir_han_kDemand, idx_Reservoir_Step)
+     );
+     NumericVector step_ReservoirInOut = pmax(step_ReservoirInflow - step_ReservoirOutflow_m3, 0.0);
+     subset_put(reservoir_yearRelase_m3, idx_Reservoir_Step, step_ReservoirYearRealse);
+     subset_put(confluen_outflow_m3, idx_Reservoir_Step, step_ReservoirOutflow_m3);
+     subset_put(reservoir_water_m3, idx_Reservoir_Step, step_ReservoirWater + step_ReservoirInOut);
+   }
+
 
  }
+
+
+ return confluen_outflow_m3;
+
+}
 
 
 

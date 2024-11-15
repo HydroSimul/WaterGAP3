@@ -14,7 +14,8 @@
 \alias{river_LinearResorvoir}
 \alias{riverlake_LinearResorvoir}
 \alias{reservoir_Hanasaki}
-\alias{confluen_WaterGAP3}
+\alias{confluen_WaterGAP3_L}
+\alias{confluen_WaterGAP3_LR}
 \title{Hydrological Process}
 \usage{
 atmosSnow_ThresholdT(
@@ -103,7 +104,22 @@ reservoir_Hanasaki(
   param_reservoir_han_kDemand
 )
 
-confluen_WaterGAP3(
+confluen_WaterGAP3_L(
+  confluen_cellInflow_m3,
+  river_water_m3,
+  river_length_km,
+  river_velocity_km,
+  riverlake_cellNumber_int,
+  riverlake_water_m3,
+  riverlake_capacity_m3,
+  basin_cellNumberStep_int,
+  basin_inflowCellNumberStep_int,
+  param_lake_acp_storeFactor,
+  param_lake_acp_gamma,
+  param_riverlake_lin_storeFactor
+)
+
+confluen_WaterGAP3_LR(
   confluen_cellInflow_m3,
   river_water_m3,
   river_length_km,
@@ -228,11 +244,11 @@ confluen_WaterGAP3(
 
 \item{riverlake_cellNumber_int}{(int) river-lake cell number}
 
-\item{reservoir_cellNumber_int}{(int) reservoir cell number}
-
 \item{basin_cellNumberStep_int}{(int) step number of basin cells}
 
 \item{basin_inflowCellNumberStep_int}{(int) step number of inflow cells in the basin}
+
+\item{reservoir_cellNumber_int}{(int) reservoir cell number}
 }
 \value{
 atmos_snow_mm (mm/m2/TS) snowfall volume
