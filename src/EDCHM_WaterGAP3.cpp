@@ -71,7 +71,14 @@ List EDCHM_WaterGAP3(
  waterbody_verticalInflow_m3(n_spat, 0.),
  land_outflow_m3;
  NumericMatrix land_runoff_mm(n_time, n_spat), ground_baseflow_mm(n_time, n_spat), river_outflow_m3(n_time, n_spat);
- NumericMatrix out_snow(n_time, n_spat), out_evatransPot(n_time, n_spat), out_evatrans(n_time, n_spat), out_soilwater(n_time, n_spat), out_groundwater(n_time, n_spat), out_snowice(n_time, n_spat), out_snowmelt(n_time, n_spat);
+ int n_Lake = lake_cellNumber_int.size(), n_Riverlake = riverlake_cellNumber_int.size(), n_Reservoir = reservoir_cellNumber_int.size();
+ NumericMatrix out_snow(n_time, n_spat), out_evatransPot(n_time, n_spat), out_evatrans(n_time, n_spat),
+               out_soilwater(n_time, n_spat), out_groundwater(n_time, n_spat),
+               out_snowice(n_time, n_spat), out_snowmelt(n_time, n_spat),
+               out_land_outflow(n_time, n_spat),
+               out_river_water(n_time, n_spat), out_riverlake_water(n_time, n_Riverlake), out_reservior_water(n_time, n_Reservoir),
+               out_lake_evatrans(n_time, n_Lake), out_riverlake_evatrans(n_time, n_Riverlake), out_reservoir_evatrans(n_time, n_Reservoir);
+
 
  for (int i = 0; i < n_time; i++) {
 
@@ -185,29 +192,43 @@ List EDCHM_WaterGAP3(
      param_reservoir_han_kDemand
    );
 
-   out_snow(i, _) = atmos_snow_mm;
-   out_evatransPot(i, _) = atmos_potentialEvatrans_mm;
-   out_evatrans(i, _) = soil_evatrans_mm;
-   out_soilwater(i, _) = soil_water_mm;
-   out_groundwater(i, _) = ground_water_mm;
-   out_snowice(i, _) = snow_ice_mm;
-   out_snowmelt(i, _) = snow_melt_mm;
+   // out_snow(i, _) = atmos_snow_mm;
+   // out_evatransPot(i, _) = atmos_potentialEvatrans_mm;
+   // out_evatrans(i, _) = soil_evatrans_mm;
+   // out_soilwater(i, _) = soil_water_mm;
+   // out_groundwater(i, _) = ground_water_mm;
+   // out_snowice(i, _) = snow_ice_mm;
+   // out_snowmelt(i, _) = snow_melt_mm;
+   out_land_outflow(i, _) = land_outflow_m3;
+   out_river_water(i, _) = river_water_m3;
+   out_riverlake_water(i, _) = riverlake_water_m3;
+   out_reservior_water(i, _) = reservoir_water_m3;
+   out_lake_evatrans(i, _) = lake_evatrans_mm;
+   out_riverlake_evatrans(i, _) = riverlake_evatrans_mm;
+   out_reservoir_evatrans(i, _) = reservoir_evatrans_mm;
 
  }
 
  return List::create(
-   _["precipitation_mm"] = atmos_precipitation_mm,
-   _["temperature_Cel"] = atmos_temperature_Cel,
-   _["solarRadiat_MJ"] = atmos_solarRadiat_MJ,
-   _["snowFall_mm"] = out_snow,
-   _["evatransPot_mm"] = out_evatransPot,
-   _["evatrans_mm"] = out_evatrans,
-   _["soilwater_mm"] = out_soilwater,
-   _["groundwater_mm"] = out_groundwater,
-   _["snowice_mm"] = out_snowice,
-   _["snowmelt_mm"] = out_snowmelt,
+   // _["precipitation_mm"] = atmos_precipitation_mm,
+   // _["temperature_Cel"] = atmos_temperature_Cel,
+   // _["solarRadiat_MJ"] = atmos_solarRadiat_MJ,
+   // _["snowFall_mm"] = out_snow,
+   // _["evatransPot_mm"] = out_evatransPot,
+   // _["evatrans_mm"] = out_evatrans,
+   // _["soilwater_mm"] = out_soilwater,
+   // _["groundwater_mm"] = out_groundwater,
+   // _["snowice_mm"] = out_snowice,
+   // _["snowmelt_mm"] = out_snowmelt,
    _["runoff_mm"] = land_runoff_mm,
+   _["runoff_m3"] = out_land_outflow,
    _["baseflow_mm"] = ground_baseflow_mm,
-   _["streamflow_mm"] = river_outflow_m3
+   _["river_water_m3"] = river_water_m3,
+   _["riverlake_water_m3"] = riverlake_water_m3,
+   _["reservoir_water_m3"] = reservoir_water_m3,
+   _["lake_evatrans_mm"] = lake_evatrans_mm,
+   _["riverlake_evatrans_mm"] = riverlake_evatrans_mm,
+   _["reservoir_evatrans_mm"] = reservoir_evatrans_mm,
+   _["streamflow_m3"] = river_outflow_m3
  );
 }
