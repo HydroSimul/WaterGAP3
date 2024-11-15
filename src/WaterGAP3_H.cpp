@@ -56,7 +56,7 @@ List WaterGAP3_H(
  NumericMatrix out_snow(n_time, n_spat), out_evatransPot(n_time, n_spat), out_evatrans(n_time, n_spat),
                out_soilwater(n_time, n_spat), out_groundwater(n_time, n_spat),
                out_snowice(n_time, n_spat), out_snowmelt(n_time, n_spat),
-               out_land_outflow(n_time, n_spat),
+               out_land_outflow(n_time, n_spat), out_landlake_outflow(n_time, n_spat),
                out_river_water(n_time, n_spat),
                out_lake_evatrans(n_time, n_Lake);
 
@@ -103,6 +103,11 @@ List WaterGAP3_H(
 
 
    land_outflow_m3 = (land_runoff_mm(i, _) + ground_baseflow_mm(i, _)) * basin_landArea_km2 * 1000;
+
+
+   out_land_outflow(i, _) = land_outflow_m3;
+
+
    // Water body
 
    // AET Waterbody
@@ -150,7 +155,7 @@ List WaterGAP3_H(
    // out_groundwater(i, _) = ground_water_mm;
    // out_snowice(i, _) = snow_ice_mm;
    // out_snowmelt(i, _) = snow_melt_mm;
-   out_land_outflow(i, _) = land_outflow_m3;
+   out_landlake_outflow(i, _) = land_outflow_m3;
    out_river_water(i, _) = river_water_m3;
    out_lake_evatrans(i, _) = lake_evatrans_mm;
 
@@ -169,6 +174,7 @@ List WaterGAP3_H(
    // _["snowmelt_mm"] = out_snowmelt,
    _["runoff_mm"] = land_runoff_mm,
    _["runoff_m3"] = out_land_outflow,
+   _["runofflake_m3"] = out_landlake_outflow,
    _["baseflow_mm"] = ground_baseflow_mm,
    _["river_water_m3"] = out_river_water,
    _["lake_evatrans_mm"] = out_lake_evatrans,
