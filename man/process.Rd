@@ -14,7 +14,7 @@
 \alias{river_LinearResorvoir}
 \alias{riverlake_LinearResorvoir}
 \alias{reservoir_Hanasaki}
-\alias{confluen_WaterGAP3_L}
+\alias{confluen_WaterGAP3}
 \alias{confluen_WaterGAP3_LR}
 \title{Hydrological Process}
 \usage{
@@ -104,17 +104,13 @@ reservoir_Hanasaki(
   param_reservoir_han_kDemand
 )
 
-confluen_WaterGAP3_L(
+confluen_WaterGAP3(
   confluen_cellInflow_m3,
   river_water_m3,
   river_length_km,
   river_velocity_km,
-  riverlake_cellNumber_int,
-  riverlake_water_m3,
-  riverlake_capacity_m3,
   basin_cellNumberStep_int,
-  basin_inflowCellNumberStep_int,
-  param_riverlake_lin_storeFactor
+  basin_inflowCellNumberStep_int
 )
 
 confluen_WaterGAP3_LR(
@@ -238,11 +234,11 @@ confluen_WaterGAP3_LR(
 
 \item{confluen_cellInflow_m3}{(m3 / TS) input water volum in every routeline}
 
-\item{riverlake_cellNumber_int}{(int) river-lake cell number}
-
 \item{basin_cellNumberStep_int}{(int) step number of basin cells}
 
 \item{basin_inflowCellNumberStep_int}{(int) step number of inflow cells in the basin}
+
+\item{riverlake_cellNumber_int}{(int) river-lake cell number}
 
 \item{reservoir_cellNumber_int}{(int) reservoir cell number}
 }

@@ -338,6 +338,27 @@ namespace WaterGAP3 {
         return Rcpp::as<NumericVector >(rcpp_result_gen);
     }
 
+    inline NumericVector confluen_WaterGAP3(NumericVector confluen_cellInflow_m3, NumericVector& river_water_m3, NumericVector river_length_km, NumericVector river_velocity_km, List basin_cellNumberStep_int, List basin_inflowCellNumberStep_int) {
+        typedef SEXP(*Ptr_confluen_WaterGAP3)(SEXP,SEXP,SEXP,SEXP,SEXP,SEXP);
+        static Ptr_confluen_WaterGAP3 p_confluen_WaterGAP3 = NULL;
+        if (p_confluen_WaterGAP3 == NULL) {
+            validateSignature("NumericVector(*confluen_WaterGAP3)(NumericVector,NumericVector&,NumericVector,NumericVector,List,List)");
+            p_confluen_WaterGAP3 = (Ptr_confluen_WaterGAP3)R_GetCCallable("WaterGAP3", "_WaterGAP3_confluen_WaterGAP3");
+        }
+        RObject rcpp_result_gen;
+        {
+            RNGScope RCPP_rngScope_gen;
+            rcpp_result_gen = p_confluen_WaterGAP3(Shield<SEXP>(Rcpp::wrap(confluen_cellInflow_m3)), Shield<SEXP>(Rcpp::wrap(river_water_m3)), Shield<SEXP>(Rcpp::wrap(river_length_km)), Shield<SEXP>(Rcpp::wrap(river_velocity_km)), Shield<SEXP>(Rcpp::wrap(basin_cellNumberStep_int)), Shield<SEXP>(Rcpp::wrap(basin_inflowCellNumberStep_int)));
+        }
+        if (rcpp_result_gen.inherits("interrupted-error"))
+            throw Rcpp::internal::InterruptedException();
+        if (Rcpp::internal::isLongjumpSentinel(rcpp_result_gen))
+            throw Rcpp::LongjumpException(rcpp_result_gen);
+        if (rcpp_result_gen.inherits("try-error"))
+            throw Rcpp::exception(Rcpp::as<std::string>(rcpp_result_gen).c_str());
+        return Rcpp::as<NumericVector >(rcpp_result_gen);
+    }
+
     inline NumericVector confluen_WaterGAP3_L(NumericVector confluen_cellInflow_m3, NumericVector& river_water_m3, NumericVector river_length_km, NumericVector river_velocity_km, IntegerVector riverlake_cellNumber_int, NumericVector& riverlake_water_m3, NumericVector riverlake_capacity_m3, List basin_cellNumberStep_int, List basin_inflowCellNumberStep_int, NumericVector param_riverlake_lin_storeFactor) {
         typedef SEXP(*Ptr_confluen_WaterGAP3_L)(SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP);
         static Ptr_confluen_WaterGAP3_L p_confluen_WaterGAP3_L = NULL;

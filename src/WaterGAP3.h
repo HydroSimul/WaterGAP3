@@ -66,6 +66,15 @@ NumericVector lake_AcceptPow(
   NumericVector param_lake_acp_gamma
 );
 
+NumericVector confluen_WaterGAP3(
+    NumericVector confluen_cellInflow_m3,
+    NumericVector &river_water_m3,
+    NumericVector river_length_km,
+    NumericVector river_velocity_km,
+    List basin_cellNumberStep_int,
+    List basin_inflowCellNumberStep_int
+);
+
 
 NumericVector confluen_WaterGAP3_L(
     NumericVector confluen_cellInflow_m3,

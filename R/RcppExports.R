@@ -27,6 +27,16 @@ subset_put <- function(vec_Data, int_Index, vec_DataPut) {
 }
 
 #' WaterGAP3
+#' @name WaterGAP3_H
+#' @inheritParams all_vari
+#' @inheritParams process
+#' @return streamflow m3
+#' @export
+WaterGAP3_H <- function(n_time, n_spat, atmos_precipitation_mm, atmos_temperature_Cel, atmos_solarRadiat_MJ, snow_ice_mm, land_impermeableFrac_1, soil_water_mm, soil_capacity_mm, soil_potentialPercola_mm, ground_water_mm, ground_capacity_mm, basin_landArea_km2, lake_cellNumber_int, lake_water_m3, lake_area_km2, lake_capacity_m3, river_water_m3, river_length_km, river_velocity_km, basin_cellNumberStep_int, basin_inflowCellNumberStep_int, param_atmos_thr_Ts, param_snow_fac_f, param_snow_fac_Tmelt, param_evatrans_tur_k, param_evatrans_ubc_gamma, param_evatrans_vic_gamma, param_infilt_hbv_beta, param_percola_arn_k, param_percola_arn_thresh, param_baseflow_grf_gamma, param_lake_acp_storeFactor, param_lake_acp_gamma) {
+    .Call(`_WaterGAP3_WaterGAP3_H`, n_time, n_spat, atmos_precipitation_mm, atmos_temperature_Cel, atmos_solarRadiat_MJ, snow_ice_mm, land_impermeableFrac_1, soil_water_mm, soil_capacity_mm, soil_potentialPercola_mm, ground_water_mm, ground_capacity_mm, basin_landArea_km2, lake_cellNumber_int, lake_water_m3, lake_area_km2, lake_capacity_m3, river_water_m3, river_length_km, river_velocity_km, basin_cellNumberStep_int, basin_inflowCellNumberStep_int, param_atmos_thr_Ts, param_snow_fac_f, param_snow_fac_Tmelt, param_evatrans_tur_k, param_evatrans_ubc_gamma, param_evatrans_vic_gamma, param_infilt_hbv_beta, param_percola_arn_k, param_percola_arn_thresh, param_baseflow_grf_gamma, param_lake_acp_storeFactor, param_lake_acp_gamma)
+}
+
+#' WaterGAP3
 #' @name WaterGAP3_HL
 #' @inheritParams all_vari
 #' @inheritParams process
@@ -77,6 +87,9 @@ get_inflow_lastcell <- function(int_Outflow) {
 get_step_param <- function(int_Outflow) {
     .Call(`_WaterGAP3_get_step_param`, int_Outflow)
 }
+
+#' @rdname process
+NULL
 
 #' Hydrological Process
 #' @name process
@@ -173,6 +186,10 @@ reservoir_Hanasaki <- function(reservoir_water_m3, reservoir_inflow_m3, reservoi
 
 #' @rdname process
 #' @export
+confluen_WaterGAP3 <- function(confluen_cellInflow_m3, river_water_m3, river_length_km, river_velocity_km, basin_cellNumberStep_int, basin_inflowCellNumberStep_int) {
+    .Call(`_WaterGAP3_confluen_WaterGAP3`, confluen_cellInflow_m3, river_water_m3, river_length_km, river_velocity_km, basin_cellNumberStep_int, basin_inflowCellNumberStep_int)
+}
+
 confluen_WaterGAP3_L <- function(confluen_cellInflow_m3, river_water_m3, river_length_km, river_velocity_km, riverlake_cellNumber_int, riverlake_water_m3, riverlake_capacity_m3, basin_cellNumberStep_int, basin_inflowCellNumberStep_int, param_riverlake_lin_storeFactor) {
     .Call(`_WaterGAP3_confluen_WaterGAP3_L`, confluen_cellInflow_m3, river_water_m3, river_length_km, river_velocity_km, riverlake_cellNumber_int, riverlake_water_m3, riverlake_capacity_m3, basin_cellNumberStep_int, basin_inflowCellNumberStep_int, param_riverlake_lin_storeFactor)
 }
