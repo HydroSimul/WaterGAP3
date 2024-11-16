@@ -18,10 +18,6 @@ WaterGAP3_H(
   ground_water_mm,
   ground_capacity_mm,
   basin_landArea_km2,
-  lake_cellNumber_int,
-  lake_water_m3,
-  lake_area_km2,
-  lake_capacity_m3,
   river_water_m3,
   river_length_km,
   river_velocity_km,
@@ -36,9 +32,7 @@ WaterGAP3_H(
   param_infilt_hbv_beta,
   param_percola_arn_k,
   param_percola_arn_thresh,
-  param_baseflow_grf_gamma,
-  param_lake_acp_storeFactor,
-  param_lake_acp_gamma
+  param_baseflow_grf_gamma
 )
 }
 \arguments{
@@ -67,14 +61,6 @@ WaterGAP3_H(
 \item{ground_capacity_mm}{(mm/m2) water storage capacity in `groundLy`}
 
 \item{basin_landArea_km2}{(km2) land area of the basin}
-
-\item{lake_cellNumber_int}{(int) lake cell number}
-
-\item{lake_water_m3}{(m3) lake water volume}
-
-\item{lake_area_km2}{(km2) area of the lake}
-
-\item{lake_capacity_m3}{(m3) capacity of the lake}
 
 \item{river_water_m3}{(m3) river water volume}
 
@@ -105,10 +91,6 @@ WaterGAP3_H(
 \item{param_percola_arn_thresh}{<0.1, 0.9> coefficient parameter for [percola_ThreshPow()]}
 
 \item{param_baseflow_grf_gamma}{<2, 7> exponential parameter for [baseflow_GR4Jfix()]}
-
-\item{param_lake_acp_storeFactor}{<uknow> parameter for [lake_AcceptPow()],}
-
-\item{param_lake_acp_gamma}{<uknow> parameter for [lake_AcceptPow()],}
 }
 \value{
 streamflow m3
