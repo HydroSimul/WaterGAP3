@@ -119,8 +119,8 @@ RcppExport SEXP _WaterGAP3_subset_put(SEXP vec_DataSEXP, SEXP int_IndexSEXP, SEX
     return rcpp_result_gen;
 }
 // WaterGAP3_H
-List WaterGAP3_H(int n_time, int n_spat, NumericMatrix atmos_precipitation_mm, NumericMatrix atmos_temperature_Cel, NumericMatrix atmos_solarRadiat_MJ, NumericVector snow_ice_mm, NumericVector land_impermeableFrac_1, NumericVector soil_water_mm, NumericVector soil_capacity_mm, NumericVector soil_potentialPercola_mm, NumericVector ground_water_mm, NumericVector ground_capacity_mm, NumericVector basin_landArea_km2, NumericVector river_water_m3, NumericVector river_length_km, NumericVector river_velocity_km, List basin_cellNumberStep_int, List basin_inflowCellNumberStep_int, NumericVector param_atmos_thr_Ts, NumericVector param_snow_fac_f, NumericVector param_snow_fac_Tmelt, NumericVector param_evatrans_tur_k, NumericVector param_evatrans_ubc_gamma, NumericVector param_evatrans_vic_gamma, NumericVector param_infilt_hbv_beta, NumericVector param_percola_arn_k, NumericVector param_percola_arn_thresh, NumericVector param_baseflow_grf_gamma);
-RcppExport SEXP _WaterGAP3_WaterGAP3_H(SEXP n_timeSEXP, SEXP n_spatSEXP, SEXP atmos_precipitation_mmSEXP, SEXP atmos_temperature_CelSEXP, SEXP atmos_solarRadiat_MJSEXP, SEXP snow_ice_mmSEXP, SEXP land_impermeableFrac_1SEXP, SEXP soil_water_mmSEXP, SEXP soil_capacity_mmSEXP, SEXP soil_potentialPercola_mmSEXP, SEXP ground_water_mmSEXP, SEXP ground_capacity_mmSEXP, SEXP basin_landArea_km2SEXP, SEXP river_water_m3SEXP, SEXP river_length_kmSEXP, SEXP river_velocity_kmSEXP, SEXP basin_cellNumberStep_intSEXP, SEXP basin_inflowCellNumberStep_intSEXP, SEXP param_atmos_thr_TsSEXP, SEXP param_snow_fac_fSEXP, SEXP param_snow_fac_TmeltSEXP, SEXP param_evatrans_tur_kSEXP, SEXP param_evatrans_ubc_gammaSEXP, SEXP param_evatrans_vic_gammaSEXP, SEXP param_infilt_hbv_betaSEXP, SEXP param_percola_arn_kSEXP, SEXP param_percola_arn_threshSEXP, SEXP param_baseflow_grf_gammaSEXP) {
+List WaterGAP3_H(int n_time, int n_spat, NumericMatrix atmos_precipitation_mm, NumericMatrix atmos_temperature_Cel, NumericMatrix atmos_solarRadiat_MJ, NumericVector snow_ice_mm, NumericVector soil_water_mm, NumericVector soil_capacity_mm, NumericVector soil_potentialPercola_mm, NumericVector ground_water_mm, NumericVector ground_capacity_mm, NumericVector basin_landArea_km2, NumericVector river_water_m3, NumericVector river_length_km, NumericVector river_velocity_km, List basin_cellNumberStep_int, List basin_inflowCellNumberStep_int, NumericVector param_atmos_thr_Ts, NumericVector param_snow_fac_f, NumericVector param_snow_fac_Tmelt, NumericVector param_evatrans_tur_k, NumericVector param_evatrans_ubc_gamma, NumericVector param_infilt_hbv_beta, NumericVector param_percola_arn_k, NumericVector param_percola_arn_thresh, NumericVector param_baseflow_grf_gamma);
+RcppExport SEXP _WaterGAP3_WaterGAP3_H(SEXP n_timeSEXP, SEXP n_spatSEXP, SEXP atmos_precipitation_mmSEXP, SEXP atmos_temperature_CelSEXP, SEXP atmos_solarRadiat_MJSEXP, SEXP snow_ice_mmSEXP, SEXP soil_water_mmSEXP, SEXP soil_capacity_mmSEXP, SEXP soil_potentialPercola_mmSEXP, SEXP ground_water_mmSEXP, SEXP ground_capacity_mmSEXP, SEXP basin_landArea_km2SEXP, SEXP river_water_m3SEXP, SEXP river_length_kmSEXP, SEXP river_velocity_kmSEXP, SEXP basin_cellNumberStep_intSEXP, SEXP basin_inflowCellNumberStep_intSEXP, SEXP param_atmos_thr_TsSEXP, SEXP param_snow_fac_fSEXP, SEXP param_snow_fac_TmeltSEXP, SEXP param_evatrans_tur_kSEXP, SEXP param_evatrans_ubc_gammaSEXP, SEXP param_infilt_hbv_betaSEXP, SEXP param_percola_arn_kSEXP, SEXP param_percola_arn_threshSEXP, SEXP param_baseflow_grf_gammaSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -130,7 +130,6 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< NumericMatrix >::type atmos_temperature_Cel(atmos_temperature_CelSEXP);
     Rcpp::traits::input_parameter< NumericMatrix >::type atmos_solarRadiat_MJ(atmos_solarRadiat_MJSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type snow_ice_mm(snow_ice_mmSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type land_impermeableFrac_1(land_impermeableFrac_1SEXP);
     Rcpp::traits::input_parameter< NumericVector >::type soil_water_mm(soil_water_mmSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type soil_capacity_mm(soil_capacity_mmSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type soil_potentialPercola_mm(soil_potentialPercola_mmSEXP);
@@ -147,12 +146,11 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< NumericVector >::type param_snow_fac_Tmelt(param_snow_fac_TmeltSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type param_evatrans_tur_k(param_evatrans_tur_kSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type param_evatrans_ubc_gamma(param_evatrans_ubc_gammaSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type param_evatrans_vic_gamma(param_evatrans_vic_gammaSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type param_infilt_hbv_beta(param_infilt_hbv_betaSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type param_percola_arn_k(param_percola_arn_kSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type param_percola_arn_thresh(param_percola_arn_threshSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type param_baseflow_grf_gamma(param_baseflow_grf_gammaSEXP);
-    rcpp_result_gen = Rcpp::wrap(WaterGAP3_H(n_time, n_spat, atmos_precipitation_mm, atmos_temperature_Cel, atmos_solarRadiat_MJ, snow_ice_mm, land_impermeableFrac_1, soil_water_mm, soil_capacity_mm, soil_potentialPercola_mm, ground_water_mm, ground_capacity_mm, basin_landArea_km2, river_water_m3, river_length_km, river_velocity_km, basin_cellNumberStep_int, basin_inflowCellNumberStep_int, param_atmos_thr_Ts, param_snow_fac_f, param_snow_fac_Tmelt, param_evatrans_tur_k, param_evatrans_ubc_gamma, param_evatrans_vic_gamma, param_infilt_hbv_beta, param_percola_arn_k, param_percola_arn_thresh, param_baseflow_grf_gamma));
+    rcpp_result_gen = Rcpp::wrap(WaterGAP3_H(n_time, n_spat, atmos_precipitation_mm, atmos_temperature_Cel, atmos_solarRadiat_MJ, snow_ice_mm, soil_water_mm, soil_capacity_mm, soil_potentialPercola_mm, ground_water_mm, ground_capacity_mm, basin_landArea_km2, river_water_m3, river_length_km, river_velocity_km, basin_cellNumberStep_int, basin_inflowCellNumberStep_int, param_atmos_thr_Ts, param_snow_fac_f, param_snow_fac_Tmelt, param_evatrans_tur_k, param_evatrans_ubc_gamma, param_infilt_hbv_beta, param_percola_arn_k, param_percola_arn_thresh, param_baseflow_grf_gamma));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -940,7 +938,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_WaterGAP3_subset_get", (DL_FUNC) &_WaterGAP3_subset_get, 2},
     {"_WaterGAP3_subset_get_logical", (DL_FUNC) &_WaterGAP3_subset_get_logical, 2},
     {"_WaterGAP3_subset_put", (DL_FUNC) &_WaterGAP3_subset_put, 3},
-    {"_WaterGAP3_WaterGAP3_H", (DL_FUNC) &_WaterGAP3_WaterGAP3_H, 28},
+    {"_WaterGAP3_WaterGAP3_H", (DL_FUNC) &_WaterGAP3_WaterGAP3_H, 26},
     {"_WaterGAP3_WaterGAP3_HL", (DL_FUNC) &_WaterGAP3_WaterGAP3_HL, 39},
     {"_WaterGAP3_WaterGAP3_HLR", (DL_FUNC) &_WaterGAP3_WaterGAP3_HLR, 51},
     {"_WaterGAP3_get_inflow_cells", (DL_FUNC) &_WaterGAP3_get_inflow_cells, 1},

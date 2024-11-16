@@ -11,7 +11,6 @@ WaterGAP3_H(
   atmos_temperature_Cel,
   atmos_solarRadiat_MJ,
   snow_ice_mm,
-  land_impermeableFrac_1,
   soil_water_mm,
   soil_capacity_mm,
   soil_potentialPercola_mm,
@@ -28,7 +27,6 @@ WaterGAP3_H(
   param_snow_fac_Tmelt,
   param_evatrans_tur_k,
   param_evatrans_ubc_gamma,
-  param_evatrans_vic_gamma,
   param_infilt_hbv_beta,
   param_percola_arn_k,
   param_percola_arn_thresh,
@@ -47,8 +45,6 @@ WaterGAP3_H(
 \item{atmos_solarRadiat_MJ}{(MJ/m2/TS) the solar radiation that actually reaches the earths surface}
 
 \item{snow_ice_mm}{(mm/m2) water equivalent of **ice** in snowpack}
-
-\item{land_impermeableFrac_1}{<0, 1> the maximum impermeable fraction when th soil is fully saturated}
 
 \item{soil_water_mm}{(mm/m2) water volume in `soilLy`}
 
@@ -81,8 +77,6 @@ WaterGAP3_H(
 \item{param_evatrans_tur_k}{<0.6, 1> parameter for [evatransPotential_TurcWendling()], higher value when closer to the sea}
 
 \item{param_evatrans_ubc_gamma}{<0.5, 2> parameter for [evatransActual_UBC()]}
-
-\item{param_evatrans_vic_gamma}{<0.2, 5> parameter for [evatransActual_VIC()]}
 
 \item{param_infilt_hbv_beta}{<0.001, 5> parameters for [infilt_HBV()]}
 
