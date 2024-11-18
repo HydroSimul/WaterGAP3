@@ -7,21 +7,21 @@
 WaterGAP3_H(
   n_time,
   n_spat,
-  atmos_precipitation_mm,
-  atmos_temperature_Cel,
-  atmos_solarRadiat_MJ,
-  snow_ice_mm,
-  soil_water_mm,
-  soil_capacity_mm,
-  soil_potentialPercola_mm,
-  ground_water_mm,
-  ground_capacity_mm,
-  basin_landArea_km2,
-  river_water_m3,
-  river_length_km,
-  river_velocity_km,
-  basin_cellNumberStep_int,
-  basin_inflowCellNumberStep_int,
+  AtmoS_precipitation_mm,
+  AtmoS_temperature_Cel,
+  AtmoS_solarRadiat_MJ,
+  snoW_ice_mm,
+  soiL_water_mm,
+  soiL_capacity_mm,
+  soiL_potentialPercola_mm,
+  grounD_water_mm,
+  grounD_capacity_mm,
+  riveR_water_m3,
+  riveR_length_km,
+  riveR_velocity_km,
+  celL_landArea_km2,
+  celL_cellNumberStep_int,
+  celL_inflowCellNumberStep_int,
   param_atmos_thr_Ts,
   param_snow_fac_f,
   param_snow_fac_Tmelt,
@@ -30,7 +30,8 @@ WaterGAP3_H(
   param_infilt_hbv_beta,
   param_percola_arn_k,
   param_percola_arn_thresh,
-  param_baseflow_grf_gamma
+  param_baseflow_grf_gamma,
+  if_allVariExport = FALSE
 )
 }
 \arguments{
@@ -38,35 +39,35 @@ WaterGAP3_H(
 
 \item{n_spat}{(int) number of spatial units}
 
-\item{atmos_precipitation_mm}{(mm/m2/TS) precipitaion volum}
+\item{AtmoS_precipitation_mm}{(mm/m2/TS) precipitaion volum}
 
-\item{atmos_temperature_Cel}{(Cel) the average air temperature in the time phase}
+\item{AtmoS_temperature_Cel}{(Cel) the average air temperature in the time phase}
 
-\item{atmos_solarRadiat_MJ}{(MJ/m2/TS) the solar radiation that actually reaches the earths surface}
+\item{AtmoS_solarRadiat_MJ}{(MJ/m2/TS) the solar radiation that actually reaches the earths surface}
 
-\item{snow_ice_mm}{(mm/m2) water equivalent of **ice** in snowpack}
+\item{snoW_ice_mm}{(mm/m2) water equivalent of **ice** in snowpack}
 
-\item{soil_water_mm}{(mm/m2) water volume in `soilLy`}
+\item{soiL_water_mm}{(mm/m2) water volume in `soilLy`}
 
-\item{soil_capacity_mm}{(mm/m2) average soil Capacity (maximal storage capacity)}
+\item{soiL_capacity_mm}{(mm/m2) average soil Capacity (maximal storage capacity)}
 
-\item{soil_potentialPercola_mm}{<0.01, 7> (mm/m2/TS) **potential** percolation}
+\item{soiL_potentialPercola_mm}{<0.01, 7> (mm/m2/TS) **potential** percolation}
 
-\item{ground_water_mm}{(mm/m2/TS) water volume in `groundLy`}
+\item{grounD_water_mm}{(mm/m2/TS) water volume in `groundLy`}
 
-\item{ground_capacity_mm}{(mm/m2) water storage capacity in `groundLy`}
+\item{grounD_capacity_mm}{(mm/m2) water storage capacity in `groundLy`}
 
-\item{basin_landArea_km2}{(km2) land area of the basin}
+\item{riveR_water_m3}{(m3) river water volume}
 
-\item{river_water_m3}{(m3) river water volume}
+\item{riveR_length_km}{(km) river length}
 
-\item{river_length_km}{(km) river length}
+\item{riveR_velocity_km}{(km/TS) river velocity}
 
-\item{river_velocity_km}{(km/TS) river velocity}
+\item{celL_landArea_km2}{(km2) land area of the basin}
 
-\item{basin_cellNumberStep_int}{(int) step number of basin cells}
+\item{celL_cellNumberStep_int}{(int) step number of basin cells}
 
-\item{basin_inflowCellNumberStep_int}{(int) step number of inflow cells in the basin}
+\item{celL_inflowCellNumberStep_int}{(int) step number of inflow cells in the basin}
 
 \item{param_atmos_thr_Ts}{<-1, 3> (Cel) threshold air temperature that snow, parameter for [atmosSnow_ThresholdT()]}
 
@@ -85,6 +86,8 @@ WaterGAP3_H(
 \item{param_percola_arn_thresh}{<0.1, 0.9> coefficient parameter for [percola_ThreshPow()]}
 
 \item{param_baseflow_grf_gamma}{<2, 7> exponential parameter for [baseflow_GR4Jfix()]}
+
+\item{if_allVariExport}{(bool) whether export all the state variables (default in false)}
 }
 \value{
 streamflow m3

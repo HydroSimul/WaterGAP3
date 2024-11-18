@@ -77,40 +77,15 @@ NumericVector confluen_WaterGAP3(
 
 
 NumericVector confluen_WaterGAP3_L(
-    NumericVector confluen_cellInflow_m3,
-    NumericVector &river_water_m3,
-    NumericVector river_length_km,
-    NumericVector river_velocity_km,
+    NumericVector conflueN_cellInflow_m3,
+    NumericVector &riveR_water_m3,
+    NumericVector riveR_length_km,
+    NumericVector riveR_velocity_km,
+    List celL_cellNumberStep_int,
+    List celL_inflowCellNumberStep_int,
     IntegerVector riverlake_cellNumber_int,
     NumericVector &riverlake_water_m3,
     NumericVector riverlake_capacity_m3,
-    List basin_cellNumberStep_int,
-    List basin_inflowCellNumberStep_int,
     NumericVector param_riverlake_lin_storeFactor
-);
-
-
-NumericVector confluen_WaterGAP3_LR(
-    NumericVector confluen_cellInflow_m3,
-    NumericVector &river_water_m3,
-    NumericVector river_length_km,
-    NumericVector river_velocity_km,
-    IntegerVector riverlake_cellNumber_int,
-    NumericVector &riverlake_water_m3,
-    NumericVector riverlake_capacity_m3,
-    IntegerVector reservoir_cellNumber_int,
-    NumericVector &reservoir_water_m3,
-    NumericVector reservoir_capacity_m3,
-    NumericVector reservoir_demand_m3,
-    NumericVector reservoir_yearInflow_m3,
-    NumericVector reservoir_yearDemand_m3,
-    NumericVector &reservoir_yearRelase_m3,
-    LogicalVector reservoir_isOperateStart_01,
-    LogicalVector reservoir_isIrrigate_01,
-    List basin_cellNumberStep_int,
-    List basin_inflowCellNumberStep_int,
-    NumericVector param_riverlake_lin_storeFactor,
-    NumericVector param_reservoir_han_alpha,
-    NumericVector param_reservoir_han_kDemand
 );
 #endif
