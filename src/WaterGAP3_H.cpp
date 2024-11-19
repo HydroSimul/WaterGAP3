@@ -132,7 +132,7 @@ List WaterGAP3_H(
      _["runoff_mm"] = LanD_runoff_mm,
      _["basefloW_mm"] = GrounD_basefloW_mm,
      _["runoff_m3"] = OuT_cellOutflow,
-     _["river_water_m3"] = OuT_riverwater,
+     _["riverwater_m3"] = OuT_riverwater,
      _["streamflow_m3"] = RiveR_outflow_m3
    );
  } else{
