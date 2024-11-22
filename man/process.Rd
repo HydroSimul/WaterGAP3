@@ -108,8 +108,8 @@ confluen_WaterGAP3(
   RIVER_water_m3,
   RIVER_length_km,
   RIVER_velocity_km,
-  celL_cellNumberStep_int,
-  celL_inflowCellNumberStep_int
+  CELL_cellNumberStep_int,
+  CELL_inflowCellNumberStep_int
 )
 }
 \arguments{
@@ -208,6 +208,10 @@ confluen_WaterGAP3(
 \item{param_Reservoi_han_kDemand}{<uknow> parameter for [reservoi_Hanasaki()],}
 
 \item{CONFLUEN_cellInflow_m3}{(m3 / TS) input water volum in every routeline}
+
+\item{CELL_cellNumberStep_int}{(int) step number of basin cells}
+
+\item{CELL_inflowCellNumberStep_int}{(int) step number of inflow cells in the basin}
 }
 \value{
 atmos_snow_mm (mm/m2/TS) snowfall volume

@@ -319,8 +319,8 @@ NumericVector confluen_WaterGAP3(
    NumericVector &RIVER_water_m3,
    NumericVector RIVER_length_km,
    NumericVector RIVER_velocity_km,
-   List celL_cellNumberStep_int,
-   List celL_inflowCellNumberStep_int
+   List CELL_cellNumberStep_int,
+   List CELL_inflowCellNumberStep_int
 )
 {
 
@@ -330,20 +330,20 @@ NumericVector confluen_WaterGAP3(
 
  IntegerVector idx_Cell_Step,
  idx_RiverLake_Step, idx_Step_Riverlake;
- int n_Step = celL_cellNumberStep_int.size();
+ int n_Step = CELL_cellNumberStep_int.size();
 
  // Step i later with Inflow
  for (int i_Step = 0; i_Step < n_Step; i_Step++)
  {
 
-   idx_Cell_Step = celL_cellNumberStep_int[i_Step];
+   idx_Cell_Step = CELL_cellNumberStep_int[i_Step];
    NumericVector step_UpstreamInflow_m3(idx_Cell_Step.size(), 0.);
    // Inflow upstream
    if (i_Step > 0) {
 
      step_UpstreamInflow_m3 = inflow_add(
        confluen_outflow_m3,
-       celL_inflowCellNumberStep_int[i_Step]
+       CELL_inflowCellNumberStep_int[i_Step]
      );
 
    }
@@ -381,8 +381,8 @@ NumericVector confluen_WaterGAP3(
      NumericVector &RIVER_water_m3,
      NumericVector RIVER_length_km,
      NumericVector RIVER_velocity_km,
-     List celL_cellNumberStep_int,
-     List celL_inflowCellNumberStep_int,
+     List CELL_cellNumberStep_int,
+     List CELL_inflowCellNumberStep_int,
      IntegerVector Riverlak_cellNumber_int,
      NumericVector &Riverlak_water_m3,
      NumericVector Riverlak_capacity_m3,
@@ -396,20 +396,20 @@ NumericVector confluen_WaterGAP3(
 
    IntegerVector idx_Cell_Step,
    idx_RiverLake_Step, idx_Step_Riverlake;
-   int n_Step = celL_cellNumberStep_int.size();
+   int n_Step = CELL_cellNumberStep_int.size();
 
    // Step i later with Inflow
    for (int i_Step = 0; i_Step < n_Step; i_Step++)
    {
 
-     idx_Cell_Step = celL_cellNumberStep_int[i_Step];
+     idx_Cell_Step = CELL_cellNumberStep_int[i_Step];
      NumericVector step_UpstreamInflow_m3(idx_Cell_Step.size(), 0.);
      // Inflow upstream
      if (i_Step > 0) {
 
        step_UpstreamInflow_m3 = inflow_add(
          confluen_outflow_m3,
-         celL_inflowCellNumberStep_int[i_Step]
+         CELL_inflowCellNumberStep_int[i_Step]
        );
 
      }
