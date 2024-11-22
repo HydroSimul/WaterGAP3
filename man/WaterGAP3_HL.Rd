@@ -33,7 +33,6 @@ WaterGAP3_HL(
   param_ATMOS_thr_Ts,
   param_SNOW_fac_f,
   param_SNOW_fac_Tmelt,
-  param_EVATRANS_tur_k,
   param_EVATRANS_ubc_gamma,
   param_INFILT_hbv_beta,
   param_PERCOLA_arn_k,
@@ -102,8 +101,6 @@ WaterGAP3_HL(
 \item{param_SNOW_fac_f}{<0.05, 2> (mm/m2/h/Cel) potential melt volum per Cel per hour parameter for [snowMelt_Factor()]}
 
 \item{param_SNOW_fac_Tmelt}{<0, 3> (Cel) snow melt temperature parameter for [snowMelt_Factor()]}
-
-\item{param_EVATRANS_tur_k}{<0.6, 1> parameter for [evatransPotential_TurcWendling()], higher value when closer to the sea}
 
 \item{param_EVATRANS_ubc_gamma}{<0.5, 2> parameter for [evatransActual_UBC()]}
 

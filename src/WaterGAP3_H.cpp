@@ -28,7 +28,6 @@ List WaterGAP3_H(
    NumericVector param_ATMOS_thr_Ts,
    NumericVector param_SNOW_fac_f,
    NumericVector param_SNOW_fac_Tmelt,
-   NumericVector param_EVATRANS_tur_k,
    NumericVector param_EVATRANS_ubc_gamma,
    NumericVector param_INFILT_hbv_beta,
    NumericVector param_PERCOLA_arn_k,
