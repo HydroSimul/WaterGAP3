@@ -12,206 +12,202 @@
 \alias{baseflow_GR4Jfix}
 \alias{lake_AcceptPow}
 \alias{river_LinearResorvoir}
-\alias{riverlake_LinearResorvoir}
-\alias{reservoir_Hanasaki}
+\alias{riverlak_LinearResorvoir}
+\alias{reservoi_Hanasaki}
 \alias{confluen_WaterGAP3}
 \title{Hydrological Process}
 \usage{
 atmosSnow_ThresholdT(
-  AtmoS_precipitation_mm,
-  AtmoS_temperature_Cel,
-  param_atmos_thr_Ts
+  ATMOS_precipitation_mm,
+  ATMOS_temperature_Cel,
+  param_ATMOS_thr_Ts
 )
 
 evatransPotential_TurcWendling(
-  AtmoS_temperature_Cel,
-  AtmoS_solarRadiat_MJ,
-  param_evatrans_tur_k
+  ATMOS_temperature_Cel,
+  ATMOS_solarRadiat_MJ,
+  param_EVATRANS_tur_k
 )
 
 evatransActual_VIC(
-  AtmoS_potentialEvatrans_mm,
+  ATMOS_potentialEvatrans_mm,
   water_mm,
   capacity_mm,
-  param_evatrans_vic_gamma
+  param_EVATRANS_vic_gamma
 )
 
 evatransActual_UBC(
-  AtmoS_potentialEvatrans_mm,
+  ATMOS_potentialEvatrans_mm,
   water_mm,
   capacity_mm,
-  param_evatrans_ubc_gamma
+  param_EVATRANS_ubc_gamma
 )
 
 snowMelt_Factor(
-  snoW_ice_mm,
-  AtmoS_temperature_Cel,
-  param_snow_fac_f,
-  param_snow_fac_Tmelt
+  SNOW_ice_mm,
+  ATMOS_temperature_Cel,
+  param_SNOW_fac_f,
+  param_SNOW_fac_Tmelt
 )
 
 infilt_HBV(
-  lanD_water_mm,
-  soiL_water_mm,
-  soiL_capacity_mm,
-  param_infilt_hbv_beta
+  LAND_water_mm,
+  SOIL_water_mm,
+  SOIL_capacity_mm,
+  param_INFILT_hbv_beta
 )
 
 percola_Arno(
-  soiL_water_mm,
-  soiL_capacity_mm,
-  soiL_potentialPercola_mm,
-  param_percola_arn_thresh,
-  param_percola_arn_k
+  SOIL_water_mm,
+  SOIL_capacity_mm,
+  SOIL_potentialPercola_mm,
+  param_PERCOLA_arn_thresh,
+  param_PERCOLA_arn_k
 )
 
-baseflow_GR4Jfix(grounD_water_mm, grounD_capacity_mm, param_baseflow_grf_gamma)
+baseflow_GR4Jfix(GROUND_water_mm, GROUND_capacity_mm, param_BASEFLOW_grf_gamma)
 
 lake_AcceptPow(
-  lake_water_m3,
-  lake_inflow_m3,
-  lake_capacity_m3,
-  param_lake_acp_storeFactor,
-  param_lake_acp_gamma
+  Lake_water_m3,
+  Lake_inflow_m3,
+  Lake_capacity_m3,
+  param_Lake_acp_storeFactor,
+  param_Lake_acp_gamma
 )
 
 river_LinearResorvoir(
-  riveR_water_m3,
-  riveR_inflow_m3,
-  riveR_velocity_km,
-  riveR_length_km
+  RIVER_water_m3,
+  RIVER_inflow_m3,
+  RIVER_velocity_km,
+  RIVER_length_km
 )
 
-riverlake_LinearResorvoir(
-  riverlake_water_m3,
-  riverlake_inflow_m3,
-  riverlake_capacity_m3,
-  param_riverlake_lin_storeFactor
+riverlak_LinearResorvoir(
+  Riverlak_water_m3,
+  Riverlak_inflow_m3,
+  Riverlak_capacity_m3,
+  param_Riverlak_lin_storeFactor
 )
 
-reservoir_Hanasaki(
-  reservoir_water_m3,
-  reservoir_inflow_m3,
-  reservoir_capacity_m3,
-  reservoir_demand_m3,
-  reservoir_yearInflow_m3,
-  reservoir_yearDemand_m3,
-  reservoir_yearRelase_m3,
-  reservoir_isOperateStart_01,
-  reservoir_isIrrigate_01,
-  param_reservoir_han_alpha,
-  param_reservoir_han_kDemand
+reservoi_Hanasaki(
+  Reservoi_water_m3,
+  Reservoi_inflow_m3,
+  Reservoi_capacity_m3,
+  Reservoi_demand_m3,
+  Reservoi_yearInflow_m3,
+  Reservoi_yearDemand_m3,
+  Reservoi_yearRelase_m3,
+  Reservoi_isOperateStart_01,
+  Reservoi_isIrrigate_01,
+  param_Reservoi_han_alpha,
+  param_Reservoi_han_kDemand
 )
 
 confluen_WaterGAP3(
-  conflueN_cellInflow_m3,
-  riveR_water_m3,
-  riveR_length_km,
-  riveR_velocity_km,
+  CONFLUEN_cellInflow_m3,
+  RIVER_water_m3,
+  RIVER_length_km,
+  RIVER_velocity_km,
   celL_cellNumberStep_int,
   celL_inflowCellNumberStep_int
 )
 }
 \arguments{
-\item{AtmoS_precipitation_mm}{(mm/m2/TS) precipitaion volum}
+\item{ATMOS_precipitation_mm}{(mm/m2/TS) precipitaion volum}
 
-\item{AtmoS_temperature_Cel}{(Cel) the average air temperature in the time phase}
+\item{ATMOS_temperature_Cel}{(Cel) the average air temperature in the time phase}
 
-\item{param_atmos_thr_Ts}{<-1, 3> (Cel) threshold air temperature that snow, parameter for [atmosSnow_ThresholdT()]}
+\item{param_ATMOS_thr_Ts}{<-1, 3> (Cel) threshold air temperature that snow, parameter for [atmosSnow_ThresholdT()]}
 
-\item{AtmoS_solarRadiat_MJ}{(MJ/m2/TS) the solar radiation that actually reaches the earths surface}
+\item{ATMOS_solarRadiat_MJ}{(MJ/m2/TS) the solar radiation that actually reaches the earths surface}
 
-\item{param_evatrans_tur_k}{<0.6, 1> parameter for [evatransPotential_TurcWendling()], higher value when closer to the sea}
+\item{param_EVATRANS_tur_k}{<0.6, 1> parameter for [evatransPotential_TurcWendling()], higher value when closer to the sea}
 
-\item{AtmoS_potentialEvatrans_mm}{(mm/m2/TS) **potential / reference** evapotranspiration}
+\item{ATMOS_potentialEvatrans_mm}{(mm/m2/TS) **potential / reference** evapotranspiration}
 
-\item{water_mm}{(mm/m2/TS) water volume in `soilLy`, `groundLy` or intercept of `landLy`, same as `soiL_water_mm`, `grounD_water_mm` or `lanD_interceptWater_mm`}
+\item{water_mm}{(mm/m2/TS) water volume in `soilLy`, `groundLy` or intercept of `landLy`, same as `SOIL_water_mm`, `GROUND_water_mm` or `LAND_interceptWater_mm`}
 
-\item{capacity_mm}{(mm/m2) water storage capacity in `soilLy`, `groundLy` or intercept of `landLy`, same as `soiL_capacity_mm`, `grounD_capacity_mm` or`lanD_interceptCapacity_mm`}
+\item{capacity_mm}{(mm/m2) water storage capacity in `soilLy`, `groundLy` or intercept of `landLy`, same as `SOIL_capacity_mm`, `GROUND_capacity_mm` or`LAND_interceptCapacity_mm`}
 
-\item{param_evatrans_vic_gamma}{<0.2, 5> parameter for [evatransActual_VIC()]}
+\item{param_EVATRANS_vic_gamma}{<0.2, 5> parameter for [evatransActual_VIC()]}
 
-\item{param_evatrans_ubc_gamma}{<0.5, 2> parameter for [evatransActual_UBC()]}
+\item{param_EVATRANS_ubc_gamma}{<0.5, 2> parameter for [evatransActual_UBC()]}
 
-\item{snoW_ice_mm}{(mm/m2) water equivalent of **ice** in snowpack}
+\item{SNOW_ice_mm}{(mm/m2) water equivalent of **ice** in snowpack}
 
-\item{param_snow_fac_f}{<0.05, 2> (mm/m2/h/Cel) potential melt volum per Cel per hour parameter for [snowMelt_Factor()]}
+\item{param_SNOW_fac_f}{<0.05, 2> (mm/m2/h/Cel) potential melt volum per Cel per hour parameter for [snowMelt_Factor()]}
 
-\item{param_snow_fac_Tmelt}{<0, 3> (Cel) snow melt temperature parameter for [snowMelt_Factor()]}
+\item{param_SNOW_fac_Tmelt}{<0, 3> (Cel) snow melt temperature parameter for [snowMelt_Factor()]}
 
-\item{lanD_water_mm}{(mm/m2) **pounded water** volume in `landLy` and there is no limit, different than `lanD_interceptWater_mm`}
+\item{LAND_water_mm}{(mm/m2) **pounded water** volume in `landLy` and there is no limit, different than `LAND_interceptWater_mm`}
 
-\item{soiL_water_mm}{(mm/m2) water volume in `soilLy`}
+\item{SOIL_water_mm}{(mm/m2) water volume in `soilLy`}
 
-\item{soiL_capacity_mm}{(mm/m2) average soil Capacity (maximal storage capacity)}
+\item{SOIL_capacity_mm}{(mm/m2) average soil Capacity (maximal storage capacity)}
 
-\item{param_infilt_hbv_beta}{<0.001, 5> parameters for [infilt_HBV()]}
+\item{param_INFILT_hbv_beta}{<0.001, 5> parameters for [infilt_HBV()]}
 
-\item{soiL_potentialPercola_mm}{<0.01, 7> (mm/m2/TS) **potential** percolation}
+\item{SOIL_potentialPercola_mm}{<0.01, 7> (mm/m2/TS) **potential** percolation}
 
-\item{param_percola_arn_thresh}{<0.1, 0.9> coefficient parameter for [percola_ThreshPow()]}
+\item{param_PERCOLA_arn_thresh}{<0.1, 0.9> coefficient parameter for [percola_ThreshPow()]}
 
-\item{param_percola_arn_k}{<0.1, 1> exponential parameter for [percola_ThreshPow()]}
+\item{param_PERCOLA_arn_k}{<0.1, 1> exponential parameter for [percola_ThreshPow()]}
 
-\item{grounD_water_mm}{(mm/m2/TS) water volume in `groundLy`}
+\item{GROUND_water_mm}{(mm/m2/TS) water volume in `groundLy`}
 
-\item{grounD_capacity_mm}{(mm/m2) water storage capacity in `groundLy`}
+\item{GROUND_capacity_mm}{(mm/m2) water storage capacity in `groundLy`}
 
-\item{param_baseflow_grf_gamma}{<2, 7> exponential parameter for [baseflow_GR4Jfix()]}
+\item{param_BASEFLOW_grf_gamma}{<2, 7> exponential parameter for [baseflow_GR4Jfix()]}
 
-\item{lake_water_m3}{(m3) lake water volume}
+\item{Lake_water_m3}{(m3) lake water volume}
 
-\item{lake_inflow_m3}{(m3/TS) inflow of the lake}
+\item{Lake_inflow_m3}{(m3/TS) inflow of the lake}
 
-\item{lake_capacity_m3}{(m3) capacity of the lake}
+\item{Lake_capacity_m3}{(m3) capacity of the lake}
 
-\item{param_lake_acp_storeFactor}{<uknow> parameter for [lake_AcceptPow()],}
+\item{param_Lake_acp_storeFactor}{<uknow> parameter for [lake_AcceptPow()],}
 
-\item{param_lake_acp_gamma}{<uknow> parameter for [lake_AcceptPow()],}
+\item{param_Lake_acp_gamma}{<uknow> parameter for [lake_AcceptPow()],}
 
-\item{riveR_water_m3}{(m3) river water volume}
+\item{RIVER_water_m3}{(m3) river water volume}
 
-\item{riveR_inflow_m3}{(m3/TS) river inflow volume}
+\item{RIVER_inflow_m3}{(m3/TS) river inflow volume}
 
-\item{riveR_velocity_km}{(km/TS) river velocity}
+\item{RIVER_velocity_km}{(km/TS) river velocity}
 
-\item{riveR_length_km}{(km) river length}
+\item{RIVER_length_km}{(km) river length}
 
-\item{riverlake_water_m3}{(m3) water volume in the river-lake system}
+\item{Riverlak_water_m3}{(m3) water volume in the river-lake system}
 
-\item{riverlake_inflow_m3}{(m3) inflow volume to the river-lake system}
+\item{Riverlak_inflow_m3}{(m3) inflow volume to the river-lake system}
 
-\item{riverlake_capacity_m3}{(m3) total capacity of the river-lake system}
+\item{Riverlak_capacity_m3}{(m3) total capacity of the river-lake system}
 
-\item{param_riverlake_lin_storeFactor}{<uknow> parameter for [riverlake_LinearResorvoir()],}
+\item{param_Riverlak_lin_storeFactor}{<uknow> parameter for [riverlak_LinearResorvoir()],}
 
-\item{reservoir_water_m3}{(m3) volume of water in the reservoir}
+\item{Reservoi_water_m3}{(m3) volume of water in the reservoir}
 
-\item{reservoir_inflow_m3}{(m3/TS) inflow to the reservoir}
+\item{Reservoi_inflow_m3}{(m3/TS) inflow to the reservoir}
 
-\item{reservoir_capacity_m3}{(m3) reservoir capacity}
+\item{Reservoi_capacity_m3}{(m3) reservoir capacity}
 
-\item{reservoir_demand_m3}{(m3/TS) water demand from the reservoir}
+\item{Reservoi_demand_m3}{(m3/TS) water demand from the reservoir}
 
-\item{reservoir_yearInflow_m3}{(m3/TS) annual mean inflow to the reservoir}
+\item{Reservoi_yearInflow_m3}{(m3/TS) annual mean inflow to the reservoir}
 
-\item{reservoir_yearDemand_m3}{(m3/TS) annual mean water demand from the reservoir}
+\item{Reservoi_yearDemand_m3}{(m3/TS) annual mean water demand from the reservoir}
 
-\item{reservoir_yearRelase_m3}{(m3/TS) reference to annual mean water release from the reservoir}
+\item{Reservoi_yearRelase_m3}{(m3/TS) reference to annual mean water release from the reservoir}
 
-\item{reservoir_isOperateStart_01}{(01) indicates if reservoir operation has started (0 or 1)}
+\item{Reservoi_isOperateStart_01}{(01) indicates if reservoir operation has started (0 or 1)}
 
-\item{reservoir_isIrrigate_01}{(01) indicates if the reservoir is used for irrigation (0 or 1)}
+\item{Reservoi_isIrrigate_01}{(01) indicates if the reservoir is used for irrigation (0 or 1)}
 
-\item{param_reservoir_han_alpha}{<uknow> parameter for [reservoir_Hanasaki()],}
+\item{param_Reservoi_han_alpha}{<uknow> parameter for [reservoi_Hanasaki()],}
 
-\item{param_reservoir_han_kDemand}{<uknow> parameter for [reservoir_Hanasaki()],}
+\item{param_Reservoi_han_kDemand}{<uknow> parameter for [reservoi_Hanasaki()],}
 
-\item{conflueN_cellInflow_m3}{(m3 / TS) input water volum in every routeline}
-
-\item{celL_cellNumberStep_int}{(int) step number of basin cells}
-
-\item{celL_inflowCellNumberStep_int}{(int) step number of inflow cells in the basin}
+\item{CONFLUEN_cellInflow_m3}{(m3 / TS) input water volum in every routeline}
 }
 \value{
 atmos_snow_mm (mm/m2/TS) snowfall volume

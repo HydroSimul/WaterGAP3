@@ -10,134 +10,117 @@
 List WaterGAP3_H(
    int n_time,
    int n_spat,
-   NumericMatrix AtmoS_precipitation_mm,
-   NumericMatrix AtmoS_temperature_Cel,
-   NumericMatrix AtmoS_solarRadiat_MJ,
-   NumericVector snoW_ice_mm,
-   NumericVector soiL_water_mm,
-   NumericVector soiL_capacity_mm,
-   NumericVector soiL_potentialPercola_mm,
-   NumericVector grounD_water_mm,
-   NumericVector grounD_capacity_mm,
-   NumericVector riveR_water_m3,
-   NumericVector riveR_length_km,
-   NumericVector riveR_velocity_km,
-   NumericVector celL_landArea_km2,
-   List celL_cellNumberStep_int,
-   List celL_inflowCellNumberStep_int,
-   NumericVector param_atmos_thr_Ts,
-   NumericVector param_snow_fac_f,
-   NumericVector param_snow_fac_Tmelt,
-   NumericVector param_evatrans_tur_k,
-   NumericVector param_evatrans_ubc_gamma,
-   NumericVector param_infilt_hbv_beta,
-   NumericVector param_percola_arn_k,
-   NumericVector param_percola_arn_thresh,
-   NumericVector param_baseflow_grf_gamma,
+   NumericMatrix ATMOS_precipitation_mm,
+   NumericMatrix ATMOS_temperature_Cel,
+   NumericMatrix ATMOS_potentialEvatrans_mm,
+   NumericVector SNOW_ice_mm,
+   NumericVector SOIL_water_mm,
+   NumericVector SOIL_capacity_mm,
+   NumericVector SOIL_potentialPercola_mm,
+   NumericVector GROUND_water_mm,
+   NumericVector GROUND_capacity_mm,
+   NumericVector RIVER_water_m3,
+   NumericVector RIVER_length_km,
+   NumericVector RIVER_velocity_km,
+   NumericVector CELL_landArea_km2,
+   List CELL_cellNumberStep_int,
+   List CELL_inflowCellNumberStep_int,
+   NumericVector param_ATMOS_thr_Ts,
+   NumericVector param_SNOW_fac_f,
+   NumericVector param_SNOW_fac_Tmelt,
+   NumericVector param_EVATRANS_tur_k,
+   NumericVector param_EVATRANS_ubc_gamma,
+   NumericVector param_INFILT_hbv_beta,
+   NumericVector param_PERCOLA_arn_k,
+   NumericVector param_PERCOLA_arn_thresh,
+   NumericVector param_BASEFLOW_grf_gamma,
    bool if_allVariExport = false
 )
 {
 
- NumericVector AtmoS_potentialEvatrans_mm, AtmoS_rain_mm, AtmoS_snoW_mm,
-               snoW_melt_mm, lanD_water_mm,
-               soiL_evatranS_mm, soiL_infilt_mm, soiL_percola_mm,
-               celL_outflow_m3;
- NumericMatrix LanD_runoff_mm(n_time, n_spat), GrounD_basefloW_mm(n_time, n_spat), RiveR_outflow_m3(n_time, n_spat);
+ NumericVector ATMOS_rainFall_mm, ATMOS_snowFall_mm,
+               SNOW_melt_mm,
+               LAND_water_mm, LAND_runoff_mm,
+               SOIL_evatrans_mm, SOIL_infilt_mm, SOIL_percola_mm,
+               GROUND_basefloW_mm,
+               CELL_outflow_m3;
+ NumericMatrix RIVER_outflow_m3(n_time, n_spat);
 
- NumericMatrix OuT_snow(n_time, n_spat), OuT_evatransPot(n_time, n_spat), OuT_evatrans(n_time, n_spat),
- OuT_soilwater(n_time, n_spat), OuT_groundwater(n_time, n_spat),
- OuT_snowice(n_time, n_spat), OuT_snowmelt(n_time, n_spat),
- OuT_cellOutflow(n_time, n_spat),
- OuT_riverwater(n_time, n_spat);
+ NumericMatrix OUT_snow(n_time, n_spat), OUT_evatrans(n_time, n_spat),
+ OUT_landrunoff, OUT_groundbaseflow,
+ OUT_soilwater(n_time, n_spat), OUT_groundwater(n_time, n_spat),
+ OUT_snowice(n_time, n_spat), OUT_snowmelt(n_time, n_spat),
+ OUT_cellOutflow(n_time, n_spat),
+ OUT_riverwater(n_time, n_spat);
 
 
 
  for (int i = 0; i < n_time; i++) {
 
-   // Land
-   // // snow
-   AtmoS_snoW_mm = atmosSnow_ThresholdT(AtmoS_precipitation_mm(i, _), AtmoS_temperature_Cel(i, _), param_atmos_thr_Ts);
-   AtmoS_rain_mm = AtmoS_precipitation_mm(i, _) - AtmoS_snoW_mm;
 
-   // // PET
-   AtmoS_potentialEvatrans_mm = evatransPotential_TurcWendling(AtmoS_temperature_Cel(i, _), AtmoS_solarRadiat_MJ(i, _), param_evatrans_tur_k);
+   // Vertical
+   CELL_outflow_m3 = module_land_WaterGAP3(
+     ATMOS_precipitation_mm(i, _),
+     ATMOS_temperature_Cel(i, _),
+     ATMOS_potentialEvatrans_mm(i, _),
+     ATMOS_snowFall_mm,
+     SNOW_ice_mm,
+     LAND_runoff_mm,
+     SOIL_water_mm,
+     SOIL_capacity_mm,
+     SOIL_potentialPercola_mm,
+     SOIL_evatrans_mm,
+     GROUND_water_mm,
+     GROUND_capacity_mm,
+     GROUND_basefloW_mm,
+     CELL_landArea_km2,
+     param_ATMOS_thr_Ts,
+     param_EVATRANS_ubc_gamma,
+     param_SNOW_fac_f,
+     param_SNOW_fac_Tmelt,
+     param_INFILT_hbv_beta,
+     param_PERCOLA_arn_thresh,
+     param_PERCOLA_arn_k,
+     param_BASEFLOW_grf_gamma);
 
-   // // soil
-   soiL_evatranS_mm = evatransActual_UBC(AtmoS_potentialEvatrans_mm, soiL_water_mm, soiL_capacity_mm, param_evatrans_ubc_gamma);
-   soiL_water_mm += - soiL_evatranS_mm;
-   lanD_water_mm = AtmoS_rain_mm;
-
-   // // Snow melt
-   snoW_melt_mm = snowMelt_Factor(snoW_ice_mm, AtmoS_temperature_Cel(i, _), param_snow_fac_f, param_snow_fac_Tmelt);
-   lanD_water_mm += snoW_melt_mm;
-   snoW_ice_mm += -snoW_melt_mm;
-   snoW_ice_mm += AtmoS_snoW_mm;
-
-   // // soil infiltration
-   soiL_infilt_mm = infilt_HBV(lanD_water_mm, soiL_water_mm, soiL_capacity_mm, param_infilt_hbv_beta);
-   soiL_water_mm += soiL_infilt_mm;
-   LanD_runoff_mm(i, _) = lanD_water_mm - soiL_infilt_mm;
-
-   // // soil percolation
-   soiL_percola_mm = percola_Arno(soiL_water_mm, soiL_capacity_mm, soiL_potentialPercola_mm, param_percola_arn_thresh, param_percola_arn_k);
-   grounD_water_mm += soiL_percola_mm;
-   soiL_water_mm += - soiL_percola_mm;
-
-   // // baseflow
-   NumericVector basefloW_temp = ifelse(grounD_water_mm < grounD_capacity_mm, 0, grounD_water_mm - grounD_capacity_mm);
-
-   // // ground water
-   grounD_water_mm = ifelse(grounD_water_mm < grounD_capacity_mm,grounD_water_mm, grounD_capacity_mm);
-   GrounD_basefloW_mm(i, _) = baseflow_GR4Jfix(grounD_water_mm, grounD_capacity_mm, param_baseflow_grf_gamma);
-   grounD_water_mm += - GrounD_basefloW_mm(i, _);
-   GrounD_basefloW_mm(i, _) = GrounD_basefloW_mm(i, _) + basefloW_temp;
-
-
-   celL_outflow_m3 = (LanD_runoff_mm(i, _) + GrounD_basefloW_mm(i, _)) * celL_landArea_km2 * 1000;
-
-
-
-   RiveR_outflow_m3(i, _) = confluen_WaterGAP3(
-     celL_outflow_m3,
-     riveR_water_m3,
-     riveR_length_km,
-     riveR_velocity_km,
-     celL_cellNumberStep_int,
-     celL_inflowCellNumberStep_int
+   // Horizontal
+   RIVER_outflow_m3(i, _) = confluen_WaterGAP3(
+     CELL_outflow_m3,
+     RIVER_water_m3,
+     RIVER_length_km,
+     RIVER_velocity_km,
+     CELL_cellNumberStep_int,
+     CELL_inflowCellNumberStep_int
    );
 
    if (if_allVariExport) {
-     OuT_cellOutflow(i, _) = celL_outflow_m3;
-     OuT_snow(i, _) = AtmoS_snoW_mm;
-     OuT_evatransPot(i, _) = AtmoS_potentialEvatrans_mm;
-     OuT_evatrans(i, _) = soiL_evatranS_mm;
-     OuT_soilwater(i, _) = soiL_water_mm;
-     OuT_groundwater(i, _) = grounD_water_mm;
-     OuT_snowice(i, _) = snoW_ice_mm;
-     OuT_snowmelt(i, _) = snoW_melt_mm;
-     OuT_riverwater(i, _) = riveR_water_m3;
+     OUT_snow(i, _) = ATMOS_snowFall_mm;
+     OUT_evatrans(i, _) = SOIL_evatrans_mm;
+     OUT_landrunoff(i, _) = LAND_runoff_mm;
+     OUT_soilwater(i, _) = SOIL_water_mm;
+     OUT_groundwater(i, _) = GROUND_water_mm;
+     OUT_groundbaseflow(i, _) = GROUND_basefloW_mm;
+     OUT_snowice(i, _) = SNOW_ice_mm;
+     OUT_riverwater(i, _) = RIVER_water_m3;
    }
 
  }
 
  if (if_allVariExport) {
    return List::create(
-     _["snowFall_mm"] = OuT_snow,
-     _["evatransPot_mm"] = OuT_evatransPot,
-     _["evatranS_mm"] = OuT_evatrans,
-     _["soilwater_mm"] = OuT_soilwater,
-     _["groundwater_mm"] = OuT_groundwater,
-     _["snowice_mm"] = OuT_snowice,
-     _["snowmelt_mm"] = OuT_snowmelt,
-     _["runoff_mm"] = LanD_runoff_mm,
-     _["basefloW_mm"] = GrounD_basefloW_mm,
-     _["runoff_m3"] = OuT_cellOutflow,
-     _["riverwater_m3"] = OuT_riverwater,
-     _["streamflow_m3"] = RiveR_outflow_m3
+     _["snowFall_mm"] = OUT_snow,
+     _["evatrans_mm"] = OUT_evatrans,
+     _["soilwater_mm"] = OUT_soilwater,
+     _["groundwater_mm"] = OUT_groundwater,
+     _["snowice_mm"] = OUT_snowice,
+     _["runoff_mm"] = OUT_landrunoff,
+     _["basefloW_mm"] = OUT_groundbaseflow,
+     _["riverwater_m3"] = OUT_riverwater,
+     _["streamflow_m3"] = RIVER_outflow_m3
    );
  } else{
    return List::create(
-     _["streamflow_m3"] = RiveR_outflow_m3
+     _["streamflow_m3"] = RIVER_outflow_m3
    );
  }
 

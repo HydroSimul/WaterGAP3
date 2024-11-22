@@ -5,63 +5,63 @@
 //' @name process
 //' @inheritParams all_vari
 //' @return atmos_snow_mm (mm/m2/TS) snowfall volume
-//' @param param_atmos_thr_Ts <-1, 3> (Cel) threshold air temperature that snow, parameter for [atmosSnow_ThresholdT()]
+//' @param param_ATMOS_thr_Ts <-1, 3> (Cel) threshold air temperature that snow, parameter for [atmosSnow_ThresholdT()]
 //' @export
 // [[Rcpp::export]]
 NumericVector atmosSnow_ThresholdT(
-   NumericVector AtmoS_precipitation_mm,
-   NumericVector AtmoS_temperature_Cel,
-   NumericVector param_atmos_thr_Ts
+   NumericVector ATMOS_precipitation_mm,
+   NumericVector ATMOS_temperature_Cel,
+   NumericVector param_ATMOS_thr_Ts
 )
 {
- return ifelse(AtmoS_temperature_Cel > param_atmos_thr_Ts, 0, AtmoS_precipitation_mm);
+ return ifelse(ATMOS_temperature_Cel > param_ATMOS_thr_Ts, 0, ATMOS_precipitation_mm);
 }
 
 
 //' @rdname process
-//' @param param_evatrans_tur_k <0.6, 1> parameter for [evatransPotential_TurcWendling()], higher value when closer to the sea
+//' @param param_EVATRANS_tur_k <0.6, 1> parameter for [evatransPotential_TurcWendling()], higher value when closer to the sea
 //' @return potential evapotranspiration (mm/m2)
 //' @export
 // [[Rcpp::export]]
 NumericVector evatransPotential_TurcWendling(
-   NumericVector AtmoS_temperature_Cel,
-   NumericVector AtmoS_solarRadiat_MJ,
-   NumericVector param_evatrans_tur_k
+   NumericVector ATMOS_temperature_Cel,
+   NumericVector ATMOS_solarRadiat_MJ,
+   NumericVector param_EVATRANS_tur_k
 )
 {
- return pmax((AtmoS_solarRadiat_MJ * 100 + 3.875 * 24 * param_evatrans_tur_k) * (AtmoS_temperature_Cel + 22) / 150 / (AtmoS_temperature_Cel + 123), 0);
- // return (AtmoS_solarRadiat_MJ * 100 + 3.875 * time_step_h * param_evatrans_tur_k) * (AtmoS_temperature_Cel + 22) / 150 / (AtmoS_temperature_Cel + 123);
+ return pmax((ATMOS_solarRadiat_MJ * 100 + 3.875 * 24 * param_EVATRANS_tur_k) * (ATMOS_temperature_Cel + 22) / 150 / (ATMOS_temperature_Cel + 123), 0);
+ // return (ATMOS_solarRadiat_MJ * 100 + 3.875 * time_step_h * param_EVATRANS_tur_k) * (ATMOS_temperature_Cel + 22) / 150 / (ATMOS_temperature_Cel + 123);
 }
 
 
 //' @rdname process
-//' @param param_evatrans_vic_gamma <0.2, 5> parameter for [evatransActual_VIC()]
+//' @param param_EVATRANS_vic_gamma <0.2, 5> parameter for [evatransActual_VIC()]
 //' @export
 // [[Rcpp::export]]
 NumericVector evatransActual_VIC(
-   NumericVector AtmoS_potentialEvatrans_mm,
+   NumericVector ATMOS_potentialEvatrans_mm,
    NumericVector water_mm,
    NumericVector capacity_mm,
-   NumericVector param_evatrans_vic_gamma
+   NumericVector param_EVATRANS_vic_gamma
 )
 {
  NumericVector AET, k_;
 
- k_ = 1 - vecpow((1- water_mm / capacity_mm), param_evatrans_vic_gamma);
- AET = AtmoS_potentialEvatrans_mm * k_;
+ k_ = 1 - vecpow((1- water_mm / capacity_mm), param_EVATRANS_vic_gamma);
+ AET = ATMOS_potentialEvatrans_mm * k_;
  return ifelse(AET > water_mm, water_mm, AET);
 }
 
 
 //' @rdname process
-//' @param param_evatrans_ubc_gamma <0.5, 2> parameter for [evatransActual_UBC()]
+//' @param param_EVATRANS_ubc_gamma <0.5, 2> parameter for [evatransActual_UBC()]
 //' @export
 // [[Rcpp::export]]
 NumericVector evatransActual_UBC(
-   NumericVector AtmoS_potentialEvatrans_mm,
+   NumericVector ATMOS_potentialEvatrans_mm,
    NumericVector water_mm,
    NumericVector capacity_mm,
-   NumericVector param_evatrans_ubc_gamma
+   NumericVector param_EVATRANS_ubc_gamma
 )
 {
  NumericVector diff_mm, AET, k_;
@@ -69,122 +69,122 @@ NumericVector evatransActual_UBC(
 
 
 
- k_ = vecpow10(- diff_mm / (param_evatrans_ubc_gamma * capacity_mm));
- AET = AtmoS_potentialEvatrans_mm * k_;
+ k_ = vecpow10(- diff_mm / (param_EVATRANS_ubc_gamma * capacity_mm));
+ AET = ATMOS_potentialEvatrans_mm * k_;
  return ifelse(AET > water_mm, water_mm, AET);
 }
 
 //' @rdname process
-//' @param param_snow_fac_Tmelt <0, 3> (Cel) snow melt temperature parameter for [snowMelt_Factor()]
-//' @param param_snow_fac_f <0.05, 2> (mm/m2/h/Cel) potential melt volum per Cel per hour parameter for [snowMelt_Factor()]
+//' @param param_SNOW_fac_Tmelt <0, 3> (Cel) snow melt temperature parameter for [snowMelt_Factor()]
+//' @param param_SNOW_fac_f <0.05, 2> (mm/m2/h/Cel) potential melt volum per Cel per hour parameter for [snowMelt_Factor()]
 //' @export
 // [[Rcpp::export]]
 NumericVector snowMelt_Factor(
-   NumericVector snoW_ice_mm,
-   NumericVector AtmoS_temperature_Cel,
-   NumericVector param_snow_fac_f,
-   NumericVector param_snow_fac_Tmelt
+   NumericVector SNOW_ice_mm,
+   NumericVector ATMOS_temperature_Cel,
+   NumericVector param_SNOW_fac_f,
+   NumericVector param_SNOW_fac_Tmelt
 )
 {
  NumericVector diff_T, snow_melt_mm;
- diff_T = AtmoS_temperature_Cel - param_snow_fac_Tmelt;
+ diff_T = ATMOS_temperature_Cel - param_SNOW_fac_Tmelt;
  diff_T = ifelse(diff_T > 0, diff_T, 0);
 
- snow_melt_mm = param_snow_fac_f * 24 * diff_T;
- // snow_melt_mm = param_snow_fac_f * time_step_h * diff_T;
- return ifelse(snow_melt_mm > snoW_ice_mm, snoW_ice_mm, snow_melt_mm) ;
+ snow_melt_mm = param_SNOW_fac_f * 24 * diff_T;
+ // snow_melt_mm = param_SNOW_fac_f * time_step_h * diff_T;
+ return ifelse(snow_melt_mm > SNOW_ice_mm, SNOW_ice_mm, snow_melt_mm) ;
 }
 
 //' @rdname process
-//' @param param_infilt_hbv_beta <0.001, 5> parameters for [infilt_HBV()]
+//' @param param_INFILT_hbv_beta <0.001, 5> parameters for [infilt_HBV()]
 //' @export
 // [[Rcpp::export]]
 NumericVector infilt_HBV(
-   NumericVector lanD_water_mm,
-   NumericVector soiL_water_mm,
-   NumericVector soiL_capacity_mm,
-   NumericVector param_infilt_hbv_beta
+   NumericVector LAND_water_mm,
+   NumericVector SOIL_water_mm,
+   NumericVector SOIL_capacity_mm,
+   NumericVector param_INFILT_hbv_beta
 )
 {
  NumericVector soil_diff_mm, infilt_water_mm, k_, limit_mm;
 
- soil_diff_mm = soiL_capacity_mm - soiL_water_mm;
- limit_mm = ifelse(soil_diff_mm > lanD_water_mm, lanD_water_mm, soil_diff_mm);
+ soil_diff_mm = SOIL_capacity_mm - SOIL_water_mm;
+ limit_mm = ifelse(soil_diff_mm > LAND_water_mm, LAND_water_mm, soil_diff_mm);
 
- k_ = (1 - vecpow(soiL_water_mm / soiL_capacity_mm, param_infilt_hbv_beta));
+ k_ = (1 - vecpow(SOIL_water_mm / SOIL_capacity_mm, param_INFILT_hbv_beta));
 
- infilt_water_mm = lanD_water_mm * k_;
+ infilt_water_mm = LAND_water_mm * k_;
 
  return ifelse(infilt_water_mm > limit_mm, limit_mm, infilt_water_mm);
 }
 
 
 //' @rdname process
-//' @param param_percola_arn_thresh <0.1, 0.9> coefficient parameter for [percola_ThreshPow()]
-//' @param param_percola_arn_k <0.1, 1> exponential parameter for [percola_ThreshPow()]
+//' @param param_PERCOLA_arn_thresh <0.1, 0.9> coefficient parameter for [percola_ThreshPow()]
+//' @param param_PERCOLA_arn_k <0.1, 1> exponential parameter for [percola_ThreshPow()]
 //' @export
 // [[Rcpp::export]]
 NumericVector percola_Arno(
-   NumericVector soiL_water_mm,
-   NumericVector soiL_capacity_mm,
-   NumericVector soiL_potentialPercola_mm,
-   NumericVector param_percola_arn_thresh,
-   NumericVector param_percola_arn_k
+   NumericVector SOIL_water_mm,
+   NumericVector SOIL_capacity_mm,
+   NumericVector SOIL_potentialPercola_mm,
+   NumericVector param_PERCOLA_arn_thresh,
+   NumericVector param_PERCOLA_arn_k
 )
 {
  NumericVector percola_, percola_1, percola_2, Ws_Wc;
- Ws_Wc = soiL_capacity_mm * param_percola_arn_thresh;
- percola_1 = param_percola_arn_k * soiL_potentialPercola_mm / (soiL_capacity_mm) * soiL_water_mm;
- percola_2 = param_percola_arn_k * soiL_potentialPercola_mm / (soiL_capacity_mm) * soiL_water_mm + soiL_potentialPercola_mm * (1 - param_percola_arn_k) * pow((soiL_water_mm - Ws_Wc) / (soiL_capacity_mm - Ws_Wc),2);
- percola_ = ifelse(soiL_water_mm < Ws_Wc, percola_1, percola_2);
- percola_ = ifelse(soiL_potentialPercola_mm > Ws_Wc, soiL_water_mm, percola_);
- percola_ = ifelse(percola_ > soiL_potentialPercola_mm, soiL_potentialPercola_mm, percola_);
- return ifelse(percola_ > soiL_water_mm, soiL_water_mm, percola_) ;
+ Ws_Wc = SOIL_capacity_mm * param_PERCOLA_arn_thresh;
+ percola_1 = param_PERCOLA_arn_k * SOIL_potentialPercola_mm / (SOIL_capacity_mm) * SOIL_water_mm;
+ percola_2 = param_PERCOLA_arn_k * SOIL_potentialPercola_mm / (SOIL_capacity_mm) * SOIL_water_mm + SOIL_potentialPercola_mm * (1 - param_PERCOLA_arn_k) * pow((SOIL_water_mm - Ws_Wc) / (SOIL_capacity_mm - Ws_Wc),2);
+ percola_ = ifelse(SOIL_water_mm < Ws_Wc, percola_1, percola_2);
+ percola_ = ifelse(SOIL_potentialPercola_mm > Ws_Wc, SOIL_water_mm, percola_);
+ percola_ = ifelse(percola_ > SOIL_potentialPercola_mm, SOIL_potentialPercola_mm, percola_);
+ return ifelse(percola_ > SOIL_water_mm, SOIL_water_mm, percola_) ;
 }
 
 //' @rdname process
-//' @param param_baseflow_grf_gamma <2, 7> exponential parameter for [baseflow_GR4Jfix()]
+//' @param param_BASEFLOW_grf_gamma <2, 7> exponential parameter for [baseflow_GR4Jfix()]
 //' @export
 // [[Rcpp::export]]
 NumericVector baseflow_GR4Jfix(
-   NumericVector grounD_water_mm,
-   NumericVector grounD_capacity_mm,
-   NumericVector param_baseflow_grf_gamma
+   NumericVector GROUND_water_mm,
+   NumericVector GROUND_capacity_mm,
+   NumericVector param_BASEFLOW_grf_gamma
 )
 {
  NumericVector baseflow_, k_;
 
- k_ = 1 - vecpow((1 + vecpow(grounD_water_mm / grounD_capacity_mm, param_baseflow_grf_gamma)), -1.0 / param_baseflow_grf_gamma);
- baseflow_ = k_ * grounD_water_mm;
+ k_ = 1 - vecpow((1 + vecpow(GROUND_water_mm / GROUND_capacity_mm, param_BASEFLOW_grf_gamma)), -1.0 / param_BASEFLOW_grf_gamma);
+ baseflow_ = k_ * GROUND_water_mm;
 
- return ifelse(baseflow_ > grounD_water_mm, grounD_water_mm, baseflow_) ;
+ return ifelse(baseflow_ > GROUND_water_mm, GROUND_water_mm, baseflow_) ;
 }
 
 //' @rdname process
-//' @param param_lake_acp_storeFactor <uknow> parameter for [lake_AcceptPow()],
-//' @param param_lake_acp_gamma <uknow> parameter for [lake_AcceptPow()],
+//' @param param_Lake_acp_storeFactor <uknow> parameter for [lake_AcceptPow()],
+//' @param param_Lake_acp_gamma <uknow> parameter for [lake_AcceptPow()],
 //' @return outflow (m3)
 //' @export
 // [[Rcpp::export]]
 NumericVector lake_AcceptPow(
-   NumericVector lake_water_m3,
-   NumericVector lake_inflow_m3,
-   NumericVector lake_capacity_m3,
-   NumericVector param_lake_acp_storeFactor,
-   NumericVector param_lake_acp_gamma
+   NumericVector Lake_water_m3,
+   NumericVector Lake_inflow_m3,
+   NumericVector Lake_capacity_m3,
+   NumericVector param_Lake_acp_storeFactor,
+   NumericVector param_Lake_acp_gamma
 )
 {
- lake_water_m3 += lake_inflow_m3;
+ Lake_water_m3 += Lake_inflow_m3;
 
- NumericVector lake_outflow_m3 = (1 / param_lake_acp_storeFactor) * vecpow(pmin(lake_water_m3 / lake_capacity_m3, 1), param_lake_acp_gamma);
- lake_water_m3 += -lake_outflow_m3;
+ NumericVector Lake_outflow_m3 = (1 / param_Lake_acp_storeFactor) * vecpow(pmin(Lake_water_m3 / Lake_capacity_m3, 1), param_Lake_acp_gamma);
+ Lake_water_m3 += -Lake_outflow_m3;
 
- NumericVector lake_overflow_m3 = pmax(lake_water_m3 -  lake_capacity_m3, 0);
- lake_water_m3 = pmin(lake_water_m3, lake_capacity_m3);
+ NumericVector Lake_overflow_m3 = pmax(Lake_water_m3 -  Lake_capacity_m3, 0);
+ Lake_water_m3 = pmin(Lake_water_m3, Lake_capacity_m3);
 
- lake_outflow_m3 += lake_overflow_m3;
+ Lake_outflow_m3 += Lake_overflow_m3;
 
- return (lake_outflow_m3);
+ return (Lake_outflow_m3);
 }
 
 
@@ -192,82 +192,82 @@ NumericVector lake_AcceptPow(
 //' @export
 // [[Rcpp::export]]
 NumericVector river_LinearResorvoir(
-   NumericVector riveR_water_m3,
-   NumericVector riveR_inflow_m3,
-   NumericVector riveR_velocity_km,
-   NumericVector riveR_length_km
+   NumericVector RIVER_water_m3,
+   NumericVector RIVER_inflow_m3,
+   NumericVector RIVER_velocity_km,
+   NumericVector RIVER_length_km
 )
 {
 
- NumericVector riveR_paramK_TS = pmax(riveR_length_km / riveR_velocity_km, 1.);
+ NumericVector RIVER_paramK_TS = pmax(RIVER_length_km / RIVER_velocity_km, 1.);
 
- // return riveR_water_m3 * (1 / (riveR_paramK_TS + 0.5)) + riveR_inflow_m3 * (0.5 / (riveR_paramK_TS + 0.5));
- return riveR_water_m3 * (1 - exp(-1. / riveR_paramK_TS)) + riveR_inflow_m3 * (1 - riveR_paramK_TS * (1 - exp(-1. / riveR_paramK_TS)));
+ // return RIVER_water_m3 * (1 / (RIVER_paramK_TS + 0.5)) + RIVER_inflow_m3 * (0.5 / (RIVER_paramK_TS + 0.5));
+ return RIVER_water_m3 * (1 - exp(-1. / RIVER_paramK_TS)) + RIVER_inflow_m3 * (1 - RIVER_paramK_TS * (1 - exp(-1. / RIVER_paramK_TS)));
 }
 
 //' @rdname process
-//' @param param_riverlake_lin_storeFactor <uknow> parameter for [riverlake_LinearResorvoir()],
+//' @param param_Riverlak_lin_storeFactor <uknow> parameter for [riverlak_LinearResorvoir()],
 //' @export
 // [[Rcpp::export]]
-NumericVector riverlake_LinearResorvoir(
-   NumericVector riverlake_water_m3,
-   NumericVector riverlake_inflow_m3,
-   NumericVector riverlake_capacity_m3,
-   NumericVector param_riverlake_lin_storeFactor
+NumericVector riverlak_LinearResorvoir(
+   NumericVector Riverlak_water_m3,
+   NumericVector Riverlak_inflow_m3,
+   NumericVector Riverlak_capacity_m3,
+   NumericVector param_Riverlak_lin_storeFactor
 )
 {
 
 
 
- NumericVector riverlake_outflow_m3 = riverlake_water_m3 * (1 - exp(-1. / param_riverlake_lin_storeFactor)) + riverlake_inflow_m3 * (1 - param_riverlake_lin_storeFactor * (1 - exp(-1. / param_riverlake_lin_storeFactor)));
+ NumericVector Riverlak_outflow_m3 = Riverlak_water_m3 * (1 - exp(-1. / param_Riverlak_lin_storeFactor)) + Riverlak_inflow_m3 * (1 - param_Riverlak_lin_storeFactor * (1 - exp(-1. / param_Riverlak_lin_storeFactor)));
 
 
- NumericVector riverlake_water_New = pmin(riverlake_water_m3 + riverlake_inflow_m3 - riverlake_outflow_m3, riverlake_capacity_m3);
- riverlake_water_New = pmax(riverlake_water_New, 0);
- riverlake_outflow_m3 = riverlake_water_m3 + riverlake_inflow_m3 - riverlake_water_New;
+ NumericVector Riverlak_water_New = pmin(Riverlak_water_m3 + Riverlak_inflow_m3 - Riverlak_outflow_m3, Riverlak_capacity_m3);
+ Riverlak_water_New = pmax(Riverlak_water_New, 0);
+ Riverlak_outflow_m3 = Riverlak_water_m3 + Riverlak_inflow_m3 - Riverlak_water_New;
 
- return (riverlake_outflow_m3);
+ return (Riverlak_outflow_m3);
 }
 
 //' @rdname process
-//' @param param_reservoir_han_alpha <uknow> parameter for [reservoir_Hanasaki()],
-//' @param param_reservoir_han_kDemand <uknow> parameter for [reservoir_Hanasaki()],
+//' @param param_Reservoi_han_alpha <uknow> parameter for [reservoi_Hanasaki()],
+//' @param param_Reservoi_han_kDemand <uknow> parameter for [reservoi_Hanasaki()],
 //' @return outflow (m3)
 //' @export
 // [[Rcpp::export]]
-NumericVector reservoir_Hanasaki(
-   NumericVector reservoir_water_m3,
-   NumericVector reservoir_inflow_m3,
-   NumericVector reservoir_capacity_m3,
-   NumericVector reservoir_demand_m3,
-   NumericVector reservoir_yearInflow_m3,
-   NumericVector reservoir_yearDemand_m3,
-   NumericVector &reservoir_yearRelase_m3,
-   LogicalVector reservoir_isOperateStart_01,
-   LogicalVector reservoir_isIrrigate_01,
-   NumericVector param_reservoir_han_alpha,
-   NumericVector param_reservoir_han_kDemand
+NumericVector reservoi_Hanasaki(
+   NumericVector Reservoi_water_m3,
+   NumericVector Reservoi_inflow_m3,
+   NumericVector Reservoi_capacity_m3,
+   NumericVector Reservoi_demand_m3,
+   NumericVector Reservoi_yearInflow_m3,
+   NumericVector Reservoi_yearDemand_m3,
+   NumericVector &Reservoi_yearRelase_m3,
+   LogicalVector Reservoi_isOperateStart_01,
+   LogicalVector Reservoi_isIrrigate_01,
+   NumericVector param_Reservoi_han_alpha,
+   NumericVector param_Reservoi_han_kDemand
 )
 {
- reservoir_water_m3 += reservoir_inflow_m3;
+ Reservoi_water_m3 += Reservoi_inflow_m3;
 
- NumericVector reservoir_releaseCoefficient_ = reservoir_water_m3 / (param_reservoir_han_alpha * reservoir_capacity_m3); // eq-3
- reservoir_releaseCoefficient_ = pmax(reservoir_releaseCoefficient_, 0.1);
- reservoir_yearRelase_m3 = ifelse(reservoir_isOperateStart_01, reservoir_releaseCoefficient_ * reservoir_yearInflow_m3, reservoir_yearRelase_m3); // eq-2
+ NumericVector Reservoi_releaseCoefficient_ = Reservoi_water_m3 / (param_Reservoi_han_alpha * Reservoi_capacity_m3); // eq-3
+ Reservoi_releaseCoefficient_ = pmax(Reservoi_releaseCoefficient_, 0.1);
+ Reservoi_yearRelase_m3 = ifelse(Reservoi_isOperateStart_01, Reservoi_releaseCoefficient_ * Reservoi_yearInflow_m3, Reservoi_yearRelase_m3); // eq-2
 
- NumericVector reservoir_releaseProvis_m3 = reservoir_yearInflow_m3; // eq-4
- reservoir_releaseProvis_m3 = ifelse(reservoir_isIrrigate_01,
-                                     0.5 * reservoir_yearInflow_m3 * (1 + param_reservoir_han_kDemand * reservoir_demand_m3 / reservoir_yearDemand_m3),
-                                     reservoir_releaseProvis_m3);  // eq-5
- reservoir_releaseProvis_m3 = ifelse(reservoir_yearDemand_m3 < 0.5 * reservoir_yearInflow_m3,
-                                     reservoir_yearInflow_m3 + param_reservoir_han_kDemand * reservoir_demand_m3 - reservoir_yearDemand_m3,
-                                     reservoir_releaseProvis_m3);  // eq-5
- NumericVector reservoir_inflowRatio_ = reservoir_capacity_m3 / reservoir_yearInflow_m3; // eq-7
- NumericVector temp_inflowRatio_ = 4 * reservoir_inflowRatio_ * reservoir_inflowRatio_; // eq-7
+ NumericVector Reservoi_releaseProvis_m3 = Reservoi_yearInflow_m3; // eq-4
+ Reservoi_releaseProvis_m3 = ifelse(Reservoi_isIrrigate_01,
+                                     0.5 * Reservoi_yearInflow_m3 * (1 + param_Reservoi_han_kDemand * Reservoi_demand_m3 / Reservoi_yearDemand_m3),
+                                     Reservoi_releaseProvis_m3);  // eq-5
+ Reservoi_releaseProvis_m3 = ifelse(Reservoi_yearDemand_m3 < 0.5 * Reservoi_yearInflow_m3,
+                                     Reservoi_yearInflow_m3 + param_Reservoi_han_kDemand * Reservoi_demand_m3 - Reservoi_yearDemand_m3,
+                                     Reservoi_releaseProvis_m3);  // eq-5
+ NumericVector Reservoi_inflowRatio_ = Reservoi_capacity_m3 / Reservoi_yearInflow_m3; // eq-7
+ NumericVector temp_inflowRatio_ = 4 * Reservoi_inflowRatio_ * Reservoi_inflowRatio_; // eq-7
 
- return ifelse(reservoir_inflowRatio_ > 0.5,
-               reservoir_releaseCoefficient_ * reservoir_releaseProvis_m3,
-               temp_inflowRatio_ * reservoir_releaseCoefficient_ * reservoir_releaseProvis_m3 + (1 - temp_inflowRatio_) * reservoir_inflow_m3); //  eq-7
+ return ifelse(Reservoi_inflowRatio_ > 0.5,
+               Reservoi_releaseCoefficient_ * Reservoi_releaseProvis_m3,
+               temp_inflowRatio_ * Reservoi_releaseCoefficient_ * Reservoi_releaseProvis_m3 + (1 - temp_inflowRatio_) * Reservoi_inflow_m3); //  eq-7
 }
 
 
@@ -315,21 +315,21 @@ IntegerVector get_idx_cell(IntegerVector int_Cell, IntegerVector int_Step) {
 //' @export
 // [[Rcpp::export]]
 NumericVector confluen_WaterGAP3(
-   NumericVector conflueN_cellInflow_m3,
-   NumericVector &riveR_water_m3,
-   NumericVector riveR_length_km,
-   NumericVector riveR_velocity_km,
+   NumericVector CONFLUEN_cellInflow_m3,
+   NumericVector &RIVER_water_m3,
+   NumericVector RIVER_length_km,
+   NumericVector RIVER_velocity_km,
    List celL_cellNumberStep_int,
    List celL_inflowCellNumberStep_int
 )
 {
 
- int n_Cell = conflueN_cellInflow_m3.size();
+ int n_Cell = CONFLUEN_cellInflow_m3.size();
  NumericVector confluen_outflow_m3(n_Cell),
  step_RiverOutflow_m3, step_RiverlakeOutflow_m3;
 
  IntegerVector idx_Cell_Step,
- idx_Riverlake_Step, idx_Step_Riverlake;
+ idx_RiverLake_Step, idx_Step_Riverlake;
  int n_Step = celL_cellNumberStep_int.size();
 
  // Step i later with Inflow
@@ -350,20 +350,20 @@ NumericVector confluen_WaterGAP3(
 
 
    // river segment
-   NumericVector step_CellInflow = subset_get(conflueN_cellInflow_m3, idx_Cell_Step),
-     step_RiverWater = subset_get(riveR_water_m3, idx_Cell_Step),
+   NumericVector step_CellInflow = subset_get(CONFLUEN_cellInflow_m3, idx_Cell_Step),
+     step_RiverWater = subset_get(RIVER_water_m3, idx_Cell_Step),
      step_RiverInflow = step_UpstreamInflow_m3 + step_CellInflow;
 
    step_RiverOutflow_m3 = river_LinearResorvoir(
      step_RiverWater,
      step_RiverInflow,
-     subset_get(riveR_velocity_km, idx_Cell_Step),
-     subset_get(riveR_length_km, idx_Cell_Step)
+     subset_get(RIVER_velocity_km, idx_Cell_Step),
+     subset_get(RIVER_length_km, idx_Cell_Step)
    );
-   NumericVector step_riveR_Water_New = pmax(step_RiverWater + step_RiverInflow - step_RiverOutflow_m3, 0.0);
-   NumericVector step_riveR_Outflow_New = step_RiverWater + step_RiverInflow - step_riveR_Water_New;
-   subset_put(confluen_outflow_m3, idx_Cell_Step, step_riveR_Outflow_New);
-   subset_put(riveR_water_m3, idx_Cell_Step,  step_riveR_Water_New);
+   NumericVector step_RIVER_Water_New = pmax(step_RiverWater + step_RiverInflow - step_RiverOutflow_m3, 0.0);
+   NumericVector step_RIVER_Outflow_New = step_RiverWater + step_RiverInflow - step_RIVER_Water_New;
+   subset_put(confluen_outflow_m3, idx_Cell_Step, step_RIVER_Outflow_New);
+   subset_put(RIVER_water_m3, idx_Cell_Step,  step_RIVER_Water_New);
 
 
  }
@@ -377,25 +377,25 @@ NumericVector confluen_WaterGAP3(
  //' @export
  // [[Rcpp::export]]
  NumericVector confluen_WaterGAP3_L(
-     NumericVector conflueN_cellInflow_m3,
-     NumericVector &riveR_water_m3,
-     NumericVector riveR_length_km,
-     NumericVector riveR_velocity_km,
+     NumericVector CONFLUEN_cellInflow_m3,
+     NumericVector &RIVER_water_m3,
+     NumericVector RIVER_length_km,
+     NumericVector RIVER_velocity_km,
      List celL_cellNumberStep_int,
      List celL_inflowCellNumberStep_int,
-     IntegerVector riverlake_cellNumber_int,
-     NumericVector &riverlake_water_m3,
-     NumericVector riverlake_capacity_m3,
-     NumericVector param_riverlake_lin_storeFactor
+     IntegerVector Riverlak_cellNumber_int,
+     NumericVector &Riverlak_water_m3,
+     NumericVector Riverlak_capacity_m3,
+     NumericVector param_Riverlak_lin_storeFactor
  )
  {
 
-   int n_Cell = conflueN_cellInflow_m3.size();
+   int n_Cell = CONFLUEN_cellInflow_m3.size();
    NumericVector confluen_outflow_m3(n_Cell),
    step_RiverOutflow_m3, step_RiverlakeOutflow_m3;
 
    IntegerVector idx_Cell_Step,
-   idx_Riverlake_Step, idx_Step_Riverlake;
+   idx_RiverLake_Step, idx_Step_Riverlake;
    int n_Step = celL_cellNumberStep_int.size();
 
    // Step i later with Inflow
@@ -416,37 +416,37 @@ NumericVector confluen_WaterGAP3(
 
 
      // river segment
-     NumericVector step_CellInflow = subset_get(conflueN_cellInflow_m3, idx_Cell_Step),
-       step_RiverWater = subset_get(riveR_water_m3, idx_Cell_Step),
+     NumericVector step_CellInflow = subset_get(CONFLUEN_cellInflow_m3, idx_Cell_Step),
+       step_RiverWater = subset_get(RIVER_water_m3, idx_Cell_Step),
        step_RiverInflow = step_UpstreamInflow_m3 + step_CellInflow;
 
      step_RiverOutflow_m3 = river_LinearResorvoir(
        step_RiverWater,
        step_RiverInflow,
-       subset_get(riveR_velocity_km, idx_Cell_Step),
-       subset_get(riveR_length_km, idx_Cell_Step)
+       subset_get(RIVER_velocity_km, idx_Cell_Step),
+       subset_get(RIVER_length_km, idx_Cell_Step)
      );
-     NumericVector step_riveR_Water_New = pmax(step_RiverWater + step_RiverInflow - step_RiverOutflow_m3, 0.0);
-     NumericVector step_riveR_Outflow_New = step_RiverWater + step_RiverInflow - step_riveR_Water_New;
-     subset_put(confluen_outflow_m3, idx_Cell_Step, step_riveR_Outflow_New);
-     subset_put(riveR_water_m3, idx_Cell_Step,  step_riveR_Water_New);
+     NumericVector step_RIVER_Water_New = pmax(step_RiverWater + step_RiverInflow - step_RiverOutflow_m3, 0.0);
+     NumericVector step_RIVER_Outflow_New = step_RiverWater + step_RiverInflow - step_RIVER_Water_New;
+     subset_put(confluen_outflow_m3, idx_Cell_Step, step_RIVER_Outflow_New);
+     subset_put(RIVER_water_m3, idx_Cell_Step,  step_RIVER_Water_New);
 
      // global lake (riverlake)
-     idx_Riverlake_Step = get_idx_cell(riverlake_cellNumber_int, idx_Cell_Step);
-     idx_Step_Riverlake = get_idx_step(riverlake_cellNumber_int, idx_Cell_Step);
-     if (idx_Riverlake_Step.size() > 0) {
-       NumericVector step_RiverlakeWater= subset_get(riverlake_water_m3, idx_Riverlake_Step),
+     idx_RiverLake_Step = get_idx_cell(Riverlak_cellNumber_int, idx_Cell_Step);
+     idx_Step_Riverlake = get_idx_step(Riverlak_cellNumber_int, idx_Cell_Step);
+     if (idx_RiverLake_Step.size() > 0) {
+       NumericVector step_RiverlakeWater= subset_get(Riverlak_water_m3, idx_RiverLake_Step),
          step_RiverlakeInflow = subset_get(step_UpstreamInflow_m3 + step_CellInflow, idx_Step_Riverlake);
 
 
-       step_RiverlakeOutflow_m3 = riverlake_LinearResorvoir(
+       step_RiverlakeOutflow_m3 = riverlak_LinearResorvoir(
          step_RiverlakeWater,
          step_RiverlakeInflow,
-         subset_get(riverlake_capacity_m3, idx_Riverlake_Step),
-         subset_get(param_riverlake_lin_storeFactor, idx_Riverlake_Step)
+         subset_get(Riverlak_capacity_m3, idx_RiverLake_Step),
+         subset_get(param_Riverlak_lin_storeFactor, idx_RiverLake_Step)
        );
-       subset_put(confluen_outflow_m3, idx_Riverlake_Step, step_RiverlakeOutflow_m3);
-       subset_put(riverlake_water_m3, idx_Riverlake_Step,  step_RiverlakeWater + step_RiverlakeInflow - step_RiverlakeOutflow_m3);
+       subset_put(confluen_outflow_m3, idx_RiverLake_Step, step_RiverlakeOutflow_m3);
+       subset_put(Riverlak_water_m3, idx_RiverLake_Step,  step_RiverlakeWater + step_RiverlakeInflow - step_RiverlakeOutflow_m3);
      }
 
 

@@ -5,87 +5,107 @@
 #include "00utilis.h"
 
 NumericVector atmosSnow_ThresholdT(
-    NumericVector atmos_precipitation_mm,
-    NumericVector atmos_temperature_Cel,
-    NumericVector param_atmos_thr_Ts
+    NumericVector ATMOS_precipitation_mm,
+    NumericVector ATMOS_temperature_Cel,
+    NumericVector param_ATMOS_thr_Ts
 );
 NumericVector evatransPotential_TurcWendling(
-    NumericVector atmos_temperature_Cel,
-    NumericVector atmos_solarRadiat_MJ,
-    NumericVector param_evatrans_tur_k
+    NumericVector ATMOS_temperature_Cel,
+    NumericVector ATMOS_solarRadiat_MJ,
+    NumericVector param_EVATRANS_tur_k
 );
 NumericVector evatransActual_UBC(
-    NumericVector atmos_potentialEvatrans_mm,
+    NumericVector ATMOS_potentialEvatrans_mm,
     NumericVector water_mm,
     NumericVector capacity_mm,
-    NumericVector param_evatrans_ubc_gamma
+    NumericVector param_EVATRANS_ubc_gamma
 );
 NumericVector evatransActual_VIC(
-    NumericVector atmos_potentialEvatrans_mm,
+    NumericVector ATMOS_potentialEvatrans_mm,
     NumericVector water_mm,
     NumericVector capacity_mm,
-    NumericVector param_evatrans_vic_gamma
+    NumericVector param_EVATRANS_vic_gamma
 );
 NumericVector snowMelt_Factor(
-    NumericVector snow_ice_mm,
-    NumericVector atmos_temperature_Cel,
-    NumericVector param_snow_fac_f,
-    NumericVector param_snow_fac_Tmelt
+    NumericVector SNOW_ice_mm,
+    NumericVector ATMOS_temperature_Cel,
+    NumericVector param_SNOW_fac_f,
+    NumericVector param_SNOW_fac_Tmelt
 );
 
 NumericVector infilt_HBV(
-    NumericVector land_water_mm,
-    NumericVector soil_water_mm,
-    NumericVector soil_capacity_mm,
-    NumericVector param_infilt_hbv_beta
+    NumericVector LAND_water_mm,
+    NumericVector SOIL_water_mm,
+    NumericVector SOIL_capacity_mm,
+    NumericVector param_INFILT_hbv_beta
 );
 NumericVector percola_Arno(
-    NumericVector soil_water_mm,
-    NumericVector soil_capacity_mm,
-    NumericVector soil_potentialPercola_mm,
-    NumericVector param_percola_arn_thresh,
-    NumericVector param_percola_arn_k
+    NumericVector SOIL_water_mm,
+    NumericVector SOIL_capacity_mm,
+    NumericVector SOIL_potentialPercola_mm,
+    NumericVector param_PERCOLA_arn_thresh,
+    NumericVector param_PERCOLA_arn_k
 );
 NumericVector baseflow_GR4Jfix(
-    NumericVector ground_water_mm,
-    NumericVector ground_capacity_mm,
-    NumericVector param_baseflow_grf_gamma
-);
-NumericVector confluen_IUH2S(
-    NumericVector land_runoff_mm,
-    NumericVector ground_baseflow_mm,
-    NumericVector confluen_iuhLand_1,
-    NumericVector confluen_iuhGround_1
+    NumericVector GROUND_water_mm,
+    NumericVector GROUND_capacity_mm,
+    NumericVector param_BASEFLOW_grf_gamma
 );
 
 NumericVector lake_AcceptPow(
-  NumericVector lake_water_m3,
-  NumericVector lake_inflow_m3,
-  NumericVector lake_capacity_m3,
-  NumericVector param_lake_acp_storeFactor,
-  NumericVector param_lake_acp_gamma
+  NumericVector Lake_water_m3,
+  NumericVector Lake_inflow_m3,
+  NumericVector Lake_capacity_m3,
+  NumericVector param_Lake_acp_storeFactor,
+  NumericVector param_Lake_acp_gamma
 );
 
 NumericVector confluen_WaterGAP3(
-    NumericVector confluen_cellInflow_m3,
-    NumericVector &river_water_m3,
-    NumericVector river_length_km,
-    NumericVector river_velocity_km,
-    List basin_cellNumberStep_int,
-    List basin_inflowCellNumberStep_int
+    NumericVector CONFLUEN_cellInflow_m3,
+    NumericVector &RIVER_water_m3,
+    NumericVector RIVER_length_km,
+    NumericVector RIVER_velocity_km,
+    List celL_cellNumberStep_int,
+    List celL_inflowCellNumberStep_int
 );
 
 
 NumericVector confluen_WaterGAP3_L(
-    NumericVector conflueN_cellInflow_m3,
-    NumericVector &riveR_water_m3,
-    NumericVector riveR_length_km,
-    NumericVector riveR_velocity_km,
+    NumericVector CONFLUEN_cellInflow_m3,
+    NumericVector &RIVER_water_m3,
+    NumericVector RIVER_length_km,
+    NumericVector RIVER_velocity_km,
     List celL_cellNumberStep_int,
     List celL_inflowCellNumberStep_int,
-    IntegerVector riverlake_cellNumber_int,
-    NumericVector &riverlake_water_m3,
-    NumericVector riverlake_capacity_m3,
-    NumericVector param_riverlake_lin_storeFactor
+    IntegerVector Riverlak_cellNumber_int,
+    NumericVector &Riverlak_water_m3,
+    NumericVector Riverlak_capacity_m3,
+    NumericVector param_Riverlak_lin_storeFactor
 );
+
+NumericVector module_land_WaterGAP3(
+    NumericVector ATMOS_precipitation_mm,
+    NumericVector ATMOS_temperature_Cel,
+    NumericVector ATMOS_potentialEvatrans_mm,
+    NumericVector& ATMOS_snowFall_mm,
+    NumericVector& SNOW_ice_mm,
+    NumericVector& LAND_runoff_mm,
+    NumericVector& SOIL_water_mm,
+    NumericVector SOIL_capacity_mm,
+    NumericVector SOIL_potentialPercola_mm,
+    NumericVector& SOIL_EVATRANS_mm,
+    NumericVector& GROUND_water_mm,
+    NumericVector GROUND_capacity_mm,
+    NumericVector& GROUND_basefloW_mm,
+    NumericVector CELL_landArea_km2,
+    NumericVector param_ATMOS_thr_Ts,
+    NumericVector param_EVATRANS_ubc_gamma,
+    NumericVector param_SNOW_fac_f,
+    NumericVector param_SNOW_fac_Tmelt,
+    NumericVector param_INFILT_hbv_beta,
+    NumericVector param_PERCOLA_arn_thresh,
+    NumericVector param_PERCOLA_arn_k,
+    NumericVector param_BASEFLOW_grf_gamma);
+
 #endif
+
