@@ -59,7 +59,7 @@ List WaterGAP3_HL(
  NumericMatrix RIVER_outflow_m3(n_time, n_spat);
 
  NumericMatrix OUT_snow(n_time, n_spat), OUT_evatrans(n_time, n_spat),
- OUT_landrunoff, OUT_groundbaseflow,
+ OUT_landrunoff(n_time, n_spat), OUT_groundbaseflow(n_time, n_spat),
  OUT_soilwater(n_time, n_spat), OUT_groundwater(n_time, n_spat),
  OUT_snowice(n_time, n_spat), OUT_snowmelt(n_time, n_spat),
  OUT_cellOutflow(n_time, n_spat),
