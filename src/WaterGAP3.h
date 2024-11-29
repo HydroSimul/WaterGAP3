@@ -83,6 +83,30 @@ NumericVector confluen_WaterGAP3_L(
     NumericVector param_Riverlak_lin_storeFactor
 );
 
+NumericVector confluen_WaterGAP3_LR(
+    NumericVector CONFLUEN_cellInflow_m3,
+    NumericVector &RIVER_water_m3,
+    NumericVector RIVER_length_km,
+    NumericVector RIVER_velocity_km,
+    IntegerVector Riverlak_cellNumber_int,
+    NumericVector &Riverlak_water_m3,
+    NumericVector Riverlak_capacity_m3,
+    IntegerVector Reservoi_cellNumber_int,
+    NumericVector &Reservoi_water_m3,
+    NumericVector Reservoi_capacity_m3,
+    NumericVector Reservoi_demand_m3,
+    NumericVector Reservoi_yearInflow_m3,
+    NumericVector Reservoi_yearDemand_m3,
+    NumericVector &Reservoi_yearRelase_m3,
+    LogicalVector Reservoi_isOperateStart_01,
+    LogicalVector Reservoi_isIrrigate_01,
+    List CELL_cellNumberStep_int,
+    List CELL_inflowCellNumberStep_int,
+    NumericVector param_Riverlak_lin_storeFactor,
+    NumericVector param_Reservoi_han_alpha,
+    NumericVector param_Reservoi_han_kDemand
+);
+
 NumericVector module_land_WaterGAP3(
     NumericVector ATMOS_precipitation_mm,
     NumericVector ATMOS_temperature_Cel,

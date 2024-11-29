@@ -202,6 +202,65 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// WaterGAP3_HLR
+List WaterGAP3_HLR(int n_time, int n_spat, NumericMatrix ATMOS_precipitation_mm, NumericMatrix ATMOS_temperature_Cel, NumericMatrix ATMOS_potentialEvatrans_mm, NumericVector SNOW_ice_mm, NumericVector SOIL_water_mm, NumericVector SOIL_capacity_mm, NumericVector SOIL_potentialPercola_mm, NumericVector GROUND_water_mm, NumericVector GROUND_capacity_mm, NumericVector RIVER_water_m3, NumericVector RIVER_length_km, NumericVector RIVER_velocity_km, NumericVector CELL_landArea_km2, List CELL_cellNumberStep_int, List CELL_inflowCellNumberStep_int, IntegerVector Lake_cellNumber_int, NumericVector Lake_water_m3, NumericVector Lake_area_km2, NumericVector Lake_capacity_m3, IntegerVector Riverlak_cellNumber_int, NumericVector Riverlak_water_m3, NumericVector Riverlak_area_km2, NumericVector Riverlak_capacity_m3, IntegerVector Reservoi_cellNumber_int, NumericVector Reservoi_water_m3, NumericVector Reservoi_capacity_m3, NumericVector Reservoi_demand_m3, NumericVector Reservoi_yearInflow_m3, NumericVector Reservoi_yearDemand_m3, NumericVector Reservoi_yearRelase_m3, LogicalVector Reservoi_isOperateStart_01, LogicalVector Reservoi_isIrrigate_01, NumericVector param_ATMOS_thr_Ts, NumericVector param_SNOW_fac_f, NumericVector param_SNOW_fac_Tmelt, NumericVector param_EVATRANS_ubc_gamma, NumericVector param_INFILT_hbv_beta, NumericVector param_PERCOLA_arn_k, NumericVector param_PERCOLA_arn_thresh, NumericVector param_BASEFLOW_grf_gamma, NumericVector param_Evalake_vic_gamma, NumericVector param_Lake_acp_storeFactor, NumericVector param_Lake_acp_gamma, NumericVector param_Riverlak_lin_storeFactor, NumericVector param_Reservoi_han_alpha, NumericVector param_Reservoi_han_kDemand, bool if_allVariExport);
+RcppExport SEXP _WaterGAP3_WaterGAP3_HLR(SEXP n_timeSEXP, SEXP n_spatSEXP, SEXP ATMOS_precipitation_mmSEXP, SEXP ATMOS_temperature_CelSEXP, SEXP ATMOS_potentialEvatrans_mmSEXP, SEXP SNOW_ice_mmSEXP, SEXP SOIL_water_mmSEXP, SEXP SOIL_capacity_mmSEXP, SEXP SOIL_potentialPercola_mmSEXP, SEXP GROUND_water_mmSEXP, SEXP GROUND_capacity_mmSEXP, SEXP RIVER_water_m3SEXP, SEXP RIVER_length_kmSEXP, SEXP RIVER_velocity_kmSEXP, SEXP CELL_landArea_km2SEXP, SEXP CELL_cellNumberStep_intSEXP, SEXP CELL_inflowCellNumberStep_intSEXP, SEXP Lake_cellNumber_intSEXP, SEXP Lake_water_m3SEXP, SEXP Lake_area_km2SEXP, SEXP Lake_capacity_m3SEXP, SEXP Riverlak_cellNumber_intSEXP, SEXP Riverlak_water_m3SEXP, SEXP Riverlak_area_km2SEXP, SEXP Riverlak_capacity_m3SEXP, SEXP Reservoi_cellNumber_intSEXP, SEXP Reservoi_water_m3SEXP, SEXP Reservoi_capacity_m3SEXP, SEXP Reservoi_demand_m3SEXP, SEXP Reservoi_yearInflow_m3SEXP, SEXP Reservoi_yearDemand_m3SEXP, SEXP Reservoi_yearRelase_m3SEXP, SEXP Reservoi_isOperateStart_01SEXP, SEXP Reservoi_isIrrigate_01SEXP, SEXP param_ATMOS_thr_TsSEXP, SEXP param_SNOW_fac_fSEXP, SEXP param_SNOW_fac_TmeltSEXP, SEXP param_EVATRANS_ubc_gammaSEXP, SEXP param_INFILT_hbv_betaSEXP, SEXP param_PERCOLA_arn_kSEXP, SEXP param_PERCOLA_arn_threshSEXP, SEXP param_BASEFLOW_grf_gammaSEXP, SEXP param_Evalake_vic_gammaSEXP, SEXP param_Lake_acp_storeFactorSEXP, SEXP param_Lake_acp_gammaSEXP, SEXP param_Riverlak_lin_storeFactorSEXP, SEXP param_Reservoi_han_alphaSEXP, SEXP param_Reservoi_han_kDemandSEXP, SEXP if_allVariExportSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type n_time(n_timeSEXP);
+    Rcpp::traits::input_parameter< int >::type n_spat(n_spatSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type ATMOS_precipitation_mm(ATMOS_precipitation_mmSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type ATMOS_temperature_Cel(ATMOS_temperature_CelSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type ATMOS_potentialEvatrans_mm(ATMOS_potentialEvatrans_mmSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type SNOW_ice_mm(SNOW_ice_mmSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type SOIL_water_mm(SOIL_water_mmSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type SOIL_capacity_mm(SOIL_capacity_mmSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type SOIL_potentialPercola_mm(SOIL_potentialPercola_mmSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type GROUND_water_mm(GROUND_water_mmSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type GROUND_capacity_mm(GROUND_capacity_mmSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type RIVER_water_m3(RIVER_water_m3SEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type RIVER_length_km(RIVER_length_kmSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type RIVER_velocity_km(RIVER_velocity_kmSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type CELL_landArea_km2(CELL_landArea_km2SEXP);
+    Rcpp::traits::input_parameter< List >::type CELL_cellNumberStep_int(CELL_cellNumberStep_intSEXP);
+    Rcpp::traits::input_parameter< List >::type CELL_inflowCellNumberStep_int(CELL_inflowCellNumberStep_intSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type Lake_cellNumber_int(Lake_cellNumber_intSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type Lake_water_m3(Lake_water_m3SEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type Lake_area_km2(Lake_area_km2SEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type Lake_capacity_m3(Lake_capacity_m3SEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type Riverlak_cellNumber_int(Riverlak_cellNumber_intSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type Riverlak_water_m3(Riverlak_water_m3SEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type Riverlak_area_km2(Riverlak_area_km2SEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type Riverlak_capacity_m3(Riverlak_capacity_m3SEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type Reservoi_cellNumber_int(Reservoi_cellNumber_intSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type Reservoi_water_m3(Reservoi_water_m3SEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type Reservoi_capacity_m3(Reservoi_capacity_m3SEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type Reservoi_demand_m3(Reservoi_demand_m3SEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type Reservoi_yearInflow_m3(Reservoi_yearInflow_m3SEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type Reservoi_yearDemand_m3(Reservoi_yearDemand_m3SEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type Reservoi_yearRelase_m3(Reservoi_yearRelase_m3SEXP);
+    Rcpp::traits::input_parameter< LogicalVector >::type Reservoi_isOperateStart_01(Reservoi_isOperateStart_01SEXP);
+    Rcpp::traits::input_parameter< LogicalVector >::type Reservoi_isIrrigate_01(Reservoi_isIrrigate_01SEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type param_ATMOS_thr_Ts(param_ATMOS_thr_TsSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type param_SNOW_fac_f(param_SNOW_fac_fSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type param_SNOW_fac_Tmelt(param_SNOW_fac_TmeltSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type param_EVATRANS_ubc_gamma(param_EVATRANS_ubc_gammaSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type param_INFILT_hbv_beta(param_INFILT_hbv_betaSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type param_PERCOLA_arn_k(param_PERCOLA_arn_kSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type param_PERCOLA_arn_thresh(param_PERCOLA_arn_threshSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type param_BASEFLOW_grf_gamma(param_BASEFLOW_grf_gammaSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type param_Evalake_vic_gamma(param_Evalake_vic_gammaSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type param_Lake_acp_storeFactor(param_Lake_acp_storeFactorSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type param_Lake_acp_gamma(param_Lake_acp_gammaSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type param_Riverlak_lin_storeFactor(param_Riverlak_lin_storeFactorSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type param_Reservoi_han_alpha(param_Reservoi_han_alphaSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type param_Reservoi_han_kDemand(param_Reservoi_han_kDemandSEXP);
+    Rcpp::traits::input_parameter< bool >::type if_allVariExport(if_allVariExportSEXP);
+    rcpp_result_gen = Rcpp::wrap(WaterGAP3_HLR(n_time, n_spat, ATMOS_precipitation_mm, ATMOS_temperature_Cel, ATMOS_potentialEvatrans_mm, SNOW_ice_mm, SOIL_water_mm, SOIL_capacity_mm, SOIL_potentialPercola_mm, GROUND_water_mm, GROUND_capacity_mm, RIVER_water_m3, RIVER_length_km, RIVER_velocity_km, CELL_landArea_km2, CELL_cellNumberStep_int, CELL_inflowCellNumberStep_int, Lake_cellNumber_int, Lake_water_m3, Lake_area_km2, Lake_capacity_m3, Riverlak_cellNumber_int, Riverlak_water_m3, Riverlak_area_km2, Riverlak_capacity_m3, Reservoi_cellNumber_int, Reservoi_water_m3, Reservoi_capacity_m3, Reservoi_demand_m3, Reservoi_yearInflow_m3, Reservoi_yearDemand_m3, Reservoi_yearRelase_m3, Reservoi_isOperateStart_01, Reservoi_isIrrigate_01, param_ATMOS_thr_Ts, param_SNOW_fac_f, param_SNOW_fac_Tmelt, param_EVATRANS_ubc_gamma, param_INFILT_hbv_beta, param_PERCOLA_arn_k, param_PERCOLA_arn_thresh, param_BASEFLOW_grf_gamma, param_Evalake_vic_gamma, param_Lake_acp_storeFactor, param_Lake_acp_gamma, param_Riverlak_lin_storeFactor, param_Reservoi_han_alpha, param_Reservoi_han_kDemand, if_allVariExport));
+    return rcpp_result_gen;
+END_RCPP
+}
 // get_inflow_cells
 List get_inflow_cells(IntegerVector int_Outflow);
 RcppExport SEXP _WaterGAP3_get_inflow_cells(SEXP int_OutflowSEXP) {
@@ -767,6 +826,60 @@ RcppExport SEXP _WaterGAP3_confluen_WaterGAP3_L(SEXP CONFLUEN_cellInflow_m3SEXP,
     UNPROTECT(1);
     return rcpp_result_gen;
 }
+// confluen_WaterGAP3_LR
+NumericVector confluen_WaterGAP3_LR(NumericVector CONFLUEN_cellInflow_m3, NumericVector& RIVER_water_m3, NumericVector RIVER_length_km, NumericVector RIVER_velocity_km, IntegerVector Riverlak_cellNumber_int, NumericVector& Riverlak_water_m3, NumericVector Riverlak_capacity_m3, IntegerVector Reservoi_cellNumber_int, NumericVector& Reservoi_water_m3, NumericVector Reservoi_capacity_m3, NumericVector Reservoi_demand_m3, NumericVector Reservoi_yearInflow_m3, NumericVector Reservoi_yearDemand_m3, NumericVector& Reservoi_yearRelase_m3, LogicalVector Reservoi_isOperateStart_01, LogicalVector Reservoi_isIrrigate_01, List CELL_cellNumberStep_int, List CELL_inflowCellNumberStep_int, NumericVector param_Riverlak_lin_storeFactor, NumericVector param_Reservoi_han_alpha, NumericVector param_Reservoi_han_kDemand);
+static SEXP _WaterGAP3_confluen_WaterGAP3_LR_try(SEXP CONFLUEN_cellInflow_m3SEXP, SEXP RIVER_water_m3SEXP, SEXP RIVER_length_kmSEXP, SEXP RIVER_velocity_kmSEXP, SEXP Riverlak_cellNumber_intSEXP, SEXP Riverlak_water_m3SEXP, SEXP Riverlak_capacity_m3SEXP, SEXP Reservoi_cellNumber_intSEXP, SEXP Reservoi_water_m3SEXP, SEXP Reservoi_capacity_m3SEXP, SEXP Reservoi_demand_m3SEXP, SEXP Reservoi_yearInflow_m3SEXP, SEXP Reservoi_yearDemand_m3SEXP, SEXP Reservoi_yearRelase_m3SEXP, SEXP Reservoi_isOperateStart_01SEXP, SEXP Reservoi_isIrrigate_01SEXP, SEXP CELL_cellNumberStep_intSEXP, SEXP CELL_inflowCellNumberStep_intSEXP, SEXP param_Riverlak_lin_storeFactorSEXP, SEXP param_Reservoi_han_alphaSEXP, SEXP param_Reservoi_han_kDemandSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type CONFLUEN_cellInflow_m3(CONFLUEN_cellInflow_m3SEXP);
+    Rcpp::traits::input_parameter< NumericVector& >::type RIVER_water_m3(RIVER_water_m3SEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type RIVER_length_km(RIVER_length_kmSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type RIVER_velocity_km(RIVER_velocity_kmSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type Riverlak_cellNumber_int(Riverlak_cellNumber_intSEXP);
+    Rcpp::traits::input_parameter< NumericVector& >::type Riverlak_water_m3(Riverlak_water_m3SEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type Riverlak_capacity_m3(Riverlak_capacity_m3SEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type Reservoi_cellNumber_int(Reservoi_cellNumber_intSEXP);
+    Rcpp::traits::input_parameter< NumericVector& >::type Reservoi_water_m3(Reservoi_water_m3SEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type Reservoi_capacity_m3(Reservoi_capacity_m3SEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type Reservoi_demand_m3(Reservoi_demand_m3SEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type Reservoi_yearInflow_m3(Reservoi_yearInflow_m3SEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type Reservoi_yearDemand_m3(Reservoi_yearDemand_m3SEXP);
+    Rcpp::traits::input_parameter< NumericVector& >::type Reservoi_yearRelase_m3(Reservoi_yearRelase_m3SEXP);
+    Rcpp::traits::input_parameter< LogicalVector >::type Reservoi_isOperateStart_01(Reservoi_isOperateStart_01SEXP);
+    Rcpp::traits::input_parameter< LogicalVector >::type Reservoi_isIrrigate_01(Reservoi_isIrrigate_01SEXP);
+    Rcpp::traits::input_parameter< List >::type CELL_cellNumberStep_int(CELL_cellNumberStep_intSEXP);
+    Rcpp::traits::input_parameter< List >::type CELL_inflowCellNumberStep_int(CELL_inflowCellNumberStep_intSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type param_Riverlak_lin_storeFactor(param_Riverlak_lin_storeFactorSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type param_Reservoi_han_alpha(param_Reservoi_han_alphaSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type param_Reservoi_han_kDemand(param_Reservoi_han_kDemandSEXP);
+    rcpp_result_gen = Rcpp::wrap(confluen_WaterGAP3_LR(CONFLUEN_cellInflow_m3, RIVER_water_m3, RIVER_length_km, RIVER_velocity_km, Riverlak_cellNumber_int, Riverlak_water_m3, Riverlak_capacity_m3, Reservoi_cellNumber_int, Reservoi_water_m3, Reservoi_capacity_m3, Reservoi_demand_m3, Reservoi_yearInflow_m3, Reservoi_yearDemand_m3, Reservoi_yearRelase_m3, Reservoi_isOperateStart_01, Reservoi_isIrrigate_01, CELL_cellNumberStep_int, CELL_inflowCellNumberStep_int, param_Riverlak_lin_storeFactor, param_Reservoi_han_alpha, param_Reservoi_han_kDemand));
+    return rcpp_result_gen;
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP _WaterGAP3_confluen_WaterGAP3_LR(SEXP CONFLUEN_cellInflow_m3SEXP, SEXP RIVER_water_m3SEXP, SEXP RIVER_length_kmSEXP, SEXP RIVER_velocity_kmSEXP, SEXP Riverlak_cellNumber_intSEXP, SEXP Riverlak_water_m3SEXP, SEXP Riverlak_capacity_m3SEXP, SEXP Reservoi_cellNumber_intSEXP, SEXP Reservoi_water_m3SEXP, SEXP Reservoi_capacity_m3SEXP, SEXP Reservoi_demand_m3SEXP, SEXP Reservoi_yearInflow_m3SEXP, SEXP Reservoi_yearDemand_m3SEXP, SEXP Reservoi_yearRelase_m3SEXP, SEXP Reservoi_isOperateStart_01SEXP, SEXP Reservoi_isIrrigate_01SEXP, SEXP CELL_cellNumberStep_intSEXP, SEXP CELL_inflowCellNumberStep_intSEXP, SEXP param_Riverlak_lin_storeFactorSEXP, SEXP param_Reservoi_han_alphaSEXP, SEXP param_Reservoi_han_kDemandSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(_WaterGAP3_confluen_WaterGAP3_LR_try(CONFLUEN_cellInflow_m3SEXP, RIVER_water_m3SEXP, RIVER_length_kmSEXP, RIVER_velocity_kmSEXP, Riverlak_cellNumber_intSEXP, Riverlak_water_m3SEXP, Riverlak_capacity_m3SEXP, Reservoi_cellNumber_intSEXP, Reservoi_water_m3SEXP, Reservoi_capacity_m3SEXP, Reservoi_demand_m3SEXP, Reservoi_yearInflow_m3SEXP, Reservoi_yearDemand_m3SEXP, Reservoi_yearRelase_m3SEXP, Reservoi_isOperateStart_01SEXP, Reservoi_isIrrigate_01SEXP, CELL_cellNumberStep_intSEXP, CELL_inflowCellNumberStep_intSEXP, param_Riverlak_lin_storeFactorSEXP, param_Reservoi_han_alphaSEXP, param_Reservoi_han_kDemandSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    bool rcpp_isLongjump_gen = Rcpp::internal::isLongjumpSentinel(rcpp_result_gen);
+    if (rcpp_isLongjump_gen) {
+        Rcpp::internal::resumeJump(rcpp_result_gen);
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error("%s", CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
+}
 
 // validate (ensure exported C++ functions exist before calling them)
 static int _WaterGAP3_RcppExport_validate(const char* sig) { 
@@ -789,6 +902,7 @@ static int _WaterGAP3_RcppExport_validate(const char* sig) {
         signatures.insert("NumericVector(*reservoi_Hanasaki)(NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector&,LogicalVector,LogicalVector,NumericVector,NumericVector)");
         signatures.insert("NumericVector(*confluen_WaterGAP3)(NumericVector,NumericVector&,NumericVector,NumericVector,List,List)");
         signatures.insert("NumericVector(*confluen_WaterGAP3_L)(NumericVector,NumericVector&,NumericVector,NumericVector,List,List,IntegerVector,NumericVector&,NumericVector,NumericVector)");
+        signatures.insert("NumericVector(*confluen_WaterGAP3_LR)(NumericVector,NumericVector&,NumericVector,NumericVector,IntegerVector,NumericVector&,NumericVector,IntegerVector,NumericVector&,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector&,LogicalVector,LogicalVector,List,List,NumericVector,NumericVector,NumericVector)");
     }
     return signatures.find(sig) != signatures.end();
 }
@@ -812,6 +926,7 @@ RcppExport SEXP _WaterGAP3_RcppExport_registerCCallable() {
     R_RegisterCCallable("WaterGAP3", "_WaterGAP3_reservoi_Hanasaki", (DL_FUNC)_WaterGAP3_reservoi_Hanasaki_try);
     R_RegisterCCallable("WaterGAP3", "_WaterGAP3_confluen_WaterGAP3", (DL_FUNC)_WaterGAP3_confluen_WaterGAP3_try);
     R_RegisterCCallable("WaterGAP3", "_WaterGAP3_confluen_WaterGAP3_L", (DL_FUNC)_WaterGAP3_confluen_WaterGAP3_L_try);
+    R_RegisterCCallable("WaterGAP3", "_WaterGAP3_confluen_WaterGAP3_LR", (DL_FUNC)_WaterGAP3_confluen_WaterGAP3_LR_try);
     R_RegisterCCallable("WaterGAP3", "_WaterGAP3_RcppExport_validate", (DL_FUNC)_WaterGAP3_RcppExport_validate);
     return R_NilValue;
 }
@@ -822,6 +937,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_WaterGAP3_subset_put", (DL_FUNC) &_WaterGAP3_subset_put, 3},
     {"_WaterGAP3_WaterGAP3_H", (DL_FUNC) &_WaterGAP3_WaterGAP3_H, 26},
     {"_WaterGAP3_WaterGAP3_HL", (DL_FUNC) &_WaterGAP3_WaterGAP3_HL, 38},
+    {"_WaterGAP3_WaterGAP3_HLR", (DL_FUNC) &_WaterGAP3_WaterGAP3_HLR, 49},
     {"_WaterGAP3_get_inflow_cells", (DL_FUNC) &_WaterGAP3_get_inflow_cells, 1},
     {"_WaterGAP3_get_inflow_lastcell", (DL_FUNC) &_WaterGAP3_get_inflow_lastcell, 1},
     {"_WaterGAP3_get_step_param", (DL_FUNC) &_WaterGAP3_get_step_param, 1},
@@ -839,6 +955,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_WaterGAP3_reservoi_Hanasaki", (DL_FUNC) &_WaterGAP3_reservoi_Hanasaki, 11},
     {"_WaterGAP3_confluen_WaterGAP3", (DL_FUNC) &_WaterGAP3_confluen_WaterGAP3, 6},
     {"_WaterGAP3_confluen_WaterGAP3_L", (DL_FUNC) &_WaterGAP3_confluen_WaterGAP3_L, 10},
+    {"_WaterGAP3_confluen_WaterGAP3_LR", (DL_FUNC) &_WaterGAP3_confluen_WaterGAP3_LR, 21},
     {"_WaterGAP3_RcppExport_registerCCallable", (DL_FUNC) &_WaterGAP3_RcppExport_registerCCallable, 0},
     {NULL, NULL, 0}
 };

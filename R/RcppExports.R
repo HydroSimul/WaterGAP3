@@ -47,6 +47,17 @@ WaterGAP3_HL <- function(n_time, n_spat, ATMOS_precipitation_mm, ATMOS_temperatu
     .Call(`_WaterGAP3_WaterGAP3_HL`, n_time, n_spat, ATMOS_precipitation_mm, ATMOS_temperature_Cel, ATMOS_potentialEvatrans_mm, SNOW_ice_mm, SOIL_water_mm, SOIL_capacity_mm, SOIL_potentialPercola_mm, GROUND_water_mm, GROUND_capacity_mm, RIVER_water_m3, RIVER_length_km, RIVER_velocity_km, CELL_landArea_km2, CELL_cellNumberStep_int, CELL_inflowCellNumberStep_int, Lake_cellNumber_int, Lake_water_m3, Lake_area_km2, Lake_capacity_m3, Riverlak_cellNumber_int, Riverlak_water_m3, Riverlak_area_km2, Riverlak_capacity_m3, param_ATMOS_thr_Ts, param_SNOW_fac_f, param_SNOW_fac_Tmelt, param_EVATRANS_ubc_gamma, param_INFILT_hbv_beta, param_PERCOLA_arn_k, param_PERCOLA_arn_thresh, param_BASEFLOW_grf_gamma, param_Evalake_vic_gamma, param_Lake_acp_storeFactor, param_Lake_acp_gamma, param_Riverlak_lin_storeFactor, if_allVariExport)
 }
 
+#' WaterGAP3
+#' @name WaterGAP3_HLR
+#' @inheritParams all_vari
+#' @inheritParams process
+#' @param param_Evalake_vic_gamma same as param_EVATRANS_vic_gamma
+#' @return streamflow m3
+#' @export
+WaterGAP3_HLR <- function(n_time, n_spat, ATMOS_precipitation_mm, ATMOS_temperature_Cel, ATMOS_potentialEvatrans_mm, SNOW_ice_mm, SOIL_water_mm, SOIL_capacity_mm, SOIL_potentialPercola_mm, GROUND_water_mm, GROUND_capacity_mm, RIVER_water_m3, RIVER_length_km, RIVER_velocity_km, CELL_landArea_km2, CELL_cellNumberStep_int, CELL_inflowCellNumberStep_int, Lake_cellNumber_int, Lake_water_m3, Lake_area_km2, Lake_capacity_m3, Riverlak_cellNumber_int, Riverlak_water_m3, Riverlak_area_km2, Riverlak_capacity_m3, Reservoi_cellNumber_int, Reservoi_water_m3, Reservoi_capacity_m3, Reservoi_demand_m3, Reservoi_yearInflow_m3, Reservoi_yearDemand_m3, Reservoi_yearRelase_m3, Reservoi_isOperateStart_01, Reservoi_isIrrigate_01, param_ATMOS_thr_Ts, param_SNOW_fac_f, param_SNOW_fac_Tmelt, param_EVATRANS_ubc_gamma, param_INFILT_hbv_beta, param_PERCOLA_arn_k, param_PERCOLA_arn_thresh, param_BASEFLOW_grf_gamma, param_Evalake_vic_gamma, param_Lake_acp_storeFactor, param_Lake_acp_gamma, param_Riverlak_lin_storeFactor, param_Reservoi_han_alpha, param_Reservoi_han_kDemand, if_allVariExport = FALSE) {
+    .Call(`_WaterGAP3_WaterGAP3_HLR`, n_time, n_spat, ATMOS_precipitation_mm, ATMOS_temperature_Cel, ATMOS_potentialEvatrans_mm, SNOW_ice_mm, SOIL_water_mm, SOIL_capacity_mm, SOIL_potentialPercola_mm, GROUND_water_mm, GROUND_capacity_mm, RIVER_water_m3, RIVER_length_km, RIVER_velocity_km, CELL_landArea_km2, CELL_cellNumberStep_int, CELL_inflowCellNumberStep_int, Lake_cellNumber_int, Lake_water_m3, Lake_area_km2, Lake_capacity_m3, Riverlak_cellNumber_int, Riverlak_water_m3, Riverlak_area_km2, Riverlak_capacity_m3, Reservoi_cellNumber_int, Reservoi_water_m3, Reservoi_capacity_m3, Reservoi_demand_m3, Reservoi_yearInflow_m3, Reservoi_yearDemand_m3, Reservoi_yearRelase_m3, Reservoi_isOperateStart_01, Reservoi_isIrrigate_01, param_ATMOS_thr_Ts, param_SNOW_fac_f, param_SNOW_fac_Tmelt, param_EVATRANS_ubc_gamma, param_INFILT_hbv_beta, param_PERCOLA_arn_k, param_PERCOLA_arn_thresh, param_BASEFLOW_grf_gamma, param_Evalake_vic_gamma, param_Lake_acp_storeFactor, param_Lake_acp_gamma, param_Riverlak_lin_storeFactor, param_Reservoi_han_alpha, param_Reservoi_han_kDemand, if_allVariExport)
+}
+
 #' @rdname flowpath
 #' @name get_inflow_cells
 #' @title Get Inflow Cells
@@ -78,6 +89,9 @@ get_inflow_lastcell <- function(int_Outflow) {
 get_step_param <- function(int_Outflow) {
     .Call(`_WaterGAP3_get_step_param`, int_Outflow)
 }
+
+#' @rdname process
+NULL
 
 #' @rdname process
 NULL
@@ -183,6 +197,10 @@ confluen_WaterGAP3 <- function(CONFLUEN_cellInflow_m3, RIVER_water_m3, RIVER_len
 
 confluen_WaterGAP3_L <- function(CONFLUEN_cellInflow_m3, RIVER_water_m3, RIVER_length_km, RIVER_velocity_km, CELL_cellNumberStep_int, CELL_inflowCellNumberStep_int, Riverlak_cellNumber_int, Riverlak_water_m3, Riverlak_capacity_m3, param_Riverlak_lin_storeFactor) {
     .Call(`_WaterGAP3_confluen_WaterGAP3_L`, CONFLUEN_cellInflow_m3, RIVER_water_m3, RIVER_length_km, RIVER_velocity_km, CELL_cellNumberStep_int, CELL_inflowCellNumberStep_int, Riverlak_cellNumber_int, Riverlak_water_m3, Riverlak_capacity_m3, param_Riverlak_lin_storeFactor)
+}
+
+confluen_WaterGAP3_LR <- function(CONFLUEN_cellInflow_m3, RIVER_water_m3, RIVER_length_km, RIVER_velocity_km, Riverlak_cellNumber_int, Riverlak_water_m3, Riverlak_capacity_m3, Reservoi_cellNumber_int, Reservoi_water_m3, Reservoi_capacity_m3, Reservoi_demand_m3, Reservoi_yearInflow_m3, Reservoi_yearDemand_m3, Reservoi_yearRelase_m3, Reservoi_isOperateStart_01, Reservoi_isIrrigate_01, CELL_cellNumberStep_int, CELL_inflowCellNumberStep_int, param_Riverlak_lin_storeFactor, param_Reservoi_han_alpha, param_Reservoi_han_kDemand) {
+    .Call(`_WaterGAP3_confluen_WaterGAP3_LR`, CONFLUEN_cellInflow_m3, RIVER_water_m3, RIVER_length_km, RIVER_velocity_km, Riverlak_cellNumber_int, Riverlak_water_m3, Riverlak_capacity_m3, Reservoi_cellNumber_int, Reservoi_water_m3, Reservoi_capacity_m3, Reservoi_demand_m3, Reservoi_yearInflow_m3, Reservoi_yearDemand_m3, Reservoi_yearRelase_m3, Reservoi_isOperateStart_01, Reservoi_isIrrigate_01, CELL_cellNumberStep_int, CELL_inflowCellNumberStep_int, param_Riverlak_lin_storeFactor, param_Reservoi_han_alpha, param_Reservoi_han_kDemand)
 }
 
 # Register entry points for exported C++ functions

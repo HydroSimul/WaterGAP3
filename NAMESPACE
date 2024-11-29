@@ -2,6 +2,7 @@
 
 export(WaterGAP3_H)
 export(WaterGAP3_HL)
+export(WaterGAP3_HLR)
 export(atmosSnow_ThresholdT)
 export(baseflow_GR4Jfix)
 export(confluen_WaterGAP3)

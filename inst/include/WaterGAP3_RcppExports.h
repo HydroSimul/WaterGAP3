@@ -380,6 +380,27 @@ namespace WaterGAP3 {
         return Rcpp::as<NumericVector >(rcpp_result_gen);
     }
 
+    inline NumericVector confluen_WaterGAP3_LR(NumericVector CONFLUEN_cellInflow_m3, NumericVector& RIVER_water_m3, NumericVector RIVER_length_km, NumericVector RIVER_velocity_km, IntegerVector Riverlak_cellNumber_int, NumericVector& Riverlak_water_m3, NumericVector Riverlak_capacity_m3, IntegerVector Reservoi_cellNumber_int, NumericVector& Reservoi_water_m3, NumericVector Reservoi_capacity_m3, NumericVector Reservoi_demand_m3, NumericVector Reservoi_yearInflow_m3, NumericVector Reservoi_yearDemand_m3, NumericVector& Reservoi_yearRelase_m3, LogicalVector Reservoi_isOperateStart_01, LogicalVector Reservoi_isIrrigate_01, List CELL_cellNumberStep_int, List CELL_inflowCellNumberStep_int, NumericVector param_Riverlak_lin_storeFactor, NumericVector param_Reservoi_han_alpha, NumericVector param_Reservoi_han_kDemand) {
+        typedef SEXP(*Ptr_confluen_WaterGAP3_LR)(SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP);
+        static Ptr_confluen_WaterGAP3_LR p_confluen_WaterGAP3_LR = NULL;
+        if (p_confluen_WaterGAP3_LR == NULL) {
+            validateSignature("NumericVector(*confluen_WaterGAP3_LR)(NumericVector,NumericVector&,NumericVector,NumericVector,IntegerVector,NumericVector&,NumericVector,IntegerVector,NumericVector&,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector&,LogicalVector,LogicalVector,List,List,NumericVector,NumericVector,NumericVector)");
+            p_confluen_WaterGAP3_LR = (Ptr_confluen_WaterGAP3_LR)R_GetCCallable("WaterGAP3", "_WaterGAP3_confluen_WaterGAP3_LR");
+        }
+        RObject rcpp_result_gen;
+        {
+            RNGScope RCPP_rngScope_gen;
+            rcpp_result_gen = p_confluen_WaterGAP3_LR(Shield<SEXP>(Rcpp::wrap(CONFLUEN_cellInflow_m3)), Shield<SEXP>(Rcpp::wrap(RIVER_water_m3)), Shield<SEXP>(Rcpp::wrap(RIVER_length_km)), Shield<SEXP>(Rcpp::wrap(RIVER_velocity_km)), Shield<SEXP>(Rcpp::wrap(Riverlak_cellNumber_int)), Shield<SEXP>(Rcpp::wrap(Riverlak_water_m3)), Shield<SEXP>(Rcpp::wrap(Riverlak_capacity_m3)), Shield<SEXP>(Rcpp::wrap(Reservoi_cellNumber_int)), Shield<SEXP>(Rcpp::wrap(Reservoi_water_m3)), Shield<SEXP>(Rcpp::wrap(Reservoi_capacity_m3)), Shield<SEXP>(Rcpp::wrap(Reservoi_demand_m3)), Shield<SEXP>(Rcpp::wrap(Reservoi_yearInflow_m3)), Shield<SEXP>(Rcpp::wrap(Reservoi_yearDemand_m3)), Shield<SEXP>(Rcpp::wrap(Reservoi_yearRelase_m3)), Shield<SEXP>(Rcpp::wrap(Reservoi_isOperateStart_01)), Shield<SEXP>(Rcpp::wrap(Reservoi_isIrrigate_01)), Shield<SEXP>(Rcpp::wrap(CELL_cellNumberStep_int)), Shield<SEXP>(Rcpp::wrap(CELL_inflowCellNumberStep_int)), Shield<SEXP>(Rcpp::wrap(param_Riverlak_lin_storeFactor)), Shield<SEXP>(Rcpp::wrap(param_Reservoi_han_alpha)), Shield<SEXP>(Rcpp::wrap(param_Reservoi_han_kDemand)));
+        }
+        if (rcpp_result_gen.inherits("interrupted-error"))
+            throw Rcpp::internal::InterruptedException();
+        if (Rcpp::internal::isLongjumpSentinel(rcpp_result_gen))
+            throw Rcpp::LongjumpException(rcpp_result_gen);
+        if (rcpp_result_gen.inherits("try-error"))
+            throw Rcpp::exception(Rcpp::as<std::string>(rcpp_result_gen).c_str());
+        return Rcpp::as<NumericVector >(rcpp_result_gen);
+    }
+
 }
 
 #endif // RCPP_WaterGAP3_RCPPEXPORTS_H_GEN_
