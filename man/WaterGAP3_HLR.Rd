@@ -32,6 +32,7 @@ WaterGAP3_HLR(
   Riverlak_capacity_m3,
   Reservoi_cellNumber_int,
   Reservoi_water_m3,
+  Reservoi_area_km2,
   Reservoi_capacity_m3,
   Reservoi_demand_m3,
   Reservoi_yearInflow_m3,
@@ -110,6 +111,8 @@ WaterGAP3_HLR(
 \item{Reservoi_cellNumber_int}{(int) reservoir cell number}
 
 \item{Reservoi_water_m3}{(m3) volume of water in the reservoir}
+
+\item{Reservoi_area_km2}{(km2) surface area of the reservoir}
 
 \item{Reservoi_capacity_m3}{(m3) reservoir capacity}
 

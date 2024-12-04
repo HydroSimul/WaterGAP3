@@ -36,6 +36,7 @@ List WaterGAP3_HLR(
    NumericVector Riverlak_capacity_m3,
    IntegerVector Reservoi_cellNumber_int,
    NumericVector Reservoi_water_m3,
+   NumericVector Reservoi_area_km2,
    NumericVector Reservoi_capacity_m3,
    NumericVector Reservoi_demand_m3,
    NumericVector Reservoi_yearInflow_m3,
@@ -76,7 +77,7 @@ List WaterGAP3_HLR(
  OUT_cellOutflow(n_time, n_spat),
  OUT_riverwater(n_time, n_spat);
 
- NumericVector Lake_evatrans_mm, Riverlak_evatrans_mm;
+ NumericVector Lake_evatrans_mm, Riverlak_evatrans_mm, Reservoi_evatrans_mm;
  int n_Lake = Lake_cellNumber_int.size(), n_Riverlake = Riverlak_cellNumber_int.size();
  NumericMatrix OUT_lakeWater(n_time, n_Lake), OUT_riverlakWater(n_time, n_Riverlake),
  OUT_lakeEvalake(n_time, n_Lake), OUT_riverlakEvalake(n_time, n_Riverlake);
@@ -124,16 +125,25 @@ List WaterGAP3_HLR(
      Riverlak_capacity_m3,
      subset_get(param_Evalake_vic_gamma, Riverlak_cellNumber_int)
    );
+   Reservoi_evatrans_mm = evatransActual_VIC(
+     subset_get(ATMOS_potentialEvatrans_mm, Reservoi_cellNumber_int),
+     Reservoi_water_m3,
+     Reservoi_capacity_m3,
+     subset_get(param_Evalake_vic_gamma, Reservoi_cellNumber_int)
+   );
 
 
    // // Net vertical Inflow
-   NumericVector Lake_verticalInflow_m3, Riverlak_verticalInflow_m3, reservoir_verticalInflow_m3;
+   NumericVector Lake_verticalInflow_m3, Riverlak_verticalInflow_m3, Reservoi_verticalInflow_m3;
 
    NumericVector Lake_verticalInflow_mm = pmax((subset_get(ATMOS_precipitation_mm, Lake_cellNumber_int) - Lake_evatrans_mm), 0.0);
    Lake_verticalInflow_m3 = Lake_verticalInflow_mm * Lake_area_km2 * 1000;
 
    NumericVector Riverlak_verticalInflow_mm = pmax((subset_get(ATMOS_precipitation_mm, Riverlak_cellNumber_int) - Riverlak_evatrans_mm), 0.0);
    Riverlak_verticalInflow_m3 = Riverlak_verticalInflow_mm * Riverlak_area_km2 * 1000;
+
+   NumericVector Reservoi_verticalInflow_mm = pmax((subset_get(ATMOS_precipitation_mm, Reservoi_cellNumber_int) - Reservoi_evatrans_mm), 0.0);
+   Reservoi_verticalInflow_m3 = Reservoi_verticalInflow_mm * Reservoi_area_km2 * 1000;
 
    // Local Lake runoff
    NumericVector Lake_Outflow_m3 = lake_AcceptPow(
@@ -147,6 +157,7 @@ List WaterGAP3_HLR(
    // Sum Inflow to water net
    subset_put(CELL_outflow_m3, Lake_cellNumber_int, Lake_Outflow_m3);
    subset_put(CELL_outflow_m3, Riverlak_cellNumber_int, subset_get(CELL_outflow_m3, Riverlak_cellNumber_int) + Riverlak_verticalInflow_m3);
+   subset_put(CELL_outflow_m3, Reservoi_cellNumber_int, subset_get(CELL_outflow_m3, Reservoi_cellNumber_int) + Reservoi_verticalInflow_m3);
 
    // Horizontal
    RIVER_outflow_m3(i, _) = confluen_WaterGAP3_LR(
