@@ -199,7 +199,7 @@ NumericVector river_LinearResorvoir(
 )
 {
 
- NumericVector RIVER_paramK_TS = pmax(RIVER_length_km / RIVER_velocity_km, 1.);
+ NumericVector RIVER_paramK_TS = RIVER_length_km / RIVER_velocity_km; // pmax(RIVER_length_km / RIVER_velocity_km, 1.);
 
  // return RIVER_water_m3 * (1 / (RIVER_paramK_TS + 0.5)) + RIVER_inflow_m3 * (0.5 / (RIVER_paramK_TS + 0.5));
  return RIVER_water_m3 * (1 - exp(-1. / RIVER_paramK_TS)) + RIVER_inflow_m3 * (1 - RIVER_paramK_TS * (1 - exp(-1. / RIVER_paramK_TS)));
