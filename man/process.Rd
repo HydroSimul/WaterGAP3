@@ -92,7 +92,7 @@ percola_Arno(
 
 baseflow_GR4Jfix(GROUND_water_mm, GROUND_capacity_mm, param_BASEFLOW_grf_gamma)
 
-baseflow_SupplyRatio(ground_water_mm, param_BASEFLOW_sur_k)
+baseflow_SupplyRatio(GROUND_water_mm, param_BASEFLOW_sur_k)
 
 lake_AcceptPow(
   Lake_water_m3,

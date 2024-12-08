@@ -317,7 +317,7 @@ namespace WaterGAP3 {
         return Rcpp::as<NumericVector >(rcpp_result_gen);
     }
 
-    inline NumericVector baseflow_SupplyRatio(NumericVector ground_water_mm, NumericVector param_BASEFLOW_sur_k) {
+    inline NumericVector baseflow_SupplyRatio(NumericVector GROUND_water_mm, NumericVector param_BASEFLOW_sur_k) {
         typedef SEXP(*Ptr_baseflow_SupplyRatio)(SEXP,SEXP);
         static Ptr_baseflow_SupplyRatio p_baseflow_SupplyRatio = NULL;
         if (p_baseflow_SupplyRatio == NULL) {
@@ -327,7 +327,7 @@ namespace WaterGAP3 {
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_baseflow_SupplyRatio(Shield<SEXP>(Rcpp::wrap(ground_water_mm)), Shield<SEXP>(Rcpp::wrap(param_BASEFLOW_sur_k)));
+            rcpp_result_gen = p_baseflow_SupplyRatio(Shield<SEXP>(Rcpp::wrap(GROUND_water_mm)), Shield<SEXP>(Rcpp::wrap(param_BASEFLOW_sur_k)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();

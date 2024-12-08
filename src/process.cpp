@@ -220,12 +220,12 @@ NumericVector baseflow_GR4Jfix(
 //' @export
 // [[Rcpp::export]]
 NumericVector baseflow_SupplyRatio(
-    NumericVector ground_water_mm,
+    NumericVector GROUND_water_mm,
     NumericVector param_BASEFLOW_sur_k
 )
 {
 
-  return param_BASEFLOW_sur_k * ground_water_mm;
+  return param_BASEFLOW_sur_k * GROUND_water_mm;
 
 }
 

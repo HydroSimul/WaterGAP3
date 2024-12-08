@@ -182,8 +182,8 @@ baseflow_GR4Jfix <- function(GROUND_water_mm, GROUND_capacity_mm, param_BASEFLOW
 #' @rdname process
 #' @param param_BASEFLOW_sur_k <0.01, 1> coefficient parameter for [baseflow_SupplyRatio()]
 #' @export
-baseflow_SupplyRatio <- function(ground_water_mm, param_BASEFLOW_sur_k) {
-    .Call(`_WaterGAP3_baseflow_SupplyRatio`, ground_water_mm, param_BASEFLOW_sur_k)
+baseflow_SupplyRatio <- function(GROUND_water_mm, param_BASEFLOW_sur_k) {
+    .Call(`_WaterGAP3_baseflow_SupplyRatio`, GROUND_water_mm, param_BASEFLOW_sur_k)
 }
 
 #' @rdname process

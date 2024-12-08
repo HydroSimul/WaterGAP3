@@ -712,21 +712,21 @@ RcppExport SEXP _WaterGAP3_baseflow_GR4Jfix(SEXP GROUND_water_mmSEXP, SEXP GROUN
     return rcpp_result_gen;
 }
 // baseflow_SupplyRatio
-NumericVector baseflow_SupplyRatio(NumericVector ground_water_mm, NumericVector param_BASEFLOW_sur_k);
-static SEXP _WaterGAP3_baseflow_SupplyRatio_try(SEXP ground_water_mmSEXP, SEXP param_BASEFLOW_sur_kSEXP) {
+NumericVector baseflow_SupplyRatio(NumericVector GROUND_water_mm, NumericVector param_BASEFLOW_sur_k);
+static SEXP _WaterGAP3_baseflow_SupplyRatio_try(SEXP GROUND_water_mmSEXP, SEXP param_BASEFLOW_sur_kSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type ground_water_mm(ground_water_mmSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type GROUND_water_mm(GROUND_water_mmSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type param_BASEFLOW_sur_k(param_BASEFLOW_sur_kSEXP);
-    rcpp_result_gen = Rcpp::wrap(baseflow_SupplyRatio(ground_water_mm, param_BASEFLOW_sur_k));
+    rcpp_result_gen = Rcpp::wrap(baseflow_SupplyRatio(GROUND_water_mm, param_BASEFLOW_sur_k));
     return rcpp_result_gen;
 END_RCPP_RETURN_ERROR
 }
-RcppExport SEXP _WaterGAP3_baseflow_SupplyRatio(SEXP ground_water_mmSEXP, SEXP param_BASEFLOW_sur_kSEXP) {
+RcppExport SEXP _WaterGAP3_baseflow_SupplyRatio(SEXP GROUND_water_mmSEXP, SEXP param_BASEFLOW_sur_kSEXP) {
     SEXP rcpp_result_gen;
     {
         Rcpp::RNGScope rcpp_rngScope_gen;
-        rcpp_result_gen = PROTECT(_WaterGAP3_baseflow_SupplyRatio_try(ground_water_mmSEXP, param_BASEFLOW_sur_kSEXP));
+        rcpp_result_gen = PROTECT(_WaterGAP3_baseflow_SupplyRatio_try(GROUND_water_mmSEXP, param_BASEFLOW_sur_kSEXP));
     }
     Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
     if (rcpp_isInterrupt_gen) {
