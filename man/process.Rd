@@ -4,12 +4,16 @@
 \alias{process}
 \alias{atmosSnow_ThresholdT}
 \alias{evatransPotential_TurcWendling}
+\alias{intercep_Full}
+\alias{evatransActual_SupplyPow}
+\alias{evatransActual_SupplyRatio}
 \alias{evatransActual_VIC}
 \alias{evatransActual_UBC}
 \alias{snowMelt_Factor}
 \alias{infilt_HBV}
 \alias{percola_Arno}
 \alias{baseflow_GR4Jfix}
+\alias{baseflow_SupplyRatio}
 \alias{lake_AcceptPow}
 \alias{river_LinearResorvoir}
 \alias{riverlak_LinearResorvoir}
@@ -27,6 +31,27 @@ evatransPotential_TurcWendling(
   ATMOS_temperature_Cel,
   ATMOS_solarRadiat_MJ,
   param_EVATRANS_tur_k
+)
+
+intercep_Full(
+  ATMOS_precipitation_mm,
+  LAND_interceptWater_mm,
+  LAND_interceptCapacity_mm
+)
+
+evatransActual_SupplyPow(
+  ATMOS_potentialEvatrans_mm,
+  water_mm,
+  capacity_mm,
+  param_EVATRANS_sup_k,
+  param_EVATRANS_sup_gamma
+)
+
+evatransActual_SupplyRatio(
+  ATMOS_potentialEvatrans_mm,
+  water_mm,
+  capacity_mm,
+  param_EVATRANS_sur_k
 )
 
 evatransActual_VIC(
@@ -66,6 +91,8 @@ percola_Arno(
 )
 
 baseflow_GR4Jfix(GROUND_water_mm, GROUND_capacity_mm, param_BASEFLOW_grf_gamma)
+
+baseflow_SupplyRatio(ground_water_mm, param_BASEFLOW_sur_k)
 
 lake_AcceptPow(
   Lake_water_m3,
@@ -123,11 +150,21 @@ confluen_WaterGAP3(
 
 \item{param_EVATRANS_tur_k}{<0.6, 1> parameter for [evatransPotential_TurcWendling()], higher value when closer to the sea}
 
+\item{LAND_interceptWater_mm}{(mm/m2) initial water volume that can be **intercepted**}
+
+\item{LAND_interceptCapacity_mm}{(mm/m2) average intercept Capacity (maximal storage capacity)}
+
 \item{ATMOS_potentialEvatrans_mm}{(mm/m2/TS) **potential / reference** evapotranspiration}
 
 \item{water_mm}{(mm/m2/TS) water volume in `soilLy`, `groundLy` or intercept of `landLy`, same as `SOIL_water_mm`, `GROUND_water_mm` or `LAND_interceptWater_mm`}
 
 \item{capacity_mm}{(mm/m2) water storage capacity in `soilLy`, `groundLy` or intercept of `landLy`, same as `SOIL_capacity_mm`, `GROUND_capacity_mm` or`LAND_interceptCapacity_mm`}
+
+\item{param_EVATRANS_sup_k}{<0.1, 1> parameter for [evatransActual_SupplyPow()], ratio of this method}
+
+\item{param_EVATRANS_sup_gamma}{<.1, 5> parameter for [evatransActual_SupplyPow()], exponent of this method}
+
+\item{param_EVATRANS_sur_k}{<0.1, 1> parameter for [evatransActual_SupplyRatio()], ratio of potential ET, that is estimated as actually ET}
 
 \item{param_EVATRANS_vic_gamma}{<0.2, 5> parameter for [evatransActual_VIC()]}
 
@@ -158,6 +195,8 @@ confluen_WaterGAP3(
 \item{GROUND_capacity_mm}{(mm/m2) water storage capacity in `groundLy`}
 
 \item{param_BASEFLOW_grf_gamma}{<2, 7> exponential parameter for [baseflow_GR4Jfix()]}
+
+\item{param_BASEFLOW_sur_k}{<0.01, 1> coefficient parameter for [baseflow_SupplyRatio()]}
 
 \item{Lake_water_m3}{(m3) lake water volume}
 
@@ -214,7 +253,7 @@ confluen_WaterGAP3(
 \item{CELL_inflowCellNumberStep_int}{(int) step number of inflow cells in the basin}
 }
 \value{
-atmos_snow_mm (mm/m2/TS) snowfall volume
+ATMOS_snow_mm (mm/m2/TS) snowfall volume
 
 potential evapotranspiration (mm/m2)
 

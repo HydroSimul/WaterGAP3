@@ -32,8 +32,8 @@ subset_put <- function(vec_Data, int_Index, vec_DataPut) {
 #' @inheritParams process
 #' @return streamflow m3
 #' @export
-WaterGAP3_H <- function(n_time, n_spat, ATMOS_precipitation_mm, ATMOS_temperature_Cel, ATMOS_potentialEvatrans_mm, SNOW_ice_mm, SOIL_water_mm, SOIL_capacity_mm, SOIL_potentialPercola_mm, GROUND_water_mm, GROUND_capacity_mm, RIVER_water_m3, RIVER_length_km, RIVER_velocity_km, CELL_landArea_km2, CELL_cellNumberStep_int, CELL_inflowCellNumberStep_int, param_ATMOS_thr_Ts, param_SNOW_fac_f, param_SNOW_fac_Tmelt, param_EVATRANS_ubc_gamma, param_INFILT_hbv_beta, param_PERCOLA_arn_k, param_PERCOLA_arn_thresh, param_BASEFLOW_grf_gamma, if_allVariExport = FALSE) {
-    .Call(`_WaterGAP3_WaterGAP3_H`, n_time, n_spat, ATMOS_precipitation_mm, ATMOS_temperature_Cel, ATMOS_potentialEvatrans_mm, SNOW_ice_mm, SOIL_water_mm, SOIL_capacity_mm, SOIL_potentialPercola_mm, GROUND_water_mm, GROUND_capacity_mm, RIVER_water_m3, RIVER_length_km, RIVER_velocity_km, CELL_landArea_km2, CELL_cellNumberStep_int, CELL_inflowCellNumberStep_int, param_ATMOS_thr_Ts, param_SNOW_fac_f, param_SNOW_fac_Tmelt, param_EVATRANS_ubc_gamma, param_INFILT_hbv_beta, param_PERCOLA_arn_k, param_PERCOLA_arn_thresh, param_BASEFLOW_grf_gamma, if_allVariExport)
+WaterGAP3_H <- function(n_time, n_spat, ATMOS_precipitation_mm, ATMOS_temperature_Cel, ATMOS_potentialEvatrans_mm, SNOW_ice_mm, LAND_interceptWater_mm, LAND_interceptCapacity_mm, SOIL_water_mm, SOIL_capacity_mm, SOIL_potentialPercola_mm, GROUND_water_mm, RIVER_water_m3, RIVER_length_km, RIVER_velocity_km, CELL_landArea_km2, CELL_cellNumberStep_int, CELL_inflowCellNumberStep_int, param_ATMOS_thr_Ts, param_SNOW_fac_f, param_SNOW_fac_Tmelt, param_EVATRANS_sup_k, param_EVATRANS_sup_gamma, param_EVATRANS_sur_k, param_INFILT_hbv_beta, param_PERCOLA_arn_k, param_PERCOLA_arn_thresh, param_BASEFLOW_sur_k, if_allVariExport = FALSE) {
+    .Call(`_WaterGAP3_WaterGAP3_H`, n_time, n_spat, ATMOS_precipitation_mm, ATMOS_temperature_Cel, ATMOS_potentialEvatrans_mm, SNOW_ice_mm, LAND_interceptWater_mm, LAND_interceptCapacity_mm, SOIL_water_mm, SOIL_capacity_mm, SOIL_potentialPercola_mm, GROUND_water_mm, RIVER_water_m3, RIVER_length_km, RIVER_velocity_km, CELL_landArea_km2, CELL_cellNumberStep_int, CELL_inflowCellNumberStep_int, param_ATMOS_thr_Ts, param_SNOW_fac_f, param_SNOW_fac_Tmelt, param_EVATRANS_sup_k, param_EVATRANS_sup_gamma, param_EVATRANS_sur_k, param_INFILT_hbv_beta, param_PERCOLA_arn_k, param_PERCOLA_arn_thresh, param_BASEFLOW_sur_k, if_allVariExport)
 }
 
 #' WaterGAP3
@@ -43,8 +43,8 @@ WaterGAP3_H <- function(n_time, n_spat, ATMOS_precipitation_mm, ATMOS_temperatur
 #' @param param_Evalake_vic_gamma same as param_EVATRANS_vic_gamma
 #' @return streamflow m3
 #' @export
-WaterGAP3_HL <- function(n_time, n_spat, ATMOS_precipitation_mm, ATMOS_temperature_Cel, ATMOS_potentialEvatrans_mm, SNOW_ice_mm, SOIL_water_mm, SOIL_capacity_mm, SOIL_potentialPercola_mm, GROUND_water_mm, GROUND_capacity_mm, RIVER_water_m3, RIVER_length_km, RIVER_velocity_km, CELL_landArea_km2, CELL_cellNumberStep_int, CELL_inflowCellNumberStep_int, Lake_cellNumber_int, Lake_water_m3, Lake_area_km2, Lake_capacity_m3, Riverlak_cellNumber_int, Riverlak_water_m3, Riverlak_area_km2, Riverlak_capacity_m3, param_ATMOS_thr_Ts, param_SNOW_fac_f, param_SNOW_fac_Tmelt, param_EVATRANS_ubc_gamma, param_INFILT_hbv_beta, param_PERCOLA_arn_k, param_PERCOLA_arn_thresh, param_BASEFLOW_grf_gamma, param_Evalake_vic_gamma, param_Lake_acp_storeFactor, param_Lake_acp_gamma, param_Riverlak_lin_storeFactor, if_allVariExport = FALSE) {
-    .Call(`_WaterGAP3_WaterGAP3_HL`, n_time, n_spat, ATMOS_precipitation_mm, ATMOS_temperature_Cel, ATMOS_potentialEvatrans_mm, SNOW_ice_mm, SOIL_water_mm, SOIL_capacity_mm, SOIL_potentialPercola_mm, GROUND_water_mm, GROUND_capacity_mm, RIVER_water_m3, RIVER_length_km, RIVER_velocity_km, CELL_landArea_km2, CELL_cellNumberStep_int, CELL_inflowCellNumberStep_int, Lake_cellNumber_int, Lake_water_m3, Lake_area_km2, Lake_capacity_m3, Riverlak_cellNumber_int, Riverlak_water_m3, Riverlak_area_km2, Riverlak_capacity_m3, param_ATMOS_thr_Ts, param_SNOW_fac_f, param_SNOW_fac_Tmelt, param_EVATRANS_ubc_gamma, param_INFILT_hbv_beta, param_PERCOLA_arn_k, param_PERCOLA_arn_thresh, param_BASEFLOW_grf_gamma, param_Evalake_vic_gamma, param_Lake_acp_storeFactor, param_Lake_acp_gamma, param_Riverlak_lin_storeFactor, if_allVariExport)
+WaterGAP3_HL <- function(n_time, n_spat, ATMOS_precipitation_mm, ATMOS_temperature_Cel, ATMOS_potentialEvatrans_mm, SNOW_ice_mm, LAND_interceptWater_mm, LAND_interceptCapacity_mm, SOIL_water_mm, SOIL_capacity_mm, SOIL_potentialPercola_mm, GROUND_water_mm, GROUND_capacity_mm, RIVER_water_m3, RIVER_length_km, RIVER_velocity_km, CELL_landArea_km2, CELL_cellNumberStep_int, CELL_inflowCellNumberStep_int, Lake_cellNumber_int, Lake_water_m3, Lake_area_km2, Lake_capacity_m3, Riverlak_cellNumber_int, Riverlak_water_m3, Riverlak_area_km2, Riverlak_capacity_m3, param_ATMOS_thr_Ts, param_SNOW_fac_f, param_SNOW_fac_Tmelt, param_EVATRANS_sup_k, param_EVATRANS_sup_gamma, param_EVATRANS_sur_k, param_INFILT_hbv_beta, param_PERCOLA_arn_k, param_PERCOLA_arn_thresh, param_BASEFLOW_sur_k, param_Evalake_vic_gamma, param_Lake_acp_storeFactor, param_Lake_acp_gamma, param_Riverlak_lin_storeFactor, if_allVariExport = FALSE) {
+    .Call(`_WaterGAP3_WaterGAP3_HL`, n_time, n_spat, ATMOS_precipitation_mm, ATMOS_temperature_Cel, ATMOS_potentialEvatrans_mm, SNOW_ice_mm, LAND_interceptWater_mm, LAND_interceptCapacity_mm, SOIL_water_mm, SOIL_capacity_mm, SOIL_potentialPercola_mm, GROUND_water_mm, GROUND_capacity_mm, RIVER_water_m3, RIVER_length_km, RIVER_velocity_km, CELL_landArea_km2, CELL_cellNumberStep_int, CELL_inflowCellNumberStep_int, Lake_cellNumber_int, Lake_water_m3, Lake_area_km2, Lake_capacity_m3, Riverlak_cellNumber_int, Riverlak_water_m3, Riverlak_area_km2, Riverlak_capacity_m3, param_ATMOS_thr_Ts, param_SNOW_fac_f, param_SNOW_fac_Tmelt, param_EVATRANS_sup_k, param_EVATRANS_sup_gamma, param_EVATRANS_sur_k, param_INFILT_hbv_beta, param_PERCOLA_arn_k, param_PERCOLA_arn_thresh, param_BASEFLOW_sur_k, param_Evalake_vic_gamma, param_Lake_acp_storeFactor, param_Lake_acp_gamma, param_Riverlak_lin_storeFactor, if_allVariExport)
 }
 
 #' WaterGAP3
@@ -54,8 +54,8 @@ WaterGAP3_HL <- function(n_time, n_spat, ATMOS_precipitation_mm, ATMOS_temperatu
 #' @param param_Evalake_vic_gamma same as param_EVATRANS_vic_gamma
 #' @return streamflow m3
 #' @export
-WaterGAP3_HLR <- function(n_time, n_spat, ATMOS_precipitation_mm, ATMOS_temperature_Cel, ATMOS_potentialEvatrans_mm, SNOW_ice_mm, SOIL_water_mm, SOIL_capacity_mm, SOIL_potentialPercola_mm, GROUND_water_mm, GROUND_capacity_mm, RIVER_water_m3, RIVER_length_km, RIVER_velocity_km, CELL_landArea_km2, CELL_cellNumberStep_int, CELL_inflowCellNumberStep_int, Lake_cellNumber_int, Lake_water_m3, Lake_area_km2, Lake_capacity_m3, Riverlak_cellNumber_int, Riverlak_water_m3, Riverlak_area_km2, Riverlak_capacity_m3, Reservoi_cellNumber_int, Reservoi_water_m3, Reservoi_area_km2, Reservoi_capacity_m3, Reservoi_demand_m3, Reservoi_yearInflow_m3, Reservoi_yearDemand_m3, Reservoi_yearRelase_m3, Reservoi_isOperateStart_01, Reservoi_isIrrigate_01, param_ATMOS_thr_Ts, param_SNOW_fac_f, param_SNOW_fac_Tmelt, param_EVATRANS_ubc_gamma, param_INFILT_hbv_beta, param_PERCOLA_arn_k, param_PERCOLA_arn_thresh, param_BASEFLOW_grf_gamma, param_Evalake_vic_gamma, param_Lake_acp_storeFactor, param_Lake_acp_gamma, param_Riverlak_lin_storeFactor, param_Reservoi_han_alpha, param_Reservoi_han_kDemand, if_allVariExport = FALSE) {
-    .Call(`_WaterGAP3_WaterGAP3_HLR`, n_time, n_spat, ATMOS_precipitation_mm, ATMOS_temperature_Cel, ATMOS_potentialEvatrans_mm, SNOW_ice_mm, SOIL_water_mm, SOIL_capacity_mm, SOIL_potentialPercola_mm, GROUND_water_mm, GROUND_capacity_mm, RIVER_water_m3, RIVER_length_km, RIVER_velocity_km, CELL_landArea_km2, CELL_cellNumberStep_int, CELL_inflowCellNumberStep_int, Lake_cellNumber_int, Lake_water_m3, Lake_area_km2, Lake_capacity_m3, Riverlak_cellNumber_int, Riverlak_water_m3, Riverlak_area_km2, Riverlak_capacity_m3, Reservoi_cellNumber_int, Reservoi_water_m3, Reservoi_area_km2, Reservoi_capacity_m3, Reservoi_demand_m3, Reservoi_yearInflow_m3, Reservoi_yearDemand_m3, Reservoi_yearRelase_m3, Reservoi_isOperateStart_01, Reservoi_isIrrigate_01, param_ATMOS_thr_Ts, param_SNOW_fac_f, param_SNOW_fac_Tmelt, param_EVATRANS_ubc_gamma, param_INFILT_hbv_beta, param_PERCOLA_arn_k, param_PERCOLA_arn_thresh, param_BASEFLOW_grf_gamma, param_Evalake_vic_gamma, param_Lake_acp_storeFactor, param_Lake_acp_gamma, param_Riverlak_lin_storeFactor, param_Reservoi_han_alpha, param_Reservoi_han_kDemand, if_allVariExport)
+WaterGAP3_HLR <- function(n_time, n_spat, ATMOS_precipitation_mm, ATMOS_temperature_Cel, ATMOS_potentialEvatrans_mm, SNOW_ice_mm, LAND_interceptWater_mm, LAND_interceptCapacity_mm, SOIL_water_mm, SOIL_capacity_mm, SOIL_potentialPercola_mm, GROUND_water_mm, GROUND_capacity_mm, RIVER_water_m3, RIVER_length_km, RIVER_velocity_km, CELL_landArea_km2, CELL_cellNumberStep_int, CELL_inflowCellNumberStep_int, Lake_cellNumber_int, Lake_water_m3, Lake_area_km2, Lake_capacity_m3, Riverlak_cellNumber_int, Riverlak_water_m3, Riverlak_area_km2, Riverlak_capacity_m3, Reservoi_cellNumber_int, Reservoi_water_m3, Reservoi_area_km2, Reservoi_capacity_m3, Reservoi_demand_m3, Reservoi_yearInflow_m3, Reservoi_yearDemand_m3, Reservoi_yearRelase_m3, Reservoi_isOperateStart_01, Reservoi_isIrrigate_01, param_ATMOS_thr_Ts, param_SNOW_fac_f, param_SNOW_fac_Tmelt, param_EVATRANS_sup_k, param_EVATRANS_sup_gamma, param_EVATRANS_sur_k, param_INFILT_hbv_beta, param_PERCOLA_arn_k, param_PERCOLA_arn_thresh, param_BASEFLOW_sur_k, param_Evalake_vic_gamma, param_Lake_acp_storeFactor, param_Lake_acp_gamma, param_Riverlak_lin_storeFactor, param_Reservoi_han_alpha, param_Reservoi_han_kDemand, if_allVariExport = FALSE) {
+    .Call(`_WaterGAP3_WaterGAP3_HLR`, n_time, n_spat, ATMOS_precipitation_mm, ATMOS_temperature_Cel, ATMOS_potentialEvatrans_mm, SNOW_ice_mm, LAND_interceptWater_mm, LAND_interceptCapacity_mm, SOIL_water_mm, SOIL_capacity_mm, SOIL_potentialPercola_mm, GROUND_water_mm, GROUND_capacity_mm, RIVER_water_m3, RIVER_length_km, RIVER_velocity_km, CELL_landArea_km2, CELL_cellNumberStep_int, CELL_inflowCellNumberStep_int, Lake_cellNumber_int, Lake_water_m3, Lake_area_km2, Lake_capacity_m3, Riverlak_cellNumber_int, Riverlak_water_m3, Riverlak_area_km2, Riverlak_capacity_m3, Reservoi_cellNumber_int, Reservoi_water_m3, Reservoi_area_km2, Reservoi_capacity_m3, Reservoi_demand_m3, Reservoi_yearInflow_m3, Reservoi_yearDemand_m3, Reservoi_yearRelase_m3, Reservoi_isOperateStart_01, Reservoi_isIrrigate_01, param_ATMOS_thr_Ts, param_SNOW_fac_f, param_SNOW_fac_Tmelt, param_EVATRANS_sup_k, param_EVATRANS_sup_gamma, param_EVATRANS_sur_k, param_INFILT_hbv_beta, param_PERCOLA_arn_k, param_PERCOLA_arn_thresh, param_BASEFLOW_sur_k, param_Evalake_vic_gamma, param_Lake_acp_storeFactor, param_Lake_acp_gamma, param_Riverlak_lin_storeFactor, param_Reservoi_han_alpha, param_Reservoi_han_kDemand, if_allVariExport)
 }
 
 #' @rdname flowpath
@@ -99,7 +99,7 @@ NULL
 #' Hydrological Process
 #' @name process
 #' @inheritParams all_vari
-#' @return atmos_snow_mm (mm/m2/TS) snowfall volume
+#' @return ATMOS_snow_mm (mm/m2/TS) snowfall volume
 #' @param param_ATMOS_thr_Ts <-1, 3> (Cel) threshold air temperature that snow, parameter for [atmosSnow_ThresholdT()]
 #' @export
 atmosSnow_ThresholdT <- function(ATMOS_precipitation_mm, ATMOS_temperature_Cel, param_ATMOS_thr_Ts) {
@@ -112,6 +112,27 @@ atmosSnow_ThresholdT <- function(ATMOS_precipitation_mm, ATMOS_temperature_Cel, 
 #' @export
 evatransPotential_TurcWendling <- function(ATMOS_temperature_Cel, ATMOS_solarRadiat_MJ, param_EVATRANS_tur_k) {
     .Call(`_WaterGAP3_evatransPotential_TurcWendling`, ATMOS_temperature_Cel, ATMOS_solarRadiat_MJ, param_EVATRANS_tur_k)
+}
+
+#' @rdname process
+#' @export
+intercep_Full <- function(ATMOS_precipitation_mm, LAND_interceptWater_mm, LAND_interceptCapacity_mm) {
+    .Call(`_WaterGAP3_intercep_Full`, ATMOS_precipitation_mm, LAND_interceptWater_mm, LAND_interceptCapacity_mm)
+}
+
+#' @rdname process
+#' @param param_EVATRANS_sup_k <0.1, 1> parameter for [evatransActual_SupplyPow()], ratio of this method
+#' @param param_EVATRANS_sup_gamma <.1, 5> parameter for [evatransActual_SupplyPow()], exponent of this method
+#' @export
+evatransActual_SupplyPow <- function(ATMOS_potentialEvatrans_mm, water_mm, capacity_mm, param_EVATRANS_sup_k, param_EVATRANS_sup_gamma) {
+    .Call(`_WaterGAP3_evatransActual_SupplyPow`, ATMOS_potentialEvatrans_mm, water_mm, capacity_mm, param_EVATRANS_sup_k, param_EVATRANS_sup_gamma)
+}
+
+#' @rdname process
+#' @param param_EVATRANS_sur_k <0.1, 1> parameter for [evatransActual_SupplyRatio()], ratio of potential ET, that is estimated as actually ET
+#' @export
+evatransActual_SupplyRatio <- function(ATMOS_potentialEvatrans_mm, water_mm, capacity_mm, param_EVATRANS_sur_k) {
+    .Call(`_WaterGAP3_evatransActual_SupplyRatio`, ATMOS_potentialEvatrans_mm, water_mm, capacity_mm, param_EVATRANS_sur_k)
 }
 
 #' @rdname process
@@ -156,6 +177,13 @@ percola_Arno <- function(SOIL_water_mm, SOIL_capacity_mm, SOIL_potentialPercola_
 #' @export
 baseflow_GR4Jfix <- function(GROUND_water_mm, GROUND_capacity_mm, param_BASEFLOW_grf_gamma) {
     .Call(`_WaterGAP3_baseflow_GR4Jfix`, GROUND_water_mm, GROUND_capacity_mm, param_BASEFLOW_grf_gamma)
+}
+
+#' @rdname process
+#' @param param_BASEFLOW_sur_k <0.01, 1> coefficient parameter for [baseflow_SupplyRatio()]
+#' @export
+baseflow_SupplyRatio <- function(ground_water_mm, param_BASEFLOW_sur_k) {
+    .Call(`_WaterGAP3_baseflow_SupplyRatio`, ground_water_mm, param_BASEFLOW_sur_k)
 }
 
 #' @rdname process

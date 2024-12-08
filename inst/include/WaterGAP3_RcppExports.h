@@ -128,6 +128,69 @@ namespace WaterGAP3 {
         return Rcpp::as<NumericVector >(rcpp_result_gen);
     }
 
+    inline NumericVector intercep_Full(NumericVector ATMOS_precipitation_mm, NumericVector LAND_interceptWater_mm, NumericVector LAND_interceptCapacity_mm) {
+        typedef SEXP(*Ptr_intercep_Full)(SEXP,SEXP,SEXP);
+        static Ptr_intercep_Full p_intercep_Full = NULL;
+        if (p_intercep_Full == NULL) {
+            validateSignature("NumericVector(*intercep_Full)(NumericVector,NumericVector,NumericVector)");
+            p_intercep_Full = (Ptr_intercep_Full)R_GetCCallable("WaterGAP3", "_WaterGAP3_intercep_Full");
+        }
+        RObject rcpp_result_gen;
+        {
+            RNGScope RCPP_rngScope_gen;
+            rcpp_result_gen = p_intercep_Full(Shield<SEXP>(Rcpp::wrap(ATMOS_precipitation_mm)), Shield<SEXP>(Rcpp::wrap(LAND_interceptWater_mm)), Shield<SEXP>(Rcpp::wrap(LAND_interceptCapacity_mm)));
+        }
+        if (rcpp_result_gen.inherits("interrupted-error"))
+            throw Rcpp::internal::InterruptedException();
+        if (Rcpp::internal::isLongjumpSentinel(rcpp_result_gen))
+            throw Rcpp::LongjumpException(rcpp_result_gen);
+        if (rcpp_result_gen.inherits("try-error"))
+            throw Rcpp::exception(Rcpp::as<std::string>(rcpp_result_gen).c_str());
+        return Rcpp::as<NumericVector >(rcpp_result_gen);
+    }
+
+    inline NumericVector evatransActual_SupplyPow(NumericVector ATMOS_potentialEvatrans_mm, NumericVector water_mm, NumericVector capacity_mm, NumericVector param_EVATRANS_sup_k, NumericVector param_EVATRANS_sup_gamma) {
+        typedef SEXP(*Ptr_evatransActual_SupplyPow)(SEXP,SEXP,SEXP,SEXP,SEXP);
+        static Ptr_evatransActual_SupplyPow p_evatransActual_SupplyPow = NULL;
+        if (p_evatransActual_SupplyPow == NULL) {
+            validateSignature("NumericVector(*evatransActual_SupplyPow)(NumericVector,NumericVector,NumericVector,NumericVector,NumericVector)");
+            p_evatransActual_SupplyPow = (Ptr_evatransActual_SupplyPow)R_GetCCallable("WaterGAP3", "_WaterGAP3_evatransActual_SupplyPow");
+        }
+        RObject rcpp_result_gen;
+        {
+            RNGScope RCPP_rngScope_gen;
+            rcpp_result_gen = p_evatransActual_SupplyPow(Shield<SEXP>(Rcpp::wrap(ATMOS_potentialEvatrans_mm)), Shield<SEXP>(Rcpp::wrap(water_mm)), Shield<SEXP>(Rcpp::wrap(capacity_mm)), Shield<SEXP>(Rcpp::wrap(param_EVATRANS_sup_k)), Shield<SEXP>(Rcpp::wrap(param_EVATRANS_sup_gamma)));
+        }
+        if (rcpp_result_gen.inherits("interrupted-error"))
+            throw Rcpp::internal::InterruptedException();
+        if (Rcpp::internal::isLongjumpSentinel(rcpp_result_gen))
+            throw Rcpp::LongjumpException(rcpp_result_gen);
+        if (rcpp_result_gen.inherits("try-error"))
+            throw Rcpp::exception(Rcpp::as<std::string>(rcpp_result_gen).c_str());
+        return Rcpp::as<NumericVector >(rcpp_result_gen);
+    }
+
+    inline NumericVector evatransActual_SupplyRatio(NumericVector ATMOS_potentialEvatrans_mm, NumericVector water_mm, NumericVector capacity_mm, NumericVector param_EVATRANS_sur_k) {
+        typedef SEXP(*Ptr_evatransActual_SupplyRatio)(SEXP,SEXP,SEXP,SEXP);
+        static Ptr_evatransActual_SupplyRatio p_evatransActual_SupplyRatio = NULL;
+        if (p_evatransActual_SupplyRatio == NULL) {
+            validateSignature("NumericVector(*evatransActual_SupplyRatio)(NumericVector,NumericVector,NumericVector,NumericVector)");
+            p_evatransActual_SupplyRatio = (Ptr_evatransActual_SupplyRatio)R_GetCCallable("WaterGAP3", "_WaterGAP3_evatransActual_SupplyRatio");
+        }
+        RObject rcpp_result_gen;
+        {
+            RNGScope RCPP_rngScope_gen;
+            rcpp_result_gen = p_evatransActual_SupplyRatio(Shield<SEXP>(Rcpp::wrap(ATMOS_potentialEvatrans_mm)), Shield<SEXP>(Rcpp::wrap(water_mm)), Shield<SEXP>(Rcpp::wrap(capacity_mm)), Shield<SEXP>(Rcpp::wrap(param_EVATRANS_sur_k)));
+        }
+        if (rcpp_result_gen.inherits("interrupted-error"))
+            throw Rcpp::internal::InterruptedException();
+        if (Rcpp::internal::isLongjumpSentinel(rcpp_result_gen))
+            throw Rcpp::LongjumpException(rcpp_result_gen);
+        if (rcpp_result_gen.inherits("try-error"))
+            throw Rcpp::exception(Rcpp::as<std::string>(rcpp_result_gen).c_str());
+        return Rcpp::as<NumericVector >(rcpp_result_gen);
+    }
+
     inline NumericVector evatransActual_VIC(NumericVector ATMOS_potentialEvatrans_mm, NumericVector water_mm, NumericVector capacity_mm, NumericVector param_EVATRANS_vic_gamma) {
         typedef SEXP(*Ptr_evatransActual_VIC)(SEXP,SEXP,SEXP,SEXP);
         static Ptr_evatransActual_VIC p_evatransActual_VIC = NULL;
@@ -244,6 +307,27 @@ namespace WaterGAP3 {
         {
             RNGScope RCPP_rngScope_gen;
             rcpp_result_gen = p_baseflow_GR4Jfix(Shield<SEXP>(Rcpp::wrap(GROUND_water_mm)), Shield<SEXP>(Rcpp::wrap(GROUND_capacity_mm)), Shield<SEXP>(Rcpp::wrap(param_BASEFLOW_grf_gamma)));
+        }
+        if (rcpp_result_gen.inherits("interrupted-error"))
+            throw Rcpp::internal::InterruptedException();
+        if (Rcpp::internal::isLongjumpSentinel(rcpp_result_gen))
+            throw Rcpp::LongjumpException(rcpp_result_gen);
+        if (rcpp_result_gen.inherits("try-error"))
+            throw Rcpp::exception(Rcpp::as<std::string>(rcpp_result_gen).c_str());
+        return Rcpp::as<NumericVector >(rcpp_result_gen);
+    }
+
+    inline NumericVector baseflow_SupplyRatio(NumericVector ground_water_mm, NumericVector param_BASEFLOW_sur_k) {
+        typedef SEXP(*Ptr_baseflow_SupplyRatio)(SEXP,SEXP);
+        static Ptr_baseflow_SupplyRatio p_baseflow_SupplyRatio = NULL;
+        if (p_baseflow_SupplyRatio == NULL) {
+            validateSignature("NumericVector(*baseflow_SupplyRatio)(NumericVector,NumericVector)");
+            p_baseflow_SupplyRatio = (Ptr_baseflow_SupplyRatio)R_GetCCallable("WaterGAP3", "_WaterGAP3_baseflow_SupplyRatio");
+        }
+        RObject rcpp_result_gen;
+        {
+            RNGScope RCPP_rngScope_gen;
+            rcpp_result_gen = p_baseflow_SupplyRatio(Shield<SEXP>(Rcpp::wrap(ground_water_mm)), Shield<SEXP>(Rcpp::wrap(param_BASEFLOW_sur_k)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();

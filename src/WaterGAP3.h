@@ -9,6 +9,24 @@ NumericVector atmosSnow_ThresholdT(
     NumericVector ATMOS_temperature_Cel,
     NumericVector param_ATMOS_thr_Ts
 );
+NumericVector intercep_Full(
+    NumericVector ATMOS_precipitation_mm,
+    NumericVector LAND_interceptWater_mm,
+    NumericVector LAND_interceptCapacity_mm
+);
+NumericVector evatransActual_SupplyPow(
+    NumericVector atmos_potentialEvatrans_mm,
+    NumericVector water_mm,
+    NumericVector capacity_mm,
+    NumericVector param_EVATRANS_sup_k,
+    NumericVector param_EVATRANS_sup_gamma
+);
+NumericVector evatransActual_SupplyRatio(
+    NumericVector ATMOS_potentialEvatrans_mm,
+    NumericVector water_mm,
+    NumericVector capacity_mm,
+    NumericVector param_EVATRANS_sur_k
+);
 NumericVector evatransPotential_TurcWendling(
     NumericVector ATMOS_temperature_Cel,
     NumericVector ATMOS_solarRadiat_MJ,
@@ -51,7 +69,10 @@ NumericVector baseflow_GR4Jfix(
     NumericVector GROUND_capacity_mm,
     NumericVector param_BASEFLOW_grf_gamma
 );
-
+NumericVector baseflow_SupplyRatio(
+    NumericVector ground_water_mm,
+    NumericVector param_baseflow_sur_k
+);
 NumericVector lake_AcceptPow(
   NumericVector Lake_water_m3,
   NumericVector Lake_inflow_m3,
@@ -113,6 +134,33 @@ NumericVector module_land_WaterGAP3(
     NumericVector ATMOS_potentialEvatrans_mm,
     NumericVector& ATMOS_snowFall_mm,
     NumericVector& SNOW_ice_mm,
+    NumericVector& LAND_interceptWater_mm,
+    NumericVector LAND_interceptCapacity_mm,
+    NumericVector& LAND_runoff_mm,
+    NumericVector& SOIL_water_mm,
+    NumericVector SOIL_capacity_mm,
+    NumericVector SOIL_potentialPercola_mm,
+    NumericVector& SOIL_EVATRANS_mm,
+    NumericVector& GROUND_water_mm,
+    NumericVector& GROUND_basefloW_mm,
+    NumericVector CELL_landArea_km2,
+    NumericVector param_ATMOS_thr_Ts,
+    NumericVector param_EVATRANS_sup_k,
+    NumericVector param_EVATRANS_sup_gamma,
+    NumericVector param_EVATRANS_sur_k,
+    NumericVector param_SNOW_fac_f,
+    NumericVector param_SNOW_fac_Tmelt,
+    NumericVector param_INFILT_hbv_beta,
+    NumericVector param_PERCOLA_arn_thresh,
+    NumericVector param_PERCOLA_arn_k,
+    NumericVector param_BASEFLOW_sur_k);
+
+NumericVector module_land_Sachsen(
+    NumericVector ATMOS_precipitation_mm,
+    NumericVector ATMOS_temperature_Cel,
+    NumericVector ATMOS_potentialEvatrans_mm,
+    NumericVector& ATMOS_snowFall_mm,
+    NumericVector& SNOW_ice_mm,
     NumericVector& LAND_runoff_mm,
     NumericVector& SOIL_water_mm,
     NumericVector SOIL_capacity_mm,
@@ -130,6 +178,5 @@ NumericVector module_land_WaterGAP3(
     NumericVector param_PERCOLA_arn_thresh,
     NumericVector param_PERCOLA_arn_k,
     NumericVector param_BASEFLOW_grf_gamma);
-
 #endif
 

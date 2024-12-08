@@ -4,7 +4,7 @@
 //' Hydrological Process
 //' @name process
 //' @inheritParams all_vari
-//' @return atmos_snow_mm (mm/m2/TS) snowfall volume
+//' @return ATMOS_snow_mm (mm/m2/TS) snowfall volume
 //' @param param_ATMOS_thr_Ts <-1, 3> (Cel) threshold air temperature that snow, parameter for [atmosSnow_ThresholdT()]
 //' @export
 // [[Rcpp::export]]
@@ -33,6 +33,60 @@ NumericVector evatransPotential_TurcWendling(
  // return (ATMOS_solarRadiat_MJ * 100 + 3.875 * time_step_h * param_EVATRANS_tur_k) * (ATMOS_temperature_Cel + 22) / 150 / (ATMOS_temperature_Cel + 123);
 }
 
+
+//' @rdname process
+//' @export
+// [[Rcpp::export]]
+NumericVector intercep_Full(
+    NumericVector ATMOS_precipitation_mm,
+    NumericVector LAND_interceptWater_mm,
+    NumericVector LAND_interceptCapacity_mm
+)
+{
+  NumericVector water_diff_mm = LAND_interceptCapacity_mm - LAND_interceptWater_mm;
+  return ifelse(water_diff_mm > ATMOS_precipitation_mm, ATMOS_precipitation_mm, water_diff_mm) ;
+}
+
+
+//' @rdname process
+//' @param param_EVATRANS_sup_k <0.1, 1> parameter for [evatransActual_SupplyPow()], ratio of this method
+//' @param param_EVATRANS_sup_gamma <.1, 5> parameter for [evatransActual_SupplyPow()], exponent of this method
+//' @export
+// [[Rcpp::export]]
+NumericVector evatransActual_SupplyPow(
+   NumericVector ATMOS_potentialEvatrans_mm,
+   NumericVector water_mm,
+   NumericVector capacity_mm,
+   NumericVector param_EVATRANS_sup_k,
+   NumericVector param_EVATRANS_sup_gamma
+)
+{
+ NumericVector AET, k_;
+
+ k_ = param_EVATRANS_sup_k * vecpow((water_mm / capacity_mm), param_EVATRANS_sup_gamma);
+ AET = ATMOS_potentialEvatrans_mm * k_;
+ return ifelse(AET > water_mm, water_mm, AET);
+}
+
+
+
+//' @rdname process
+//' @param param_EVATRANS_sur_k <0.1, 1> parameter for [evatransActual_SupplyRatio()], ratio of potential ET, that is estimated as actually ET
+//' @export
+// [[Rcpp::export]]
+NumericVector evatransActual_SupplyRatio(
+   NumericVector ATMOS_potentialEvatrans_mm,
+   NumericVector water_mm,
+   NumericVector capacity_mm,
+   NumericVector param_EVATRANS_sur_k
+)
+{
+ NumericVector AET, k_;
+
+ k_ = water_mm / capacity_mm * param_EVATRANS_sur_k;
+ AET = ATMOS_potentialEvatrans_mm * k_;
+ return ifelse(AET > water_mm, water_mm, AET);
+}
 
 //' @rdname process
 //' @param param_EVATRANS_vic_gamma <0.2, 5> parameter for [evatransActual_VIC()]
@@ -159,6 +213,22 @@ NumericVector baseflow_GR4Jfix(
 
  return ifelse(baseflow_ > GROUND_water_mm, GROUND_water_mm, baseflow_) ;
 }
+
+
+//' @rdname process
+//' @param param_BASEFLOW_sur_k <0.01, 1> coefficient parameter for [baseflow_SupplyRatio()]
+//' @export
+// [[Rcpp::export]]
+NumericVector baseflow_SupplyRatio(
+    NumericVector ground_water_mm,
+    NumericVector param_BASEFLOW_sur_k
+)
+{
+
+  return param_BASEFLOW_sur_k * ground_water_mm;
+
+}
+
 
 //' @rdname process
 //' @param param_Lake_acp_storeFactor <uknow> parameter for [lake_AcceptPow()],

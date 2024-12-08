@@ -11,11 +11,12 @@ WaterGAP3_H(
   ATMOS_temperature_Cel,
   ATMOS_potentialEvatrans_mm,
   SNOW_ice_mm,
+  LAND_interceptWater_mm,
+  LAND_interceptCapacity_mm,
   SOIL_water_mm,
   SOIL_capacity_mm,
   SOIL_potentialPercola_mm,
   GROUND_water_mm,
-  GROUND_capacity_mm,
   RIVER_water_m3,
   RIVER_length_km,
   RIVER_velocity_km,
@@ -25,11 +26,13 @@ WaterGAP3_H(
   param_ATMOS_thr_Ts,
   param_SNOW_fac_f,
   param_SNOW_fac_Tmelt,
-  param_EVATRANS_ubc_gamma,
+  param_EVATRANS_sup_k,
+  param_EVATRANS_sup_gamma,
+  param_EVATRANS_sur_k,
   param_INFILT_hbv_beta,
   param_PERCOLA_arn_k,
   param_PERCOLA_arn_thresh,
-  param_BASEFLOW_grf_gamma,
+  param_BASEFLOW_sur_k,
   if_allVariExport = FALSE
 )
 }
@@ -46,6 +49,10 @@ WaterGAP3_H(
 
 \item{SNOW_ice_mm}{(mm/m2) water equivalent of **ice** in snowpack}
 
+\item{LAND_interceptWater_mm}{(mm/m2) initial water volume that can be **intercepted**}
+
+\item{LAND_interceptCapacity_mm}{(mm/m2) average intercept Capacity (maximal storage capacity)}
+
 \item{SOIL_water_mm}{(mm/m2) water volume in `soilLy`}
 
 \item{SOIL_capacity_mm}{(mm/m2) average soil Capacity (maximal storage capacity)}
@@ -53,8 +60,6 @@ WaterGAP3_H(
 \item{SOIL_potentialPercola_mm}{<0.01, 7> (mm/m2/TS) **potential** percolation}
 
 \item{GROUND_water_mm}{(mm/m2/TS) water volume in `groundLy`}
-
-\item{GROUND_capacity_mm}{(mm/m2) water storage capacity in `groundLy`}
 
 \item{RIVER_water_m3}{(m3) river water volume}
 
@@ -74,7 +79,11 @@ WaterGAP3_H(
 
 \item{param_SNOW_fac_Tmelt}{<0, 3> (Cel) snow melt temperature parameter for [snowMelt_Factor()]}
 
-\item{param_EVATRANS_ubc_gamma}{<0.5, 2> parameter for [evatransActual_UBC()]}
+\item{param_EVATRANS_sup_k}{<0.1, 1> parameter for [evatransActual_SupplyPow()], ratio of this method}
+
+\item{param_EVATRANS_sup_gamma}{<.1, 5> parameter for [evatransActual_SupplyPow()], exponent of this method}
+
+\item{param_EVATRANS_sur_k}{<0.1, 1> parameter for [evatransActual_SupplyRatio()], ratio of potential ET, that is estimated as actually ET}
 
 \item{param_INFILT_hbv_beta}{<0.001, 5> parameters for [infilt_HBV()]}
 
@@ -82,7 +91,7 @@ WaterGAP3_H(
 
 \item{param_PERCOLA_arn_thresh}{<0.1, 0.9> coefficient parameter for [percola_ThreshPow()]}
 
-\item{param_BASEFLOW_grf_gamma}{<2, 7> exponential parameter for [baseflow_GR4Jfix()]}
+\item{param_BASEFLOW_sur_k}{<0.01, 1> coefficient parameter for [baseflow_SupplyRatio()]}
 
 \item{if_allVariExport}{(bool) whether export all the state variables (default in false)}
 }
