@@ -8,7 +8,7 @@
 
 \item{n_spat}{(int) number of spatial units}
 
-\item{Time_dayOfYear_}{<1, 366> (d) the number of the day in the year between 1 (1 January) and 365 or 366 (31 December)}
+\item{Time_dayOfYear_, Time_dayOfYear_d}{<1, 366> (d) the number of the day in the year between 1 (1 January) and 365 or 366 (31 December)}
 
 \item{ATMOS_precipitation_mm}{(mm/m2/TS) precipitaion volum}
 
@@ -42,7 +42,9 @@
 
 \item{LAND_albedo_1}{<0, 1> albedo of the region}
 
-\item{LAND_latitude_Degree}{(degree) average latitude}
+\item{LAND_growUpDay_d}{growup day}
+
+\item{LAND_latitude_Degree, CELL_latitude_deg}{(degree) average latitude}
 
 \item{LAND_elevation_m}{(m) average elevation}
 

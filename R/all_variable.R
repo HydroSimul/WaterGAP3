@@ -5,7 +5,7 @@
 #'
 #' @param n_time (int) number of time steps
 #' @param n_spat (int) number of spatial units
-#' @param Time_dayOfYear_ <1, 366> (d) the number of the day in the year between 1 (1 January) and 365 or 366 (31 December)
+#' @param Time_dayOfYear_,Time_dayOfYear_d <1, 366> (d) the number of the day in the year between 1 (1 January) and 365 or 366 (31 December)
 #' @param ATMOS_precipitation_mm (mm/m2/TS) precipitaion volum
 #' @param ATMOS_rain_mm (mm/m2/TS) precipitation in rain form
 #' @param ATMOS_SNOW_mm (mm/m2/TS) precipitation in snow form
@@ -22,7 +22,8 @@
 #' @param ATMOS_windSpeed2m_m_s (m/s) wind speed at 2 m above ground surface
 #' @param ATMOS_potentialEvatrans_mm (mm/m2/TS) **potential / reference** evapotranspiration
 #' @param LAND_albedo_1 <0, 1> albedo of the region
-#' @param LAND_latitude_Degree (degree) average latitude
+#' @param LAND_growUpDay_d growup day
+#' @param LAND_latitude_Degree,CELL_latitude_deg (degree) average latitude
 #' @param LAND_elevation_m (m) average elevation
 #' @param LAND_impermeableFrac_1 <0, 1> the maximum impermeable fraction when th soil is fully saturated
 #' @param LAND_water_mm (mm/m2) **pounded water** volume in `landLy` and there is no limit, different than `LAND_interceptWater_mm`

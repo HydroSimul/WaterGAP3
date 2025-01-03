@@ -14,4 +14,5 @@ LogicalVector subset_get_logical(LogicalVector data, IntegerVector int_Index);
 void subset_put(NumericVector &num_Data, IntegerVector int_Index, NumericVector num_DataPut);
 IntegerVector c_int(IntegerVector vec_A, IntegerVector vec_B);
 NumericVector c_num(NumericVector vec_A, NumericVector vec_B);
+IntegerVector find_locations(IntegerVector x, int x0);
 #endif // __UTILITIES__

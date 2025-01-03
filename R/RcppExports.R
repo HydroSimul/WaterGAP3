@@ -158,6 +158,12 @@ snowMelt_Factor <- function(SNOW_ice_mm, ATMOS_temperature_Cel, param_SNOW_fac_f
 }
 
 #' @rdname process
+#' @export
+landLeafAreaRatio_WaterGAP3 <- function(ATMOS_temperature_Cel, ATMOS_precipitation_mm, CELL_latitude_deg, LAND_growUpDay_d, Time_dayOfYear_d) {
+    .Call(`_WaterGAP3_landLeafAreaRatio_WaterGAP3`, ATMOS_temperature_Cel, ATMOS_precipitation_mm, CELL_latitude_deg, LAND_growUpDay_d, Time_dayOfYear_d)
+}
+
+#' @rdname process
 #' @param param_INFILT_hbv_beta <0.001, 5> parameters for [infilt_HBV()]
 #' @export
 infilt_HBV <- function(LAND_water_mm, SOIL_water_mm, SOIL_capacity_mm, param_INFILT_hbv_beta) {

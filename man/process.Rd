@@ -10,6 +10,7 @@
 \alias{evatransActual_VIC}
 \alias{evatransActual_UBC}
 \alias{snowMelt_Factor}
+\alias{landLeafAreaRatio_WaterGAP3}
 \alias{infilt_HBV}
 \alias{percola_Arno}
 \alias{baseflow_GR4Jfix}
@@ -73,6 +74,14 @@ snowMelt_Factor(
   ATMOS_temperature_Cel,
   param_SNOW_fac_f,
   param_SNOW_fac_Tmelt
+)
+
+landLeafAreaRatio_WaterGAP3(
+  ATMOS_temperature_Cel,
+  ATMOS_precipitation_mm,
+  CELL_latitude_deg,
+  LAND_growUpDay_d,
+  Time_dayOfYear_d
 )
 
 infilt_HBV(
@@ -175,6 +184,8 @@ confluen_WaterGAP3(
 \item{param_SNOW_fac_f}{<0.05, 2> (mm/m2/h/Cel) potential melt volum per Cel per hour parameter for [snowMelt_Factor()]}
 
 \item{param_SNOW_fac_Tmelt}{<0, 3> (Cel) snow melt temperature parameter for [snowMelt_Factor()]}
+
+\item{LAND_growUpDay_d}{growup day}
 
 \item{LAND_water_mm}{(mm/m2) **pounded water** volume in `landLy` and there is no limit, different than `LAND_interceptWater_mm`}
 
