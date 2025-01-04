@@ -44,7 +44,8 @@ NumericVector intercep_Full(
 )
 {
   NumericVector water_diff_mm = LAND_interceptCapacity_mm - LAND_interceptWater_mm;
-  return ifelse(water_diff_mm > ATMOS_precipitation_mm, ATMOS_precipitation_mm, water_diff_mm) ;
+  NumericVector intercep_mm = ifelse(water_diff_mm > ATMOS_precipitation_mm, ATMOS_precipitation_mm, water_diff_mm);
+  return ifelse(water_diff_mm < 0, 0, intercep_mm);
 }
 
 
