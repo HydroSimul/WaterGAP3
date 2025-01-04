@@ -60,6 +60,8 @@
 
 \item{LAND_infiltrat_mm}{(mm/m2/TS) infiltration from `landLy` to `soilLy`}
 
+\item{LAND_leafAreaIndexMin_, LAND_leafAreaIndexMax_}{minimal and maximal LAI}
+
 \item{SNOW_ice_mm}{(mm/m2) water equivalent of **ice** in snowpack}
 
 \item{SOIL_fieldCapacityPerc_1}{<0, 1> the relative ratio that the water content can drainage by gravity}

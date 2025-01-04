@@ -254,17 +254,17 @@ namespace WaterGAP3 {
         return Rcpp::as<NumericVector >(rcpp_result_gen);
     }
 
-    inline NumericMatrix landLeafAreaRatio_WaterGAP3(NumericMatrix ATMOS_temperature_Cel, NumericMatrix ATMOS_precipitation_mm, NumericVector CELL_latitude_deg, IntegerVector LAND_growUpDay_d, IntegerVector Time_dayOfYear_d) {
-        typedef SEXP(*Ptr_landLeafAreaRatio_WaterGAP3)(SEXP,SEXP,SEXP,SEXP,SEXP);
-        static Ptr_landLeafAreaRatio_WaterGAP3 p_landLeafAreaRatio_WaterGAP3 = NULL;
-        if (p_landLeafAreaRatio_WaterGAP3 == NULL) {
-            validateSignature("NumericMatrix(*landLeafAreaRatio_WaterGAP3)(NumericMatrix,NumericMatrix,NumericVector,IntegerVector,IntegerVector)");
-            p_landLeafAreaRatio_WaterGAP3 = (Ptr_landLeafAreaRatio_WaterGAP3)R_GetCCallable("WaterGAP3", "_WaterGAP3_landLeafAreaRatio_WaterGAP3");
+    inline NumericMatrix landLeafAreaIndex_WaterGAP3(NumericMatrix ATMOS_temperature_Cel, NumericMatrix ATMOS_precipitation_mm, NumericVector CELL_latitude_deg, IntegerVector LAND_growUpDay_d, NumericVector LAND_leafAreaIndexMin_, NumericVector LAND_leafAreaIndexMax_, IntegerVector Time_dayOfYear_d) {
+        typedef SEXP(*Ptr_landLeafAreaIndex_WaterGAP3)(SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP);
+        static Ptr_landLeafAreaIndex_WaterGAP3 p_landLeafAreaIndex_WaterGAP3 = NULL;
+        if (p_landLeafAreaIndex_WaterGAP3 == NULL) {
+            validateSignature("NumericMatrix(*landLeafAreaIndex_WaterGAP3)(NumericMatrix,NumericMatrix,NumericVector,IntegerVector,NumericVector,NumericVector,IntegerVector)");
+            p_landLeafAreaIndex_WaterGAP3 = (Ptr_landLeafAreaIndex_WaterGAP3)R_GetCCallable("WaterGAP3", "_WaterGAP3_landLeafAreaIndex_WaterGAP3");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_landLeafAreaRatio_WaterGAP3(Shield<SEXP>(Rcpp::wrap(ATMOS_temperature_Cel)), Shield<SEXP>(Rcpp::wrap(ATMOS_precipitation_mm)), Shield<SEXP>(Rcpp::wrap(CELL_latitude_deg)), Shield<SEXP>(Rcpp::wrap(LAND_growUpDay_d)), Shield<SEXP>(Rcpp::wrap(Time_dayOfYear_d)));
+            rcpp_result_gen = p_landLeafAreaIndex_WaterGAP3(Shield<SEXP>(Rcpp::wrap(ATMOS_temperature_Cel)), Shield<SEXP>(Rcpp::wrap(ATMOS_precipitation_mm)), Shield<SEXP>(Rcpp::wrap(CELL_latitude_deg)), Shield<SEXP>(Rcpp::wrap(LAND_growUpDay_d)), Shield<SEXP>(Rcpp::wrap(LAND_leafAreaIndexMin_)), Shield<SEXP>(Rcpp::wrap(LAND_leafAreaIndexMax_)), Shield<SEXP>(Rcpp::wrap(Time_dayOfYear_d)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();

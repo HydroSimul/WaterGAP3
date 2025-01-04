@@ -600,25 +600,27 @@ RcppExport SEXP _WaterGAP3_snowMelt_Factor(SEXP SNOW_ice_mmSEXP, SEXP ATMOS_temp
     UNPROTECT(1);
     return rcpp_result_gen;
 }
-// landLeafAreaRatio_WaterGAP3
-NumericMatrix landLeafAreaRatio_WaterGAP3(NumericMatrix ATMOS_temperature_Cel, NumericMatrix ATMOS_precipitation_mm, NumericVector CELL_latitude_deg, IntegerVector LAND_growUpDay_d, IntegerVector Time_dayOfYear_d);
-static SEXP _WaterGAP3_landLeafAreaRatio_WaterGAP3_try(SEXP ATMOS_temperature_CelSEXP, SEXP ATMOS_precipitation_mmSEXP, SEXP CELL_latitude_degSEXP, SEXP LAND_growUpDay_dSEXP, SEXP Time_dayOfYear_dSEXP) {
+// landLeafAreaIndex_WaterGAP3
+NumericMatrix landLeafAreaIndex_WaterGAP3(NumericMatrix ATMOS_temperature_Cel, NumericMatrix ATMOS_precipitation_mm, NumericVector CELL_latitude_deg, IntegerVector LAND_growUpDay_d, NumericVector LAND_leafAreaIndexMin_, NumericVector LAND_leafAreaIndexMax_, IntegerVector Time_dayOfYear_d);
+static SEXP _WaterGAP3_landLeafAreaIndex_WaterGAP3_try(SEXP ATMOS_temperature_CelSEXP, SEXP ATMOS_precipitation_mmSEXP, SEXP CELL_latitude_degSEXP, SEXP LAND_growUpDay_dSEXP, SEXP LAND_leafAreaIndexMin_SEXP, SEXP LAND_leafAreaIndexMax_SEXP, SEXP Time_dayOfYear_dSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::traits::input_parameter< NumericMatrix >::type ATMOS_temperature_Cel(ATMOS_temperature_CelSEXP);
     Rcpp::traits::input_parameter< NumericMatrix >::type ATMOS_precipitation_mm(ATMOS_precipitation_mmSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type CELL_latitude_deg(CELL_latitude_degSEXP);
     Rcpp::traits::input_parameter< IntegerVector >::type LAND_growUpDay_d(LAND_growUpDay_dSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type LAND_leafAreaIndexMin_(LAND_leafAreaIndexMin_SEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type LAND_leafAreaIndexMax_(LAND_leafAreaIndexMax_SEXP);
     Rcpp::traits::input_parameter< IntegerVector >::type Time_dayOfYear_d(Time_dayOfYear_dSEXP);
-    rcpp_result_gen = Rcpp::wrap(landLeafAreaRatio_WaterGAP3(ATMOS_temperature_Cel, ATMOS_precipitation_mm, CELL_latitude_deg, LAND_growUpDay_d, Time_dayOfYear_d));
+    rcpp_result_gen = Rcpp::wrap(landLeafAreaIndex_WaterGAP3(ATMOS_temperature_Cel, ATMOS_precipitation_mm, CELL_latitude_deg, LAND_growUpDay_d, LAND_leafAreaIndexMin_, LAND_leafAreaIndexMax_, Time_dayOfYear_d));
     return rcpp_result_gen;
 END_RCPP_RETURN_ERROR
 }
-RcppExport SEXP _WaterGAP3_landLeafAreaRatio_WaterGAP3(SEXP ATMOS_temperature_CelSEXP, SEXP ATMOS_precipitation_mmSEXP, SEXP CELL_latitude_degSEXP, SEXP LAND_growUpDay_dSEXP, SEXP Time_dayOfYear_dSEXP) {
+RcppExport SEXP _WaterGAP3_landLeafAreaIndex_WaterGAP3(SEXP ATMOS_temperature_CelSEXP, SEXP ATMOS_precipitation_mmSEXP, SEXP CELL_latitude_degSEXP, SEXP LAND_growUpDay_dSEXP, SEXP LAND_leafAreaIndexMin_SEXP, SEXP LAND_leafAreaIndexMax_SEXP, SEXP Time_dayOfYear_dSEXP) {
     SEXP rcpp_result_gen;
     {
         Rcpp::RNGScope rcpp_rngScope_gen;
-        rcpp_result_gen = PROTECT(_WaterGAP3_landLeafAreaRatio_WaterGAP3_try(ATMOS_temperature_CelSEXP, ATMOS_precipitation_mmSEXP, CELL_latitude_degSEXP, LAND_growUpDay_dSEXP, Time_dayOfYear_dSEXP));
+        rcpp_result_gen = PROTECT(_WaterGAP3_landLeafAreaIndex_WaterGAP3_try(ATMOS_temperature_CelSEXP, ATMOS_precipitation_mmSEXP, CELL_latitude_degSEXP, LAND_growUpDay_dSEXP, LAND_leafAreaIndexMin_SEXP, LAND_leafAreaIndexMax_SEXP, Time_dayOfYear_dSEXP));
     }
     Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
     if (rcpp_isInterrupt_gen) {
@@ -1092,7 +1094,7 @@ static int _WaterGAP3_RcppExport_validate(const char* sig) {
         signatures.insert("NumericVector(*evatransActual_VIC)(NumericVector,NumericVector,NumericVector,NumericVector)");
         signatures.insert("NumericVector(*evatransActual_UBC)(NumericVector,NumericVector,NumericVector,NumericVector)");
         signatures.insert("NumericVector(*snowMelt_Factor)(NumericVector,NumericVector,NumericVector,NumericVector)");
-        signatures.insert("NumericMatrix(*landLeafAreaRatio_WaterGAP3)(NumericMatrix,NumericMatrix,NumericVector,IntegerVector,IntegerVector)");
+        signatures.insert("NumericMatrix(*landLeafAreaIndex_WaterGAP3)(NumericMatrix,NumericMatrix,NumericVector,IntegerVector,NumericVector,NumericVector,IntegerVector)");
         signatures.insert("NumericVector(*infilt_HBV)(NumericVector,NumericVector,NumericVector,NumericVector)");
         signatures.insert("NumericVector(*percola_Arno)(NumericVector,NumericVector,NumericVector,NumericVector,NumericVector)");
         signatures.insert("NumericVector(*baseflow_GR4Jfix)(NumericVector,NumericVector,NumericVector)");
@@ -1121,7 +1123,7 @@ RcppExport SEXP _WaterGAP3_RcppExport_registerCCallable() {
     R_RegisterCCallable("WaterGAP3", "_WaterGAP3_evatransActual_VIC", (DL_FUNC)_WaterGAP3_evatransActual_VIC_try);
     R_RegisterCCallable("WaterGAP3", "_WaterGAP3_evatransActual_UBC", (DL_FUNC)_WaterGAP3_evatransActual_UBC_try);
     R_RegisterCCallable("WaterGAP3", "_WaterGAP3_snowMelt_Factor", (DL_FUNC)_WaterGAP3_snowMelt_Factor_try);
-    R_RegisterCCallable("WaterGAP3", "_WaterGAP3_landLeafAreaRatio_WaterGAP3", (DL_FUNC)_WaterGAP3_landLeafAreaRatio_WaterGAP3_try);
+    R_RegisterCCallable("WaterGAP3", "_WaterGAP3_landLeafAreaIndex_WaterGAP3", (DL_FUNC)_WaterGAP3_landLeafAreaIndex_WaterGAP3_try);
     R_RegisterCCallable("WaterGAP3", "_WaterGAP3_infilt_HBV", (DL_FUNC)_WaterGAP3_infilt_HBV_try);
     R_RegisterCCallable("WaterGAP3", "_WaterGAP3_percola_Arno", (DL_FUNC)_WaterGAP3_percola_Arno_try);
     R_RegisterCCallable("WaterGAP3", "_WaterGAP3_baseflow_GR4Jfix", (DL_FUNC)_WaterGAP3_baseflow_GR4Jfix_try);
@@ -1155,7 +1157,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_WaterGAP3_evatransActual_VIC", (DL_FUNC) &_WaterGAP3_evatransActual_VIC, 4},
     {"_WaterGAP3_evatransActual_UBC", (DL_FUNC) &_WaterGAP3_evatransActual_UBC, 4},
     {"_WaterGAP3_snowMelt_Factor", (DL_FUNC) &_WaterGAP3_snowMelt_Factor, 4},
-    {"_WaterGAP3_landLeafAreaRatio_WaterGAP3", (DL_FUNC) &_WaterGAP3_landLeafAreaRatio_WaterGAP3, 5},
+    {"_WaterGAP3_landLeafAreaIndex_WaterGAP3", (DL_FUNC) &_WaterGAP3_landLeafAreaIndex_WaterGAP3, 7},
     {"_WaterGAP3_infilt_HBV", (DL_FUNC) &_WaterGAP3_infilt_HBV, 4},
     {"_WaterGAP3_percola_Arno", (DL_FUNC) &_WaterGAP3_percola_Arno, 5},
     {"_WaterGAP3_baseflow_GR4Jfix", (DL_FUNC) &_WaterGAP3_baseflow_GR4Jfix, 3},

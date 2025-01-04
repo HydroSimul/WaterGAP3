@@ -159,8 +159,8 @@ snowMelt_Factor <- function(SNOW_ice_mm, ATMOS_temperature_Cel, param_SNOW_fac_f
 
 #' @rdname process
 #' @export
-landLeafAreaRatio_WaterGAP3 <- function(ATMOS_temperature_Cel, ATMOS_precipitation_mm, CELL_latitude_deg, LAND_growUpDay_d, Time_dayOfYear_d) {
-    .Call(`_WaterGAP3_landLeafAreaRatio_WaterGAP3`, ATMOS_temperature_Cel, ATMOS_precipitation_mm, CELL_latitude_deg, LAND_growUpDay_d, Time_dayOfYear_d)
+landLeafAreaIndex_WaterGAP3 <- function(ATMOS_temperature_Cel, ATMOS_precipitation_mm, CELL_latitude_deg, LAND_growUpDay_d, LAND_leafAreaIndexMin_, LAND_leafAreaIndexMax_, Time_dayOfYear_d) {
+    .Call(`_WaterGAP3_landLeafAreaIndex_WaterGAP3`, ATMOS_temperature_Cel, ATMOS_precipitation_mm, CELL_latitude_deg, LAND_growUpDay_d, LAND_leafAreaIndexMin_, LAND_leafAreaIndexMax_, Time_dayOfYear_d)
 }
 
 #' @rdname process

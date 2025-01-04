@@ -153,15 +153,18 @@ NumericVector snowMelt_Factor(
 //' @rdname process
 //' @export
 // [[Rcpp::export]]
-NumericMatrix landLeafAreaRatio_WaterGAP3(NumericMatrix ATMOS_temperature_Cel,
+NumericMatrix landLeafAreaIndex_WaterGAP3(NumericMatrix ATMOS_temperature_Cel,
                                                 NumericMatrix ATMOS_precipitation_mm,
                                                 NumericVector CELL_latitude_deg,
                                                 IntegerVector LAND_growUpDay_d,
+                                                NumericVector LAND_leafAreaIndexMin_,
+                                                NumericVector LAND_leafAreaIndexMax_,
                                                 IntegerVector Time_dayOfYear_d) {
   int n_Days = ATMOS_temperature_Cel.nrow();
   int n_Grids = ATMOS_temperature_Cel.ncol();
   NumericMatrix LAND_leafAreaIndex_(n_Days, n_Grids);
-
+  NumericVector LAND_leafAreaRatio_(n_Days);
+  NumericVector range_LAI = LAND_leafAreaIndexMax_ - LAND_leafAreaIndexMin_;
   NumericVector num_Growup(366, 1.0);
   NumericVector num_Droop(366, 0.0);
 
@@ -197,7 +200,7 @@ NumericMatrix landLeafAreaRatio_WaterGAP3(NumericMatrix ATMOS_temperature_Cel,
 
         if (cumsum_Perc_Temp > 40 && cum_Temp_Temp > 8) {
           for (int i = d; i < next_year_start && i < n_Days; ++i) {
-            LAND_leafAreaIndex_(i, g) = num_Growup[std::min(i - d, 365)];
+            LAND_leafAreaRatio_(i) = num_Growup[std::min(i - d, 365)];
           }
           break;
         }
@@ -211,12 +214,16 @@ NumericMatrix landLeafAreaRatio_WaterGAP3(NumericMatrix ATMOS_temperature_Cel,
 
         if (cum_Temp_Temp < 8) {
           for (int i = d; i < next_year_start && i < n_Days; ++i) {
-            LAND_leafAreaIndex_(i, g) = num_Droop[std::min(i - d, 365)];
+            LAND_leafAreaRatio_(i) = num_Droop[std::min(i - d, 365)];
           }
           break;
         }
       }
     }
+
+
+    LAND_leafAreaIndex_(_,g) = LAND_leafAreaIndexMin_(g) + LAND_leafAreaRatio_ * range_LAI(g);
+
   }
 
   return LAND_leafAreaIndex_;

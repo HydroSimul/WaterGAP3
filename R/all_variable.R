@@ -31,6 +31,7 @@
 #' @param LAND_interceptCapacity_mm (mm/m2) average intercept Capacity (maximal storage capacity)
 #' @param LAND_actualEvatrans_mm (mm/m2/TS) **actual** evapotranspiration from `landLy`
 #' @param LAND_infiltrat_mm (mm/m2/TS) infiltration from `landLy` to `soilLy`
+#' @param LAND_leafAreaIndexMin_,LAND_leafAreaIndexMax_ minimal and maximal LAI
 #' @param SNOW_ice_mm (mm/m2) water equivalent of **ice** in snowpack
 #' @param SOIL_fieldCapacityPerc_1 <0, 1> the relative ratio that the water content can drainage by gravity
 #' @param SOIL_water_mm (mm/m2) water volume in `soilLy`
