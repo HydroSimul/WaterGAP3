@@ -102,7 +102,6 @@ NumericVector module_land_WaterGAP3(
   // // Interception
   NumericVector LAND_intercp = intercep_Full(ATMOS_rainFall_mm, LAND_interceptWater_mm, LAND_interceptCapacity_mm);
   LAND_interceptWater_mm += LAND_intercp;
-  LAND_interceptWater_mm = ifelse(LAND_interceptWater_mm < 0, 0, LAND_interceptWater_mm);
   ATMOS_rainFall_mm += -LAND_intercp;
 
   // // Evapo Interception
