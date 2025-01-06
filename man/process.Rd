@@ -20,6 +20,8 @@
 \alias{riverlak_LinearResorvoir}
 \alias{reservoi_Hanasaki}
 \alias{confluen_WaterGAP3}
+\alias{confluen_WaterGAP3_L}
+\alias{confluen_WaterGAP3_LR}
 \title{Hydrological Process}
 \usage{
 atmosSnow_ThresholdT(
@@ -149,6 +151,43 @@ confluen_WaterGAP3(
   CELL_cellNumberStep_int,
   CELL_inflowCellNumberStep_int
 )
+
+confluen_WaterGAP3_L(
+  CONFLUEN_cellInflow_m3,
+  RIVER_water_m3,
+  RIVER_length_km,
+  RIVER_velocity_km,
+  CELL_cellNumberStep_int,
+  CELL_inflowCellNumberStep_int,
+  Riverlak_cellNumber_int,
+  Riverlak_water_m3,
+  Riverlak_capacity_m3,
+  param_Riverlak_lin_storeFactor
+)
+
+confluen_WaterGAP3_LR(
+  CONFLUEN_cellInflow_m3,
+  RIVER_water_m3,
+  RIVER_length_km,
+  RIVER_velocity_km,
+  Riverlak_cellNumber_int,
+  Riverlak_water_m3,
+  Riverlak_capacity_m3,
+  Reservoi_cellNumber_int,
+  Reservoi_water_m3,
+  Reservoi_capacity_m3,
+  Reservoi_demand_m3,
+  Reservoi_yearInflow_m3,
+  Reservoi_yearDemand_m3,
+  Reservoi_yearRelase_m3,
+  Reservoi_isOperateStart_01,
+  Reservoi_isIrrigate_01,
+  CELL_cellNumberStep_int,
+  CELL_inflowCellNumberStep_int,
+  param_Riverlak_lin_storeFactor,
+  param_Reservoi_han_alpha,
+  param_Reservoi_han_kDemand
+)
 }
 \arguments{
 \item{ATMOS_precipitation_mm}{(mm/m2/TS) precipitaion volum}
@@ -266,6 +305,10 @@ confluen_WaterGAP3(
 \item{CELL_cellNumberStep_int}{(int) step number of basin cells}
 
 \item{CELL_inflowCellNumberStep_int}{(int) step number of inflow cells in the basin}
+
+\item{Riverlak_cellNumber_int}{(int) river-lake cell number}
+
+\item{Reservoi_cellNumber_int}{(int) reservoir cell number}
 }
 \value{
 ATMOS_snow_mm (mm/m2/TS) snowfall volume
