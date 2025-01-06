@@ -17,7 +17,6 @@ WaterGAP3_HL(
   SOIL_capacity_mm,
   SOIL_potentialPercola_mm,
   GROUND_water_mm,
-  GROUND_capacity_mm,
   RIVER_water_m3,
   RIVER_length_km,
   RIVER_velocity_km,
@@ -73,8 +72,6 @@ WaterGAP3_HL(
 \item{SOIL_potentialPercola_mm}{<0.01, 7> (mm/m2/TS) **potential** percolation}
 
 \item{GROUND_water_mm}{(mm/m2/TS) water volume in `groundLy`}
-
-\item{GROUND_capacity_mm}{(mm/m2) water storage capacity in `groundLy`}
 
 \item{RIVER_water_m3}{(m3) river water volume}
 
