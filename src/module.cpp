@@ -73,6 +73,7 @@ NumericVector module_land_WaterGAP3(
     NumericVector ATMOS_potentialEvatrans_mm,
     NumericVector& ATMOS_snowFall_mm,
     NumericVector& SNOW_ice_mm,
+    NumericVector LAND_builtRatio_1,
     NumericVector& LAND_interceptWater_mm,
     NumericVector LAND_interceptCapacity_mm,
     NumericVector& LAND_runoff_mm,
@@ -111,6 +112,11 @@ NumericVector module_land_WaterGAP3(
   LAND_interceptWater_mm += -LAND_intercepEvapo_mm;
   ATMOS_potentialEvatrans_mm += -LAND_intercepEvapo_mm;
 
+  // // Built up
+  NumericVector LAND_runoffBuiltup_mm = ATMOS_rainFall_mm * (LAND_builtRatio_1 * .5);
+  ATMOS_rainFall_mm += -LAND_runoffBuiltup_mm;
+
+
   // // soil
   SOIL_EVATRANS_mm = evatransActual_SupplyRatio(ATMOS_potentialEvatrans_mm, SOIL_water_mm, SOIL_capacity_mm, param_EVATRANS_sur_k);
   SOIL_water_mm += - SOIL_EVATRANS_mm;
@@ -138,5 +144,5 @@ NumericVector module_land_WaterGAP3(
 
 
 
-  return (LAND_runoff_mm + GROUND_basefloW_mm) * CELL_landArea_km2 * 1000;
+  return (LAND_runoffBuiltup_mm + LAND_runoff_mm + GROUND_basefloW_mm) * CELL_landArea_km2 * 1000;
 }

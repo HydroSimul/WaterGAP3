@@ -11,6 +11,7 @@ WaterGAP3_HL(
   ATMOS_temperature_Cel,
   ATMOS_potentialEvatrans_mm,
   SNOW_ice_mm,
+  LAND_builtRatio_1,
   LAND_interceptWater_mm,
   LAND_interceptCapacity_mm,
   SOIL_water_mm,

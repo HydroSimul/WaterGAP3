@@ -134,6 +134,7 @@ NumericVector module_land_WaterGAP3(
     NumericVector ATMOS_potentialEvatrans_mm,
     NumericVector& ATMOS_snowFall_mm,
     NumericVector& SNOW_ice_mm,
+    NumericVector LAND_builtRatio_1,
     NumericVector& LAND_interceptWater_mm,
     NumericVector LAND_interceptCapacity_mm,
     NumericVector& LAND_runoff_mm,
