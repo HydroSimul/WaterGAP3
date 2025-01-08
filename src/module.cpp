@@ -12,7 +12,7 @@ NumericVector module_land_Sachsen(
     NumericVector& SOIL_water_mm,
     NumericVector SOIL_capacity_mm,
     NumericVector SOIL_potentialPercola_mm,
-    NumericVector& SOIL_EVATRANS_mm,
+    NumericVector& SOIL_evatrans_mm,
     NumericVector& GROUND_water_mm,
     NumericVector GROUND_capacity_mm,
     NumericVector& GROUND_basefloW_mm,
@@ -32,8 +32,8 @@ NumericVector module_land_Sachsen(
   ATMOS_rainFall_mm = ATMOS_precipitation_mm - ATMOS_snowFall_mm;
 
   // // soil
-  SOIL_EVATRANS_mm = evatransActual_UBC(ATMOS_potentialEvatrans_mm, SOIL_water_mm, SOIL_capacity_mm, param_EVATRANS_ubc_gamma);
-  SOIL_water_mm += - SOIL_EVATRANS_mm;
+  SOIL_evatrans_mm = evatransActual_UBC(ATMOS_potentialEvatrans_mm, SOIL_water_mm, SOIL_capacity_mm, param_EVATRANS_ubc_gamma);
+  SOIL_water_mm += - SOIL_evatrans_mm;
   LAND_water_mm = ATMOS_rainFall_mm;
 
   // // Snow melt
@@ -80,7 +80,7 @@ NumericVector module_land_WaterGAP3(
     NumericVector& SOIL_water_mm,
     NumericVector SOIL_capacity_mm,
     NumericVector SOIL_potentialPercola_mm,
-    NumericVector& SOIL_EVATRANS_mm,
+    NumericVector& SOIL_evatrans_mm,
     NumericVector& GROUND_water_mm,
     NumericVector& GROUND_basefloW_mm,
     NumericVector CELL_landArea_km2,
@@ -118,10 +118,12 @@ NumericVector module_land_WaterGAP3(
 
 
   // // soil
-  SOIL_EVATRANS_mm = evatransActual_SupplyRatio(ATMOS_potentialEvatrans_mm, SOIL_water_mm, SOIL_capacity_mm, param_EVATRANS_sur_k);
-  SOIL_water_mm += - SOIL_EVATRANS_mm;
+  SOIL_evatrans_mm = evatransActual_SupplyRatio(ATMOS_potentialEvatrans_mm, SOIL_water_mm, SOIL_capacity_mm, param_EVATRANS_sur_k);
+  SOIL_water_mm += - SOIL_evatrans_mm;
   LAND_water_mm = ATMOS_rainFall_mm;
 
+
+  SOIL_evatrans_mm += LAND_interceptWater_mm;
   // // Snow melt
   SNOW_melt_mm = snowMelt_Factor(SNOW_ice_mm, ATMOS_temperature_Cel, param_SNOW_fac_f, param_SNOW_fac_Tmelt);
   LAND_water_mm += SNOW_melt_mm;
@@ -131,7 +133,7 @@ NumericVector module_land_WaterGAP3(
   // // soil infiltration
   SOIL_INFILT_mm = infilt_HBV(LAND_water_mm, SOIL_water_mm, SOIL_capacity_mm, param_INFILT_hbv_beta);
   SOIL_water_mm += SOIL_INFILT_mm;
-  LAND_runoff_mm = LAND_water_mm - SOIL_INFILT_mm;
+  LAND_runoff_mm = LAND_water_mm - SOIL_INFILT_mm + LAND_runoffBuiltup_mm;
 
   // // soil percolation
   SOIL_percola_mm = percola_Arno(SOIL_water_mm, SOIL_capacity_mm, SOIL_potentialPercola_mm, param_PERCOLA_arn_thresh, param_PERCOLA_arn_k);
@@ -144,5 +146,5 @@ NumericVector module_land_WaterGAP3(
 
 
 
-  return (LAND_runoffBuiltup_mm + LAND_runoff_mm + GROUND_basefloW_mm) * CELL_landArea_km2 * 1000;
+  return (LAND_runoff_mm + GROUND_basefloW_mm) * CELL_landArea_km2 * 1000;
 }
