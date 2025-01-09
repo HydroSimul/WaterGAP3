@@ -184,7 +184,7 @@ List WaterGAP3_HL(
      _["groundwater_mm"] = OUT_groundwater,
      _["snowice_mm"] = OUT_snowice,
      _["runoff_mm"] = OUT_landrunoff,
-     _["basefloW_mm"] = OUT_groundbaseflow,
+     _["baseflow_mm"] = OUT_groundbaseflow,
      _["riverwater_m3"] = OUT_riverwater,
      _["streamflow_m3"] = RIVER_outflow_m3,
      _["lakewater_m3"] = OUT_lakeWater,
