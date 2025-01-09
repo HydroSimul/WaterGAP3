@@ -27,6 +27,12 @@ NumericVector evatransActual_SupplyRatio(
     NumericVector capacity_mm,
     NumericVector param_EVATRANS_sur_k
 );
+NumericVector evatransActual_WaterGAP(
+    NumericVector ATMOS_potentialEvatrans_mm,
+    NumericVector water_mm,
+    NumericVector capacity_mm,
+    NumericVector param_EVATRANS_wat_petmax
+);
 NumericVector evatransPotential_TurcWendling(
     NumericVector ATMOS_temperature_Cel,
     NumericVector ATMOS_solarRadiat_MJ,

@@ -7,6 +7,7 @@
 \alias{intercep_Full}
 \alias{evatransActual_SupplyPow}
 \alias{evatransActual_SupplyRatio}
+\alias{evatransActual_WaterGAP}
 \alias{evatransActual_VIC}
 \alias{evatransActual_UBC}
 \alias{snowMelt_Factor}
@@ -55,6 +56,13 @@ evatransActual_SupplyRatio(
   water_mm,
   capacity_mm,
   param_EVATRANS_sur_k
+)
+
+evatransActual_WaterGAP(
+  ATMOS_potentialEvatrans_mm,
+  water_mm,
+  capacity_mm,
+  param_EVATRANS_wat_petmax
 )
 
 evatransActual_VIC(
@@ -215,6 +223,8 @@ confluen_WaterGAP3_LR(
 \item{param_EVATRANS_sup_gamma}{<.1, 5> parameter for [evatransActual_SupplyPow()], exponent of this method}
 
 \item{param_EVATRANS_sur_k}{<0.1, 1> parameter for [evatransActual_SupplyRatio()], ratio of potential ET, that is estimated as actually ET}
+
+\item{param_EVATRANS_wat_petmax}{<10, 20> parameter for [evatransActual_WaterGAP()], 10 for arid area, 20 for humid area}
 
 \item{param_EVATRANS_vic_gamma}{<0.2, 5> parameter for [evatransActual_VIC()]}
 

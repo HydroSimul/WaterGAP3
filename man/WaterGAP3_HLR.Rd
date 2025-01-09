@@ -48,7 +48,7 @@ WaterGAP3_HLR(
   param_SNOW_fac_Tmelt,
   param_EVATRANS_sup_k,
   param_EVATRANS_sup_gamma,
-  param_EVATRANS_sur_k,
+  param_EVATRANS_wat_petmax,
   param_INFILT_hbv_beta,
   param_PERCOLA_arn_k,
   param_PERCOLA_arn_thresh,
@@ -147,7 +147,7 @@ WaterGAP3_HLR(
 
 \item{param_EVATRANS_sup_gamma}{<.1, 5> parameter for [evatransActual_SupplyPow()], exponent of this method}
 
-\item{param_EVATRANS_sur_k}{<0.1, 1> parameter for [evatransActual_SupplyRatio()], ratio of potential ET, that is estimated as actually ET}
+\item{param_EVATRANS_wat_petmax}{<10, 20> parameter for [evatransActual_WaterGAP()], 10 for arid area, 20 for humid area}
 
 \item{param_INFILT_hbv_beta}{<0.001, 5> parameters for [infilt_HBV()]}
 

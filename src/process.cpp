@@ -90,6 +90,25 @@ NumericVector evatransActual_SupplyRatio(
  return ifelse(AET > water_mm, water_mm, AET);
 }
 
+
+//' @rdname process
+//' @param param_EVATRANS_wat_petmax <10, 20> parameter for [evatransActual_WaterGAP()], 10 for arid area, 20 for humid area
+//' @export
+// [[Rcpp::export]]
+NumericVector evatransActual_WaterGAP(
+   NumericVector ATMOS_potentialEvatrans_mm,
+   NumericVector water_mm,
+   NumericVector capacity_mm,
+   NumericVector param_EVATRANS_wat_petmax
+)
+{
+ NumericVector AET, AET_Temp;
+
+ AET_Temp = water_mm / capacity_mm * param_EVATRANS_wat_petmax;
+ AET = ifelse(AET_Temp > ATMOS_potentialEvatrans_mm, ATMOS_potentialEvatrans_mm, AET_Temp);
+ return ifelse(AET > water_mm, water_mm, AET);
+}
+
 //' @rdname process
 //' @param param_EVATRANS_vic_gamma <0.2, 5> parameter for [evatransActual_VIC()]
 //' @export

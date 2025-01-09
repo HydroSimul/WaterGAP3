@@ -87,7 +87,7 @@ NumericVector module_land_WaterGAP3(
     NumericVector param_ATMOS_thr_Ts,
     NumericVector param_EVATRANS_sup_k,
     NumericVector param_EVATRANS_sup_gamma,
-    NumericVector param_EVATRANS_sur_k,
+    NumericVector param_EVATRANS_wat_petmax,
     NumericVector param_SNOW_fac_f,
     NumericVector param_SNOW_fac_Tmelt,
     NumericVector param_INFILT_hbv_beta,
@@ -117,9 +117,9 @@ NumericVector module_land_WaterGAP3(
   ATMOS_rainFall_mm += -LAND_runoffBuiltup_mm;
 
 
-  // // soil
-  SOIL_evatrans_mm = evatransActual_SupplyRatio(ATMOS_potentialEvatrans_mm, SOIL_water_mm, SOIL_capacity_mm, param_EVATRANS_sur_k);
-  SOIL_water_mm += - SOIL_evatrans_mm;
+  // // Evapo soil
+  SOIL_evatrans_mm = evatransActual_WaterGAP(ATMOS_potentialEvatrans_mm, SOIL_water_mm, SOIL_capacity_mm, param_EVATRANS_wat_petmax);
+  SOIL_water_mm += -SOIL_evatrans_mm;
   LAND_water_mm = ATMOS_rainFall_mm;
 
 
