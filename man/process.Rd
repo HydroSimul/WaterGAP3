@@ -7,13 +7,14 @@
 \alias{intercep_Full}
 \alias{evatransActual_SupplyPow}
 \alias{evatransActual_SupplyRatio}
-\alias{evatransActual_WaterGAP}
+\alias{evatransActual_WaterGAP3}
 \alias{evatransActual_VIC}
 \alias{evatransActual_UBC}
 \alias{snowMelt_Factor}
 \alias{landLeafAreaIndex_WaterGAP3}
 \alias{infilt_HBV}
 \alias{percola_Arno}
+\alias{percola_WaterGAP3}
 \alias{baseflow_GR4Jfix}
 \alias{baseflow_SupplyRatio}
 \alias{lake_AcceptPow}
@@ -58,7 +59,7 @@ evatransActual_SupplyRatio(
   param_EVATRANS_sur_k
 )
 
-evatransActual_WaterGAP(
+evatransActual_WaterGAP3(
   ATMOS_potentialEvatrans_mm,
   water_mm,
   capacity_mm,
@@ -109,6 +110,14 @@ percola_Arno(
   SOIL_potentialPercola_mm,
   param_PERCOLA_arn_thresh,
   param_PERCOLA_arn_k
+)
+
+percola_WaterGAP3(
+  Land_water_mm,
+  SOIL_potentialPercola_mm,
+  param_PERCOLA_wat_01,
+  param_PERCOLA_wat_thresh,
+  param_PERCOLA_wat_k
 )
 
 baseflow_GR4Jfix(GROUND_water_mm, GROUND_capacity_mm, param_BASEFLOW_grf_gamma)
@@ -250,9 +259,15 @@ confluen_WaterGAP3_LR(
 
 \item{SOIL_potentialPercola_mm}{<0.01, 7> (mm/m2/TS) **potential** percolation}
 
-\item{param_PERCOLA_arn_thresh}{<0.1, 0.9> coefficient parameter for [percola_ThreshPow()]}
+\item{param_PERCOLA_arn_thresh}{<0.1, 0.9> coefficient parameter for [percola_Arno()]}
 
-\item{param_PERCOLA_arn_k}{<0.1, 1> exponential parameter for [percola_ThreshPow()]}
+\item{param_PERCOLA_arn_k}{<0.1, 1> exponential parameter for [percola_Arno()]}
+
+\item{param_PERCOLA_wat_01}{<0, 1> 1: percolation, 0: non percolation [percola_WaterGAP3()]}
+
+\item{param_PERCOLA_wat_thresh}{<10, 15> coefficient parameter for [percola_WaterGAP3()]}
+
+\item{param_PERCOLA_wat_k}{<0.1, 1> exponential parameter for [percola_WaterGAP3()]}
 
 \item{GROUND_water_mm}{(mm/m2/TS) water volume in `groundLy`}
 

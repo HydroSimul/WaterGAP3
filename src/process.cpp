@@ -95,7 +95,7 @@ NumericVector evatransActual_SupplyRatio(
 //' @param param_EVATRANS_wat_petmax <10, 20> parameter for [evatransActual_WaterGAP()], 10 for arid area, 20 for humid area
 //' @export
 // [[Rcpp::export]]
-NumericVector evatransActual_WaterGAP(
+NumericVector evatransActual_WaterGAP3(
    NumericVector ATMOS_potentialEvatrans_mm,
    NumericVector water_mm,
    NumericVector capacity_mm,
@@ -277,8 +277,8 @@ NumericVector infilt_HBV(
 
 
 //' @rdname process
-//' @param param_PERCOLA_arn_thresh <0.1, 0.9> coefficient parameter for [percola_ThreshPow()]
-//' @param param_PERCOLA_arn_k <0.1, 1> exponential parameter for [percola_ThreshPow()]
+//' @param param_PERCOLA_arn_thresh <0.1, 0.9> coefficient parameter for [percola_Arno()]
+//' @param param_PERCOLA_arn_k <0.1, 1> exponential parameter for [percola_Arno()]
 //' @export
 // [[Rcpp::export]]
 NumericVector percola_Arno(
@@ -298,6 +298,34 @@ NumericVector percola_Arno(
  percola_ = ifelse(percola_ > SOIL_potentialPercola_mm, SOIL_potentialPercola_mm, percola_);
  return ifelse(percola_ > SOIL_water_mm, SOIL_water_mm, percola_) ;
 }
+
+//' @rdname process
+//' @param param_PERCOLA_wat_01 <0, 1> 1: percolation, 0: non percolation [percola_WaterGAP3()]
+//' @param param_PERCOLA_wat_thresh <10, 15> coefficient parameter for [percola_WaterGAP3()]
+//' @param param_PERCOLA_wat_k <0.1, 1> exponential parameter for [percola_WaterGAP3()]
+//' @export
+// [[Rcpp::export]]
+NumericVector percola_WaterGAP3(
+   NumericVector Land_water_mm,
+   NumericVector SOIL_potentialPercola_mm,
+   LogicalVector param_PERCOLA_wat_01,
+   NumericVector param_PERCOLA_wat_thresh,
+   NumericVector param_PERCOLA_wat_k
+)
+{
+ // Calculate potential percolation for all cells
+ NumericVector potential_percola = pmin(SOIL_potentialPercola_mm,
+                                        param_PERCOLA_wat_k * Land_water_mm);
+
+ // Logical mask for arid regions
+ LogicalVector arid_mask = param_PERCOLA_wat_01 & (Land_water_mm < param_PERCOLA_wat_thresh);
+
+ // Set percolation to 0 for arid regions
+ potential_percola[arid_mask] = 0.0;
+
+ return potential_percola;
+}
+
 
 //' @rdname process
 //' @param param_BASEFLOW_grf_gamma <2, 7> exponential parameter for [baseflow_GR4Jfix()]

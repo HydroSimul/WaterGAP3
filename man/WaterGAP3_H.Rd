@@ -31,8 +31,9 @@ WaterGAP3_H(
   param_EVATRANS_sup_gamma,
   param_EVATRANS_wat_petmax,
   param_INFILT_hbv_beta,
-  param_PERCOLA_arn_k,
-  param_PERCOLA_arn_thresh,
+  param_PERCOLA_wat_01,
+  param_PERCOLA_wat_k,
+  param_PERCOLA_wat_thresh,
   param_BASEFLOW_sur_k,
   if_allVariExport = FALSE
 )
@@ -88,9 +89,11 @@ WaterGAP3_H(
 
 \item{param_INFILT_hbv_beta}{<0.001, 5> parameters for [infilt_HBV()]}
 
-\item{param_PERCOLA_arn_k}{<0.1, 1> exponential parameter for [percola_ThreshPow()]}
+\item{param_PERCOLA_wat_01}{<0, 1> 1: percolation, 0: non percolation [percola_WaterGAP3()]}
 
-\item{param_PERCOLA_arn_thresh}{<0.1, 0.9> coefficient parameter for [percola_ThreshPow()]}
+\item{param_PERCOLA_wat_k}{<0.1, 1> exponential parameter for [percola_WaterGAP3()]}
+
+\item{param_PERCOLA_wat_thresh}{<10, 15> coefficient parameter for [percola_WaterGAP3()]}
 
 \item{param_BASEFLOW_sur_k}{<0.01, 1> coefficient parameter for [baseflow_SupplyRatio()]}
 

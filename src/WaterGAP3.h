@@ -27,7 +27,7 @@ NumericVector evatransActual_SupplyRatio(
     NumericVector capacity_mm,
     NumericVector param_EVATRANS_sur_k
 );
-NumericVector evatransActual_WaterGAP(
+NumericVector evatransActual_WaterGAP3(
     NumericVector ATMOS_potentialEvatrans_mm,
     NumericVector water_mm,
     NumericVector capacity_mm,
@@ -69,6 +69,13 @@ NumericVector percola_Arno(
     NumericVector SOIL_potentialPercola_mm,
     NumericVector param_PERCOLA_arn_thresh,
     NumericVector param_PERCOLA_arn_k
+);
+NumericVector percola_WaterGAP3(
+    NumericVector Land_water_mm,
+    NumericVector SOIL_potentialPercola_mm,
+    LogicalVector param_PERCOLA_wat_01,
+    NumericVector param_PERCOLA_wat_thresh,
+    NumericVector param_PERCOLA_wat_k
 );
 NumericVector baseflow_GR4Jfix(
     NumericVector GROUND_water_mm,
@@ -147,19 +154,20 @@ NumericVector module_land_WaterGAP3(
     NumericVector& SOIL_water_mm,
     NumericVector SOIL_capacity_mm,
     NumericVector SOIL_potentialPercola_mm,
-    NumericVector& SOIL_EVATRANS_mm,
+    NumericVector& SOIL_evatrans_mm,
     NumericVector& GROUND_water_mm,
     NumericVector& GROUND_basefloW_mm,
     NumericVector CELL_landArea_km2,
     NumericVector param_ATMOS_thr_Ts,
     NumericVector param_EVATRANS_sup_k,
     NumericVector param_EVATRANS_sup_gamma,
-    NumericVector param_EVATRANS_sur_k,
+    NumericVector param_EVATRANS_wat_petmax,
     NumericVector param_SNOW_fac_f,
     NumericVector param_SNOW_fac_Tmelt,
     NumericVector param_INFILT_hbv_beta,
-    NumericVector param_PERCOLA_arn_thresh,
-    NumericVector param_PERCOLA_arn_k,
+    LogicalVector param_PERCOLA_wat_01,
+    NumericVector param_PERCOLA_wat_thresh,
+    NumericVector param_PERCOLA_wat_k,
     NumericVector param_BASEFLOW_sur_k);
 
 NumericVector module_land_Sachsen(

@@ -43,8 +43,9 @@ List WaterGAP3_HL(
    NumericVector param_EVATRANS_sup_gamma,
    NumericVector param_EVATRANS_wat_petmax,
    NumericVector param_INFILT_hbv_beta,
-   NumericVector param_PERCOLA_arn_k,
-   NumericVector param_PERCOLA_arn_thresh,
+   LogicalVector param_PERCOLA_wat_01,
+   NumericVector param_PERCOLA_wat_k,
+   NumericVector param_PERCOLA_wat_thresh,
    NumericVector param_BASEFLOW_sur_k,
    NumericVector param_Evalake_vic_gamma,
    NumericVector param_Lake_acp_storeFactor,
@@ -103,8 +104,9 @@ List WaterGAP3_HL(
      param_SNOW_fac_f,
      param_SNOW_fac_Tmelt,
      param_INFILT_hbv_beta,
-     param_PERCOLA_arn_thresh,
-     param_PERCOLA_arn_k,
+     param_PERCOLA_wat_01,
+     param_PERCOLA_wat_thresh,
+     param_PERCOLA_wat_k,
      param_BASEFLOW_sur_k);
 
 

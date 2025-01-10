@@ -191,17 +191,17 @@ namespace WaterGAP3 {
         return Rcpp::as<NumericVector >(rcpp_result_gen);
     }
 
-    inline NumericVector evatransActual_WaterGAP(NumericVector ATMOS_potentialEvatrans_mm, NumericVector water_mm, NumericVector capacity_mm, NumericVector param_EVATRANS_wat_petmax) {
-        typedef SEXP(*Ptr_evatransActual_WaterGAP)(SEXP,SEXP,SEXP,SEXP);
-        static Ptr_evatransActual_WaterGAP p_evatransActual_WaterGAP = NULL;
-        if (p_evatransActual_WaterGAP == NULL) {
-            validateSignature("NumericVector(*evatransActual_WaterGAP)(NumericVector,NumericVector,NumericVector,NumericVector)");
-            p_evatransActual_WaterGAP = (Ptr_evatransActual_WaterGAP)R_GetCCallable("WaterGAP3", "_WaterGAP3_evatransActual_WaterGAP");
+    inline NumericVector evatransActual_WaterGAP3(NumericVector ATMOS_potentialEvatrans_mm, NumericVector water_mm, NumericVector capacity_mm, NumericVector param_EVATRANS_wat_petmax) {
+        typedef SEXP(*Ptr_evatransActual_WaterGAP3)(SEXP,SEXP,SEXP,SEXP);
+        static Ptr_evatransActual_WaterGAP3 p_evatransActual_WaterGAP3 = NULL;
+        if (p_evatransActual_WaterGAP3 == NULL) {
+            validateSignature("NumericVector(*evatransActual_WaterGAP3)(NumericVector,NumericVector,NumericVector,NumericVector)");
+            p_evatransActual_WaterGAP3 = (Ptr_evatransActual_WaterGAP3)R_GetCCallable("WaterGAP3", "_WaterGAP3_evatransActual_WaterGAP3");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_evatransActual_WaterGAP(Shield<SEXP>(Rcpp::wrap(ATMOS_potentialEvatrans_mm)), Shield<SEXP>(Rcpp::wrap(water_mm)), Shield<SEXP>(Rcpp::wrap(capacity_mm)), Shield<SEXP>(Rcpp::wrap(param_EVATRANS_wat_petmax)));
+            rcpp_result_gen = p_evatransActual_WaterGAP3(Shield<SEXP>(Rcpp::wrap(ATMOS_potentialEvatrans_mm)), Shield<SEXP>(Rcpp::wrap(water_mm)), Shield<SEXP>(Rcpp::wrap(capacity_mm)), Shield<SEXP>(Rcpp::wrap(param_EVATRANS_wat_petmax)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -328,6 +328,27 @@ namespace WaterGAP3 {
         {
             RNGScope RCPP_rngScope_gen;
             rcpp_result_gen = p_percola_Arno(Shield<SEXP>(Rcpp::wrap(SOIL_water_mm)), Shield<SEXP>(Rcpp::wrap(SOIL_capacity_mm)), Shield<SEXP>(Rcpp::wrap(SOIL_potentialPercola_mm)), Shield<SEXP>(Rcpp::wrap(param_PERCOLA_arn_thresh)), Shield<SEXP>(Rcpp::wrap(param_PERCOLA_arn_k)));
+        }
+        if (rcpp_result_gen.inherits("interrupted-error"))
+            throw Rcpp::internal::InterruptedException();
+        if (Rcpp::internal::isLongjumpSentinel(rcpp_result_gen))
+            throw Rcpp::LongjumpException(rcpp_result_gen);
+        if (rcpp_result_gen.inherits("try-error"))
+            throw Rcpp::exception(Rcpp::as<std::string>(rcpp_result_gen).c_str());
+        return Rcpp::as<NumericVector >(rcpp_result_gen);
+    }
+
+    inline NumericVector percola_WaterGAP3(NumericVector Land_water_mm, NumericVector SOIL_potentialPercola_mm, LogicalVector param_PERCOLA_wat_01, NumericVector param_PERCOLA_wat_thresh, NumericVector param_PERCOLA_wat_k) {
+        typedef SEXP(*Ptr_percola_WaterGAP3)(SEXP,SEXP,SEXP,SEXP,SEXP);
+        static Ptr_percola_WaterGAP3 p_percola_WaterGAP3 = NULL;
+        if (p_percola_WaterGAP3 == NULL) {
+            validateSignature("NumericVector(*percola_WaterGAP3)(NumericVector,NumericVector,LogicalVector,NumericVector,NumericVector)");
+            p_percola_WaterGAP3 = (Ptr_percola_WaterGAP3)R_GetCCallable("WaterGAP3", "_WaterGAP3_percola_WaterGAP3");
+        }
+        RObject rcpp_result_gen;
+        {
+            RNGScope RCPP_rngScope_gen;
+            rcpp_result_gen = p_percola_WaterGAP3(Shield<SEXP>(Rcpp::wrap(Land_water_mm)), Shield<SEXP>(Rcpp::wrap(SOIL_potentialPercola_mm)), Shield<SEXP>(Rcpp::wrap(param_PERCOLA_wat_01)), Shield<SEXP>(Rcpp::wrap(param_PERCOLA_wat_thresh)), Shield<SEXP>(Rcpp::wrap(param_PERCOLA_wat_k)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
