@@ -134,12 +134,12 @@ NumericVector module_land_WaterGAP3(
   // // soil infiltration
   SOIL_INFILT_mm = infilt_HBV(LAND_water_mm, SOIL_water_mm, SOIL_capacity_mm, param_INFILT_hbv_beta);
   SOIL_water_mm += SOIL_INFILT_mm;
-  LAND_runoff_mm = LAND_water_mm - SOIL_INFILT_mm + LAND_runoffBuiltup_mm;
+  LAND_runoff_mm = LAND_water_mm - SOIL_INFILT_mm;
 
   // // percolation
   SOIL_percola_mm = percola_WaterGAP3(LAND_runoff_mm, SOIL_potentialPercola_mm, param_PERCOLA_wat_01, param_PERCOLA_wat_thresh, param_PERCOLA_wat_k);
   GROUND_water_mm += SOIL_percola_mm;
-  LAND_runoff_mm += -SOIL_percola_mm;
+  LAND_runoff_mm += LAND_runoffBuiltup_mm - SOIL_percola_mm;
 
   // // ground water
   GROUND_basefloW_mm = baseflow_SupplyRatio(GROUND_water_mm, param_BASEFLOW_sur_k);
