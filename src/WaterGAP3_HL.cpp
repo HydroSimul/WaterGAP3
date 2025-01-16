@@ -118,6 +118,8 @@ List WaterGAP3_HL(
      param_PERCOLA_wat_k,
      param_BASEFLOW_sur_k);
 
+   RIVER_water_m3 += CELL_outflow_m3;
+
 
    // AET Waterbody
    Lake_evatrans_mm = evatransActual_VIC(
@@ -160,7 +162,7 @@ List WaterGAP3_HL(
 
    // Horizontal
    RIVER_outflow_m3(i, _) = confluen_WaterGAP3_L(
-     CELL_outflow_m3,
+     // CELL_outflow_m3,
      RIVER_water_m3,
      RIVER_length_km,
      RIVER_velocity_km,

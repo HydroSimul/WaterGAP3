@@ -235,14 +235,14 @@ reservoi_Hanasaki <- function(Reservoi_water_m3, Reservoi_inflow_m3, Reservoi_ca
 
 #' @rdname process
 #' @export
-confluen_WaterGAP3 <- function(CONFLUEN_cellInflow_m3, RIVER_water_m3, RIVER_length_km, RIVER_velocity_km, CELL_cellNumberStep_int, CELL_inflowCellNumberStep_int) {
-    .Call(`_WaterGAP3_confluen_WaterGAP3`, CONFLUEN_cellInflow_m3, RIVER_water_m3, RIVER_length_km, RIVER_velocity_km, CELL_cellNumberStep_int, CELL_inflowCellNumberStep_int)
+confluen_WaterGAP3 <- function(RIVER_water_m3, RIVER_length_km, RIVER_velocity_km, CELL_cellNumberStep_int, CELL_inflowCellNumberStep_int) {
+    .Call(`_WaterGAP3_confluen_WaterGAP3`, RIVER_water_m3, RIVER_length_km, RIVER_velocity_km, CELL_cellNumberStep_int, CELL_inflowCellNumberStep_int)
 }
 
 #' @rdname process
 #' @export
-confluen_WaterGAP3_L <- function(CONFLUEN_cellInflow_m3, RIVER_water_m3, RIVER_length_km, RIVER_velocity_km, CELL_cellNumberStep_int, CELL_inflowCellNumberStep_int, Riverlak_cellNumber_int, Riverlak_water_m3, Riverlak_capacity_m3, param_Riverlak_lin_storeFactor) {
-    .Call(`_WaterGAP3_confluen_WaterGAP3_L`, CONFLUEN_cellInflow_m3, RIVER_water_m3, RIVER_length_km, RIVER_velocity_km, CELL_cellNumberStep_int, CELL_inflowCellNumberStep_int, Riverlak_cellNumber_int, Riverlak_water_m3, Riverlak_capacity_m3, param_Riverlak_lin_storeFactor)
+confluen_WaterGAP3_L <- function(RIVER_water_m3, RIVER_length_km, RIVER_velocity_km, CELL_cellNumberStep_int, CELL_inflowCellNumberStep_int, Riverlak_cellNumber_int, Riverlak_water_m3, Riverlak_capacity_m3, param_Riverlak_lin_storeFactor) {
+    .Call(`_WaterGAP3_confluen_WaterGAP3_L`, RIVER_water_m3, RIVER_length_km, RIVER_velocity_km, CELL_cellNumberStep_int, CELL_inflowCellNumberStep_int, Riverlak_cellNumber_int, Riverlak_water_m3, Riverlak_capacity_m3, param_Riverlak_lin_storeFactor)
 }
 
 #' @rdname process

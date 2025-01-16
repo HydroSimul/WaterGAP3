@@ -94,7 +94,6 @@ NumericVector lake_AcceptPow(
 );
 
 NumericVector confluen_WaterGAP3(
-    NumericVector CONFLUEN_cellInflow_m3,
     NumericVector &RIVER_water_m3,
     NumericVector RIVER_length_km,
     NumericVector RIVER_velocity_km,
@@ -104,7 +103,6 @@ NumericVector confluen_WaterGAP3(
 
 
 NumericVector confluen_WaterGAP3_L(
-    NumericVector CONFLUEN_cellInflow_m3,
     NumericVector &RIVER_water_m3,
     NumericVector RIVER_length_km,
     NumericVector RIVER_velocity_km,

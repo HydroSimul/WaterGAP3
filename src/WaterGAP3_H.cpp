@@ -92,9 +92,10 @@ List WaterGAP3_H(
      param_PERCOLA_wat_k,
      param_BASEFLOW_sur_k);
 
+   RIVER_water_m3 += CELL_outflow_m3;
+
    // Horizontal
    RIVER_outflow_m3(i, _) = confluen_WaterGAP3(
-     CELL_outflow_m3,
      RIVER_water_m3,
      RIVER_length_km,
      RIVER_velocity_km,
@@ -117,6 +118,7 @@ List WaterGAP3_H(
 
  if (if_allVariExport) {
    return List::create(
+     _["streamflow_m3"] = RIVER_outflow_m3,
      _["snowFall_mm"] = OUT_snow,
      _["evatrans_mm"] = OUT_evatrans,
      _["soilwater_mm"] = OUT_soilwater,
@@ -124,8 +126,7 @@ List WaterGAP3_H(
      _["snowice_mm"] = OUT_snowice,
      _["runoff_mm"] = OUT_landrunoff,
      _["basefloW_mm"] = OUT_groundbaseflow,
-     _["riverwater_m3"] = OUT_riverwater,
-     _["streamflow_m3"] = RIVER_outflow_m3
+     _["riverwater_m3"] = OUT_riverwater
    );
  } else{
    return List::create(
