@@ -65,7 +65,7 @@ List WaterGAP3_HL(
                CELL_outflow_m3;
  NumericMatrix RIVER_outflow_m3(n_time, n_spat);
 
- if (Upstream_cellNumber_int(0) == 0) {
+ if (Upstream_cellNumber_int(0) != 0) {
    int n_Upstream = Upstream_streamflow_m3.ncol();
    for (int i = 0; i < n_Upstream; i++) {
      RIVER_outflow_m3(_, Upstream_cellNumber_int[i] - 1) = Upstream_streamflow_m3(_, i);
