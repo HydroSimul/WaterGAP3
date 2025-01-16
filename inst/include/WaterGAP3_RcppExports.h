@@ -401,17 +401,17 @@ namespace WaterGAP3 {
         return Rcpp::as<NumericVector >(rcpp_result_gen);
     }
 
-    inline NumericVector lake_AcceptPow(NumericVector Lake_water_m3, NumericVector Lake_inflow_m3, NumericVector Lake_capacity_m3, NumericVector param_Lake_acp_storeFactor, NumericVector param_Lake_acp_gamma) {
-        typedef SEXP(*Ptr_lake_AcceptPow)(SEXP,SEXP,SEXP,SEXP,SEXP);
+    inline NumericVector lake_AcceptPow(NumericVector Lake_water_m3, NumericVector Lake_capacity_m3, NumericVector param_Lake_acp_storeFactor, NumericVector param_Lake_acp_gamma) {
+        typedef SEXP(*Ptr_lake_AcceptPow)(SEXP,SEXP,SEXP,SEXP);
         static Ptr_lake_AcceptPow p_lake_AcceptPow = NULL;
         if (p_lake_AcceptPow == NULL) {
-            validateSignature("NumericVector(*lake_AcceptPow)(NumericVector,NumericVector,NumericVector,NumericVector,NumericVector)");
+            validateSignature("NumericVector(*lake_AcceptPow)(NumericVector,NumericVector,NumericVector,NumericVector)");
             p_lake_AcceptPow = (Ptr_lake_AcceptPow)R_GetCCallable("WaterGAP3", "_WaterGAP3_lake_AcceptPow");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_lake_AcceptPow(Shield<SEXP>(Rcpp::wrap(Lake_water_m3)), Shield<SEXP>(Rcpp::wrap(Lake_inflow_m3)), Shield<SEXP>(Rcpp::wrap(Lake_capacity_m3)), Shield<SEXP>(Rcpp::wrap(param_Lake_acp_storeFactor)), Shield<SEXP>(Rcpp::wrap(param_Lake_acp_gamma)));
+            rcpp_result_gen = p_lake_AcceptPow(Shield<SEXP>(Rcpp::wrap(Lake_water_m3)), Shield<SEXP>(Rcpp::wrap(Lake_capacity_m3)), Shield<SEXP>(Rcpp::wrap(param_Lake_acp_storeFactor)), Shield<SEXP>(Rcpp::wrap(param_Lake_acp_gamma)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();

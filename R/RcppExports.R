@@ -207,8 +207,8 @@ baseflow_SupplyRatio <- function(GROUND_water_mm, param_BASEFLOW_sur_k) {
 #' @param param_Lake_acp_gamma <uknow> parameter for [lake_AcceptPow()],
 #' @return outflow (m3)
 #' @export
-lake_AcceptPow <- function(Lake_water_m3, Lake_inflow_m3, Lake_capacity_m3, param_Lake_acp_storeFactor, param_Lake_acp_gamma) {
-    .Call(`_WaterGAP3_lake_AcceptPow`, Lake_water_m3, Lake_inflow_m3, Lake_capacity_m3, param_Lake_acp_storeFactor, param_Lake_acp_gamma)
+lake_AcceptPow <- function(Lake_water_m3, Lake_capacity_m3, param_Lake_acp_storeFactor, param_Lake_acp_gamma) {
+    .Call(`_WaterGAP3_lake_AcceptPow`, Lake_water_m3, Lake_capacity_m3, param_Lake_acp_storeFactor, param_Lake_acp_gamma)
 }
 
 #' @rdname process

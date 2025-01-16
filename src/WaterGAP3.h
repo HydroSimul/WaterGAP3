@@ -88,7 +88,6 @@ NumericVector baseflow_SupplyRatio(
 );
 NumericVector lake_AcceptPow(
   NumericVector Lake_water_m3,
-  NumericVector Lake_inflow_m3,
   NumericVector Lake_capacity_m3,
   NumericVector param_Lake_acp_storeFactor,
   NumericVector param_Lake_acp_gamma

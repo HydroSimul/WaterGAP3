@@ -869,24 +869,23 @@ RcppExport SEXP _WaterGAP3_baseflow_SupplyRatio(SEXP GROUND_water_mmSEXP, SEXP p
     return rcpp_result_gen;
 }
 // lake_AcceptPow
-NumericVector lake_AcceptPow(NumericVector Lake_water_m3, NumericVector Lake_inflow_m3, NumericVector Lake_capacity_m3, NumericVector param_Lake_acp_storeFactor, NumericVector param_Lake_acp_gamma);
-static SEXP _WaterGAP3_lake_AcceptPow_try(SEXP Lake_water_m3SEXP, SEXP Lake_inflow_m3SEXP, SEXP Lake_capacity_m3SEXP, SEXP param_Lake_acp_storeFactorSEXP, SEXP param_Lake_acp_gammaSEXP) {
+NumericVector lake_AcceptPow(NumericVector Lake_water_m3, NumericVector Lake_capacity_m3, NumericVector param_Lake_acp_storeFactor, NumericVector param_Lake_acp_gamma);
+static SEXP _WaterGAP3_lake_AcceptPow_try(SEXP Lake_water_m3SEXP, SEXP Lake_capacity_m3SEXP, SEXP param_Lake_acp_storeFactorSEXP, SEXP param_Lake_acp_gammaSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::traits::input_parameter< NumericVector >::type Lake_water_m3(Lake_water_m3SEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type Lake_inflow_m3(Lake_inflow_m3SEXP);
     Rcpp::traits::input_parameter< NumericVector >::type Lake_capacity_m3(Lake_capacity_m3SEXP);
     Rcpp::traits::input_parameter< NumericVector >::type param_Lake_acp_storeFactor(param_Lake_acp_storeFactorSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type param_Lake_acp_gamma(param_Lake_acp_gammaSEXP);
-    rcpp_result_gen = Rcpp::wrap(lake_AcceptPow(Lake_water_m3, Lake_inflow_m3, Lake_capacity_m3, param_Lake_acp_storeFactor, param_Lake_acp_gamma));
+    rcpp_result_gen = Rcpp::wrap(lake_AcceptPow(Lake_water_m3, Lake_capacity_m3, param_Lake_acp_storeFactor, param_Lake_acp_gamma));
     return rcpp_result_gen;
 END_RCPP_RETURN_ERROR
 }
-RcppExport SEXP _WaterGAP3_lake_AcceptPow(SEXP Lake_water_m3SEXP, SEXP Lake_inflow_m3SEXP, SEXP Lake_capacity_m3SEXP, SEXP param_Lake_acp_storeFactorSEXP, SEXP param_Lake_acp_gammaSEXP) {
+RcppExport SEXP _WaterGAP3_lake_AcceptPow(SEXP Lake_water_m3SEXP, SEXP Lake_capacity_m3SEXP, SEXP param_Lake_acp_storeFactorSEXP, SEXP param_Lake_acp_gammaSEXP) {
     SEXP rcpp_result_gen;
     {
         Rcpp::RNGScope rcpp_rngScope_gen;
-        rcpp_result_gen = PROTECT(_WaterGAP3_lake_AcceptPow_try(Lake_water_m3SEXP, Lake_inflow_m3SEXP, Lake_capacity_m3SEXP, param_Lake_acp_storeFactorSEXP, param_Lake_acp_gammaSEXP));
+        rcpp_result_gen = PROTECT(_WaterGAP3_lake_AcceptPow_try(Lake_water_m3SEXP, Lake_capacity_m3SEXP, param_Lake_acp_storeFactorSEXP, param_Lake_acp_gammaSEXP));
     }
     Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
     if (rcpp_isInterrupt_gen) {
@@ -1183,7 +1182,7 @@ static int _WaterGAP3_RcppExport_validate(const char* sig) {
         signatures.insert("NumericVector(*percola_WaterGAP3)(NumericVector,NumericVector,LogicalVector,NumericVector,NumericVector)");
         signatures.insert("NumericVector(*baseflow_GR4Jfix)(NumericVector,NumericVector,NumericVector)");
         signatures.insert("NumericVector(*baseflow_SupplyRatio)(NumericVector,NumericVector)");
-        signatures.insert("NumericVector(*lake_AcceptPow)(NumericVector,NumericVector,NumericVector,NumericVector,NumericVector)");
+        signatures.insert("NumericVector(*lake_AcceptPow)(NumericVector,NumericVector,NumericVector,NumericVector)");
         signatures.insert("NumericVector(*river_LinearResorvoir)(NumericVector,NumericVector,NumericVector,NumericVector)");
         signatures.insert("NumericVector(*riverlak_LinearResorvoir)(NumericVector,NumericVector,NumericVector,NumericVector)");
         signatures.insert("NumericVector(*reservoi_Hanasaki)(NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector&,LogicalVector,LogicalVector,NumericVector,NumericVector)");
@@ -1250,7 +1249,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_WaterGAP3_percola_WaterGAP3", (DL_FUNC) &_WaterGAP3_percola_WaterGAP3, 5},
     {"_WaterGAP3_baseflow_GR4Jfix", (DL_FUNC) &_WaterGAP3_baseflow_GR4Jfix, 3},
     {"_WaterGAP3_baseflow_SupplyRatio", (DL_FUNC) &_WaterGAP3_baseflow_SupplyRatio, 2},
-    {"_WaterGAP3_lake_AcceptPow", (DL_FUNC) &_WaterGAP3_lake_AcceptPow, 5},
+    {"_WaterGAP3_lake_AcceptPow", (DL_FUNC) &_WaterGAP3_lake_AcceptPow, 4},
     {"_WaterGAP3_river_LinearResorvoir", (DL_FUNC) &_WaterGAP3_river_LinearResorvoir, 4},
     {"_WaterGAP3_riverlak_LinearResorvoir", (DL_FUNC) &_WaterGAP3_riverlak_LinearResorvoir, 4},
     {"_WaterGAP3_reservoi_Hanasaki", (DL_FUNC) &_WaterGAP3_reservoi_Hanasaki, 11},

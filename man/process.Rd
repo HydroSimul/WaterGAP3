@@ -126,7 +126,6 @@ baseflow_SupplyRatio(GROUND_water_mm, param_BASEFLOW_sur_k)
 
 lake_AcceptPow(
   Lake_water_m3,
-  Lake_inflow_m3,
   Lake_capacity_m3,
   param_Lake_acp_storeFactor,
   param_Lake_acp_gamma
@@ -278,8 +277,6 @@ confluen_WaterGAP3_LR(
 \item{param_BASEFLOW_sur_k}{<0.01, 1> coefficient parameter for [baseflow_SupplyRatio()]}
 
 \item{Lake_water_m3}{(m3) lake water volume}
-
-\item{Lake_inflow_m3}{(m3/TS) inflow of the lake}
 
 \item{Lake_capacity_m3}{(m3) capacity of the lake}
 

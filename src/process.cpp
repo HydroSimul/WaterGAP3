@@ -369,13 +369,11 @@ NumericVector baseflow_SupplyRatio(
 // [[Rcpp::export]]
 NumericVector lake_AcceptPow(
    NumericVector Lake_water_m3,
-   NumericVector Lake_inflow_m3,
    NumericVector Lake_capacity_m3,
    NumericVector param_Lake_acp_storeFactor,
    NumericVector param_Lake_acp_gamma
 )
 {
- Lake_water_m3 += Lake_inflow_m3;
 
  NumericVector Lake_outflow_m3 = (1 / param_Lake_acp_storeFactor) * vecpow(pmin(Lake_water_m3 / Lake_capacity_m3, 1), param_Lake_acp_gamma);
  Lake_water_m3 += -Lake_outflow_m3;
