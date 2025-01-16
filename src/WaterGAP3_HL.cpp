@@ -14,6 +14,8 @@ List WaterGAP3_HL(
    NumericMatrix ATMOS_precipitation_mm,
    NumericMatrix ATMOS_temperature_Cel,
    NumericMatrix ATMOS_potentialEvatrans_mm,
+   IntegerVector Upstream_cellNumber_int,
+   NumericMatrix Upstream_streamflow_m3,
    NumericVector SNOW_ice_mm,
    NumericVector LAND_builtRatio_1,
    NumericVector LAND_interceptWater_mm,
@@ -62,6 +64,13 @@ List WaterGAP3_HL(
                GROUND_basefloW_mm,
                CELL_outflow_m3;
  NumericMatrix RIVER_outflow_m3(n_time, n_spat);
+
+ if (Upstream_cellNumber_int(0) == 0) {
+   int n_Upstream = Upstream_streamflow_m3.ncol();
+   for (int i = 0; i < n_Upstream; i++) {
+     RIVER_outflow_m3(_, Upstream_cellNumber_int[i] - 1) = Upstream_streamflow_m3(_, i);
+   }
+ }
 
  NumericMatrix OUT_snow(n_time, n_spat), OUT_evatrans(n_time, n_spat),
  OUT_landrunoff(n_time, n_spat), OUT_groundbaseflow(n_time, n_spat),
@@ -128,10 +137,10 @@ List WaterGAP3_HL(
    // // Net vertical Inflow
    NumericVector Lake_verticalInflow_m3, Riverlak_verticalInflow_m3, reservoir_verticalInflow_m3;
 
-   NumericVector Lake_verticalInflow_mm = pmax((subset_get(ATMOS_precipitation_mm, Lake_cellNumber_int) - Lake_evatrans_mm), 0.0);
+   NumericVector Lake_verticalInflow_mm = (subset_get(ATMOS_precipitation_mm, Lake_cellNumber_int) - Lake_evatrans_mm);
    Lake_verticalInflow_m3 = Lake_verticalInflow_mm * Lake_area_km2 * 1000;
 
-   NumericVector Riverlak_verticalInflow_mm = pmax((subset_get(ATMOS_precipitation_mm, Riverlak_cellNumber_int) - Riverlak_evatrans_mm), 0.0);
+   NumericVector Riverlak_verticalInflow_mm = subset_get(ATMOS_precipitation_mm, Riverlak_cellNumber_int) - Riverlak_evatrans_mm;
    Riverlak_verticalInflow_m3 = Riverlak_verticalInflow_mm * Riverlak_area_km2 * 1000;
 
    // Local Lake runoff

@@ -263,7 +263,7 @@ confluen_WaterGAP3_LR(
 
 \item{param_PERCOLA_arn_k}{<0.1, 1> exponential parameter for [percola_Arno()]}
 
-\item{param_PERCOLA_wat_01}{<0, 1> 1: percolation, 0: non percolation [percola_WaterGAP3()]}
+\item{param_PERCOLA_wat_01}{<0, 1> 0: percolation, 1: non percolation [percola_WaterGAP3()]}
 
 \item{param_PERCOLA_wat_thresh}{<10, 15> coefficient parameter for [percola_WaterGAP3()]}
 

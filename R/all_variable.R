@@ -84,6 +84,8 @@
 #' @param CELL_landArea_km2 (km2) land area of the basin
 #' @param CELL_cellNumberStep_int (int) step number of basin cells
 #' @param CELL_inflowCellNumberStep_int (int) step number of inflow cells in the basin
+#' @param Upstream_cellNumber_int Upstream cell number
+#' @param Upstream_streamflow_m3 Upstream
 #' @param if_allVariExport (bool) whether export all the state variables (default in false)
 NULL
 

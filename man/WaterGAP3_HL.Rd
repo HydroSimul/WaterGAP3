@@ -10,6 +10,8 @@ WaterGAP3_HL(
   ATMOS_precipitation_mm,
   ATMOS_temperature_Cel,
   ATMOS_potentialEvatrans_mm,
+  Upstream_cellNumber_int,
+  Upstream_streamflow_m3,
   SNOW_ice_mm,
   LAND_builtRatio_1,
   LAND_interceptWater_mm,
@@ -60,6 +62,10 @@ WaterGAP3_HL(
 \item{ATMOS_temperature_Cel}{(Cel) the average air temperature in the time phase}
 
 \item{ATMOS_potentialEvatrans_mm}{(mm/m2/TS) **potential / reference** evapotranspiration}
+
+\item{Upstream_cellNumber_int}{Upstream cell number}
+
+\item{Upstream_streamflow_m3}{Upstream}
 
 \item{SNOW_ice_mm}{(mm/m2) water equivalent of **ice** in snowpack}
 
@@ -117,7 +123,7 @@ WaterGAP3_HL(
 
 \item{param_INFILT_hbv_beta}{<0.001, 5> parameters for [infilt_HBV()]}
 
-\item{param_PERCOLA_wat_01}{<0, 1> 1: percolation, 0: non percolation [percola_WaterGAP3()]}
+\item{param_PERCOLA_wat_01}{<0, 1> 0: percolation, 1: non percolation [percola_WaterGAP3()]}
 
 \item{param_PERCOLA_wat_k}{<0.1, 1> exponential parameter for [percola_WaterGAP3()]}
 

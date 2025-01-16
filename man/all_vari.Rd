@@ -166,6 +166,10 @@
 
 \item{CELL_inflowCellNumberStep_int}{(int) step number of inflow cells in the basin}
 
+\item{Upstream_cellNumber_int}{Upstream cell number}
+
+\item{Upstream_streamflow_m3}{Upstream}
+
 \item{if_allVariExport}{(bool) whether export all the state variables (default in false)}
 }
 \description{
