@@ -162,7 +162,6 @@ List WaterGAP3_HL(
 
    // Horizontal
    RIVER_outflow_m3(i, _) = confluen_WaterGAP3_L(
-     // CELL_outflow_m3,
      RIVER_water_m3,
      RIVER_length_km,
      RIVER_velocity_km,
@@ -193,17 +192,17 @@ List WaterGAP3_HL(
 
  if (if_allVariExport) {
    return List::create(
-     _["snowFall_mm"] = OUT_snow,
-     _["evatrans_mm"] = OUT_evatrans,
-     _["soilwater_mm"] = OUT_soilwater,
-     _["groundwater_mm"] = OUT_groundwater,
-     _["snowice_mm"] = OUT_snowice,
-     _["runoff_mm"] = OUT_landrunoff,
-     _["baseflow_mm"] = OUT_groundbaseflow,
-     _["riverwater_m3"] = OUT_riverwater,
      _["streamflow_m3"] = RIVER_outflow_m3,
+     // _["snowFall_mm"] = OUT_snow,
+     // _["evatrans_mm"] = OUT_evatrans,
+     // _["soilwater_mm"] = OUT_soilwater,
+     // _["groundwater_mm"] = OUT_groundwater,
+     // _["snowice_mm"] = OUT_snowice,
+     // _["runoff_mm"] = OUT_landrunoff,
+     // _["baseflow_mm"] = OUT_groundbaseflow,
+     _["riverwater_m3"] = OUT_riverwater,
      _["lakewater_m3"] = OUT_lakeWater,
-     _["lakeEva_mm"] = OUT_lakeEvalake,
+     // _["lakeEva_mm"] = OUT_lakeEvalake,
      _["riverlakwater_m3"] = OUT_riverlakWater,
      _["riverlakEva_mm"] = OUT_riverlakEvalake
    );
