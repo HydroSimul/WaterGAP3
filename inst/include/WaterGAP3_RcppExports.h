@@ -86,6 +86,26 @@ namespace WaterGAP3 {
             throw Rcpp::exception(Rcpp::as<std::string>(rcpp_result_gen).c_str());
     }
 
+    inline void subset_add(NumericVector& vec_Data, IntegerVector int_Index, NumericVector vec_DataAdd) {
+        typedef SEXP(*Ptr_subset_add)(SEXP,SEXP,SEXP);
+        static Ptr_subset_add p_subset_add = NULL;
+        if (p_subset_add == NULL) {
+            validateSignature("void(*subset_add)(NumericVector&,IntegerVector,NumericVector)");
+            p_subset_add = (Ptr_subset_add)R_GetCCallable("WaterGAP3", "_WaterGAP3_subset_add");
+        }
+        RObject rcpp_result_gen;
+        {
+            RNGScope RCPP_rngScope_gen;
+            rcpp_result_gen = p_subset_add(Shield<SEXP>(Rcpp::wrap(vec_Data)), Shield<SEXP>(Rcpp::wrap(int_Index)), Shield<SEXP>(Rcpp::wrap(vec_DataAdd)));
+        }
+        if (rcpp_result_gen.inherits("interrupted-error"))
+            throw Rcpp::internal::InterruptedException();
+        if (Rcpp::internal::isLongjumpSentinel(rcpp_result_gen))
+            throw Rcpp::LongjumpException(rcpp_result_gen);
+        if (rcpp_result_gen.inherits("try-error"))
+            throw Rcpp::exception(Rcpp::as<std::string>(rcpp_result_gen).c_str());
+    }
+
     inline NumericVector atmosSnow_ThresholdT(NumericVector ATMOS_precipitation_mm, NumericVector ATMOS_temperature_Cel, NumericVector param_ATMOS_thr_Ts) {
         typedef SEXP(*Ptr_atmosSnow_ThresholdT)(SEXP,SEXP,SEXP);
         static Ptr_atmosSnow_ThresholdT p_atmosSnow_ThresholdT = NULL;

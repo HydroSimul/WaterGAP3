@@ -5,6 +5,7 @@
 \alias{subset_get}
 \alias{subset_get_logical}
 \alias{subset_put}
+\alias{subset_add}
 \title{**utilize functions**}
 \usage{
 subset_get(vec_Data, int_Index)
@@ -12,6 +13,8 @@ subset_get(vec_Data, int_Index)
 subset_get_logical(vec_Data, int_Index)
 
 subset_put(vec_Data, int_Index, vec_DataPut)
+
+subset_add(vec_Data, int_Index, vec_DataAdd)
 }
 \arguments{
 \item{vec_Data}{(vector of num / int) data}
@@ -19,6 +22,8 @@ subset_put(vec_Data, int_Index, vec_DataPut)
 \item{int_Index}{(vector of int) index of subset}
 
 \item{vec_DataPut}{(vector of num / int) data, to refresh}
+
+\item{vec_DataAdd}{(vector of num / int) data, to refresh}
 }
 \description{
 **utilize functions**

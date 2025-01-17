@@ -77,6 +77,18 @@ void subset_put(NumericVector &vec_Data, IntegerVector int_Index, NumericVector 
 
 }
 
+//' @rdname utilis
+//' @param vec_DataAdd (vector of num / int) data, to refresh
+//' @export
+// [[Rcpp::export]]
+void subset_add(NumericVector &vec_Data, IntegerVector int_Index, NumericVector vec_DataAdd) {
+ int n = int_Index.size();
+
+ for (int i = 0; i < n; ++i) {
+   vec_Data[int_Index[i] - 1] += vec_DataAdd[i];
+ }
+
+}
 
 
 

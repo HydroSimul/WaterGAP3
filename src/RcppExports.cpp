@@ -118,6 +118,41 @@ RcppExport SEXP _WaterGAP3_subset_put(SEXP vec_DataSEXP, SEXP int_IndexSEXP, SEX
     UNPROTECT(1);
     return rcpp_result_gen;
 }
+// subset_add
+void subset_add(NumericVector& vec_Data, IntegerVector int_Index, NumericVector vec_DataAdd);
+static SEXP _WaterGAP3_subset_add_try(SEXP vec_DataSEXP, SEXP int_IndexSEXP, SEXP vec_DataAddSEXP) {
+BEGIN_RCPP
+    Rcpp::traits::input_parameter< NumericVector& >::type vec_Data(vec_DataSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type int_Index(int_IndexSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type vec_DataAdd(vec_DataAddSEXP);
+    subset_add(vec_Data, int_Index, vec_DataAdd);
+    return R_NilValue;
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP _WaterGAP3_subset_add(SEXP vec_DataSEXP, SEXP int_IndexSEXP, SEXP vec_DataAddSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(_WaterGAP3_subset_add_try(vec_DataSEXP, int_IndexSEXP, vec_DataAddSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    bool rcpp_isLongjump_gen = Rcpp::internal::isLongjumpSentinel(rcpp_result_gen);
+    if (rcpp_isLongjump_gen) {
+        Rcpp::internal::resumeJump(rcpp_result_gen);
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error("%s", CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
+}
 // WaterGAP3_H
 List WaterGAP3_H(int n_time, int n_spat, NumericMatrix ATMOS_precipitation_mm, NumericMatrix ATMOS_temperature_Cel, NumericMatrix ATMOS_potentialEvatrans_mm, NumericVector SNOW_ice_mm, NumericVector LAND_builtRatio_1, NumericVector LAND_interceptWater_mm, NumericMatrix LAND_interceptCapacity_mm, NumericVector SOIL_water_mm, NumericVector SOIL_capacity_mm, NumericVector SOIL_potentialPercola_mm, NumericVector GROUND_water_mm, NumericVector RIVER_water_m3, NumericVector RIVER_length_km, NumericVector RIVER_velocity_km, NumericVector CELL_landArea_km2, List CELL_cellNumberStep_int, List CELL_inflowCellNumberStep_int, NumericVector param_ATMOS_thr_Ts, NumericVector param_SNOW_fac_f, NumericVector param_SNOW_fac_Tmelt, NumericVector param_EVATRANS_sup_k, NumericVector param_EVATRANS_sup_gamma, NumericVector param_EVATRANS_wat_petmax, NumericVector param_INFILT_hbv_beta, LogicalVector param_PERCOLA_wat_01, NumericVector param_PERCOLA_wat_k, NumericVector param_PERCOLA_wat_thresh, NumericVector param_BASEFLOW_sur_k, bool if_allVariExport);
 RcppExport SEXP _WaterGAP3_WaterGAP3_H(SEXP n_timeSEXP, SEXP n_spatSEXP, SEXP ATMOS_precipitation_mmSEXP, SEXP ATMOS_temperature_CelSEXP, SEXP ATMOS_potentialEvatrans_mmSEXP, SEXP SNOW_ice_mmSEXP, SEXP LAND_builtRatio_1SEXP, SEXP LAND_interceptWater_mmSEXP, SEXP LAND_interceptCapacity_mmSEXP, SEXP SOIL_water_mmSEXP, SEXP SOIL_capacity_mmSEXP, SEXP SOIL_potentialPercola_mmSEXP, SEXP GROUND_water_mmSEXP, SEXP RIVER_water_m3SEXP, SEXP RIVER_length_kmSEXP, SEXP RIVER_velocity_kmSEXP, SEXP CELL_landArea_km2SEXP, SEXP CELL_cellNumberStep_intSEXP, SEXP CELL_inflowCellNumberStep_intSEXP, SEXP param_ATMOS_thr_TsSEXP, SEXP param_SNOW_fac_fSEXP, SEXP param_SNOW_fac_TmeltSEXP, SEXP param_EVATRANS_sup_kSEXP, SEXP param_EVATRANS_sup_gammaSEXP, SEXP param_EVATRANS_wat_petmaxSEXP, SEXP param_INFILT_hbv_betaSEXP, SEXP param_PERCOLA_wat_01SEXP, SEXP param_PERCOLA_wat_kSEXP, SEXP param_PERCOLA_wat_threshSEXP, SEXP param_BASEFLOW_sur_kSEXP, SEXP if_allVariExportSEXP) {
@@ -1165,6 +1200,7 @@ static int _WaterGAP3_RcppExport_validate(const char* sig) {
         signatures.insert("NumericVector(*subset_get)(NumericVector,IntegerVector)");
         signatures.insert("LogicalVector(*subset_get_logical)(LogicalVector,IntegerVector)");
         signatures.insert("void(*subset_put)(NumericVector&,IntegerVector,NumericVector)");
+        signatures.insert("void(*subset_add)(NumericVector&,IntegerVector,NumericVector)");
         signatures.insert("NumericVector(*atmosSnow_ThresholdT)(NumericVector,NumericVector,NumericVector)");
         signatures.insert("NumericVector(*evatransPotential_TurcWendling)(NumericVector,NumericVector,NumericVector)");
         signatures.insert("NumericVector(*intercep_Full)(NumericVector,NumericVector,NumericVector)");
@@ -1196,6 +1232,7 @@ RcppExport SEXP _WaterGAP3_RcppExport_registerCCallable() {
     R_RegisterCCallable("WaterGAP3", "_WaterGAP3_subset_get", (DL_FUNC)_WaterGAP3_subset_get_try);
     R_RegisterCCallable("WaterGAP3", "_WaterGAP3_subset_get_logical", (DL_FUNC)_WaterGAP3_subset_get_logical_try);
     R_RegisterCCallable("WaterGAP3", "_WaterGAP3_subset_put", (DL_FUNC)_WaterGAP3_subset_put_try);
+    R_RegisterCCallable("WaterGAP3", "_WaterGAP3_subset_add", (DL_FUNC)_WaterGAP3_subset_add_try);
     R_RegisterCCallable("WaterGAP3", "_WaterGAP3_atmosSnow_ThresholdT", (DL_FUNC)_WaterGAP3_atmosSnow_ThresholdT_try);
     R_RegisterCCallable("WaterGAP3", "_WaterGAP3_evatransPotential_TurcWendling", (DL_FUNC)_WaterGAP3_evatransPotential_TurcWendling_try);
     R_RegisterCCallable("WaterGAP3", "_WaterGAP3_intercep_Full", (DL_FUNC)_WaterGAP3_intercep_Full_try);
@@ -1226,6 +1263,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_WaterGAP3_subset_get", (DL_FUNC) &_WaterGAP3_subset_get, 2},
     {"_WaterGAP3_subset_get_logical", (DL_FUNC) &_WaterGAP3_subset_get_logical, 2},
     {"_WaterGAP3_subset_put", (DL_FUNC) &_WaterGAP3_subset_put, 3},
+    {"_WaterGAP3_subset_add", (DL_FUNC) &_WaterGAP3_subset_add, 3},
     {"_WaterGAP3_WaterGAP3_H", (DL_FUNC) &_WaterGAP3_WaterGAP3_H, 31},
     {"_WaterGAP3_WaterGAP3_HL", (DL_FUNC) &_WaterGAP3_WaterGAP3_HL, 45},
     {"_WaterGAP3_WaterGAP3_HLR", (DL_FUNC) &_WaterGAP3_WaterGAP3_HLR, 56},

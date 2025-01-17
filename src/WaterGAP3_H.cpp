@@ -47,7 +47,7 @@ List WaterGAP3_H(
                LAND_water_mm, LAND_runoff_mm,
                SOIL_evatrans_mm, SOIL_infilt_mm, SOIL_percola_mm,
                GROUND_basefloW_mm,
-               CELL_outflow_m3;
+               CELL_verticalflow_m3;
  NumericMatrix RIVER_outflow_m3(n_time, n_spat);
 
  NumericMatrix OUT_snow(n_time, n_spat), OUT_evatrans(n_time, n_spat),
@@ -63,7 +63,7 @@ List WaterGAP3_H(
 
 
    // Vertical
-   CELL_outflow_m3 = module_land_WaterGAP3(
+   CELL_verticalflow_m3 = module_land_WaterGAP3(
      ATMOS_precipitation_mm(i, _),
      ATMOS_temperature_Cel(i, _),
      ATMOS_potentialEvatrans_mm(i, _),
@@ -92,7 +92,7 @@ List WaterGAP3_H(
      param_PERCOLA_wat_k,
      param_BASEFLOW_sur_k);
 
-   RIVER_water_m3 += CELL_outflow_m3;
+   RIVER_water_m3 += CELL_verticalflow_m3;
 
    // Horizontal
    RIVER_outflow_m3(i, _) = confluen_WaterGAP3(

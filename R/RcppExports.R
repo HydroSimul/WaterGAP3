@@ -26,6 +26,13 @@ subset_put <- function(vec_Data, int_Index, vec_DataPut) {
     invisible(.Call(`_WaterGAP3_subset_put`, vec_Data, int_Index, vec_DataPut))
 }
 
+#' @rdname utilis
+#' @param vec_DataAdd (vector of num / int) data, to refresh
+#' @export
+subset_add <- function(vec_Data, int_Index, vec_DataAdd) {
+    invisible(.Call(`_WaterGAP3_subset_add`, vec_Data, int_Index, vec_DataAdd))
+}
+
 #' WaterGAP3
 #' @name WaterGAP3_H
 #' @inheritParams all_vari

@@ -368,7 +368,7 @@ NumericVector baseflow_SupplyRatio(
 //' @export
 // [[Rcpp::export]]
 NumericVector lake_AcceptPow(
-   NumericVector Lake_water_m3,
+   NumericVector &Lake_water_m3,
    NumericVector Lake_capacity_m3,
    NumericVector param_Lake_acp_storeFactor,
    NumericVector param_Lake_acp_gamma
@@ -595,6 +595,10 @@ NumericVector confluen_WaterGAP3_L(
  idx_RiverLake_Step, idx_Step_Riverlake;
  int n_Step = CELL_cellNumberStep_int.size();
 
+ // Overflow for Riverlake
+ NumericVector Riverlak_overflow_m3 = pmax(Riverlak_water_m3 - Riverlak_capacity_m3, 0);
+ Riverlak_water_m3 += -Riverlak_overflow_m3;
+
  // Step i later with Inflow
  for (int i_Step = 0; i_Step < n_Step; i_Step++)
  {
@@ -650,7 +654,7 @@ NumericVector confluen_WaterGAP3_L(
 
  }
 
-
+ subset_add(confluen_outflow_m3, Riverlak_cellNumber_int, Riverlak_overflow_m3);
  return confluen_outflow_m3;
 
 }
