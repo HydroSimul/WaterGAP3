@@ -10,6 +10,8 @@ WaterGAP3_H(
   ATMOS_precipitation_mm,
   ATMOS_temperature_Cel,
   ATMOS_potentialEvatrans_mm,
+  Upstream_cellNumber_int,
+  Upstream_streamflow_m3,
   SNOW_ice_mm,
   LAND_builtRatio_1,
   LAND_interceptWater_mm,
@@ -48,6 +50,10 @@ WaterGAP3_H(
 \item{ATMOS_temperature_Cel}{(Cel) the average air temperature in the time phase}
 
 \item{ATMOS_potentialEvatrans_mm}{(mm/m2/TS) **potential / reference** evapotranspiration}
+
+\item{Upstream_cellNumber_int}{Upstream cell number}
+
+\item{Upstream_streamflow_m3}{Upstream}
 
 \item{SNOW_ice_mm}{(mm/m2) water equivalent of **ice** in snowpack}
 

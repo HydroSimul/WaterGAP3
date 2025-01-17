@@ -39,8 +39,8 @@ subset_add <- function(vec_Data, int_Index, vec_DataAdd) {
 #' @inheritParams process
 #' @return streamflow m3
 #' @export
-WaterGAP3_H <- function(n_time, n_spat, ATMOS_precipitation_mm, ATMOS_temperature_Cel, ATMOS_potentialEvatrans_mm, SNOW_ice_mm, LAND_builtRatio_1, LAND_interceptWater_mm, LAND_interceptCapacity_mm, SOIL_water_mm, SOIL_capacity_mm, SOIL_potentialPercola_mm, GROUND_water_mm, RIVER_water_m3, RIVER_length_km, RIVER_velocity_km, CELL_landArea_km2, CELL_cellNumberStep_int, CELL_inflowCellNumberStep_int, param_ATMOS_thr_Ts, param_SNOW_fac_f, param_SNOW_fac_Tmelt, param_EVATRANS_sup_k, param_EVATRANS_sup_gamma, param_EVATRANS_wat_petmax, param_INFILT_hbv_beta, param_PERCOLA_wat_01, param_PERCOLA_wat_k, param_PERCOLA_wat_thresh, param_BASEFLOW_sur_k, if_allVariExport = FALSE) {
-    .Call(`_WaterGAP3_WaterGAP3_H`, n_time, n_spat, ATMOS_precipitation_mm, ATMOS_temperature_Cel, ATMOS_potentialEvatrans_mm, SNOW_ice_mm, LAND_builtRatio_1, LAND_interceptWater_mm, LAND_interceptCapacity_mm, SOIL_water_mm, SOIL_capacity_mm, SOIL_potentialPercola_mm, GROUND_water_mm, RIVER_water_m3, RIVER_length_km, RIVER_velocity_km, CELL_landArea_km2, CELL_cellNumberStep_int, CELL_inflowCellNumberStep_int, param_ATMOS_thr_Ts, param_SNOW_fac_f, param_SNOW_fac_Tmelt, param_EVATRANS_sup_k, param_EVATRANS_sup_gamma, param_EVATRANS_wat_petmax, param_INFILT_hbv_beta, param_PERCOLA_wat_01, param_PERCOLA_wat_k, param_PERCOLA_wat_thresh, param_BASEFLOW_sur_k, if_allVariExport)
+WaterGAP3_H <- function(n_time, n_spat, ATMOS_precipitation_mm, ATMOS_temperature_Cel, ATMOS_potentialEvatrans_mm, Upstream_cellNumber_int, Upstream_streamflow_m3, SNOW_ice_mm, LAND_builtRatio_1, LAND_interceptWater_mm, LAND_interceptCapacity_mm, SOIL_water_mm, SOIL_capacity_mm, SOIL_potentialPercola_mm, GROUND_water_mm, RIVER_water_m3, RIVER_length_km, RIVER_velocity_km, CELL_landArea_km2, CELL_cellNumberStep_int, CELL_inflowCellNumberStep_int, param_ATMOS_thr_Ts, param_SNOW_fac_f, param_SNOW_fac_Tmelt, param_EVATRANS_sup_k, param_EVATRANS_sup_gamma, param_EVATRANS_wat_petmax, param_INFILT_hbv_beta, param_PERCOLA_wat_01, param_PERCOLA_wat_k, param_PERCOLA_wat_thresh, param_BASEFLOW_sur_k, if_allVariExport = FALSE) {
+    .Call(`_WaterGAP3_WaterGAP3_H`, n_time, n_spat, ATMOS_precipitation_mm, ATMOS_temperature_Cel, ATMOS_potentialEvatrans_mm, Upstream_cellNumber_int, Upstream_streamflow_m3, SNOW_ice_mm, LAND_builtRatio_1, LAND_interceptWater_mm, LAND_interceptCapacity_mm, SOIL_water_mm, SOIL_capacity_mm, SOIL_potentialPercola_mm, GROUND_water_mm, RIVER_water_m3, RIVER_length_km, RIVER_velocity_km, CELL_landArea_km2, CELL_cellNumberStep_int, CELL_inflowCellNumberStep_int, param_ATMOS_thr_Ts, param_SNOW_fac_f, param_SNOW_fac_Tmelt, param_EVATRANS_sup_k, param_EVATRANS_sup_gamma, param_EVATRANS_wat_petmax, param_INFILT_hbv_beta, param_PERCOLA_wat_01, param_PERCOLA_wat_k, param_PERCOLA_wat_thresh, param_BASEFLOW_sur_k, if_allVariExport)
 }
 
 #' WaterGAP3
@@ -242,14 +242,14 @@ reservoi_Hanasaki <- function(Reservoi_water_m3, Reservoi_inflow_m3, Reservoi_ca
 
 #' @rdname process
 #' @export
-confluen_WaterGAP3 <- function(RIVER_water_m3, RIVER_length_km, RIVER_velocity_km, CELL_cellNumberStep_int, CELL_inflowCellNumberStep_int) {
-    .Call(`_WaterGAP3_confluen_WaterGAP3`, RIVER_water_m3, RIVER_length_km, RIVER_velocity_km, CELL_cellNumberStep_int, CELL_inflowCellNumberStep_int)
+confluen_WaterGAP3 <- function(RIVER_water_m3, RIVER_length_km, RIVER_velocity_km, Upstream_cellNumber_int, Upstream_streamflow_m3, CELL_cellNumberStep_int, CELL_inflowCellNumberStep_int) {
+    .Call(`_WaterGAP3_confluen_WaterGAP3`, RIVER_water_m3, RIVER_length_km, RIVER_velocity_km, Upstream_cellNumber_int, Upstream_streamflow_m3, CELL_cellNumberStep_int, CELL_inflowCellNumberStep_int)
 }
 
 #' @rdname process
 #' @export
-confluen_WaterGAP3_L <- function(RIVER_water_m3, RIVER_length_km, RIVER_velocity_km, CELL_cellNumberStep_int, CELL_inflowCellNumberStep_int, Riverlak_cellNumber_int, Riverlak_water_m3, Riverlak_capacity_m3, param_Riverlak_lin_storeFactor) {
-    .Call(`_WaterGAP3_confluen_WaterGAP3_L`, RIVER_water_m3, RIVER_length_km, RIVER_velocity_km, CELL_cellNumberStep_int, CELL_inflowCellNumberStep_int, Riverlak_cellNumber_int, Riverlak_water_m3, Riverlak_capacity_m3, param_Riverlak_lin_storeFactor)
+confluen_WaterGAP3_L <- function(RIVER_water_m3, RIVER_length_km, RIVER_velocity_km, Upstream_cellNumber_int, Upstream_streamflow_m3, CELL_cellNumberStep_int, CELL_inflowCellNumberStep_int, Riverlak_cellNumber_int, Riverlak_water_m3, Riverlak_capacity_m3, param_Riverlak_lin_storeFactor) {
+    .Call(`_WaterGAP3_confluen_WaterGAP3_L`, RIVER_water_m3, RIVER_length_km, RIVER_velocity_km, Upstream_cellNumber_int, Upstream_streamflow_m3, CELL_cellNumberStep_int, CELL_inflowCellNumberStep_int, Riverlak_cellNumber_int, Riverlak_water_m3, Riverlak_capacity_m3, param_Riverlak_lin_storeFactor)
 }
 
 #' @rdname process

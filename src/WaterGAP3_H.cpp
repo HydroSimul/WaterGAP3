@@ -13,6 +13,8 @@ List WaterGAP3_H(
    NumericMatrix ATMOS_precipitation_mm,
    NumericMatrix ATMOS_temperature_Cel,
    NumericMatrix ATMOS_potentialEvatrans_mm,
+   IntegerVector Upstream_cellNumber_int,
+   NumericMatrix Upstream_streamflow_m3,
    NumericVector SNOW_ice_mm,
    NumericVector LAND_builtRatio_1,
    NumericVector LAND_interceptWater_mm,
@@ -99,6 +101,8 @@ List WaterGAP3_H(
      RIVER_water_m3,
      RIVER_length_km,
      RIVER_velocity_km,
+     Upstream_cellNumber_int,
+     Upstream_streamflow_m3(i,_),
      CELL_cellNumberStep_int,
      CELL_inflowCellNumberStep_int
    );

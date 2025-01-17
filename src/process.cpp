@@ -517,25 +517,30 @@ NumericVector confluen_WaterGAP3(
    NumericVector &RIVER_water_m3,
    NumericVector RIVER_length_km,
    NumericVector RIVER_velocity_km,
+   IntegerVector Upstream_cellNumber_int,
+   NumericVector Upstream_streamflow_m3,
    List CELL_cellNumberStep_int,
    List CELL_inflowCellNumberStep_int
 )
 {
 
  int n_Cell = RIVER_water_m3.size();
- NumericVector RIVER_outflow_m3(n_Cell),
+ NumericVector RIVER_outflow_m3(n_Cell), RIVER_upstreamInflow_m3(n_Cell),
  step_RiverOutflow_m3, step_RiverlakeOutflow_m3;
 
  IntegerVector idx_Cell_Step,
  idx_Riverlake_Step, idx_Step_Riverlake;
  int n_Step = CELL_cellNumberStep_int.size();
+ if (Upstream_cellNumber_int(0) != 0) {
+   subset_put(RIVER_upstreamInflow_m3, Upstream_cellNumber_int, Upstream_streamflow_m3);
+ }
 
  // Step i later with Inflow
  for (int i_Step = 0; i_Step < n_Step; i_Step++)
  {
 
    idx_Cell_Step = CELL_cellNumberStep_int[i_Step];
-   NumericVector step_UpstreamInflow_m3(idx_Cell_Step.size(), 0.);
+   NumericVector step_UpstreamInflow_m3 = subset_get(RIVER_upstreamInflow_m3, idx_Cell_Step);
    // Inflow upstream
    if (i_Step > 0) {
 
@@ -578,6 +583,8 @@ NumericVector confluen_WaterGAP3_L(
    NumericVector &RIVER_water_m3,
    NumericVector RIVER_length_km,
    NumericVector RIVER_velocity_km,
+   IntegerVector Upstream_cellNumber_int,
+   NumericVector Upstream_streamflow_m3,
    List CELL_cellNumberStep_int,
    List CELL_inflowCellNumberStep_int,
    IntegerVector Riverlak_cellNumber_int,
@@ -588,10 +595,11 @@ NumericVector confluen_WaterGAP3_L(
 {
 
  int n_Cell = RIVER_water_m3.size();
- NumericVector RIVER_outflow_m3(n_Cell),
+ NumericVector RIVER_outflow_m3(n_Cell), RIVER_upstreamInflow_m3(n_Cell),
  step_RiverOutflow_m3, step_RiverlakeOutflow_m3;
 
  IntegerVector idx_Cell_Step,
+ idx_Step_Upstream,
  idx_Riverlake_Step, idx_Step_Riverlake;
  int n_Step = CELL_cellNumberStep_int.size();
 
@@ -599,14 +607,16 @@ NumericVector confluen_WaterGAP3_L(
  NumericVector Riverlak_overflow_m3 = pmax(Riverlak_water_m3 - Riverlak_capacity_m3, 0);
  Riverlak_water_m3 += -Riverlak_overflow_m3;
 
-
+ if (Upstream_cellNumber_int(0) != 0) {
+   subset_put(RIVER_upstreamInflow_m3, Upstream_cellNumber_int, Upstream_streamflow_m3);
+ }
 
  // Step i later with Inflow
  for (int i_Step = 0; i_Step < n_Step; i_Step++)
  {
 
    idx_Cell_Step = CELL_cellNumberStep_int[i_Step];
-   NumericVector step_UpstreamInflow_m3(idx_Cell_Step.size(), 0.);
+   NumericVector step_UpstreamInflow_m3 = subset_get(RIVER_upstreamInflow_m3, idx_Cell_Step);
 
 
    // Inflow upstream
