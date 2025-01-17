@@ -599,6 +599,9 @@ NumericVector confluen_WaterGAP3_L(
  NumericVector Riverlak_overflow_m3 = pmax(Riverlak_water_m3 - Riverlak_capacity_m3, 0);
  Riverlak_water_m3 += -Riverlak_overflow_m3;
 
+ NumericVector Riverlak_CONFLUEN_outflow_m3 = subset_get(CONFLUEN_outflow_m3, Riverlak_cellNumber_int);
+
+
  // Step i later with Inflow
  for (int i_Step = 0; i_Step < n_Step; i_Step++)
  {
@@ -635,7 +638,6 @@ NumericVector confluen_WaterGAP3_L(
    // global lake (riverlake)
    idx_RiverLake_Step = get_idx_cell(Riverlak_cellNumber_int, idx_Cell_Step);
    idx_Step_Riverlake = get_idx_step(Riverlak_cellNumber_int, idx_Cell_Step);
-   NumericVector Riverlak_CONFLUEN_outflow_m3 = subset_get(CONFLUEN_outflow_m3, idx_Step_Riverlake);
    if (idx_RiverLake_Step.size() > 0) {
      NumericVector step_RiverlakeWater= subset_get(Riverlak_water_m3, idx_RiverLake_Step),
        step_RiverlakeInflow = subset_get(step_UpstreamInflow_m3, idx_Step_Riverlake);
@@ -650,11 +652,11 @@ NumericVector confluen_WaterGAP3_L(
      subset_put(Riverlak_CONFLUEN_outflow_m3, idx_RiverLake_Step, step_RiverlakeOutflow_m3);
      subset_put(Riverlak_water_m3, idx_RiverLake_Step,  step_RiverlakeWater + step_RiverlakeInflow - step_RiverlakeOutflow_m3);
    }
-   subset_put(CONFLUEN_outflow_m3, idx_Step_Riverlake, Riverlak_CONFLUEN_outflow_m3);
 
 
 
  }
+ subset_put(CONFLUEN_outflow_m3, Riverlak_cellNumber_int, Riverlak_CONFLUEN_outflow_m3);
 
  subset_add(CONFLUEN_outflow_m3, Riverlak_cellNumber_int, Riverlak_overflow_m3);
  return CONFLUEN_outflow_m3;
