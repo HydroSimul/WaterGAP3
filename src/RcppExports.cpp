@@ -904,11 +904,11 @@ RcppExport SEXP _WaterGAP3_baseflow_SupplyRatio(SEXP GROUND_water_mmSEXP, SEXP p
     return rcpp_result_gen;
 }
 // lake_AcceptPow
-NumericVector lake_AcceptPow(NumericVector Lake_water_m3, NumericVector Lake_capacity_m3, NumericVector param_Lake_acp_storeFactor, NumericVector param_Lake_acp_gamma);
+NumericVector lake_AcceptPow(NumericVector& Lake_water_m3, NumericVector Lake_capacity_m3, NumericVector param_Lake_acp_storeFactor, NumericVector param_Lake_acp_gamma);
 static SEXP _WaterGAP3_lake_AcceptPow_try(SEXP Lake_water_m3SEXP, SEXP Lake_capacity_m3SEXP, SEXP param_Lake_acp_storeFactorSEXP, SEXP param_Lake_acp_gammaSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type Lake_water_m3(Lake_water_m3SEXP);
+    Rcpp::traits::input_parameter< NumericVector& >::type Lake_water_m3(Lake_water_m3SEXP);
     Rcpp::traits::input_parameter< NumericVector >::type Lake_capacity_m3(Lake_capacity_m3SEXP);
     Rcpp::traits::input_parameter< NumericVector >::type param_Lake_acp_storeFactor(param_Lake_acp_storeFactorSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type param_Lake_acp_gamma(param_Lake_acp_gammaSEXP);
@@ -1216,7 +1216,7 @@ static int _WaterGAP3_RcppExport_validate(const char* sig) {
         signatures.insert("NumericVector(*percola_WaterGAP3)(NumericVector,NumericVector,LogicalVector,NumericVector,NumericVector)");
         signatures.insert("NumericVector(*baseflow_GR4Jfix)(NumericVector,NumericVector,NumericVector)");
         signatures.insert("NumericVector(*baseflow_SupplyRatio)(NumericVector,NumericVector)");
-        signatures.insert("NumericVector(*lake_AcceptPow)(NumericVector,NumericVector,NumericVector,NumericVector)");
+        signatures.insert("NumericVector(*lake_AcceptPow)(NumericVector&,NumericVector,NumericVector,NumericVector)");
         signatures.insert("NumericVector(*river_LinearResorvoir)(NumericVector,NumericVector,NumericVector,NumericVector)");
         signatures.insert("NumericVector(*riverlak_LinearResorvoir)(NumericVector,NumericVector,NumericVector,NumericVector)");
         signatures.insert("NumericVector(*reservoi_Hanasaki)(NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector&,LogicalVector,LogicalVector,NumericVector,NumericVector)");
