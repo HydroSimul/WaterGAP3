@@ -65,38 +65,6 @@ WaterGAP3_HLR <- function(n_time, n_spat, ATMOS_precipitation_mm, ATMOS_temperat
     .Call(`_WaterGAP3_WaterGAP3_HLR`, n_time, n_spat, ATMOS_precipitation_mm, ATMOS_temperature_Cel, ATMOS_potentialEvatrans_mm, SNOW_ice_mm, LAND_builtRatio_1, LAND_interceptWater_mm, LAND_interceptCapacity_mm, SOIL_water_mm, SOIL_capacity_mm, SOIL_potentialPercola_mm, GROUND_water_mm, GROUND_capacity_mm, RIVER_water_m3, RIVER_length_km, RIVER_velocity_km, CELL_landArea_km2, CELL_cellNumberStep_int, CELL_inflowCellNumberStep_int, Lake_cellNumber_int, Lake_water_m3, Lake_area_km2, Lake_capacity_m3, Riverlak_cellNumber_int, Riverlak_water_m3, Riverlak_area_km2, Riverlak_capacity_m3, Reservoi_cellNumber_int, Reservoi_water_m3, Reservoi_area_km2, Reservoi_capacity_m3, Reservoi_demand_m3, Reservoi_yearInflow_m3, Reservoi_yearDemand_m3, Reservoi_yearRelase_m3, Reservoi_isOperateStart_01, Reservoi_isIrrigate_01, param_ATMOS_thr_Ts, param_SNOW_fac_f, param_SNOW_fac_Tmelt, param_EVATRANS_sup_k, param_EVATRANS_sup_gamma, param_EVATRANS_wat_petmax, param_INFILT_hbv_beta, param_PERCOLA_wat_01, param_PERCOLA_wat_k, param_PERCOLA_wat_thresh, param_BASEFLOW_sur_k, param_Evalake_vic_gamma, param_Lake_acp_storeFactor, param_Lake_acp_gamma, param_Riverlak_lin_storeFactor, param_Reservoi_han_alpha, param_Reservoi_han_kDemand, if_allVariExport)
 }
 
-#' @rdname flowpath
-#' @name get_inflow_cells
-#' @title Get Inflow Cells
-#' @description This function calculates inflow cells based on the outflow vector.
-#' @param int_Outflow (vector of int) The cell number of the next cell. The cell number must range from 1 to the length of the cells.
-#' If the cell has no outflow, the number should be set to itself.
-#' @return A list where each element is an IntegerVector containing the inflow cells for each cell.
-#' @export
-get_inflow_cells <- function(int_Outflow) {
-    .Call(`_WaterGAP3_get_inflow_cells`, int_Outflow)
-}
-
-#' @rdname flowpath
-#' @name get_inflow_lastcell
-#' @title Get Inflow Last Cell Matrix
-#' @description This function creates a matrix of inflow cells for each cell based on the outflow vector.
-#' @return A NumericMatrix where each row corresponds to a cell, and each column represents an inflow cell.
-#' @export
-get_inflow_lastcell <- function(int_Outflow) {
-    .Call(`_WaterGAP3_get_inflow_lastcell`, int_Outflow)
-}
-
-#' @rdname flowpath
-#' @name get_step_param
-#' @title Get Step Parameters
-#' @description This function returns a list of step cells and the corresponding last cell matrices.
-#' @return A list containing the step cells and last cell matrices.
-#' @export
-get_step_param <- function(int_Outflow) {
-    .Call(`_WaterGAP3_get_step_param`, int_Outflow)
-}
-
 #' Hydrological Process
 #' @name process
 #' @inheritParams all_vari
@@ -242,20 +210,52 @@ reservoi_Hanasaki <- function(Reservoi_water_m3, Reservoi_inflow_m3, Reservoi_ca
 
 #' @rdname process
 #' @export
-confluen_WaterGAP3 <- function(RIVER_water_m3, RIVER_length_km, RIVER_velocity_km, Upstream_cellNumber_int, Upstream_streamflow_m3, CELL_cellNumberStep_int, CELL_inflowCellNumberStep_int) {
-    .Call(`_WaterGAP3_confluen_WaterGAP3`, RIVER_water_m3, RIVER_length_km, RIVER_velocity_km, Upstream_cellNumber_int, Upstream_streamflow_m3, CELL_cellNumberStep_int, CELL_inflowCellNumberStep_int)
+confluen_WaterGAP3 <- function(RIVER_water_m3, RIVER_length_km, RIVER_velocity_km, RIVER_outflow_m3, CELL_cellNumberStep_int, CELL_inflowCellNumberStep_int) {
+    .Call(`_WaterGAP3_confluen_WaterGAP3`, RIVER_water_m3, RIVER_length_km, RIVER_velocity_km, RIVER_outflow_m3, CELL_cellNumberStep_int, CELL_inflowCellNumberStep_int)
 }
 
 #' @rdname process
 #' @export
-confluen_WaterGAP3_L <- function(RIVER_water_m3, RIVER_length_km, RIVER_velocity_km, Upstream_cellNumber_int, Upstream_streamflow_m3, CELL_cellNumberStep_int, CELL_inflowCellNumberStep_int, Riverlak_cellNumber_int, Riverlak_water_m3, Riverlak_capacity_m3, param_Riverlak_lin_storeFactor) {
-    .Call(`_WaterGAP3_confluen_WaterGAP3_L`, RIVER_water_m3, RIVER_length_km, RIVER_velocity_km, Upstream_cellNumber_int, Upstream_streamflow_m3, CELL_cellNumberStep_int, CELL_inflowCellNumberStep_int, Riverlak_cellNumber_int, Riverlak_water_m3, Riverlak_capacity_m3, param_Riverlak_lin_storeFactor)
+confluen_WaterGAP3_L <- function(RIVER_water_m3, RIVER_length_km, RIVER_velocity_km, RIVER_outflow_m3, CELL_cellNumberStep_int, CELL_inflowCellNumberStep_int, Riverlak_cellNumber_int, Riverlak_water_m3, Riverlak_capacity_m3, param_Riverlak_lin_storeFactor) {
+    .Call(`_WaterGAP3_confluen_WaterGAP3_L`, RIVER_water_m3, RIVER_length_km, RIVER_velocity_km, RIVER_outflow_m3, CELL_cellNumberStep_int, CELL_inflowCellNumberStep_int, Riverlak_cellNumber_int, Riverlak_water_m3, Riverlak_capacity_m3, param_Riverlak_lin_storeFactor)
 }
 
 #' @rdname process
 #' @export
 confluen_WaterGAP3_LR <- function(CONFLUEN_cellInflow_m3, RIVER_water_m3, RIVER_length_km, RIVER_velocity_km, Riverlak_cellNumber_int, Riverlak_water_m3, Riverlak_capacity_m3, Reservoi_cellNumber_int, Reservoi_water_m3, Reservoi_capacity_m3, Reservoi_demand_m3, Reservoi_yearInflow_m3, Reservoi_yearDemand_m3, Reservoi_yearRelase_m3, Reservoi_isOperateStart_01, Reservoi_isIrrigate_01, CELL_cellNumberStep_int, CELL_inflowCellNumberStep_int, param_Riverlak_lin_storeFactor, param_Reservoi_han_alpha, param_Reservoi_han_kDemand) {
     .Call(`_WaterGAP3_confluen_WaterGAP3_LR`, CONFLUEN_cellInflow_m3, RIVER_water_m3, RIVER_length_km, RIVER_velocity_km, Riverlak_cellNumber_int, Riverlak_water_m3, Riverlak_capacity_m3, Reservoi_cellNumber_int, Reservoi_water_m3, Reservoi_capacity_m3, Reservoi_demand_m3, Reservoi_yearInflow_m3, Reservoi_yearDemand_m3, Reservoi_yearRelase_m3, Reservoi_isOperateStart_01, Reservoi_isIrrigate_01, CELL_cellNumberStep_int, CELL_inflowCellNumberStep_int, param_Riverlak_lin_storeFactor, param_Reservoi_han_alpha, param_Reservoi_han_kDemand)
+}
+
+#' @rdname routingtopology
+#' @name get_inflow_cells
+#' @title Get Inflow Cells
+#' @description This function calculates inflow cells based on the outflow vector.
+#' @param int_Outflow (vector of int) The cell number of the next cell. The cell number must range from 1 to the length of the cells.
+#' If the cell has no outflow, the number should be set to itself.
+#' @return A list where each element is an IntegerVector containing the inflow cells for each cell.
+#' @export
+get_inflow_cells <- function(int_Outflow) {
+    .Call(`_WaterGAP3_get_inflow_cells`, int_Outflow)
+}
+
+#' @rdname routingtopology
+#' @name get_inflow_lastcell
+#' @title Get Inflow Last Cell Matrix
+#' @description This function creates a matrix of inflow cells for each cell based on the outflow vector.
+#' @return A NumericMatrix where each row corresponds to a cell, and each column represents an inflow cell.
+#' @export
+get_inflow_lastcell <- function(int_Outflow) {
+    .Call(`_WaterGAP3_get_inflow_lastcell`, int_Outflow)
+}
+
+#' @rdname routingtopology
+#' @name get_step_param
+#' @title Get Step Parameters
+#' @description This function returns a list of step cells and the corresponding last cell matrices.
+#' @return A list containing the step cells and last cell matrices.
+#' @export
+get_step_param <- function(int_Outflow) {
+    .Call(`_WaterGAP3_get_step_param`, int_Outflow)
 }
 
 # Register entry points for exported C++ functions

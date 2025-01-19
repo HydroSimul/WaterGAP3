@@ -163,8 +163,7 @@ confluen_WaterGAP3(
   RIVER_water_m3,
   RIVER_length_km,
   RIVER_velocity_km,
-  Upstream_cellNumber_int,
-  Upstream_streamflow_m3,
+  RIVER_outflow_m3,
   CELL_cellNumberStep_int,
   CELL_inflowCellNumberStep_int
 )
@@ -173,8 +172,7 @@ confluen_WaterGAP3_L(
   RIVER_water_m3,
   RIVER_length_km,
   RIVER_velocity_km,
-  Upstream_cellNumber_int,
-  Upstream_streamflow_m3,
+  RIVER_outflow_m3,
   CELL_cellNumberStep_int,
   CELL_inflowCellNumberStep_int,
   Riverlak_cellNumber_int,
@@ -324,9 +322,7 @@ confluen_WaterGAP3_LR(
 
 \item{param_Reservoi_han_kDemand}{<uknow> parameter for [reservoi_Hanasaki()],}
 
-\item{Upstream_cellNumber_int}{Upstream cell number}
-
-\item{Upstream_streamflow_m3}{Upstream}
+\item{RIVER_outflow_m3}{(m3/TS) river outflow volume}
 
 \item{CELL_cellNumberStep_int}{(int) step number of basin cells}
 

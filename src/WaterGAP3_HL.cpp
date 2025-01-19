@@ -157,12 +157,14 @@ List WaterGAP3_HL(
    Riverlak_water_m3 = pmax(Riverlak_water_m3 + subset_get(CELL_verticalflow_m3, Riverlak_cellNumber_int) + Riverlak_verticalInflow_m3, 0.);
 
    // Horizontal
+   if (Upstream_cellNumber_int(0) != 0) {
+     subset_put(CELL_verticalflow_m3, Upstream_cellNumber_int, Upstream_streamflow_m3(i,_));
+   }
    RIVER_outflow_m3(i, _) = confluen_WaterGAP3_L(
      RIVER_water_m3,
      RIVER_length_km,
      RIVER_velocity_km,
-     Upstream_cellNumber_int,
-     Upstream_streamflow_m3(i,_),
+     CELL_verticalflow_m3, // just for the cell in Step 0
      CELL_cellNumberStep_int,
      CELL_inflowCellNumberStep_int,
      Riverlak_cellNumber_int,

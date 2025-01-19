@@ -97,8 +97,7 @@ NumericVector confluen_WaterGAP3(
     NumericVector &RIVER_water_m3,
     NumericVector RIVER_length_km,
     NumericVector RIVER_velocity_km,
-    IntegerVector Upstream_cellNumber_int,
-    NumericVector Upstream_streamflow_m3,
+    NumericVector RIVER_outflow_m3,
     List CELL_cellNumberStep_int,
     List CELL_inflowCellNumberStep_int
 );
@@ -108,8 +107,7 @@ NumericVector confluen_WaterGAP3_L(
     NumericVector &RIVER_water_m3,
     NumericVector RIVER_length_km,
     NumericVector RIVER_velocity_km,
-    IntegerVector Upstream_cellNumber_int,
-    NumericVector Upstream_streamflow_m3,
+    NumericVector RIVER_outflow_m3,
     List CELL_cellNumberStep_int,
     List CELL_inflowCellNumberStep_int,
     IntegerVector Riverlak_cellNumber_int,

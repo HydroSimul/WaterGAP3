@@ -120,6 +120,8 @@
 
 \item{RIVER_inflow_m3}{(m3/TS) river inflow volume}
 
+\item{RIVER_outflow_m3}{(m3/TS) river outflow volume}
+
 \item{RIVER_velocity_km}{(km/TS) river velocity}
 
 \item{RIVER_length_km}{(km) river length}
@@ -133,6 +135,8 @@
 \item{Riverlak_inflow_m3}{(m3) inflow volume to the river-lake system}
 
 \item{Riverlak_water_m3}{(m3) water volume in the river-lake system}
+
+\item{RIVER_upstreamInflow_m3}{(m3) Upstream flow}
 
 \item{Reservoi_cellNumber_int}{(int) reservoir cell number}
 

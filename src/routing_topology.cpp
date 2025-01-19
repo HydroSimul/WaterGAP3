@@ -4,7 +4,7 @@
 using namespace Rcpp;
 
 
-//' @rdname flowpath
+//' @rdname routingtopology
 //' @name get_inflow_cells
 //' @title Get Inflow Cells
 //' @description This function calculates inflow cells based on the outflow vector.
@@ -45,7 +45,7 @@ List get_inflow_cells(IntegerVector int_Outflow) {
   return lst_Inflow;
 }
 
-//' @rdname flowpath
+//' @rdname routingtopology
 //' @name get_inflow_lastcell
 //' @title Get Inflow Last Cell Matrix
 //' @description This function creates a matrix of inflow cells for each cell based on the outflow vector.
@@ -168,7 +168,7 @@ List get_step_lastcell(List lst_Step_Cell, NumericMatrix mat_Inflow_LastCell) {
 }
 
 
-//' @rdname flowpath
+//' @rdname routingtopology
 //' @name get_step_param
 //' @title Get Step Parameters
 //' @description This function returns a list of step cells and the corresponding last cell matrices.

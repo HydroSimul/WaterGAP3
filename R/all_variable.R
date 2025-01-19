@@ -61,6 +61,7 @@
 #' @param Lake_inflow_m3 (m3/TS) inflow of the lake
 #' @param RIVER_water_m3 (m3) river water volume
 #' @param RIVER_inflow_m3 (m3/TS) river inflow volume
+#' @param RIVER_outflow_m3 (m3/TS) river outflow volume
 #' @param RIVER_velocity_km (km/TS) river velocity
 #' @param RIVER_length_km (km) river length
 #' @param Riverlak_cellNumber_int (int) river-lake cell number
@@ -68,6 +69,7 @@
 #' @param Riverlak_capacity_m3 (m3) total capacity of the river-lake system
 #' @param Riverlak_inflow_m3 (m3) inflow volume to the river-lake system
 #' @param Riverlak_water_m3 (m3) water volume in the river-lake system
+#' @param RIVER_upstreamInflow_m3 (m3) Upstream flow
 #' @param Reservoi_cellNumber_int (int) reservoir cell number
 #' @param Reservoi_water_m3 (m3) volume of water in the reservoir
 #' @param Reservoi_capacity_m3 (m3) reservoir capacity
