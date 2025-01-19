@@ -1196,6 +1196,19 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// get_upstream_basin
+IntegerVector get_upstream_basin(List lst_Inflow_Cell, int int_OutLet, IntegerVector int_UpstreamCell);
+RcppExport SEXP _WaterGAP3_get_upstream_basin(SEXP lst_Inflow_CellSEXP, SEXP int_OutLetSEXP, SEXP int_UpstreamCellSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< List >::type lst_Inflow_Cell(lst_Inflow_CellSEXP);
+    Rcpp::traits::input_parameter< int >::type int_OutLet(int_OutLetSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type int_UpstreamCell(int_UpstreamCellSEXP);
+    rcpp_result_gen = Rcpp::wrap(get_upstream_basin(lst_Inflow_Cell, int_OutLet, int_UpstreamCell));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 // validate (ensure exported C++ functions exist before calling them)
 static int _WaterGAP3_RcppExport_validate(const char* sig) { 
@@ -1296,6 +1309,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_WaterGAP3_get_inflow_cells", (DL_FUNC) &_WaterGAP3_get_inflow_cells, 1},
     {"_WaterGAP3_get_inflow_lastcell", (DL_FUNC) &_WaterGAP3_get_inflow_lastcell, 1},
     {"_WaterGAP3_get_step_param", (DL_FUNC) &_WaterGAP3_get_step_param, 1},
+    {"_WaterGAP3_get_upstream_basin", (DL_FUNC) &_WaterGAP3_get_upstream_basin, 3},
     {"_WaterGAP3_RcppExport_registerCCallable", (DL_FUNC) &_WaterGAP3_RcppExport_registerCCallable, 0},
     {NULL, NULL, 0}
 };

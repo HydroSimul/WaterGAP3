@@ -258,6 +258,17 @@ get_step_param <- function(int_Outflow) {
     .Call(`_WaterGAP3_get_step_param`, int_Outflow)
 }
 
+#' @rdname routingtopology
+#' @param lst_Inflow_Cell A list of integer vectors, where each vector contains the cells that flow into the respective cell.
+#' @param int_OutLet An integer representing the outlet cell (1-based index).
+#' @param int_UpstreamCell An integer vector containing the upstream cells to find the upstream basin.
+#' @return An integer vector representing the new upstream basin, which includes the upstream cells and the set difference of the basin cells.
+#' This function identifies the upstream basin of a given outlet cell by first finding the intersection of the upstream cells
+#' with the cells that flow into the outlet. It then computes the set difference between the upstream basin and the outlet basin.
+get_upstream_basin <- function(lst_Inflow_Cell, int_OutLet, int_UpstreamCell) {
+    .Call(`_WaterGAP3_get_upstream_basin`, lst_Inflow_Cell, int_OutLet, int_UpstreamCell)
+}
+
 # Register entry points for exported C++ functions
 methods::setLoadAction(function(ns) {
     .Call(`_WaterGAP3_RcppExport_registerCCallable`)

@@ -4,6 +4,7 @@
 \alias{get_inflow_cells}
 \alias{get_inflow_lastcell}
 \alias{get_step_param}
+\alias{get_upstream_basin}
 \title{Get Inflow Cells}
 \usage{
 get_inflow_cells(int_Outflow)
@@ -11,10 +12,18 @@ get_inflow_cells(int_Outflow)
 get_inflow_lastcell(int_Outflow)
 
 get_step_param(int_Outflow)
+
+get_upstream_basin(lst_Inflow_Cell, int_OutLet, int_UpstreamCell)
 }
 \arguments{
 \item{int_Outflow}{(vector of int) The cell number of the next cell. The cell number must range from 1 to the length of the cells.
 If the cell has no outflow, the number should be set to itself.}
+
+\item{lst_Inflow_Cell}{A list of integer vectors, where each vector contains the cells that flow into the respective cell.}
+
+\item{int_OutLet}{An integer representing the outlet cell (1-based index).}
+
+\item{int_UpstreamCell}{An integer vector containing the upstream cells to find the upstream basin.}
 }
 \value{
 A list where each element is an IntegerVector containing the inflow cells for each cell.
@@ -22,6 +31,10 @@ A list where each element is an IntegerVector containing the inflow cells for ea
 A NumericMatrix where each row corresponds to a cell, and each column represents an inflow cell.
 
 A list containing the step cells and last cell matrices.
+
+An integer vector representing the new upstream basin, which includes the upstream cells and the set difference of the basin cells.
+This function identifies the upstream basin of a given outlet cell by first finding the intersection of the upstream cells
+with the cells that flow into the outlet. It then computes the set difference between the upstream basin and the outlet basin.
 }
 \description{
 This function calculates inflow cells based on the outflow vector.

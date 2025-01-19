@@ -1,6 +1,7 @@
 #include <Rcpp.h>
 #include <unordered_map>
 #include <algorithm>
+#include <set>       // for std::set
 using namespace Rcpp;
 
 
@@ -194,3 +195,54 @@ List get_step_param(IntegerVector int_Outflow) {
     Named("mat_LastCell") = lst_Step_LastCell
   );
 }
+
+
+
+//' @rdname routingtopology
+//' @param lst_Inflow_Cell A list of integer vectors, where each vector contains the cells that flow into the respective cell.
+//' @param int_OutLet An integer representing the outlet cell (1-based index).
+//' @param int_UpstreamCell An integer vector containing the upstream cells to find the upstream basin.
+//' @return An integer vector representing the new upstream basin, which includes the upstream cells and the set difference of the basin cells.
+//' This function identifies the upstream basin of a given outlet cell by first finding the intersection of the upstream cells
+//' with the cells that flow into the outlet. It then computes the set difference between the upstream basin and the outlet basin.
+// [[Rcpp::export]]
+IntegerVector get_upstream_basin(List lst_Inflow_Cell, int int_OutLet, IntegerVector int_UpstreamCell) {
+  // Extract the Big Basin
+  IntegerVector int_BigBasin = lst_Inflow_Cell[int_OutLet - 1];
+
+  // Convert vectors to sets for efficient operations
+  std::set<int> big_basin(int_BigBasin.begin(), int_BigBasin.end());
+  std::set<int> upstream_cells(int_UpstreamCell.begin(), int_UpstreamCell.end());
+
+  // Find intersection of UpstreamCell and BigBasin
+  std::vector<int> upstream_cell_in_basin;
+  std::set_intersection(
+    big_basin.begin(), big_basin.end(),
+    upstream_cells.begin(), upstream_cells.end(),
+    std::back_inserter(upstream_cell_in_basin)
+  );
+
+  // Collect inflow cells for intersected upstream cells
+  std::set<int> upstream_basin;
+  for (int cell : upstream_cell_in_basin) {
+    IntegerVector inflow_cells = lst_Inflow_Cell[cell - 1];
+    upstream_basin.insert(inflow_cells.begin(), inflow_cells.end());
+  }
+
+  // Compute set difference: BigBasin - UpstreamBasin
+  std::vector<int> remaining_basin;
+  std::set_difference(
+    big_basin.begin(), big_basin.end(),
+    upstream_basin.begin(), upstream_basin.end(),
+    std::back_inserter(remaining_basin)
+  );
+
+  // Combine intersected upstream cells and remaining basin
+  std::vector<int> new_basin = upstream_cell_in_basin;
+  new_basin.insert(new_basin.end(), remaining_basin.begin(), remaining_basin.end());
+
+  // Return the result as an IntegerVector
+  return wrap(new_basin);
+}
+
+
