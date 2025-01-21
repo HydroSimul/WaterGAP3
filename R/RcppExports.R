@@ -254,19 +254,41 @@ get_inflow_lastcell <- function(int_Outflow) {
 #' @description This function returns a list of step cells and the corresponding last cell matrices.
 #' @return A list containing the step cells and last cell matrices.
 #' @export
-get_step_param <- function(int_Outflow) {
-    .Call(`_WaterGAP3_get_step_param`, int_Outflow)
+get_routing_step <- function(int_Outflow) {
+    .Call(`_WaterGAP3_get_routing_step`, int_Outflow)
 }
 
 #' @rdname routingtopology
 #' @param lst_Inflow_Cell A list of integer vectors, where each vector contains the cells that flow into the respective cell.
 #' @param int_OutLet An integer representing the outlet cell (1-based index).
+#' @param int_TestCell An integer vector, cells to test.
+#' @return An integer vector of cells in the intersection of the station cells and the basin.
+get_cell_in_basin <- function(lst_Inflow_Cell, int_OutLet, int_TestCell) {
+    .Call(`_WaterGAP3_get_cell_in_basin`, lst_Inflow_Cell, int_OutLet, int_TestCell)
+}
+
+#' @rdname routingtopology
 #' @param int_UpstreamCell An integer vector containing the upstream cells to find the upstream basin.
 #' @return An integer vector representing the new upstream basin, which includes the upstream cells and the set difference of the basin cells.
 #' This function identifies the upstream basin of a given outlet cell by first finding the intersection of the upstream cells
 #' with the cells that flow into the outlet. It then computes the set difference between the upstream basin and the outlet basin.
-get_upstream_basin <- function(lst_Inflow_Cell, int_OutLet, int_UpstreamCell) {
-    .Call(`_WaterGAP3_get_upstream_basin`, lst_Inflow_Cell, int_OutLet, int_UpstreamCell)
+get_inter_basin <- function(lst_Inflow_Cell, int_OutLet, int_UpstreamCell) {
+    .Call(`_WaterGAP3_get_inter_basin`, lst_Inflow_Cell, int_OutLet, int_UpstreamCell)
+}
+
+#' @rdname routingtopology
+#' @param int_Outflow_Ori An integer vector representing the original outflow indices (1-based).
+#' @param int_CellNew An integer vector representing the cells within the new basin.
+#' @return An integer vector of the new outflow indices adjusted for the sub-basin.
+get_new_outflow <- function(int_Outflow_Ori, int_CellNew) {
+    .Call(`_WaterGAP3_get_new_outflow`, int_Outflow_Ori, int_CellNew)
+}
+
+#' @rdname routingtopology
+#' @param int_CaliCell An integer vector of calibration cells.
+#' @return A list of integer vectors (`lst_Step_Cali`), where each element represents calibration cells at a specific step.
+get_cali_step <- function(lst_Inflow_Cell, int_CaliCell) {
+    .Call(`_WaterGAP3_get_cali_step`, lst_Inflow_Cell, int_CaliCell)
 }
 
 # Register entry points for exported C++ functions

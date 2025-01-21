@@ -176,7 +176,7 @@ List get_step_lastcell(List lst_Step_Cell, NumericMatrix mat_Inflow_LastCell) {
 //' @return A list containing the step cells and last cell matrices.
 //' @export
 // [[Rcpp::export]]
-List get_step_param(IntegerVector int_Outflow) {
+List get_routing_step(IntegerVector int_Outflow) {
   // Step 1: Get inflow cells
   List lst_Flow_Cells = get_inflow_cells(int_Outflow);
 
@@ -196,40 +196,53 @@ List get_step_param(IntegerVector int_Outflow) {
   );
 }
 
-
-
 //' @rdname routingtopology
 //' @param lst_Inflow_Cell A list of integer vectors, where each vector contains the cells that flow into the respective cell.
 //' @param int_OutLet An integer representing the outlet cell (1-based index).
-//' @param int_UpstreamCell An integer vector containing the upstream cells to find the upstream basin.
-//' @return An integer vector representing the new upstream basin, which includes the upstream cells and the set difference of the basin cells.
-//' This function identifies the upstream basin of a given outlet cell by first finding the intersection of the upstream cells
-//' with the cells that flow into the outlet. It then computes the set difference between the upstream basin and the outlet basin.
+//' @param int_TestCell An integer vector, cells to test.
+//' @return An integer vector of cells in the intersection of the station cells and the basin.
 // [[Rcpp::export]]
-IntegerVector get_upstream_basin(List lst_Inflow_Cell, int int_OutLet, IntegerVector int_UpstreamCell) {
+IntegerVector get_cell_in_basin(List lst_Inflow_Cell, int int_OutLet, IntegerVector int_TestCell) {
   // Extract the Big Basin
   IntegerVector int_BigBasin = lst_Inflow_Cell[int_OutLet - 1];
 
   // Convert vectors to sets for efficient operations
   std::set<int> big_basin(int_BigBasin.begin(), int_BigBasin.end());
-  std::set<int> upstream_cells(int_UpstreamCell.begin(), int_UpstreamCell.end());
+  std::set<int> station_cells(int_TestCell.begin(), int_TestCell.end());
 
-  // Find intersection of UpstreamCell and BigBasin
-  std::vector<int> upstream_cell_in_basin;
+  // Find the intersection
+  std::vector<int> intersection;
   std::set_intersection(
     big_basin.begin(), big_basin.end(),
-    upstream_cells.begin(), upstream_cells.end(),
-    std::back_inserter(upstream_cell_in_basin)
+    station_cells.begin(), station_cells.end(),
+    std::back_inserter(intersection)
   );
 
-  // Collect inflow cells for intersected upstream cells
+  // Return the intersection as an IntegerVector
+  return wrap(intersection);
+}
+
+//' @rdname routingtopology
+//' @param int_UpstreamCell An integer vector containing the upstream cells to find the upstream basin.
+//' @return An integer vector representing the new upstream basin, which includes the upstream cells and the set difference of the basin cells.
+//' This function identifies the upstream basin of a given outlet cell by first finding the intersection of the upstream cells
+//' with the cells that flow into the outlet. It then computes the set difference between the upstream basin and the outlet basin.
+// [[Rcpp::export]]
+IntegerVector get_inter_basin(List lst_Inflow_Cell, int int_OutLet, IntegerVector int_UpstreamCell) {
+  // Extract the Big Basin
+  IntegerVector int_BigBasin = lst_Inflow_Cell[int_OutLet - 1];
+
+  // Collect inflow cells for upstream cells
   std::set<int> upstream_basin;
-  for (int cell : upstream_cell_in_basin) {
+  for (int cell : int_UpstreamCell) {
     IntegerVector inflow_cells = lst_Inflow_Cell[cell - 1];
     upstream_basin.insert(inflow_cells.begin(), inflow_cells.end());
   }
 
-  // Compute set difference: BigBasin - UpstreamBasin
+  // Convert Big Basin to a set
+  std::set<int> big_basin(int_BigBasin.begin(), int_BigBasin.end());
+
+  // Compute the set difference: BigBasin - UpstreamBasin
   std::vector<int> remaining_basin;
   std::set_difference(
     big_basin.begin(), big_basin.end(),
@@ -237,12 +250,102 @@ IntegerVector get_upstream_basin(List lst_Inflow_Cell, int int_OutLet, IntegerVe
     std::back_inserter(remaining_basin)
   );
 
-  // Combine intersected upstream cells and remaining basin
-  std::vector<int> new_basin = upstream_cell_in_basin;
-  new_basin.insert(new_basin.end(), remaining_basin.begin(), remaining_basin.end());
+  // Combine upstream cells and remaining basin
+  std::vector<int> inter_basin = as<std::vector<int>>(int_UpstreamCell);
+  inter_basin.insert(inter_basin.end(), remaining_basin.begin(), remaining_basin.end());
 
   // Return the result as an IntegerVector
-  return wrap(new_basin);
+  return wrap(inter_basin);
 }
 
 
+
+
+//' @rdname routingtopology
+//' @param int_Outflow_Ori An integer vector representing the original outflow indices (1-based).
+//' @param int_CellNew An integer vector representing the cells within the new basin.
+//' @return An integer vector of the new outflow indices adjusted for the sub-basin.
+// [[Rcpp::export]]
+IntegerVector get_new_outflow(IntegerVector int_Outflow_Ori, IntegerVector int_CellNew) {
+  int n_Cell_Ori = int_Outflow_Ori.size();
+  int n_interBasin = int_CellNew.size();
+
+  // Create a mapping for the inter-basin
+  IntegerVector match_interBasin(n_Cell_Ori, NA_INTEGER);
+  for (int i = 0; i < n_interBasin; ++i) {
+    if (int_CellNew[i] - 1 < n_Cell_Ori) {
+      match_interBasin[int_CellNew[i] - 1] = i + 1; // 1-based index
+    }
+  }
+
+  // Compute the new outflow indices for the sub-basin
+  IntegerVector int_Outflow_Subbasin(n_interBasin, NA_INTEGER);
+  for (int i = 0; i < n_interBasin; ++i) {
+    int outflow_idx = int_Outflow_Ori[int_CellNew[i] - 1] - 1; // Convert to 0-based index
+    if (outflow_idx >= 0 && outflow_idx < n_Cell_Ori) {
+      int_Outflow_Subbasin[i] = match_interBasin[outflow_idx];
+    }
+  }
+
+  // Replace the first NA value with its position (1-based index) and exit the loop
+  for (int i = 0; i < n_interBasin; ++i) {
+    if (IntegerVector::is_na(int_Outflow_Subbasin[i])) {
+      int_Outflow_Subbasin[i] = i + 1; // 1-based index
+      break;
+    }
+  }
+
+  return int_Outflow_Subbasin;
+}
+
+
+
+//' @rdname routingtopology
+//' @param int_CaliCell An integer vector of calibration cells.
+//' @return A list of integer vectors (`lst_Step_Cali`), where each element represents calibration cells at a specific step.
+// [[Rcpp::export]]
+List get_cali_step(List lst_Inflow_Cell, IntegerVector int_CaliCell) {
+  // Flatten the inflow cells for the calibration cells
+  std::vector<int> int_Cell_All;
+  for (int i = 0; i < int_CaliCell.size(); ++i) {
+    IntegerVector inflow_cells = lst_Inflow_Cell[int_CaliCell[i] - 1]; // 1-based indexing
+    int_Cell_All.insert(int_Cell_All.end(), inflow_cells.begin(), inflow_cells.end());
+  }
+
+  // Count occurrences of cells within int_CaliCell
+  std::unordered_map<int, int> cell_count_map;
+  for (int cell : int_Cell_All) {
+    if (std::find(int_CaliCell.begin(), int_CaliCell.end(), cell) != int_CaliCell.end()) {
+      cell_count_map[cell]++;
+    }
+  }
+
+  // Get counts for each calibration cell
+  std::vector<int> counts(int_CaliCell.size());
+  for (int i = 0; i < int_CaliCell.size(); ++i) {
+    counts[i] = cell_count_map[int_CaliCell[i]];
+  }
+
+  // Find max count
+  int max_count = *std::max_element(counts.begin(), counts.end());
+
+  // Directly calculate steps using vectorized arithmetic
+  std::vector<int> cell_steps(int_CaliCell.size());
+  for (int i = 0; i < counts.size(); ++i) {
+    cell_steps[i] = max_count - counts[i] + 1;
+  }
+
+  // Group calibration cells by their step
+  std::vector<std::vector<int>> step_groups(max_count);
+  for (int i = 0; i < int_CaliCell.size(); ++i) {
+    step_groups[cell_steps[i] - 1].push_back(int_CaliCell[i]); // Adjust to 0-based index
+  }
+
+  // Convert step groups to Rcpp List
+  List lst_Step_Cali(max_count);
+  for (int i = 0; i < max_count; ++i) {
+    lst_Step_Cali[i] = wrap(step_groups[i]);
+  }
+
+  return lst_Step_Cali;
+}

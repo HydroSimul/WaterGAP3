@@ -1185,27 +1185,64 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// get_step_param
-List get_step_param(IntegerVector int_Outflow);
-RcppExport SEXP _WaterGAP3_get_step_param(SEXP int_OutflowSEXP) {
+// get_routing_step
+List get_routing_step(IntegerVector int_Outflow);
+RcppExport SEXP _WaterGAP3_get_routing_step(SEXP int_OutflowSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< IntegerVector >::type int_Outflow(int_OutflowSEXP);
-    rcpp_result_gen = Rcpp::wrap(get_step_param(int_Outflow));
+    rcpp_result_gen = Rcpp::wrap(get_routing_step(int_Outflow));
     return rcpp_result_gen;
 END_RCPP
 }
-// get_upstream_basin
-IntegerVector get_upstream_basin(List lst_Inflow_Cell, int int_OutLet, IntegerVector int_UpstreamCell);
-RcppExport SEXP _WaterGAP3_get_upstream_basin(SEXP lst_Inflow_CellSEXP, SEXP int_OutLetSEXP, SEXP int_UpstreamCellSEXP) {
+// get_cell_in_basin
+IntegerVector get_cell_in_basin(List lst_Inflow_Cell, int int_OutLet, IntegerVector int_TestCell);
+RcppExport SEXP _WaterGAP3_get_cell_in_basin(SEXP lst_Inflow_CellSEXP, SEXP int_OutLetSEXP, SEXP int_TestCellSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< List >::type lst_Inflow_Cell(lst_Inflow_CellSEXP);
+    Rcpp::traits::input_parameter< int >::type int_OutLet(int_OutLetSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type int_TestCell(int_TestCellSEXP);
+    rcpp_result_gen = Rcpp::wrap(get_cell_in_basin(lst_Inflow_Cell, int_OutLet, int_TestCell));
+    return rcpp_result_gen;
+END_RCPP
+}
+// get_inter_basin
+IntegerVector get_inter_basin(List lst_Inflow_Cell, int int_OutLet, IntegerVector int_UpstreamCell);
+RcppExport SEXP _WaterGAP3_get_inter_basin(SEXP lst_Inflow_CellSEXP, SEXP int_OutLetSEXP, SEXP int_UpstreamCellSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< List >::type lst_Inflow_Cell(lst_Inflow_CellSEXP);
     Rcpp::traits::input_parameter< int >::type int_OutLet(int_OutLetSEXP);
     Rcpp::traits::input_parameter< IntegerVector >::type int_UpstreamCell(int_UpstreamCellSEXP);
-    rcpp_result_gen = Rcpp::wrap(get_upstream_basin(lst_Inflow_Cell, int_OutLet, int_UpstreamCell));
+    rcpp_result_gen = Rcpp::wrap(get_inter_basin(lst_Inflow_Cell, int_OutLet, int_UpstreamCell));
+    return rcpp_result_gen;
+END_RCPP
+}
+// get_new_outflow
+IntegerVector get_new_outflow(IntegerVector int_Outflow_Ori, IntegerVector int_CellNew);
+RcppExport SEXP _WaterGAP3_get_new_outflow(SEXP int_Outflow_OriSEXP, SEXP int_CellNewSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< IntegerVector >::type int_Outflow_Ori(int_Outflow_OriSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type int_CellNew(int_CellNewSEXP);
+    rcpp_result_gen = Rcpp::wrap(get_new_outflow(int_Outflow_Ori, int_CellNew));
+    return rcpp_result_gen;
+END_RCPP
+}
+// get_cali_step
+List get_cali_step(List lst_Inflow_Cell, IntegerVector int_CaliCell);
+RcppExport SEXP _WaterGAP3_get_cali_step(SEXP lst_Inflow_CellSEXP, SEXP int_CaliCellSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< List >::type lst_Inflow_Cell(lst_Inflow_CellSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type int_CaliCell(int_CaliCellSEXP);
+    rcpp_result_gen = Rcpp::wrap(get_cali_step(lst_Inflow_Cell, int_CaliCell));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -1308,8 +1345,11 @@ static const R_CallMethodDef CallEntries[] = {
     {"_WaterGAP3_confluen_WaterGAP3_LR", (DL_FUNC) &_WaterGAP3_confluen_WaterGAP3_LR, 21},
     {"_WaterGAP3_get_inflow_cells", (DL_FUNC) &_WaterGAP3_get_inflow_cells, 1},
     {"_WaterGAP3_get_inflow_lastcell", (DL_FUNC) &_WaterGAP3_get_inflow_lastcell, 1},
-    {"_WaterGAP3_get_step_param", (DL_FUNC) &_WaterGAP3_get_step_param, 1},
-    {"_WaterGAP3_get_upstream_basin", (DL_FUNC) &_WaterGAP3_get_upstream_basin, 3},
+    {"_WaterGAP3_get_routing_step", (DL_FUNC) &_WaterGAP3_get_routing_step, 1},
+    {"_WaterGAP3_get_cell_in_basin", (DL_FUNC) &_WaterGAP3_get_cell_in_basin, 3},
+    {"_WaterGAP3_get_inter_basin", (DL_FUNC) &_WaterGAP3_get_inter_basin, 3},
+    {"_WaterGAP3_get_new_outflow", (DL_FUNC) &_WaterGAP3_get_new_outflow, 2},
+    {"_WaterGAP3_get_cali_step", (DL_FUNC) &_WaterGAP3_get_cali_step, 2},
     {"_WaterGAP3_RcppExport_registerCCallable", (DL_FUNC) &_WaterGAP3_RcppExport_registerCCallable, 0},
     {NULL, NULL, 0}
 };
