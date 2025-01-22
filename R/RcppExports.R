@@ -263,6 +263,7 @@ get_routing_step <- function(int_Outflow) {
 #' @param int_OutLet An integer representing the outlet cell (1-based index).
 #' @param int_TestCell An integer vector, cells to test.
 #' @return An integer vector of cells in the intersection of the station cells and the basin.
+#' @export
 get_cell_in_basin <- function(lst_Inflow_Cell, int_OutLet, int_TestCell) {
     .Call(`_WaterGAP3_get_cell_in_basin`, lst_Inflow_Cell, int_OutLet, int_TestCell)
 }
@@ -272,6 +273,7 @@ get_cell_in_basin <- function(lst_Inflow_Cell, int_OutLet, int_TestCell) {
 #' @return An integer vector representing the new upstream basin, which includes the upstream cells and the set difference of the basin cells.
 #' This function identifies the upstream basin of a given outlet cell by first finding the intersection of the upstream cells
 #' with the cells that flow into the outlet. It then computes the set difference between the upstream basin and the outlet basin.
+#' @export
 get_inter_basin <- function(lst_Inflow_Cell, int_OutLet, int_UpstreamCell) {
     .Call(`_WaterGAP3_get_inter_basin`, lst_Inflow_Cell, int_OutLet, int_UpstreamCell)
 }
@@ -280,6 +282,7 @@ get_inter_basin <- function(lst_Inflow_Cell, int_OutLet, int_UpstreamCell) {
 #' @param int_Outflow_Ori An integer vector representing the original outflow indices (1-based).
 #' @param int_CellNew An integer vector representing the cells within the new basin.
 #' @return An integer vector of the new outflow indices adjusted for the sub-basin.
+#' @export
 get_new_outflow <- function(int_Outflow_Ori, int_CellNew) {
     .Call(`_WaterGAP3_get_new_outflow`, int_Outflow_Ori, int_CellNew)
 }
@@ -287,6 +290,7 @@ get_new_outflow <- function(int_Outflow_Ori, int_CellNew) {
 #' @rdname routingtopology
 #' @param int_CaliCell An integer vector of calibration cells.
 #' @return A list of integer vectors (`lst_Step_Cali`), where each element represents calibration cells at a specific step.
+#' @export
 get_cali_step <- function(lst_Inflow_Cell, int_CaliCell) {
     .Call(`_WaterGAP3_get_cali_step`, lst_Inflow_Cell, int_CaliCell)
 }

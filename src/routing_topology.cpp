@@ -201,6 +201,7 @@ List get_routing_step(IntegerVector int_Outflow) {
 //' @param int_OutLet An integer representing the outlet cell (1-based index).
 //' @param int_TestCell An integer vector, cells to test.
 //' @return An integer vector of cells in the intersection of the station cells and the basin.
+//' @export
 // [[Rcpp::export]]
 IntegerVector get_cell_in_basin(List lst_Inflow_Cell, int int_OutLet, IntegerVector int_TestCell) {
   // Extract the Big Basin
@@ -227,6 +228,7 @@ IntegerVector get_cell_in_basin(List lst_Inflow_Cell, int int_OutLet, IntegerVec
 //' @return An integer vector representing the new upstream basin, which includes the upstream cells and the set difference of the basin cells.
 //' This function identifies the upstream basin of a given outlet cell by first finding the intersection of the upstream cells
 //' with the cells that flow into the outlet. It then computes the set difference between the upstream basin and the outlet basin.
+//' @export
 // [[Rcpp::export]]
 IntegerVector get_inter_basin(List lst_Inflow_Cell, int int_OutLet, IntegerVector int_UpstreamCell) {
   // Extract the Big Basin
@@ -265,6 +267,7 @@ IntegerVector get_inter_basin(List lst_Inflow_Cell, int int_OutLet, IntegerVecto
 //' @param int_Outflow_Ori An integer vector representing the original outflow indices (1-based).
 //' @param int_CellNew An integer vector representing the cells within the new basin.
 //' @return An integer vector of the new outflow indices adjusted for the sub-basin.
+//' @export
 // [[Rcpp::export]]
 IntegerVector get_new_outflow(IntegerVector int_Outflow_Ori, IntegerVector int_CellNew) {
   int n_Cell_Ori = int_Outflow_Ori.size();
@@ -303,6 +306,7 @@ IntegerVector get_new_outflow(IntegerVector int_Outflow_Ori, IntegerVector int_C
 //' @rdname routingtopology
 //' @param int_CaliCell An integer vector of calibration cells.
 //' @return A list of integer vectors (`lst_Step_Cali`), where each element represents calibration cells at a specific step.
+//' @export
 // [[Rcpp::export]]
 List get_cali_step(List lst_Inflow_Cell, IntegerVector int_CaliCell) {
   // Flatten the inflow cells for the calibration cells
