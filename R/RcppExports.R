@@ -295,6 +295,13 @@ get_cali_step <- function(lst_Inflow_Cell, int_CaliCell) {
     .Call(`_WaterGAP3_get_cali_step`, lst_Inflow_Cell, int_CaliCell)
 }
 
+#' @rdname routingtopology
+#' @return A list of integer vectors (`lst_Step_Cali`), where each element represents calibration cells at a specific step.
+#' @export
+get_upstream_cali_cell <- function(lst_Inflow_Cell, int_CaliCell) {
+    .Call(`_WaterGAP3_get_upstream_cali_cell`, lst_Inflow_Cell, int_CaliCell)
+}
+
 # Register entry points for exported C++ functions
 methods::setLoadAction(function(ns) {
     .Call(`_WaterGAP3_RcppExport_registerCCallable`)

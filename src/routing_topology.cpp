@@ -204,12 +204,15 @@ List get_routing_step(IntegerVector int_Outflow) {
 //' @export
 // [[Rcpp::export]]
 IntegerVector get_cell_in_basin(List lst_Inflow_Cell, int int_OutLet, IntegerVector int_TestCell) {
-  // Extract the Big Basin
+  // Extract the Big Basin (1-based indexing)
   IntegerVector int_BigBasin = lst_Inflow_Cell[int_OutLet - 1];
+
+  // Remove int_OutLet from int_TestCell if present
+  IntegerVector int_TestCell_no_outlet = setdiff(int_TestCell, IntegerVector::create(int_OutLet));
 
   // Convert vectors to sets for efficient operations
   std::set<int> big_basin(int_BigBasin.begin(), int_BigBasin.end());
-  std::set<int> station_cells(int_TestCell.begin(), int_TestCell.end());
+  std::set<int> station_cells(int_TestCell_no_outlet.begin(), int_TestCell_no_outlet.end());
 
   // Find the intersection
   std::vector<int> intersection;
@@ -352,4 +355,54 @@ List get_cali_step(List lst_Inflow_Cell, IntegerVector int_CaliCell) {
   }
 
   return lst_Step_Cali;
+}
+
+
+
+//' @rdname routingtopology
+//' @return A list of integer vectors (`lst_Step_Cali`), where each element represents calibration cells at a specific step.
+//' @export
+// [[Rcpp::export]]
+List get_upstream_cali_cell(List lst_Inflow_Cell, IntegerVector int_CaliCell) {
+  int n_CaliCells = int_CaliCell.size();
+
+  // Step 1: Get upstream cells for each calibration cell
+  List lst_Cali_Upstream(n_CaliCells);
+  for (int i = 0; i < n_CaliCells; ++i) {
+    // Get upstream cells for the current calibration cell
+    lst_Cali_Upstream[i] = get_cell_in_basin(lst_Inflow_Cell, int_CaliCell[i], int_CaliCell);
+  }
+
+  // Step 2: Determine the last calibration cell for each calibration cell
+  List lst_LastCaliCell(n_CaliCells);
+  for (int i = 0; i < n_CaliCells; ++i) {
+    IntegerVector upstream_cells = lst_Cali_Upstream[i];
+
+    // Map upstream cells to their indices in int_CaliCell
+    std::unordered_set<int> upstream_indices;
+    for (int j = 0; j < upstream_cells.size(); ++j) {
+      auto it = std::find(int_CaliCell.begin(), int_CaliCell.end(), upstream_cells[j]);
+      if (it != int_CaliCell.end()) {
+        upstream_indices.insert(it - int_CaliCell.begin());
+      }
+    }
+
+    // Collect last calibration cells by removing the common upstream cells
+    std::unordered_set<int> temp_set;
+    for (int index : upstream_indices) {
+      IntegerVector temp = lst_Cali_Upstream[index];
+      temp_set.insert(temp.begin(), temp.end());
+    }
+
+    std::vector<int> result;
+    for (int cell : upstream_cells) {
+      if (temp_set.find(cell) == temp_set.end()) {
+        result.push_back(cell);
+      }
+    }
+
+    lst_LastCaliCell[i] = wrap(result);
+  }
+
+  return lst_LastCaliCell;
 }

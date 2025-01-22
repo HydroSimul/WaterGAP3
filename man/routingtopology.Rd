@@ -9,6 +9,7 @@
 \alias{get_inter_basin}
 \alias{get_new_outflow}
 \alias{get_cali_step}
+\alias{get_upstream_cali_cell}
 \title{Get Inflow Cells}
 \usage{
 get_inflow_cells(int_Outflow)
@@ -24,6 +25,8 @@ get_inter_basin(lst_Inflow_Cell, int_OutLet, int_UpstreamCell)
 get_new_outflow(int_Outflow_Ori, int_CellNew)
 
 get_cali_step(lst_Inflow_Cell, int_CaliCell)
+
+get_upstream_cali_cell(lst_Inflow_Cell, int_CaliCell)
 }
 \arguments{
 \item{int_Outflow}{(vector of int) The cell number of the next cell. The cell number must range from 1 to the length of the cells.
@@ -57,6 +60,8 @@ This function identifies the upstream basin of a given outlet cell by first find
 with the cells that flow into the outlet. It then computes the set difference between the upstream basin and the outlet basin.
 
 An integer vector of the new outflow indices adjusted for the sub-basin.
+
+A list of integer vectors (`lst_Step_Cali`), where each element represents calibration cells at a specific step.
 
 A list of integer vectors (`lst_Step_Cali`), where each element represents calibration cells at a specific step.
 }
