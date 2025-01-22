@@ -1185,14 +1185,14 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// get_routing_step
-List get_routing_step(IntegerVector int_Outflow);
-RcppExport SEXP _WaterGAP3_get_routing_step(SEXP int_OutflowSEXP) {
+// get_routing_info
+List get_routing_info(IntegerVector int_Outflow);
+RcppExport SEXP _WaterGAP3_get_routing_info(SEXP int_OutflowSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< IntegerVector >::type int_Outflow(int_OutflowSEXP);
-    rcpp_result_gen = Rcpp::wrap(get_routing_step(int_Outflow));
+    rcpp_result_gen = Rcpp::wrap(get_routing_info(int_Outflow));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -1357,7 +1357,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_WaterGAP3_confluen_WaterGAP3_LR", (DL_FUNC) &_WaterGAP3_confluen_WaterGAP3_LR, 21},
     {"_WaterGAP3_get_inflow_cells", (DL_FUNC) &_WaterGAP3_get_inflow_cells, 1},
     {"_WaterGAP3_get_inflow_lastcell", (DL_FUNC) &_WaterGAP3_get_inflow_lastcell, 1},
-    {"_WaterGAP3_get_routing_step", (DL_FUNC) &_WaterGAP3_get_routing_step, 1},
+    {"_WaterGAP3_get_routing_info", (DL_FUNC) &_WaterGAP3_get_routing_info, 1},
     {"_WaterGAP3_get_cell_in_basin", (DL_FUNC) &_WaterGAP3_get_cell_in_basin, 3},
     {"_WaterGAP3_get_inter_basin", (DL_FUNC) &_WaterGAP3_get_inter_basin, 3},
     {"_WaterGAP3_get_new_outflow", (DL_FUNC) &_WaterGAP3_get_new_outflow, 2},

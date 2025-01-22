@@ -170,13 +170,12 @@ List get_step_lastcell(List lst_Step_Cell, NumericMatrix mat_Inflow_LastCell) {
 
 
 //' @rdname routingtopology
-//' @name get_step_param
 //' @title Get Step Parameters
 //' @description This function returns a list of step cells and the corresponding last cell matrices.
 //' @return A list containing the step cells and last cell matrices.
 //' @export
 // [[Rcpp::export]]
-List get_routing_step(IntegerVector int_Outflow) {
+List get_routing_info(IntegerVector int_Outflow) {
   // Step 1: Get inflow cells
   List lst_Flow_Cells = get_inflow_cells(int_Outflow);
 

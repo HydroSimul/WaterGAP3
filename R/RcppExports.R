@@ -249,13 +249,12 @@ get_inflow_lastcell <- function(int_Outflow) {
 }
 
 #' @rdname routingtopology
-#' @name get_step_param
 #' @title Get Step Parameters
 #' @description This function returns a list of step cells and the corresponding last cell matrices.
 #' @return A list containing the step cells and last cell matrices.
 #' @export
-get_routing_step <- function(int_Outflow) {
-    .Call(`_WaterGAP3_get_routing_step`, int_Outflow)
+get_routing_info <- function(int_Outflow) {
+    .Call(`_WaterGAP3_get_routing_info`, int_Outflow)
 }
 
 #' @rdname routingtopology

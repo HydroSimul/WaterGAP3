@@ -3,8 +3,7 @@
 \name{get_inflow_cells}
 \alias{get_inflow_cells}
 \alias{get_inflow_lastcell}
-\alias{get_step_param}
-\alias{get_routing_step}
+\alias{get_routing_info}
 \alias{get_cell_in_basin}
 \alias{get_inter_basin}
 \alias{get_new_outflow}
@@ -16,7 +15,7 @@ get_inflow_cells(int_Outflow)
 
 get_inflow_lastcell(int_Outflow)
 
-get_routing_step(int_Outflow)
+get_routing_info(int_Outflow)
 
 get_cell_in_basin(lst_Inflow_Cell, int_OutLet, int_TestCell)
 
