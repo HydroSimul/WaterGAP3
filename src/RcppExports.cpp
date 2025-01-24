@@ -317,6 +317,23 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cali_DDS
+List cali_DDS(Function fitness, List lst_OtherData, NumericVector x_Min, NumericVector x_Max, Nullable<NumericVector> x_Init, int max_iter, double r);
+RcppExport SEXP _WaterGAP3_cali_DDS(SEXP fitnessSEXP, SEXP lst_OtherDataSEXP, SEXP x_MinSEXP, SEXP x_MaxSEXP, SEXP x_InitSEXP, SEXP max_iterSEXP, SEXP rSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Function >::type fitness(fitnessSEXP);
+    Rcpp::traits::input_parameter< List >::type lst_OtherData(lst_OtherDataSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type x_Min(x_MinSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type x_Max(x_MaxSEXP);
+    Rcpp::traits::input_parameter< Nullable<NumericVector> >::type x_Init(x_InitSEXP);
+    Rcpp::traits::input_parameter< int >::type max_iter(max_iterSEXP);
+    Rcpp::traits::input_parameter< double >::type r(rSEXP);
+    rcpp_result_gen = Rcpp::wrap(cali_DDS(fitness, lst_OtherData, x_Min, x_Max, x_Init, max_iter, r));
+    return rcpp_result_gen;
+END_RCPP
+}
 // atmosSnow_ThresholdT
 NumericVector atmosSnow_ThresholdT(NumericVector ATMOS_precipitation_mm, NumericVector ATMOS_temperature_Cel, NumericVector param_ATMOS_thr_Ts);
 static SEXP _WaterGAP3_atmosSnow_ThresholdT_try(SEXP ATMOS_precipitation_mmSEXP, SEXP ATMOS_temperature_CelSEXP, SEXP param_ATMOS_thr_TsSEXP) {
@@ -1333,6 +1350,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_WaterGAP3_WaterGAP3_H", (DL_FUNC) &_WaterGAP3_WaterGAP3_H, 33},
     {"_WaterGAP3_WaterGAP3_HL", (DL_FUNC) &_WaterGAP3_WaterGAP3_HL, 45},
     {"_WaterGAP3_WaterGAP3_HLR", (DL_FUNC) &_WaterGAP3_WaterGAP3_HLR, 56},
+    {"_WaterGAP3_cali_DDS", (DL_FUNC) &_WaterGAP3_cali_DDS, 7},
     {"_WaterGAP3_atmosSnow_ThresholdT", (DL_FUNC) &_WaterGAP3_atmosSnow_ThresholdT, 3},
     {"_WaterGAP3_evatransPotential_TurcWendling", (DL_FUNC) &_WaterGAP3_evatransPotential_TurcWendling, 3},
     {"_WaterGAP3_intercep_Full", (DL_FUNC) &_WaterGAP3_intercep_Full, 3},

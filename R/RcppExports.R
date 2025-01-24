@@ -65,6 +65,27 @@ WaterGAP3_HLR <- function(n_time, n_spat, ATMOS_precipitation_mm, ATMOS_temperat
     .Call(`_WaterGAP3_WaterGAP3_HLR`, n_time, n_spat, ATMOS_precipitation_mm, ATMOS_temperature_Cel, ATMOS_potentialEvatrans_mm, SNOW_ice_mm, LAND_builtRatio_1, LAND_interceptWater_mm, LAND_interceptCapacity_mm, SOIL_water_mm, SOIL_capacity_mm, SOIL_potentialPercola_mm, GROUND_water_mm, GROUND_capacity_mm, RIVER_water_m3, RIVER_length_km, RIVER_velocity_km, CELL_landArea_km2, CELL_cellNumberStep_int, CELL_inflowCellNumberStep_int, Lake_cellNumber_int, Lake_water_m3, Lake_area_km2, Lake_capacity_m3, Riverlak_cellNumber_int, Riverlak_water_m3, Riverlak_area_km2, Riverlak_capacity_m3, Reservoi_cellNumber_int, Reservoi_water_m3, Reservoi_area_km2, Reservoi_capacity_m3, Reservoi_demand_m3, Reservoi_yearInflow_m3, Reservoi_yearDemand_m3, Reservoi_yearRelase_m3, Reservoi_isOperateStart_01, Reservoi_isIrrigate_01, param_ATMOS_thr_Ts, param_SNOW_fac_f, param_SNOW_fac_Tmelt, param_EVATRANS_sup_k, param_EVATRANS_sup_gamma, param_EVATRANS_wat_petmax, param_INFILT_hbv_beta, param_PERCOLA_wat_01, param_PERCOLA_wat_k, param_PERCOLA_wat_thresh, param_BASEFLOW_sur_k, param_Evalake_vic_gamma, param_Lake_acp_storeFactor, param_Lake_acp_gamma, param_Riverlak_lin_storeFactor, param_Reservoi_han_alpha, param_Reservoi_han_kDemand, if_allVariExport)
 }
 
+#' This function implements a calibration algorithm based on the Direct Search method.
+#'
+#' It attempts to find the optimal parameter values that minimize the given objective (fitness) function.
+#'
+#' @param fitness A function handle to the objective function that returns a numeric value
+#' @param lst_OtherData A list of other data that may be passed to the fitness function
+#' @param x_Min A NumericVector of lower bounds for each parameter
+#' @param x_Max A NumericVector of upper bounds for each parameter
+#' @param x_Init An optional initial solution (NumericVector), if NULL, the midpoint of `x_Min` and `x_Max` is used
+#' @param max_iter The maximum number of iterations to perform (default is 100)
+#' @param r The perturbation factor (default is 0.2)
+#'
+#' @return A List containing:
+#'   - `x_Best`: The best parameter set found during the search
+#'   - `y_Best`: The corresponding objective value of the best parameter set
+#'
+#' @export
+cali_DDS <- function(fitness, lst_OtherData, x_Min, x_Max, x_Init = NULL, max_iter = 100L, r = 0.2) {
+    .Call(`_WaterGAP3_cali_DDS`, fitness, lst_OtherData, x_Min, x_Max, x_Init, max_iter, r)
+}
+
 #' Hydrological Process
 #' @name process
 #' @inheritParams all_vari
