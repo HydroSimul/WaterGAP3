@@ -1,4 +1,4 @@
-#include "WaterGAP3.h"
+#include "WaterGAP3_Process.h"
 
 //' WaterGAP3
 //' @name WaterGAP3_H
