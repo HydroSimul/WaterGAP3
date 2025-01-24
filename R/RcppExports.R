@@ -86,6 +86,23 @@ cali_DDS <- function(fitness, lst_OtherData, x_Min, x_Max, x_Init = NULL, max_it
     .Call(`_WaterGAP3_cali_DDS`, fitness, lst_OtherData, x_Min, x_Max, x_Init, max_iter, r)
 }
 
+#' Evalute matrics
+#' @name eva
+#' @param num_Sim A numeric vector of simulated values.
+#' @param num_Obs A numeric vector of observed values. NA values are removed along with corresponding values in num_Sim.
+#' @return A double representing the Evalute matrics.
+#' @export
+eva_NSE <- function(num_Sim, num_Obs) {
+    .Call(`_WaterGAP3_eva_NSE`, num_Sim, num_Obs)
+}
+
+#' @rdname eva
+#' @param factor_r,factor_alpha,factor_beta A double specifying the weight for the correlation term (r - 1), (alpha - 1) and (beta - 1). Default is 1.0.
+#' @export
+eva_KGE <- function(num_Sim, num_Obs, factor_r = 1.0, factor_alpha = 1.0, factor_beta = 1.0) {
+    .Call(`_WaterGAP3_eva_KGE`, num_Sim, num_Obs, factor_r, factor_alpha, factor_beta)
+}
+
 #' Hydrological Process
 #' @name process
 #' @inheritParams all_vari

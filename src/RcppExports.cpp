@@ -334,6 +334,33 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// eva_NSE
+double eva_NSE(NumericVector num_Sim, NumericVector num_Obs);
+RcppExport SEXP _WaterGAP3_eva_NSE(SEXP num_SimSEXP, SEXP num_ObsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type num_Sim(num_SimSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type num_Obs(num_ObsSEXP);
+    rcpp_result_gen = Rcpp::wrap(eva_NSE(num_Sim, num_Obs));
+    return rcpp_result_gen;
+END_RCPP
+}
+// eva_KGE
+double eva_KGE(NumericVector num_Sim, NumericVector num_Obs, double factor_r, double factor_alpha, double factor_beta);
+RcppExport SEXP _WaterGAP3_eva_KGE(SEXP num_SimSEXP, SEXP num_ObsSEXP, SEXP factor_rSEXP, SEXP factor_alphaSEXP, SEXP factor_betaSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type num_Sim(num_SimSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type num_Obs(num_ObsSEXP);
+    Rcpp::traits::input_parameter< double >::type factor_r(factor_rSEXP);
+    Rcpp::traits::input_parameter< double >::type factor_alpha(factor_alphaSEXP);
+    Rcpp::traits::input_parameter< double >::type factor_beta(factor_betaSEXP);
+    rcpp_result_gen = Rcpp::wrap(eva_KGE(num_Sim, num_Obs, factor_r, factor_alpha, factor_beta));
+    return rcpp_result_gen;
+END_RCPP
+}
 // atmosSnow_ThresholdT
 NumericVector atmosSnow_ThresholdT(NumericVector ATMOS_precipitation_mm, NumericVector ATMOS_temperature_Cel, NumericVector param_ATMOS_thr_Ts);
 static SEXP _WaterGAP3_atmosSnow_ThresholdT_try(SEXP ATMOS_precipitation_mmSEXP, SEXP ATMOS_temperature_CelSEXP, SEXP param_ATMOS_thr_TsSEXP) {
@@ -1351,6 +1378,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_WaterGAP3_WaterGAP3_HL", (DL_FUNC) &_WaterGAP3_WaterGAP3_HL, 45},
     {"_WaterGAP3_WaterGAP3_HLR", (DL_FUNC) &_WaterGAP3_WaterGAP3_HLR, 56},
     {"_WaterGAP3_cali_DDS", (DL_FUNC) &_WaterGAP3_cali_DDS, 7},
+    {"_WaterGAP3_eva_NSE", (DL_FUNC) &_WaterGAP3_eva_NSE, 2},
+    {"_WaterGAP3_eva_KGE", (DL_FUNC) &_WaterGAP3_eva_KGE, 5},
     {"_WaterGAP3_atmosSnow_ThresholdT", (DL_FUNC) &_WaterGAP3_atmosSnow_ThresholdT, 3},
     {"_WaterGAP3_evatransPotential_TurcWendling", (DL_FUNC) &_WaterGAP3_evatransPotential_TurcWendling, 3},
     {"_WaterGAP3_intercep_Full", (DL_FUNC) &_WaterGAP3_intercep_Full, 3},
