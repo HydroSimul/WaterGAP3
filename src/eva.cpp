@@ -1,5 +1,6 @@
 #include <Rcpp.h>
 using namespace Rcpp;
+// [[Rcpp::interfaces(r, cpp)]]
 
 //' Evalute matrics
 //' @name eva

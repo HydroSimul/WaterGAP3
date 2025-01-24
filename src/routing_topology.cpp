@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <set>       // for std::set
 using namespace Rcpp;
+// [[Rcpp::interfaces(r, cpp)]]
 
 
 //' @rdname routingtopology

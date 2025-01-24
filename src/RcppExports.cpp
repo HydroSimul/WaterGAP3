@@ -155,10 +155,9 @@ RcppExport SEXP _WaterGAP3_subset_add(SEXP vec_DataSEXP, SEXP int_IndexSEXP, SEX
 }
 // WaterGAP3_H
 List WaterGAP3_H(int n_time, int n_spat, NumericMatrix ATMOS_precipitation_mm, NumericMatrix ATMOS_temperature_Cel, NumericMatrix ATMOS_potentialEvatrans_mm, IntegerVector Upstream_cellNumber_int, NumericMatrix Upstream_streamflow_m3, NumericVector SNOW_ice_mm, NumericVector LAND_builtRatio_1, NumericVector LAND_interceptWater_mm, NumericMatrix LAND_interceptCapacity_mm, NumericVector SOIL_water_mm, NumericVector SOIL_capacity_mm, NumericVector SOIL_potentialPercola_mm, NumericVector GROUND_water_mm, NumericVector RIVER_water_m3, NumericVector RIVER_length_km, NumericVector RIVER_velocity_km, NumericVector CELL_landArea_km2, List CELL_cellNumberStep_int, List CELL_inflowCellNumberStep_int, NumericVector param_ATMOS_thr_Ts, NumericVector param_SNOW_fac_f, NumericVector param_SNOW_fac_Tmelt, NumericVector param_EVATRANS_sup_k, NumericVector param_EVATRANS_sup_gamma, NumericVector param_EVATRANS_wat_petmax, NumericVector param_INFILT_hbv_beta, LogicalVector param_PERCOLA_wat_01, NumericVector param_PERCOLA_wat_k, NumericVector param_PERCOLA_wat_thresh, NumericVector param_BASEFLOW_sur_k, bool if_allVariExport);
-RcppExport SEXP _WaterGAP3_WaterGAP3_H(SEXP n_timeSEXP, SEXP n_spatSEXP, SEXP ATMOS_precipitation_mmSEXP, SEXP ATMOS_temperature_CelSEXP, SEXP ATMOS_potentialEvatrans_mmSEXP, SEXP Upstream_cellNumber_intSEXP, SEXP Upstream_streamflow_m3SEXP, SEXP SNOW_ice_mmSEXP, SEXP LAND_builtRatio_1SEXP, SEXP LAND_interceptWater_mmSEXP, SEXP LAND_interceptCapacity_mmSEXP, SEXP SOIL_water_mmSEXP, SEXP SOIL_capacity_mmSEXP, SEXP SOIL_potentialPercola_mmSEXP, SEXP GROUND_water_mmSEXP, SEXP RIVER_water_m3SEXP, SEXP RIVER_length_kmSEXP, SEXP RIVER_velocity_kmSEXP, SEXP CELL_landArea_km2SEXP, SEXP CELL_cellNumberStep_intSEXP, SEXP CELL_inflowCellNumberStep_intSEXP, SEXP param_ATMOS_thr_TsSEXP, SEXP param_SNOW_fac_fSEXP, SEXP param_SNOW_fac_TmeltSEXP, SEXP param_EVATRANS_sup_kSEXP, SEXP param_EVATRANS_sup_gammaSEXP, SEXP param_EVATRANS_wat_petmaxSEXP, SEXP param_INFILT_hbv_betaSEXP, SEXP param_PERCOLA_wat_01SEXP, SEXP param_PERCOLA_wat_kSEXP, SEXP param_PERCOLA_wat_threshSEXP, SEXP param_BASEFLOW_sur_kSEXP, SEXP if_allVariExportSEXP) {
+static SEXP _WaterGAP3_WaterGAP3_H_try(SEXP n_timeSEXP, SEXP n_spatSEXP, SEXP ATMOS_precipitation_mmSEXP, SEXP ATMOS_temperature_CelSEXP, SEXP ATMOS_potentialEvatrans_mmSEXP, SEXP Upstream_cellNumber_intSEXP, SEXP Upstream_streamflow_m3SEXP, SEXP SNOW_ice_mmSEXP, SEXP LAND_builtRatio_1SEXP, SEXP LAND_interceptWater_mmSEXP, SEXP LAND_interceptCapacity_mmSEXP, SEXP SOIL_water_mmSEXP, SEXP SOIL_capacity_mmSEXP, SEXP SOIL_potentialPercola_mmSEXP, SEXP GROUND_water_mmSEXP, SEXP RIVER_water_m3SEXP, SEXP RIVER_length_kmSEXP, SEXP RIVER_velocity_kmSEXP, SEXP CELL_landArea_km2SEXP, SEXP CELL_cellNumberStep_intSEXP, SEXP CELL_inflowCellNumberStep_intSEXP, SEXP param_ATMOS_thr_TsSEXP, SEXP param_SNOW_fac_fSEXP, SEXP param_SNOW_fac_TmeltSEXP, SEXP param_EVATRANS_sup_kSEXP, SEXP param_EVATRANS_sup_gammaSEXP, SEXP param_EVATRANS_wat_petmaxSEXP, SEXP param_INFILT_hbv_betaSEXP, SEXP param_PERCOLA_wat_01SEXP, SEXP param_PERCOLA_wat_kSEXP, SEXP param_PERCOLA_wat_threshSEXP, SEXP param_BASEFLOW_sur_kSEXP, SEXP if_allVariExportSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< int >::type n_time(n_timeSEXP);
     Rcpp::traits::input_parameter< int >::type n_spat(n_spatSEXP);
     Rcpp::traits::input_parameter< NumericMatrix >::type ATMOS_precipitation_mm(ATMOS_precipitation_mmSEXP);
@@ -194,14 +193,37 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< bool >::type if_allVariExport(if_allVariExportSEXP);
     rcpp_result_gen = Rcpp::wrap(WaterGAP3_H(n_time, n_spat, ATMOS_precipitation_mm, ATMOS_temperature_Cel, ATMOS_potentialEvatrans_mm, Upstream_cellNumber_int, Upstream_streamflow_m3, SNOW_ice_mm, LAND_builtRatio_1, LAND_interceptWater_mm, LAND_interceptCapacity_mm, SOIL_water_mm, SOIL_capacity_mm, SOIL_potentialPercola_mm, GROUND_water_mm, RIVER_water_m3, RIVER_length_km, RIVER_velocity_km, CELL_landArea_km2, CELL_cellNumberStep_int, CELL_inflowCellNumberStep_int, param_ATMOS_thr_Ts, param_SNOW_fac_f, param_SNOW_fac_Tmelt, param_EVATRANS_sup_k, param_EVATRANS_sup_gamma, param_EVATRANS_wat_petmax, param_INFILT_hbv_beta, param_PERCOLA_wat_01, param_PERCOLA_wat_k, param_PERCOLA_wat_thresh, param_BASEFLOW_sur_k, if_allVariExport));
     return rcpp_result_gen;
-END_RCPP
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP _WaterGAP3_WaterGAP3_H(SEXP n_timeSEXP, SEXP n_spatSEXP, SEXP ATMOS_precipitation_mmSEXP, SEXP ATMOS_temperature_CelSEXP, SEXP ATMOS_potentialEvatrans_mmSEXP, SEXP Upstream_cellNumber_intSEXP, SEXP Upstream_streamflow_m3SEXP, SEXP SNOW_ice_mmSEXP, SEXP LAND_builtRatio_1SEXP, SEXP LAND_interceptWater_mmSEXP, SEXP LAND_interceptCapacity_mmSEXP, SEXP SOIL_water_mmSEXP, SEXP SOIL_capacity_mmSEXP, SEXP SOIL_potentialPercola_mmSEXP, SEXP GROUND_water_mmSEXP, SEXP RIVER_water_m3SEXP, SEXP RIVER_length_kmSEXP, SEXP RIVER_velocity_kmSEXP, SEXP CELL_landArea_km2SEXP, SEXP CELL_cellNumberStep_intSEXP, SEXP CELL_inflowCellNumberStep_intSEXP, SEXP param_ATMOS_thr_TsSEXP, SEXP param_SNOW_fac_fSEXP, SEXP param_SNOW_fac_TmeltSEXP, SEXP param_EVATRANS_sup_kSEXP, SEXP param_EVATRANS_sup_gammaSEXP, SEXP param_EVATRANS_wat_petmaxSEXP, SEXP param_INFILT_hbv_betaSEXP, SEXP param_PERCOLA_wat_01SEXP, SEXP param_PERCOLA_wat_kSEXP, SEXP param_PERCOLA_wat_threshSEXP, SEXP param_BASEFLOW_sur_kSEXP, SEXP if_allVariExportSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(_WaterGAP3_WaterGAP3_H_try(n_timeSEXP, n_spatSEXP, ATMOS_precipitation_mmSEXP, ATMOS_temperature_CelSEXP, ATMOS_potentialEvatrans_mmSEXP, Upstream_cellNumber_intSEXP, Upstream_streamflow_m3SEXP, SNOW_ice_mmSEXP, LAND_builtRatio_1SEXP, LAND_interceptWater_mmSEXP, LAND_interceptCapacity_mmSEXP, SOIL_water_mmSEXP, SOIL_capacity_mmSEXP, SOIL_potentialPercola_mmSEXP, GROUND_water_mmSEXP, RIVER_water_m3SEXP, RIVER_length_kmSEXP, RIVER_velocity_kmSEXP, CELL_landArea_km2SEXP, CELL_cellNumberStep_intSEXP, CELL_inflowCellNumberStep_intSEXP, param_ATMOS_thr_TsSEXP, param_SNOW_fac_fSEXP, param_SNOW_fac_TmeltSEXP, param_EVATRANS_sup_kSEXP, param_EVATRANS_sup_gammaSEXP, param_EVATRANS_wat_petmaxSEXP, param_INFILT_hbv_betaSEXP, param_PERCOLA_wat_01SEXP, param_PERCOLA_wat_kSEXP, param_PERCOLA_wat_threshSEXP, param_BASEFLOW_sur_kSEXP, if_allVariExportSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    bool rcpp_isLongjump_gen = Rcpp::internal::isLongjumpSentinel(rcpp_result_gen);
+    if (rcpp_isLongjump_gen) {
+        Rcpp::internal::resumeJump(rcpp_result_gen);
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error("%s", CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
 }
 // WaterGAP3_HL
 List WaterGAP3_HL(int n_time, int n_spat, NumericMatrix ATMOS_precipitation_mm, NumericMatrix ATMOS_temperature_Cel, NumericMatrix ATMOS_potentialEvatrans_mm, IntegerVector Upstream_cellNumber_int, NumericMatrix Upstream_streamflow_m3, NumericVector SNOW_ice_mm, NumericVector LAND_builtRatio_1, NumericVector LAND_interceptWater_mm, NumericMatrix LAND_interceptCapacity_mm, NumericVector SOIL_water_mm, NumericVector SOIL_capacity_mm, NumericVector SOIL_potentialPercola_mm, NumericVector GROUND_water_mm, NumericVector RIVER_water_m3, NumericVector RIVER_length_km, NumericVector RIVER_velocity_km, NumericVector CELL_landArea_km2, List CELL_cellNumberStep_int, List CELL_inflowCellNumberStep_int, IntegerVector Lake_cellNumber_int, NumericVector Lake_water_m3, NumericVector Lake_area_km2, NumericVector Lake_capacity_m3, IntegerVector Riverlak_cellNumber_int, NumericVector Riverlak_water_m3, NumericVector Riverlak_area_km2, NumericVector Riverlak_capacity_m3, NumericVector param_ATMOS_thr_Ts, NumericVector param_SNOW_fac_f, NumericVector param_SNOW_fac_Tmelt, NumericVector param_EVATRANS_sup_k, NumericVector param_EVATRANS_sup_gamma, NumericVector param_EVATRANS_wat_petmax, NumericVector param_INFILT_hbv_beta, LogicalVector param_PERCOLA_wat_01, NumericVector param_PERCOLA_wat_k, NumericVector param_PERCOLA_wat_thresh, NumericVector param_BASEFLOW_sur_k, NumericVector param_Evalake_vic_gamma, NumericVector param_Lake_acp_storeFactor, NumericVector param_Lake_acp_gamma, NumericVector param_Riverlak_lin_storeFactor, bool if_allVariExport);
-RcppExport SEXP _WaterGAP3_WaterGAP3_HL(SEXP n_timeSEXP, SEXP n_spatSEXP, SEXP ATMOS_precipitation_mmSEXP, SEXP ATMOS_temperature_CelSEXP, SEXP ATMOS_potentialEvatrans_mmSEXP, SEXP Upstream_cellNumber_intSEXP, SEXP Upstream_streamflow_m3SEXP, SEXP SNOW_ice_mmSEXP, SEXP LAND_builtRatio_1SEXP, SEXP LAND_interceptWater_mmSEXP, SEXP LAND_interceptCapacity_mmSEXP, SEXP SOIL_water_mmSEXP, SEXP SOIL_capacity_mmSEXP, SEXP SOIL_potentialPercola_mmSEXP, SEXP GROUND_water_mmSEXP, SEXP RIVER_water_m3SEXP, SEXP RIVER_length_kmSEXP, SEXP RIVER_velocity_kmSEXP, SEXP CELL_landArea_km2SEXP, SEXP CELL_cellNumberStep_intSEXP, SEXP CELL_inflowCellNumberStep_intSEXP, SEXP Lake_cellNumber_intSEXP, SEXP Lake_water_m3SEXP, SEXP Lake_area_km2SEXP, SEXP Lake_capacity_m3SEXP, SEXP Riverlak_cellNumber_intSEXP, SEXP Riverlak_water_m3SEXP, SEXP Riverlak_area_km2SEXP, SEXP Riverlak_capacity_m3SEXP, SEXP param_ATMOS_thr_TsSEXP, SEXP param_SNOW_fac_fSEXP, SEXP param_SNOW_fac_TmeltSEXP, SEXP param_EVATRANS_sup_kSEXP, SEXP param_EVATRANS_sup_gammaSEXP, SEXP param_EVATRANS_wat_petmaxSEXP, SEXP param_INFILT_hbv_betaSEXP, SEXP param_PERCOLA_wat_01SEXP, SEXP param_PERCOLA_wat_kSEXP, SEXP param_PERCOLA_wat_threshSEXP, SEXP param_BASEFLOW_sur_kSEXP, SEXP param_Evalake_vic_gammaSEXP, SEXP param_Lake_acp_storeFactorSEXP, SEXP param_Lake_acp_gammaSEXP, SEXP param_Riverlak_lin_storeFactorSEXP, SEXP if_allVariExportSEXP) {
+static SEXP _WaterGAP3_WaterGAP3_HL_try(SEXP n_timeSEXP, SEXP n_spatSEXP, SEXP ATMOS_precipitation_mmSEXP, SEXP ATMOS_temperature_CelSEXP, SEXP ATMOS_potentialEvatrans_mmSEXP, SEXP Upstream_cellNumber_intSEXP, SEXP Upstream_streamflow_m3SEXP, SEXP SNOW_ice_mmSEXP, SEXP LAND_builtRatio_1SEXP, SEXP LAND_interceptWater_mmSEXP, SEXP LAND_interceptCapacity_mmSEXP, SEXP SOIL_water_mmSEXP, SEXP SOIL_capacity_mmSEXP, SEXP SOIL_potentialPercola_mmSEXP, SEXP GROUND_water_mmSEXP, SEXP RIVER_water_m3SEXP, SEXP RIVER_length_kmSEXP, SEXP RIVER_velocity_kmSEXP, SEXP CELL_landArea_km2SEXP, SEXP CELL_cellNumberStep_intSEXP, SEXP CELL_inflowCellNumberStep_intSEXP, SEXP Lake_cellNumber_intSEXP, SEXP Lake_water_m3SEXP, SEXP Lake_area_km2SEXP, SEXP Lake_capacity_m3SEXP, SEXP Riverlak_cellNumber_intSEXP, SEXP Riverlak_water_m3SEXP, SEXP Riverlak_area_km2SEXP, SEXP Riverlak_capacity_m3SEXP, SEXP param_ATMOS_thr_TsSEXP, SEXP param_SNOW_fac_fSEXP, SEXP param_SNOW_fac_TmeltSEXP, SEXP param_EVATRANS_sup_kSEXP, SEXP param_EVATRANS_sup_gammaSEXP, SEXP param_EVATRANS_wat_petmaxSEXP, SEXP param_INFILT_hbv_betaSEXP, SEXP param_PERCOLA_wat_01SEXP, SEXP param_PERCOLA_wat_kSEXP, SEXP param_PERCOLA_wat_threshSEXP, SEXP param_BASEFLOW_sur_kSEXP, SEXP param_Evalake_vic_gammaSEXP, SEXP param_Lake_acp_storeFactorSEXP, SEXP param_Lake_acp_gammaSEXP, SEXP param_Riverlak_lin_storeFactorSEXP, SEXP if_allVariExportSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< int >::type n_time(n_timeSEXP);
     Rcpp::traits::input_parameter< int >::type n_spat(n_spatSEXP);
     Rcpp::traits::input_parameter< NumericMatrix >::type ATMOS_precipitation_mm(ATMOS_precipitation_mmSEXP);
@@ -249,14 +271,37 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< bool >::type if_allVariExport(if_allVariExportSEXP);
     rcpp_result_gen = Rcpp::wrap(WaterGAP3_HL(n_time, n_spat, ATMOS_precipitation_mm, ATMOS_temperature_Cel, ATMOS_potentialEvatrans_mm, Upstream_cellNumber_int, Upstream_streamflow_m3, SNOW_ice_mm, LAND_builtRatio_1, LAND_interceptWater_mm, LAND_interceptCapacity_mm, SOIL_water_mm, SOIL_capacity_mm, SOIL_potentialPercola_mm, GROUND_water_mm, RIVER_water_m3, RIVER_length_km, RIVER_velocity_km, CELL_landArea_km2, CELL_cellNumberStep_int, CELL_inflowCellNumberStep_int, Lake_cellNumber_int, Lake_water_m3, Lake_area_km2, Lake_capacity_m3, Riverlak_cellNumber_int, Riverlak_water_m3, Riverlak_area_km2, Riverlak_capacity_m3, param_ATMOS_thr_Ts, param_SNOW_fac_f, param_SNOW_fac_Tmelt, param_EVATRANS_sup_k, param_EVATRANS_sup_gamma, param_EVATRANS_wat_petmax, param_INFILT_hbv_beta, param_PERCOLA_wat_01, param_PERCOLA_wat_k, param_PERCOLA_wat_thresh, param_BASEFLOW_sur_k, param_Evalake_vic_gamma, param_Lake_acp_storeFactor, param_Lake_acp_gamma, param_Riverlak_lin_storeFactor, if_allVariExport));
     return rcpp_result_gen;
-END_RCPP
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP _WaterGAP3_WaterGAP3_HL(SEXP n_timeSEXP, SEXP n_spatSEXP, SEXP ATMOS_precipitation_mmSEXP, SEXP ATMOS_temperature_CelSEXP, SEXP ATMOS_potentialEvatrans_mmSEXP, SEXP Upstream_cellNumber_intSEXP, SEXP Upstream_streamflow_m3SEXP, SEXP SNOW_ice_mmSEXP, SEXP LAND_builtRatio_1SEXP, SEXP LAND_interceptWater_mmSEXP, SEXP LAND_interceptCapacity_mmSEXP, SEXP SOIL_water_mmSEXP, SEXP SOIL_capacity_mmSEXP, SEXP SOIL_potentialPercola_mmSEXP, SEXP GROUND_water_mmSEXP, SEXP RIVER_water_m3SEXP, SEXP RIVER_length_kmSEXP, SEXP RIVER_velocity_kmSEXP, SEXP CELL_landArea_km2SEXP, SEXP CELL_cellNumberStep_intSEXP, SEXP CELL_inflowCellNumberStep_intSEXP, SEXP Lake_cellNumber_intSEXP, SEXP Lake_water_m3SEXP, SEXP Lake_area_km2SEXP, SEXP Lake_capacity_m3SEXP, SEXP Riverlak_cellNumber_intSEXP, SEXP Riverlak_water_m3SEXP, SEXP Riverlak_area_km2SEXP, SEXP Riverlak_capacity_m3SEXP, SEXP param_ATMOS_thr_TsSEXP, SEXP param_SNOW_fac_fSEXP, SEXP param_SNOW_fac_TmeltSEXP, SEXP param_EVATRANS_sup_kSEXP, SEXP param_EVATRANS_sup_gammaSEXP, SEXP param_EVATRANS_wat_petmaxSEXP, SEXP param_INFILT_hbv_betaSEXP, SEXP param_PERCOLA_wat_01SEXP, SEXP param_PERCOLA_wat_kSEXP, SEXP param_PERCOLA_wat_threshSEXP, SEXP param_BASEFLOW_sur_kSEXP, SEXP param_Evalake_vic_gammaSEXP, SEXP param_Lake_acp_storeFactorSEXP, SEXP param_Lake_acp_gammaSEXP, SEXP param_Riverlak_lin_storeFactorSEXP, SEXP if_allVariExportSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(_WaterGAP3_WaterGAP3_HL_try(n_timeSEXP, n_spatSEXP, ATMOS_precipitation_mmSEXP, ATMOS_temperature_CelSEXP, ATMOS_potentialEvatrans_mmSEXP, Upstream_cellNumber_intSEXP, Upstream_streamflow_m3SEXP, SNOW_ice_mmSEXP, LAND_builtRatio_1SEXP, LAND_interceptWater_mmSEXP, LAND_interceptCapacity_mmSEXP, SOIL_water_mmSEXP, SOIL_capacity_mmSEXP, SOIL_potentialPercola_mmSEXP, GROUND_water_mmSEXP, RIVER_water_m3SEXP, RIVER_length_kmSEXP, RIVER_velocity_kmSEXP, CELL_landArea_km2SEXP, CELL_cellNumberStep_intSEXP, CELL_inflowCellNumberStep_intSEXP, Lake_cellNumber_intSEXP, Lake_water_m3SEXP, Lake_area_km2SEXP, Lake_capacity_m3SEXP, Riverlak_cellNumber_intSEXP, Riverlak_water_m3SEXP, Riverlak_area_km2SEXP, Riverlak_capacity_m3SEXP, param_ATMOS_thr_TsSEXP, param_SNOW_fac_fSEXP, param_SNOW_fac_TmeltSEXP, param_EVATRANS_sup_kSEXP, param_EVATRANS_sup_gammaSEXP, param_EVATRANS_wat_petmaxSEXP, param_INFILT_hbv_betaSEXP, param_PERCOLA_wat_01SEXP, param_PERCOLA_wat_kSEXP, param_PERCOLA_wat_threshSEXP, param_BASEFLOW_sur_kSEXP, param_Evalake_vic_gammaSEXP, param_Lake_acp_storeFactorSEXP, param_Lake_acp_gammaSEXP, param_Riverlak_lin_storeFactorSEXP, if_allVariExportSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    bool rcpp_isLongjump_gen = Rcpp::internal::isLongjumpSentinel(rcpp_result_gen);
+    if (rcpp_isLongjump_gen) {
+        Rcpp::internal::resumeJump(rcpp_result_gen);
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error("%s", CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
 }
 // WaterGAP3_HLR
 List WaterGAP3_HLR(int n_time, int n_spat, NumericMatrix ATMOS_precipitation_mm, NumericMatrix ATMOS_temperature_Cel, NumericMatrix ATMOS_potentialEvatrans_mm, NumericVector SNOW_ice_mm, NumericVector LAND_builtRatio_1, NumericVector LAND_interceptWater_mm, NumericVector LAND_interceptCapacity_mm, NumericVector SOIL_water_mm, NumericVector SOIL_capacity_mm, NumericVector SOIL_potentialPercola_mm, NumericVector GROUND_water_mm, NumericVector GROUND_capacity_mm, NumericVector RIVER_water_m3, NumericVector RIVER_length_km, NumericVector RIVER_velocity_km, NumericVector CELL_landArea_km2, List CELL_cellNumberStep_int, List CELL_inflowCellNumberStep_int, IntegerVector Lake_cellNumber_int, NumericVector Lake_water_m3, NumericVector Lake_area_km2, NumericVector Lake_capacity_m3, IntegerVector Riverlak_cellNumber_int, NumericVector Riverlak_water_m3, NumericVector Riverlak_area_km2, NumericVector Riverlak_capacity_m3, IntegerVector Reservoi_cellNumber_int, NumericVector Reservoi_water_m3, NumericVector Reservoi_area_km2, NumericVector Reservoi_capacity_m3, NumericVector Reservoi_demand_m3, NumericVector Reservoi_yearInflow_m3, NumericVector Reservoi_yearDemand_m3, NumericVector Reservoi_yearRelase_m3, LogicalVector Reservoi_isOperateStart_01, LogicalVector Reservoi_isIrrigate_01, NumericVector param_ATMOS_thr_Ts, NumericVector param_SNOW_fac_f, NumericVector param_SNOW_fac_Tmelt, NumericVector param_EVATRANS_sup_k, NumericVector param_EVATRANS_sup_gamma, NumericVector param_EVATRANS_wat_petmax, NumericVector param_INFILT_hbv_beta, LogicalVector param_PERCOLA_wat_01, NumericVector param_PERCOLA_wat_k, NumericVector param_PERCOLA_wat_thresh, NumericVector param_BASEFLOW_sur_k, NumericVector param_Evalake_vic_gamma, NumericVector param_Lake_acp_storeFactor, NumericVector param_Lake_acp_gamma, NumericVector param_Riverlak_lin_storeFactor, NumericVector param_Reservoi_han_alpha, NumericVector param_Reservoi_han_kDemand, bool if_allVariExport);
-RcppExport SEXP _WaterGAP3_WaterGAP3_HLR(SEXP n_timeSEXP, SEXP n_spatSEXP, SEXP ATMOS_precipitation_mmSEXP, SEXP ATMOS_temperature_CelSEXP, SEXP ATMOS_potentialEvatrans_mmSEXP, SEXP SNOW_ice_mmSEXP, SEXP LAND_builtRatio_1SEXP, SEXP LAND_interceptWater_mmSEXP, SEXP LAND_interceptCapacity_mmSEXP, SEXP SOIL_water_mmSEXP, SEXP SOIL_capacity_mmSEXP, SEXP SOIL_potentialPercola_mmSEXP, SEXP GROUND_water_mmSEXP, SEXP GROUND_capacity_mmSEXP, SEXP RIVER_water_m3SEXP, SEXP RIVER_length_kmSEXP, SEXP RIVER_velocity_kmSEXP, SEXP CELL_landArea_km2SEXP, SEXP CELL_cellNumberStep_intSEXP, SEXP CELL_inflowCellNumberStep_intSEXP, SEXP Lake_cellNumber_intSEXP, SEXP Lake_water_m3SEXP, SEXP Lake_area_km2SEXP, SEXP Lake_capacity_m3SEXP, SEXP Riverlak_cellNumber_intSEXP, SEXP Riverlak_water_m3SEXP, SEXP Riverlak_area_km2SEXP, SEXP Riverlak_capacity_m3SEXP, SEXP Reservoi_cellNumber_intSEXP, SEXP Reservoi_water_m3SEXP, SEXP Reservoi_area_km2SEXP, SEXP Reservoi_capacity_m3SEXP, SEXP Reservoi_demand_m3SEXP, SEXP Reservoi_yearInflow_m3SEXP, SEXP Reservoi_yearDemand_m3SEXP, SEXP Reservoi_yearRelase_m3SEXP, SEXP Reservoi_isOperateStart_01SEXP, SEXP Reservoi_isIrrigate_01SEXP, SEXP param_ATMOS_thr_TsSEXP, SEXP param_SNOW_fac_fSEXP, SEXP param_SNOW_fac_TmeltSEXP, SEXP param_EVATRANS_sup_kSEXP, SEXP param_EVATRANS_sup_gammaSEXP, SEXP param_EVATRANS_wat_petmaxSEXP, SEXP param_INFILT_hbv_betaSEXP, SEXP param_PERCOLA_wat_01SEXP, SEXP param_PERCOLA_wat_kSEXP, SEXP param_PERCOLA_wat_threshSEXP, SEXP param_BASEFLOW_sur_kSEXP, SEXP param_Evalake_vic_gammaSEXP, SEXP param_Lake_acp_storeFactorSEXP, SEXP param_Lake_acp_gammaSEXP, SEXP param_Riverlak_lin_storeFactorSEXP, SEXP param_Reservoi_han_alphaSEXP, SEXP param_Reservoi_han_kDemandSEXP, SEXP if_allVariExportSEXP) {
+static SEXP _WaterGAP3_WaterGAP3_HLR_try(SEXP n_timeSEXP, SEXP n_spatSEXP, SEXP ATMOS_precipitation_mmSEXP, SEXP ATMOS_temperature_CelSEXP, SEXP ATMOS_potentialEvatrans_mmSEXP, SEXP SNOW_ice_mmSEXP, SEXP LAND_builtRatio_1SEXP, SEXP LAND_interceptWater_mmSEXP, SEXP LAND_interceptCapacity_mmSEXP, SEXP SOIL_water_mmSEXP, SEXP SOIL_capacity_mmSEXP, SEXP SOIL_potentialPercola_mmSEXP, SEXP GROUND_water_mmSEXP, SEXP GROUND_capacity_mmSEXP, SEXP RIVER_water_m3SEXP, SEXP RIVER_length_kmSEXP, SEXP RIVER_velocity_kmSEXP, SEXP CELL_landArea_km2SEXP, SEXP CELL_cellNumberStep_intSEXP, SEXP CELL_inflowCellNumberStep_intSEXP, SEXP Lake_cellNumber_intSEXP, SEXP Lake_water_m3SEXP, SEXP Lake_area_km2SEXP, SEXP Lake_capacity_m3SEXP, SEXP Riverlak_cellNumber_intSEXP, SEXP Riverlak_water_m3SEXP, SEXP Riverlak_area_km2SEXP, SEXP Riverlak_capacity_m3SEXP, SEXP Reservoi_cellNumber_intSEXP, SEXP Reservoi_water_m3SEXP, SEXP Reservoi_area_km2SEXP, SEXP Reservoi_capacity_m3SEXP, SEXP Reservoi_demand_m3SEXP, SEXP Reservoi_yearInflow_m3SEXP, SEXP Reservoi_yearDemand_m3SEXP, SEXP Reservoi_yearRelase_m3SEXP, SEXP Reservoi_isOperateStart_01SEXP, SEXP Reservoi_isIrrigate_01SEXP, SEXP param_ATMOS_thr_TsSEXP, SEXP param_SNOW_fac_fSEXP, SEXP param_SNOW_fac_TmeltSEXP, SEXP param_EVATRANS_sup_kSEXP, SEXP param_EVATRANS_sup_gammaSEXP, SEXP param_EVATRANS_wat_petmaxSEXP, SEXP param_INFILT_hbv_betaSEXP, SEXP param_PERCOLA_wat_01SEXP, SEXP param_PERCOLA_wat_kSEXP, SEXP param_PERCOLA_wat_threshSEXP, SEXP param_BASEFLOW_sur_kSEXP, SEXP param_Evalake_vic_gammaSEXP, SEXP param_Lake_acp_storeFactorSEXP, SEXP param_Lake_acp_gammaSEXP, SEXP param_Riverlak_lin_storeFactorSEXP, SEXP param_Reservoi_han_alphaSEXP, SEXP param_Reservoi_han_kDemandSEXP, SEXP if_allVariExportSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< int >::type n_time(n_timeSEXP);
     Rcpp::traits::input_parameter< int >::type n_spat(n_spatSEXP);
     Rcpp::traits::input_parameter< NumericMatrix >::type ATMOS_precipitation_mm(ATMOS_precipitation_mmSEXP);
@@ -315,14 +360,37 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< bool >::type if_allVariExport(if_allVariExportSEXP);
     rcpp_result_gen = Rcpp::wrap(WaterGAP3_HLR(n_time, n_spat, ATMOS_precipitation_mm, ATMOS_temperature_Cel, ATMOS_potentialEvatrans_mm, SNOW_ice_mm, LAND_builtRatio_1, LAND_interceptWater_mm, LAND_interceptCapacity_mm, SOIL_water_mm, SOIL_capacity_mm, SOIL_potentialPercola_mm, GROUND_water_mm, GROUND_capacity_mm, RIVER_water_m3, RIVER_length_km, RIVER_velocity_km, CELL_landArea_km2, CELL_cellNumberStep_int, CELL_inflowCellNumberStep_int, Lake_cellNumber_int, Lake_water_m3, Lake_area_km2, Lake_capacity_m3, Riverlak_cellNumber_int, Riverlak_water_m3, Riverlak_area_km2, Riverlak_capacity_m3, Reservoi_cellNumber_int, Reservoi_water_m3, Reservoi_area_km2, Reservoi_capacity_m3, Reservoi_demand_m3, Reservoi_yearInflow_m3, Reservoi_yearDemand_m3, Reservoi_yearRelase_m3, Reservoi_isOperateStart_01, Reservoi_isIrrigate_01, param_ATMOS_thr_Ts, param_SNOW_fac_f, param_SNOW_fac_Tmelt, param_EVATRANS_sup_k, param_EVATRANS_sup_gamma, param_EVATRANS_wat_petmax, param_INFILT_hbv_beta, param_PERCOLA_wat_01, param_PERCOLA_wat_k, param_PERCOLA_wat_thresh, param_BASEFLOW_sur_k, param_Evalake_vic_gamma, param_Lake_acp_storeFactor, param_Lake_acp_gamma, param_Riverlak_lin_storeFactor, param_Reservoi_han_alpha, param_Reservoi_han_kDemand, if_allVariExport));
     return rcpp_result_gen;
-END_RCPP
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP _WaterGAP3_WaterGAP3_HLR(SEXP n_timeSEXP, SEXP n_spatSEXP, SEXP ATMOS_precipitation_mmSEXP, SEXP ATMOS_temperature_CelSEXP, SEXP ATMOS_potentialEvatrans_mmSEXP, SEXP SNOW_ice_mmSEXP, SEXP LAND_builtRatio_1SEXP, SEXP LAND_interceptWater_mmSEXP, SEXP LAND_interceptCapacity_mmSEXP, SEXP SOIL_water_mmSEXP, SEXP SOIL_capacity_mmSEXP, SEXP SOIL_potentialPercola_mmSEXP, SEXP GROUND_water_mmSEXP, SEXP GROUND_capacity_mmSEXP, SEXP RIVER_water_m3SEXP, SEXP RIVER_length_kmSEXP, SEXP RIVER_velocity_kmSEXP, SEXP CELL_landArea_km2SEXP, SEXP CELL_cellNumberStep_intSEXP, SEXP CELL_inflowCellNumberStep_intSEXP, SEXP Lake_cellNumber_intSEXP, SEXP Lake_water_m3SEXP, SEXP Lake_area_km2SEXP, SEXP Lake_capacity_m3SEXP, SEXP Riverlak_cellNumber_intSEXP, SEXP Riverlak_water_m3SEXP, SEXP Riverlak_area_km2SEXP, SEXP Riverlak_capacity_m3SEXP, SEXP Reservoi_cellNumber_intSEXP, SEXP Reservoi_water_m3SEXP, SEXP Reservoi_area_km2SEXP, SEXP Reservoi_capacity_m3SEXP, SEXP Reservoi_demand_m3SEXP, SEXP Reservoi_yearInflow_m3SEXP, SEXP Reservoi_yearDemand_m3SEXP, SEXP Reservoi_yearRelase_m3SEXP, SEXP Reservoi_isOperateStart_01SEXP, SEXP Reservoi_isIrrigate_01SEXP, SEXP param_ATMOS_thr_TsSEXP, SEXP param_SNOW_fac_fSEXP, SEXP param_SNOW_fac_TmeltSEXP, SEXP param_EVATRANS_sup_kSEXP, SEXP param_EVATRANS_sup_gammaSEXP, SEXP param_EVATRANS_wat_petmaxSEXP, SEXP param_INFILT_hbv_betaSEXP, SEXP param_PERCOLA_wat_01SEXP, SEXP param_PERCOLA_wat_kSEXP, SEXP param_PERCOLA_wat_threshSEXP, SEXP param_BASEFLOW_sur_kSEXP, SEXP param_Evalake_vic_gammaSEXP, SEXP param_Lake_acp_storeFactorSEXP, SEXP param_Lake_acp_gammaSEXP, SEXP param_Riverlak_lin_storeFactorSEXP, SEXP param_Reservoi_han_alphaSEXP, SEXP param_Reservoi_han_kDemandSEXP, SEXP if_allVariExportSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(_WaterGAP3_WaterGAP3_HLR_try(n_timeSEXP, n_spatSEXP, ATMOS_precipitation_mmSEXP, ATMOS_temperature_CelSEXP, ATMOS_potentialEvatrans_mmSEXP, SNOW_ice_mmSEXP, LAND_builtRatio_1SEXP, LAND_interceptWater_mmSEXP, LAND_interceptCapacity_mmSEXP, SOIL_water_mmSEXP, SOIL_capacity_mmSEXP, SOIL_potentialPercola_mmSEXP, GROUND_water_mmSEXP, GROUND_capacity_mmSEXP, RIVER_water_m3SEXP, RIVER_length_kmSEXP, RIVER_velocity_kmSEXP, CELL_landArea_km2SEXP, CELL_cellNumberStep_intSEXP, CELL_inflowCellNumberStep_intSEXP, Lake_cellNumber_intSEXP, Lake_water_m3SEXP, Lake_area_km2SEXP, Lake_capacity_m3SEXP, Riverlak_cellNumber_intSEXP, Riverlak_water_m3SEXP, Riverlak_area_km2SEXP, Riverlak_capacity_m3SEXP, Reservoi_cellNumber_intSEXP, Reservoi_water_m3SEXP, Reservoi_area_km2SEXP, Reservoi_capacity_m3SEXP, Reservoi_demand_m3SEXP, Reservoi_yearInflow_m3SEXP, Reservoi_yearDemand_m3SEXP, Reservoi_yearRelase_m3SEXP, Reservoi_isOperateStart_01SEXP, Reservoi_isIrrigate_01SEXP, param_ATMOS_thr_TsSEXP, param_SNOW_fac_fSEXP, param_SNOW_fac_TmeltSEXP, param_EVATRANS_sup_kSEXP, param_EVATRANS_sup_gammaSEXP, param_EVATRANS_wat_petmaxSEXP, param_INFILT_hbv_betaSEXP, param_PERCOLA_wat_01SEXP, param_PERCOLA_wat_kSEXP, param_PERCOLA_wat_threshSEXP, param_BASEFLOW_sur_kSEXP, param_Evalake_vic_gammaSEXP, param_Lake_acp_storeFactorSEXP, param_Lake_acp_gammaSEXP, param_Riverlak_lin_storeFactorSEXP, param_Reservoi_han_alphaSEXP, param_Reservoi_han_kDemandSEXP, if_allVariExportSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    bool rcpp_isLongjump_gen = Rcpp::internal::isLongjumpSentinel(rcpp_result_gen);
+    if (rcpp_isLongjump_gen) {
+        Rcpp::internal::resumeJump(rcpp_result_gen);
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error("%s", CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
 }
 // cali_DDS
 List cali_DDS(Function fitness, List lst_OtherData, NumericVector x_Min, NumericVector x_Max, Nullable<NumericVector> x_Init, int max_iter, double r);
-RcppExport SEXP _WaterGAP3_cali_DDS(SEXP fitnessSEXP, SEXP lst_OtherDataSEXP, SEXP x_MinSEXP, SEXP x_MaxSEXP, SEXP x_InitSEXP, SEXP max_iterSEXP, SEXP rSEXP) {
+static SEXP _WaterGAP3_cali_DDS_try(SEXP fitnessSEXP, SEXP lst_OtherDataSEXP, SEXP x_MinSEXP, SEXP x_MaxSEXP, SEXP x_InitSEXP, SEXP max_iterSEXP, SEXP rSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< Function >::type fitness(fitnessSEXP);
     Rcpp::traits::input_parameter< List >::type lst_OtherData(lst_OtherDataSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type x_Min(x_MinSEXP);
@@ -332,26 +400,72 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< double >::type r(rSEXP);
     rcpp_result_gen = Rcpp::wrap(cali_DDS(fitness, lst_OtherData, x_Min, x_Max, x_Init, max_iter, r));
     return rcpp_result_gen;
-END_RCPP
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP _WaterGAP3_cali_DDS(SEXP fitnessSEXP, SEXP lst_OtherDataSEXP, SEXP x_MinSEXP, SEXP x_MaxSEXP, SEXP x_InitSEXP, SEXP max_iterSEXP, SEXP rSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(_WaterGAP3_cali_DDS_try(fitnessSEXP, lst_OtherDataSEXP, x_MinSEXP, x_MaxSEXP, x_InitSEXP, max_iterSEXP, rSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    bool rcpp_isLongjump_gen = Rcpp::internal::isLongjumpSentinel(rcpp_result_gen);
+    if (rcpp_isLongjump_gen) {
+        Rcpp::internal::resumeJump(rcpp_result_gen);
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error("%s", CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
 }
 // eva_NSE
 double eva_NSE(NumericVector num_Sim, NumericVector num_Obs);
-RcppExport SEXP _WaterGAP3_eva_NSE(SEXP num_SimSEXP, SEXP num_ObsSEXP) {
+static SEXP _WaterGAP3_eva_NSE_try(SEXP num_SimSEXP, SEXP num_ObsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericVector >::type num_Sim(num_SimSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type num_Obs(num_ObsSEXP);
     rcpp_result_gen = Rcpp::wrap(eva_NSE(num_Sim, num_Obs));
     return rcpp_result_gen;
-END_RCPP
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP _WaterGAP3_eva_NSE(SEXP num_SimSEXP, SEXP num_ObsSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(_WaterGAP3_eva_NSE_try(num_SimSEXP, num_ObsSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    bool rcpp_isLongjump_gen = Rcpp::internal::isLongjumpSentinel(rcpp_result_gen);
+    if (rcpp_isLongjump_gen) {
+        Rcpp::internal::resumeJump(rcpp_result_gen);
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error("%s", CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
 }
 // eva_KGE
 double eva_KGE(NumericVector num_Sim, NumericVector num_Obs, double factor_r, double factor_alpha, double factor_beta);
-RcppExport SEXP _WaterGAP3_eva_KGE(SEXP num_SimSEXP, SEXP num_ObsSEXP, SEXP factor_rSEXP, SEXP factor_alphaSEXP, SEXP factor_betaSEXP) {
+static SEXP _WaterGAP3_eva_KGE_try(SEXP num_SimSEXP, SEXP num_ObsSEXP, SEXP factor_rSEXP, SEXP factor_alphaSEXP, SEXP factor_betaSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericVector >::type num_Sim(num_SimSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type num_Obs(num_ObsSEXP);
     Rcpp::traits::input_parameter< double >::type factor_r(factor_rSEXP);
@@ -359,7 +473,31 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< double >::type factor_beta(factor_betaSEXP);
     rcpp_result_gen = Rcpp::wrap(eva_KGE(num_Sim, num_Obs, factor_r, factor_alpha, factor_beta));
     return rcpp_result_gen;
-END_RCPP
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP _WaterGAP3_eva_KGE(SEXP num_SimSEXP, SEXP num_ObsSEXP, SEXP factor_rSEXP, SEXP factor_alphaSEXP, SEXP factor_betaSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(_WaterGAP3_eva_KGE_try(num_SimSEXP, num_ObsSEXP, factor_rSEXP, factor_alphaSEXP, factor_betaSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    bool rcpp_isLongjump_gen = Rcpp::internal::isLongjumpSentinel(rcpp_result_gen);
+    if (rcpp_isLongjump_gen) {
+        Rcpp::internal::resumeJump(rcpp_result_gen);
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error("%s", CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
 }
 // atmosSnow_ThresholdT
 NumericVector atmosSnow_ThresholdT(NumericVector ATMOS_precipitation_mm, NumericVector ATMOS_temperature_Cel, NumericVector param_ATMOS_thr_Ts);
@@ -1209,98 +1347,282 @@ RcppExport SEXP _WaterGAP3_confluen_WaterGAP3_LR(SEXP CONFLUEN_cellInflow_m3SEXP
 }
 // get_inflow_cells
 List get_inflow_cells(IntegerVector int_Outflow);
-RcppExport SEXP _WaterGAP3_get_inflow_cells(SEXP int_OutflowSEXP) {
+static SEXP _WaterGAP3_get_inflow_cells_try(SEXP int_OutflowSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< IntegerVector >::type int_Outflow(int_OutflowSEXP);
     rcpp_result_gen = Rcpp::wrap(get_inflow_cells(int_Outflow));
     return rcpp_result_gen;
-END_RCPP
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP _WaterGAP3_get_inflow_cells(SEXP int_OutflowSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(_WaterGAP3_get_inflow_cells_try(int_OutflowSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    bool rcpp_isLongjump_gen = Rcpp::internal::isLongjumpSentinel(rcpp_result_gen);
+    if (rcpp_isLongjump_gen) {
+        Rcpp::internal::resumeJump(rcpp_result_gen);
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error("%s", CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
 }
 // get_inflow_lastcell
 NumericMatrix get_inflow_lastcell(IntegerVector int_Outflow);
-RcppExport SEXP _WaterGAP3_get_inflow_lastcell(SEXP int_OutflowSEXP) {
+static SEXP _WaterGAP3_get_inflow_lastcell_try(SEXP int_OutflowSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< IntegerVector >::type int_Outflow(int_OutflowSEXP);
     rcpp_result_gen = Rcpp::wrap(get_inflow_lastcell(int_Outflow));
     return rcpp_result_gen;
-END_RCPP
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP _WaterGAP3_get_inflow_lastcell(SEXP int_OutflowSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(_WaterGAP3_get_inflow_lastcell_try(int_OutflowSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    bool rcpp_isLongjump_gen = Rcpp::internal::isLongjumpSentinel(rcpp_result_gen);
+    if (rcpp_isLongjump_gen) {
+        Rcpp::internal::resumeJump(rcpp_result_gen);
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error("%s", CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
 }
 // get_routing_info
 List get_routing_info(IntegerVector int_Outflow);
-RcppExport SEXP _WaterGAP3_get_routing_info(SEXP int_OutflowSEXP) {
+static SEXP _WaterGAP3_get_routing_info_try(SEXP int_OutflowSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< IntegerVector >::type int_Outflow(int_OutflowSEXP);
     rcpp_result_gen = Rcpp::wrap(get_routing_info(int_Outflow));
     return rcpp_result_gen;
-END_RCPP
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP _WaterGAP3_get_routing_info(SEXP int_OutflowSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(_WaterGAP3_get_routing_info_try(int_OutflowSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    bool rcpp_isLongjump_gen = Rcpp::internal::isLongjumpSentinel(rcpp_result_gen);
+    if (rcpp_isLongjump_gen) {
+        Rcpp::internal::resumeJump(rcpp_result_gen);
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error("%s", CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
 }
 // get_cell_in_basin
 IntegerVector get_cell_in_basin(List lst_Inflow_Cell, int int_OutLet, IntegerVector int_TestCell);
-RcppExport SEXP _WaterGAP3_get_cell_in_basin(SEXP lst_Inflow_CellSEXP, SEXP int_OutLetSEXP, SEXP int_TestCellSEXP) {
+static SEXP _WaterGAP3_get_cell_in_basin_try(SEXP lst_Inflow_CellSEXP, SEXP int_OutLetSEXP, SEXP int_TestCellSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< List >::type lst_Inflow_Cell(lst_Inflow_CellSEXP);
     Rcpp::traits::input_parameter< int >::type int_OutLet(int_OutLetSEXP);
     Rcpp::traits::input_parameter< IntegerVector >::type int_TestCell(int_TestCellSEXP);
     rcpp_result_gen = Rcpp::wrap(get_cell_in_basin(lst_Inflow_Cell, int_OutLet, int_TestCell));
     return rcpp_result_gen;
-END_RCPP
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP _WaterGAP3_get_cell_in_basin(SEXP lst_Inflow_CellSEXP, SEXP int_OutLetSEXP, SEXP int_TestCellSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(_WaterGAP3_get_cell_in_basin_try(lst_Inflow_CellSEXP, int_OutLetSEXP, int_TestCellSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    bool rcpp_isLongjump_gen = Rcpp::internal::isLongjumpSentinel(rcpp_result_gen);
+    if (rcpp_isLongjump_gen) {
+        Rcpp::internal::resumeJump(rcpp_result_gen);
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error("%s", CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
 }
 // get_inter_basin
 IntegerVector get_inter_basin(List lst_Inflow_Cell, int int_OutLet, IntegerVector int_UpstreamCell);
-RcppExport SEXP _WaterGAP3_get_inter_basin(SEXP lst_Inflow_CellSEXP, SEXP int_OutLetSEXP, SEXP int_UpstreamCellSEXP) {
+static SEXP _WaterGAP3_get_inter_basin_try(SEXP lst_Inflow_CellSEXP, SEXP int_OutLetSEXP, SEXP int_UpstreamCellSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< List >::type lst_Inflow_Cell(lst_Inflow_CellSEXP);
     Rcpp::traits::input_parameter< int >::type int_OutLet(int_OutLetSEXP);
     Rcpp::traits::input_parameter< IntegerVector >::type int_UpstreamCell(int_UpstreamCellSEXP);
     rcpp_result_gen = Rcpp::wrap(get_inter_basin(lst_Inflow_Cell, int_OutLet, int_UpstreamCell));
     return rcpp_result_gen;
-END_RCPP
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP _WaterGAP3_get_inter_basin(SEXP lst_Inflow_CellSEXP, SEXP int_OutLetSEXP, SEXP int_UpstreamCellSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(_WaterGAP3_get_inter_basin_try(lst_Inflow_CellSEXP, int_OutLetSEXP, int_UpstreamCellSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    bool rcpp_isLongjump_gen = Rcpp::internal::isLongjumpSentinel(rcpp_result_gen);
+    if (rcpp_isLongjump_gen) {
+        Rcpp::internal::resumeJump(rcpp_result_gen);
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error("%s", CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
 }
 // get_new_outflow
 IntegerVector get_new_outflow(IntegerVector int_Outflow_Ori, IntegerVector int_CellNew);
-RcppExport SEXP _WaterGAP3_get_new_outflow(SEXP int_Outflow_OriSEXP, SEXP int_CellNewSEXP) {
+static SEXP _WaterGAP3_get_new_outflow_try(SEXP int_Outflow_OriSEXP, SEXP int_CellNewSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< IntegerVector >::type int_Outflow_Ori(int_Outflow_OriSEXP);
     Rcpp::traits::input_parameter< IntegerVector >::type int_CellNew(int_CellNewSEXP);
     rcpp_result_gen = Rcpp::wrap(get_new_outflow(int_Outflow_Ori, int_CellNew));
     return rcpp_result_gen;
-END_RCPP
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP _WaterGAP3_get_new_outflow(SEXP int_Outflow_OriSEXP, SEXP int_CellNewSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(_WaterGAP3_get_new_outflow_try(int_Outflow_OriSEXP, int_CellNewSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    bool rcpp_isLongjump_gen = Rcpp::internal::isLongjumpSentinel(rcpp_result_gen);
+    if (rcpp_isLongjump_gen) {
+        Rcpp::internal::resumeJump(rcpp_result_gen);
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error("%s", CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
 }
 // get_cali_step
 List get_cali_step(List lst_Inflow_Cell, IntegerVector int_CaliCell);
-RcppExport SEXP _WaterGAP3_get_cali_step(SEXP lst_Inflow_CellSEXP, SEXP int_CaliCellSEXP) {
+static SEXP _WaterGAP3_get_cali_step_try(SEXP lst_Inflow_CellSEXP, SEXP int_CaliCellSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< List >::type lst_Inflow_Cell(lst_Inflow_CellSEXP);
     Rcpp::traits::input_parameter< IntegerVector >::type int_CaliCell(int_CaliCellSEXP);
     rcpp_result_gen = Rcpp::wrap(get_cali_step(lst_Inflow_Cell, int_CaliCell));
     return rcpp_result_gen;
-END_RCPP
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP _WaterGAP3_get_cali_step(SEXP lst_Inflow_CellSEXP, SEXP int_CaliCellSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(_WaterGAP3_get_cali_step_try(lst_Inflow_CellSEXP, int_CaliCellSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    bool rcpp_isLongjump_gen = Rcpp::internal::isLongjumpSentinel(rcpp_result_gen);
+    if (rcpp_isLongjump_gen) {
+        Rcpp::internal::resumeJump(rcpp_result_gen);
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error("%s", CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
 }
 // get_upstream_cali_cell
 List get_upstream_cali_cell(List lst_Inflow_Cell, IntegerVector int_CaliCell);
-RcppExport SEXP _WaterGAP3_get_upstream_cali_cell(SEXP lst_Inflow_CellSEXP, SEXP int_CaliCellSEXP) {
+static SEXP _WaterGAP3_get_upstream_cali_cell_try(SEXP lst_Inflow_CellSEXP, SEXP int_CaliCellSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< List >::type lst_Inflow_Cell(lst_Inflow_CellSEXP);
     Rcpp::traits::input_parameter< IntegerVector >::type int_CaliCell(int_CaliCellSEXP);
     rcpp_result_gen = Rcpp::wrap(get_upstream_cali_cell(lst_Inflow_Cell, int_CaliCell));
     return rcpp_result_gen;
-END_RCPP
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP _WaterGAP3_get_upstream_cali_cell(SEXP lst_Inflow_CellSEXP, SEXP int_CaliCellSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(_WaterGAP3_get_upstream_cali_cell_try(lst_Inflow_CellSEXP, int_CaliCellSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    bool rcpp_isLongjump_gen = Rcpp::internal::isLongjumpSentinel(rcpp_result_gen);
+    if (rcpp_isLongjump_gen) {
+        Rcpp::internal::resumeJump(rcpp_result_gen);
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error("%s", CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
 }
 
 // validate (ensure exported C++ functions exist before calling them)
@@ -1311,6 +1633,12 @@ static int _WaterGAP3_RcppExport_validate(const char* sig) {
         signatures.insert("LogicalVector(*subset_get_logical)(LogicalVector,IntegerVector)");
         signatures.insert("void(*subset_put)(NumericVector&,IntegerVector,NumericVector)");
         signatures.insert("void(*subset_add)(NumericVector&,IntegerVector,NumericVector)");
+        signatures.insert("List(*WaterGAP3_H)(int,int,NumericMatrix,NumericMatrix,NumericMatrix,IntegerVector,NumericMatrix,NumericVector,NumericVector,NumericVector,NumericMatrix,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,List,List,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,LogicalVector,NumericVector,NumericVector,NumericVector,bool)");
+        signatures.insert("List(*WaterGAP3_HL)(int,int,NumericMatrix,NumericMatrix,NumericMatrix,IntegerVector,NumericMatrix,NumericVector,NumericVector,NumericVector,NumericMatrix,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,List,List,IntegerVector,NumericVector,NumericVector,NumericVector,IntegerVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,LogicalVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,bool)");
+        signatures.insert("List(*WaterGAP3_HLR)(int,int,NumericMatrix,NumericMatrix,NumericMatrix,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,List,List,IntegerVector,NumericVector,NumericVector,NumericVector,IntegerVector,NumericVector,NumericVector,NumericVector,IntegerVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,LogicalVector,LogicalVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,LogicalVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,bool)");
+        signatures.insert("List(*cali_DDS)(Function,List,NumericVector,NumericVector,Nullable<NumericVector>,int,double)");
+        signatures.insert("double(*eva_NSE)(NumericVector,NumericVector)");
+        signatures.insert("double(*eva_KGE)(NumericVector,NumericVector,double,double,double)");
         signatures.insert("NumericVector(*atmosSnow_ThresholdT)(NumericVector,NumericVector,NumericVector)");
         signatures.insert("NumericVector(*evatransPotential_TurcWendling)(NumericVector,NumericVector,NumericVector)");
         signatures.insert("NumericVector(*intercep_Full)(NumericVector,NumericVector,NumericVector)");
@@ -1333,6 +1661,14 @@ static int _WaterGAP3_RcppExport_validate(const char* sig) {
         signatures.insert("NumericVector(*confluen_WaterGAP3)(NumericVector&,NumericVector,NumericVector,NumericVector,List,List)");
         signatures.insert("NumericVector(*confluen_WaterGAP3_L)(NumericVector&,NumericVector,NumericVector,NumericVector,List,List,IntegerVector,NumericVector&,NumericVector,NumericVector)");
         signatures.insert("NumericVector(*confluen_WaterGAP3_LR)(NumericVector,NumericVector&,NumericVector,NumericVector,IntegerVector,NumericVector&,NumericVector,IntegerVector,NumericVector&,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector&,LogicalVector,LogicalVector,List,List,NumericVector,NumericVector,NumericVector)");
+        signatures.insert("List(*get_inflow_cells)(IntegerVector)");
+        signatures.insert("NumericMatrix(*get_inflow_lastcell)(IntegerVector)");
+        signatures.insert("List(*get_routing_info)(IntegerVector)");
+        signatures.insert("IntegerVector(*get_cell_in_basin)(List,int,IntegerVector)");
+        signatures.insert("IntegerVector(*get_inter_basin)(List,int,IntegerVector)");
+        signatures.insert("IntegerVector(*get_new_outflow)(IntegerVector,IntegerVector)");
+        signatures.insert("List(*get_cali_step)(List,IntegerVector)");
+        signatures.insert("List(*get_upstream_cali_cell)(List,IntegerVector)");
     }
     return signatures.find(sig) != signatures.end();
 }
@@ -1343,6 +1679,12 @@ RcppExport SEXP _WaterGAP3_RcppExport_registerCCallable() {
     R_RegisterCCallable("WaterGAP3", "_WaterGAP3_subset_get_logical", (DL_FUNC)_WaterGAP3_subset_get_logical_try);
     R_RegisterCCallable("WaterGAP3", "_WaterGAP3_subset_put", (DL_FUNC)_WaterGAP3_subset_put_try);
     R_RegisterCCallable("WaterGAP3", "_WaterGAP3_subset_add", (DL_FUNC)_WaterGAP3_subset_add_try);
+    R_RegisterCCallable("WaterGAP3", "_WaterGAP3_WaterGAP3_H", (DL_FUNC)_WaterGAP3_WaterGAP3_H_try);
+    R_RegisterCCallable("WaterGAP3", "_WaterGAP3_WaterGAP3_HL", (DL_FUNC)_WaterGAP3_WaterGAP3_HL_try);
+    R_RegisterCCallable("WaterGAP3", "_WaterGAP3_WaterGAP3_HLR", (DL_FUNC)_WaterGAP3_WaterGAP3_HLR_try);
+    R_RegisterCCallable("WaterGAP3", "_WaterGAP3_cali_DDS", (DL_FUNC)_WaterGAP3_cali_DDS_try);
+    R_RegisterCCallable("WaterGAP3", "_WaterGAP3_eva_NSE", (DL_FUNC)_WaterGAP3_eva_NSE_try);
+    R_RegisterCCallable("WaterGAP3", "_WaterGAP3_eva_KGE", (DL_FUNC)_WaterGAP3_eva_KGE_try);
     R_RegisterCCallable("WaterGAP3", "_WaterGAP3_atmosSnow_ThresholdT", (DL_FUNC)_WaterGAP3_atmosSnow_ThresholdT_try);
     R_RegisterCCallable("WaterGAP3", "_WaterGAP3_evatransPotential_TurcWendling", (DL_FUNC)_WaterGAP3_evatransPotential_TurcWendling_try);
     R_RegisterCCallable("WaterGAP3", "_WaterGAP3_intercep_Full", (DL_FUNC)_WaterGAP3_intercep_Full_try);
@@ -1365,6 +1707,14 @@ RcppExport SEXP _WaterGAP3_RcppExport_registerCCallable() {
     R_RegisterCCallable("WaterGAP3", "_WaterGAP3_confluen_WaterGAP3", (DL_FUNC)_WaterGAP3_confluen_WaterGAP3_try);
     R_RegisterCCallable("WaterGAP3", "_WaterGAP3_confluen_WaterGAP3_L", (DL_FUNC)_WaterGAP3_confluen_WaterGAP3_L_try);
     R_RegisterCCallable("WaterGAP3", "_WaterGAP3_confluen_WaterGAP3_LR", (DL_FUNC)_WaterGAP3_confluen_WaterGAP3_LR_try);
+    R_RegisterCCallable("WaterGAP3", "_WaterGAP3_get_inflow_cells", (DL_FUNC)_WaterGAP3_get_inflow_cells_try);
+    R_RegisterCCallable("WaterGAP3", "_WaterGAP3_get_inflow_lastcell", (DL_FUNC)_WaterGAP3_get_inflow_lastcell_try);
+    R_RegisterCCallable("WaterGAP3", "_WaterGAP3_get_routing_info", (DL_FUNC)_WaterGAP3_get_routing_info_try);
+    R_RegisterCCallable("WaterGAP3", "_WaterGAP3_get_cell_in_basin", (DL_FUNC)_WaterGAP3_get_cell_in_basin_try);
+    R_RegisterCCallable("WaterGAP3", "_WaterGAP3_get_inter_basin", (DL_FUNC)_WaterGAP3_get_inter_basin_try);
+    R_RegisterCCallable("WaterGAP3", "_WaterGAP3_get_new_outflow", (DL_FUNC)_WaterGAP3_get_new_outflow_try);
+    R_RegisterCCallable("WaterGAP3", "_WaterGAP3_get_cali_step", (DL_FUNC)_WaterGAP3_get_cali_step_try);
+    R_RegisterCCallable("WaterGAP3", "_WaterGAP3_get_upstream_cali_cell", (DL_FUNC)_WaterGAP3_get_upstream_cali_cell_try);
     R_RegisterCCallable("WaterGAP3", "_WaterGAP3_RcppExport_validate", (DL_FUNC)_WaterGAP3_RcppExport_validate);
     return R_NilValue;
 }

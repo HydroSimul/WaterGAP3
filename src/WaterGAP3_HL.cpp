@@ -1,4 +1,5 @@
 #include "WaterGAP3_Process.h"
+// [[Rcpp::interfaces(r, cpp)]]
 
 //' WaterGAP3
 //' @name WaterGAP3_HL

@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <cmath>
 #include <vector>
+// [[Rcpp::interfaces(r, cpp)]]
 
 using namespace Rcpp;
 // Function to generate a random number from a normal distribution
