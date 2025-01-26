@@ -186,7 +186,7 @@ List WaterGAP3_HL(
      OUT_snowice(i, _) = SNOW_ice_mm;
      OUT_riverwater(i, _) = RIVER_water_m3;
      OUT_lakeWater(i, _) = Lake_water_m3;
-     OUT_lakeEvalake(i, _) = Lake_Outflow_m3;
+     OUT_lakeEvalake(i, _) = Lake_evatrans_mm;
      OUT_riverlakWater(i, _) = Riverlak_water_m3;
      OUT_riverlakEvalake(i, _) = Riverlak_evatrans_mm;
    }
