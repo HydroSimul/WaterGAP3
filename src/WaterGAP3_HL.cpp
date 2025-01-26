@@ -120,7 +120,6 @@ List WaterGAP3_HL(
      param_PERCOLA_wat_k,
      param_BASEFLOW_sur_k);
 
-   RIVER_water_m3 += CELL_verticalflow_m3;
 
 
    // Local Lake
@@ -136,30 +135,9 @@ List WaterGAP3_HL(
      param_Lake_acp_gamma);
 
 
-   // Lake_evatrans_mm = evatransActual_VIC(
-   //   subset_get(ATMOS_potentialEvatrans_mm(i, _), Lake_cellNumber_int),
-   //   Lake_water_m3,
-   //   Lake_capacity_m3,
-   //   subset_get(param_Evalake_vic_gamma, Lake_cellNumber_int)
-   // );
-   // NumericVector Lake_verticalInflow_mm = (subset_get(ATMOS_precipitation_mm(i, _), Lake_cellNumber_int) - Lake_evatrans_mm);
-   // NumericVector Lake_verticalInflow_m3 = Lake_verticalInflow_mm * Lake_area_km2 * 1000;
-   // Lake_water_m3 = pmax(Lake_water_m3 + subset_get(CELL_verticalflow_m3, Lake_cellNumber_int) + Lake_verticalInflow_m3, 0.01);
-   //
-   //
-   //
-   // NumericVector Lake_Outflow_m3 = lake_AcceptPow(
-   //   Lake_water_m3,
-   //   Lake_capacity_m3,
-   //   subset_get(param_Lake_acp_storeFactor, Lake_cellNumber_int),
-   //   subset_get(param_Lake_acp_gamma, Lake_cellNumber_int)
-   // );
-   //
-   // Lake_water_m3 += -Lake_Outflow_m3;
-   // Lake_water_m3 = pmin(Lake_water_m3, Lake_capacity_m3);
-
    subset_put(CELL_verticalflow_m3, Lake_cellNumber_int, Lake_Outflow_m3);
 
+   RIVER_water_m3 += CELL_verticalflow_m3;
 
    // Riverlake
    Riverlak_evatrans_mm = evatransActual_VIC(
