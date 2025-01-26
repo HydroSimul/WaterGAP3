@@ -150,3 +150,66 @@ NumericVector module_land_WaterGAP3(
 
   return (LAND_runoff_mm + GROUND_basefloW_mm) * CELL_landArea_km2 * 1000;
 }
+
+
+
+NumericVector module_lake_WaterGAP3(
+    NumericVector ATMOS_precipitation_mm,
+    NumericVector ATMOS_potentialEvatrans_mm,
+    NumericVector& Lake_water_m3,
+    NumericVector Lake_area_km2,
+    NumericVector Lake_capacity_m3,
+    NumericVector Lake_inflow_m3,
+    NumericVector param_EVATRANS_vic_gamma,
+    NumericVector param_Lake_acp_storeFactor,
+    NumericVector param_Lake_acp_gamma) {
+  // Step 1: Calculate Lake evaporation in mm
+  NumericVector Lake_evatrans_mm = evatransActual_VIC(
+    ATMOS_potentialEvatrans_mm,
+    Lake_water_m3,
+    Lake_capacity_m3,
+    param_EVATRANS_vic_gamma
+  );
+
+  // Step 2: Calculate vertical inflow in mm and convert to m3
+  NumericVector Lake_verticalInflow_mm = (ATMOS_precipitation_mm - Lake_evatrans_mm);
+  NumericVector Lake_verticalInflow_m3 = Lake_verticalInflow_mm * Lake_area_km2 * 1000;
+
+  // Step 3: Update Lake water storage with inflows
+  Lake_water_m3 = pmax(Lake_water_m3 + Lake_inflow_m3 + Lake_verticalInflow_m3, 0.01);
+
+  // Step 4: Calculate Lake outflow in m3
+  NumericVector Lake_Outflow_m3 = lake_AcceptPow(
+    Lake_water_m3,
+    Lake_capacity_m3,
+    param_Lake_acp_storeFactor,
+    param_Lake_acp_gamma
+  );
+
+  // Step 5: Update Lake water storage with outflows and enforce capacity constraints
+  Lake_water_m3 += -Lake_Outflow_m3;
+
+  // Return updated Lake water storage
+  return Lake_Outflow_m3;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

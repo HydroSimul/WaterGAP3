@@ -45,9 +45,10 @@ WaterGAP3_HL(
   param_PERCOLA_wat_k,
   param_PERCOLA_wat_thresh,
   param_BASEFLOW_sur_k,
-  param_Evalake_vic_gamma,
+  param_Lake_Eva_vic_gamma,
   param_Lake_acp_storeFactor,
   param_Lake_acp_gamma,
+  param_Riverlak_Eva_vic_gamma,
   param_Riverlak_lin_storeFactor,
   if_allVariExport = FALSE
 )
@@ -131,8 +132,6 @@ WaterGAP3_HL(
 
 \item{param_BASEFLOW_sur_k}{<0.01, 1> coefficient parameter for [baseflow_SupplyRatio()]}
 
-\item{param_Evalake_vic_gamma}{same as param_EVATRANS_vic_gamma}
-
 \item{param_Lake_acp_storeFactor}{<uknow> parameter for [lake_AcceptPow()],}
 
 \item{param_Lake_acp_gamma}{<uknow> parameter for [lake_AcceptPow()],}
@@ -140,6 +139,8 @@ WaterGAP3_HL(
 \item{param_Riverlak_lin_storeFactor}{<uknow> parameter for [riverlak_LinearResorvoir()],}
 
 \item{if_allVariExport}{(bool) whether export all the state variables (default in false)}
+
+\item{param_Evalake_vic_gamma}{same as param_EVATRANS_vic_gamma}
 }
 \value{
 streamflow m3

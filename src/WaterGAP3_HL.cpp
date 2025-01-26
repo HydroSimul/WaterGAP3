@@ -50,9 +50,10 @@ List WaterGAP3_HL(
    NumericVector param_PERCOLA_wat_k,
    NumericVector param_PERCOLA_wat_thresh,
    NumericVector param_BASEFLOW_sur_k,
-   NumericVector param_Evalake_vic_gamma,
+   NumericVector param_Lake_Eva_vic_gamma,
    NumericVector param_Lake_acp_storeFactor,
    NumericVector param_Lake_acp_gamma,
+   NumericVector param_Riverlak_Eva_vic_gamma,
    NumericVector param_Riverlak_lin_storeFactor,
    bool if_allVariExport = false
 )
@@ -123,27 +124,39 @@ List WaterGAP3_HL(
 
 
    // Local Lake
-   Lake_evatrans_mm = evatransActual_VIC(
+   NumericVector Lake_Outflow_m3 = module_lake_WaterGAP3(
+     subset_get(ATMOS_precipitation_mm(i, _), Lake_cellNumber_int),
      subset_get(ATMOS_potentialEvatrans_mm(i, _), Lake_cellNumber_int),
      Lake_water_m3,
+     Lake_area_km2,
      Lake_capacity_m3,
-     subset_get(param_Evalake_vic_gamma, Lake_cellNumber_int)
-   );
-   NumericVector Lake_verticalInflow_mm = (subset_get(ATMOS_precipitation_mm(i, _), Lake_cellNumber_int) - Lake_evatrans_mm);
-   NumericVector Lake_verticalInflow_m3 = Lake_verticalInflow_mm * Lake_area_km2 * 1000;
-   Lake_water_m3 = pmax(Lake_water_m3 + subset_get(CELL_verticalflow_m3, Lake_cellNumber_int) + Lake_verticalInflow_m3, 0.01);
+     subset_get(CELL_verticalflow_m3, Lake_cellNumber_int),
+     param_Lake_Eva_vic_gamma,
+     param_Lake_acp_storeFactor,
+     param_Lake_acp_gamma);
 
 
-
-   NumericVector Lake_Outflow_m3 = lake_AcceptPow(
-     Lake_water_m3,
-     Lake_capacity_m3,
-     subset_get(param_Lake_acp_storeFactor, Lake_cellNumber_int),
-     subset_get(param_Lake_acp_gamma, Lake_cellNumber_int)
-   );
-
-   Lake_water_m3 += -Lake_Outflow_m3;
-   Lake_water_m3 = pmin(Lake_water_m3, Lake_capacity_m3);
+   // Lake_evatrans_mm = evatransActual_VIC(
+   //   subset_get(ATMOS_potentialEvatrans_mm(i, _), Lake_cellNumber_int),
+   //   Lake_water_m3,
+   //   Lake_capacity_m3,
+   //   subset_get(param_Evalake_vic_gamma, Lake_cellNumber_int)
+   // );
+   // NumericVector Lake_verticalInflow_mm = (subset_get(ATMOS_precipitation_mm(i, _), Lake_cellNumber_int) - Lake_evatrans_mm);
+   // NumericVector Lake_verticalInflow_m3 = Lake_verticalInflow_mm * Lake_area_km2 * 1000;
+   // Lake_water_m3 = pmax(Lake_water_m3 + subset_get(CELL_verticalflow_m3, Lake_cellNumber_int) + Lake_verticalInflow_m3, 0.01);
+   //
+   //
+   //
+   // NumericVector Lake_Outflow_m3 = lake_AcceptPow(
+   //   Lake_water_m3,
+   //   Lake_capacity_m3,
+   //   subset_get(param_Lake_acp_storeFactor, Lake_cellNumber_int),
+   //   subset_get(param_Lake_acp_gamma, Lake_cellNumber_int)
+   // );
+   //
+   // Lake_water_m3 += -Lake_Outflow_m3;
+   // Lake_water_m3 = pmin(Lake_water_m3, Lake_capacity_m3);
 
    subset_put(CELL_verticalflow_m3, Lake_cellNumber_int, Lake_Outflow_m3);
 
@@ -153,7 +166,7 @@ List WaterGAP3_HL(
      subset_get(ATMOS_potentialEvatrans_mm(i, _), Riverlak_cellNumber_int),
      Riverlak_water_m3,
      Riverlak_capacity_m3,
-     subset_get(param_Evalake_vic_gamma, Riverlak_cellNumber_int)
+     param_Riverlak_Eva_vic_gamma
    );
 
    NumericVector Riverlak_verticalInflow_mm = subset_get(ATMOS_precipitation_mm(i, _), Riverlak_cellNumber_int) - Riverlak_evatrans_mm;
