@@ -124,7 +124,7 @@ List WaterGAP3_HL(
 
    // Local Lake
    Lake_evatrans_mm = evatransActual_VIC(
-     subset_get(ATMOS_potentialEvatrans_mm, Lake_cellNumber_int),
+     subset_get(ATMOS_potentialEvatrans_mm(i, _), Lake_cellNumber_int),
      Lake_water_m3,
      Lake_capacity_m3,
      subset_get(param_Evalake_vic_gamma, Lake_cellNumber_int)
@@ -147,7 +147,7 @@ List WaterGAP3_HL(
 
    // Riverlake
    Riverlak_evatrans_mm = evatransActual_VIC(
-     subset_get(ATMOS_potentialEvatrans_mm, Riverlak_cellNumber_int),
+     subset_get(ATMOS_potentialEvatrans_mm(i, _), Riverlak_cellNumber_int),
      Riverlak_water_m3,
      Riverlak_capacity_m3,
      subset_get(param_Evalake_vic_gamma, Riverlak_cellNumber_int)
@@ -193,15 +193,15 @@ List WaterGAP3_HL(
 
  if (if_allVariExport) {
    return List::create(
-     _["streamflow_m3"] = RIVER_outflow_m3,
-     _["snowFall_mm"] = OUT_snow,
-     _["evatrans_mm"] = OUT_evatrans,
-     _["soilwater_mm"] = OUT_soilwater,
-     _["groundwater_mm"] = OUT_groundwater,
-     _["snowice_mm"] = OUT_snowice,
-     _["runoff_mm"] = OUT_landrunoff,
-     _["baseflow_mm"] = OUT_groundbaseflow,
-     _["riverwater_m3"] = OUT_riverwater,
+     // _["streamflow_m3"] = RIVER_outflow_m3,
+     // _["snowFall_mm"] = OUT_snow,
+     // _["evatrans_mm"] = OUT_evatrans,
+     // _["soilwater_mm"] = OUT_soilwater,
+     // _["groundwater_mm"] = OUT_groundwater,
+     // _["snowice_mm"] = OUT_snowice,
+     // _["runoff_mm"] = OUT_landrunoff,
+     // _["baseflow_mm"] = OUT_groundbaseflow,
+     // _["riverwater_m3"] = OUT_riverwater,
      _["lakewater_m3"] = OUT_lakeWater,
      _["lakeEva_mm"] = OUT_lakeEvalake,
      _["riverlakwater_m3"] = OUT_riverlakWater,
