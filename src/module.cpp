@@ -176,7 +176,7 @@ NumericVector module_lake_WaterGAP3(
   NumericVector Lake_verticalInflow_m3 = Lake_verticalInflow_mm * Lake_area_km2 * 1000;
 
   // Step 3: Update Lake water storage with inflows
-  Lake_water_m3 = pmax(Lake_water_m3 + Lake_inflow_m3 + Lake_verticalInflow_m3, 0.01);
+  Lake_water_m3 = pmax(Lake_water_m3 + Lake_inflow_m3 + Lake_verticalInflow_m3, 0);
 
   // Step 4: Calculate Lake outflow in m3
   NumericVector Lake_Outflow_m3 = lake_AcceptPow(

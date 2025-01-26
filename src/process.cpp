@@ -382,7 +382,7 @@ NumericVector lake_AcceptPow(
 
   Lake_outflow_m3 = pmin(Lake_outflow_m3, Lake_water_m3);
   Lake_outflow_m3 += Lake_overflow_m3;
-
+  Lake_outflow_m3 = pmin(Lake_outflow_m3, Lake_water_m3 + Lake_overflow_m3);
   return (Lake_outflow_m3);
 }
 
