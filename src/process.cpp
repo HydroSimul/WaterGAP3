@@ -376,7 +376,7 @@ NumericVector lake_AcceptPow(
 {
 
   NumericVector Lake_overflow_m3 = pmax(Lake_water_m3 -  Lake_capacity_m3, 0);
-  Lake_water_m3 = pmin(Lake_water_m3, Lake_capacity_m3);
+  Lake_water_m3 += -Lake_overflow_m3;
 
   NumericVector Lake_outflow_m3 = (1 / param_Lake_acp_storeFactor) * vecpow(Lake_water_m3 / Lake_capacity_m3, param_Lake_acp_gamma);
 
