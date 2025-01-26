@@ -188,7 +188,7 @@ NumericVector module_lake_WaterGAP3(
 
   // Step 5: Update Lake water storage with outflows and enforce capacity constraints
   Lake_water_m3 += -Lake_Outflow_m3;
-
+  Lake_water_m3 = pmin(Lake_water_m3, Lake_capacity_m3);
   // Return updated Lake water storage
   return Lake_Outflow_m3;
 }
