@@ -177,6 +177,8 @@ NumericVector module_lake_WaterGAP3(
 
   // Step 3: Update Lake water storage with inflows
   Lake_water_m3 = pmax(Lake_water_m3 + Lake_inflow_m3 + Lake_verticalInflow_m3, 0);
+  NumericVector Lake_overflow_m3 = pmax(Lake_water_m3 -  Lake_capacity_m3, 0);
+  Lake_water_m3 = pmin(Lake_water_m3, Lake_capacity_m3);
 
   // Step 4: Calculate Lake outflow in m3
   NumericVector Lake_Outflow_m3 = lake_AcceptPow(
@@ -188,9 +190,9 @@ NumericVector module_lake_WaterGAP3(
 
   // Step 5: Update Lake water storage with outflows and enforce capacity constraints
   Lake_water_m3 += -Lake_Outflow_m3;
-  Lake_water_m3 = pmin(Lake_water_m3, Lake_capacity_m3);
+  // Lake_water_m3 = pmin(Lake_water_m3, Lake_capacity_m3);
   // Return updated Lake water storage
-  return Lake_Outflow_m3;
+  return Lake_Outflow_m3 + Lake_overflow_m3;
 }
 
 
