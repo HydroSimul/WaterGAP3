@@ -137,6 +137,7 @@ List WaterGAP3_HL(
 
    subset_put(CELL_verticalflow_m3, Lake_cellNumber_int, Lake_Outflow_m3);
 
+   // confluen
    RIVER_water_m3 += CELL_verticalflow_m3;
 
    // Riverlake
