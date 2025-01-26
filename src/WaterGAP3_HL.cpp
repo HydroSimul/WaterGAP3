@@ -143,6 +143,7 @@ List WaterGAP3_HL(
    );
 
    Lake_water_m3 += -Lake_Outflow_m3;
+   Lake_water_m3 = pmin(Lake_water_m3, Lake_capacity_m3);
 
    subset_put(CELL_verticalflow_m3, Lake_cellNumber_int, Lake_Outflow_m3);
 
@@ -186,7 +187,7 @@ List WaterGAP3_HL(
      OUT_snowice(i, _) = SNOW_ice_mm;
      OUT_riverwater(i, _) = RIVER_water_m3;
      OUT_lakeWater(i, _) = Lake_water_m3;
-     OUT_lakeEvalake(i, _) = Lake_evatrans_mm;
+     OUT_lakeEvalake(i, _) = Lake_Outflow_m3;
      OUT_riverlakWater(i, _) = Riverlak_water_m3;
      OUT_riverlakEvalake(i, _) = Riverlak_evatrans_mm;
    }
