@@ -160,11 +160,12 @@ NumericVector module_lake_WaterGAP3(
     NumericVector Lake_area_km2,
     NumericVector Lake_capacity_m3,
     NumericVector Lake_inflow_m3,
+    NumericVector& Lake_evatrans_mm,
     NumericVector param_EVATRANS_vic_gamma,
     NumericVector param_Lake_acp_storeFactor,
     NumericVector param_Lake_acp_gamma) {
   // Step 1: Calculate Lake evaporation in mm
-  NumericVector Lake_evatrans_mm = evatransActual_VIC(
+  Lake_evatrans_mm = evatransActual_VIC(
     ATMOS_potentialEvatrans_mm,
     Lake_water_m3,
     Lake_capacity_m3,

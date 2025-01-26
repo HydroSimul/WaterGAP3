@@ -192,6 +192,7 @@ NumericVector module_land_Sachsen(
     NumericVector param_PERCOLA_arn_thresh,
     NumericVector param_PERCOLA_arn_k,
     NumericVector param_BASEFLOW_grf_gamma);
+
 NumericVector module_lake_WaterGAP3(
     NumericVector ATMOS_precipitation_mm,
     NumericVector ATMOS_potentialEvatrans_mm,
@@ -199,6 +200,7 @@ NumericVector module_lake_WaterGAP3(
     NumericVector Lake_area_km2,
     NumericVector Lake_capacity_m3,
     NumericVector Lake_inflow_m3,
+    NumericVector& Lake_evatrans_mm,
     NumericVector param_EVATRANS_vic_gamma,
     NumericVector param_Lake_acp_storeFactor,
     NumericVector param_Lake_acp_gamma);

@@ -130,6 +130,7 @@ List WaterGAP3_HL(
      Lake_area_km2,
      Lake_capacity_m3,
      subset_get(CELL_verticalflow_m3, Lake_cellNumber_int),
+     Lake_evatrans_mm,
      param_Lake_Eva_vic_gamma,
      param_Lake_acp_storeFactor,
      param_Lake_acp_gamma);
@@ -179,7 +180,7 @@ List WaterGAP3_HL(
      OUT_snowice(i, _) = SNOW_ice_mm;
      OUT_riverwater(i, _) = RIVER_water_m3;
      OUT_lakeWater(i, _) = Lake_water_m3;
-     OUT_lakeEvalake(i, _) = Lake_Outflow_m3;
+     OUT_lakeEvalake(i, _) = Lake_evatrans_mm;
      OUT_riverlakWater(i, _) = Riverlak_water_m3;
      OUT_riverlakEvalake(i, _) = Riverlak_evatrans_mm;
    }
@@ -188,15 +189,15 @@ List WaterGAP3_HL(
 
  if (if_allVariExport) {
    return List::create(
-     // _["streamflow_m3"] = RIVER_outflow_m3,
-     // _["snowFall_mm"] = OUT_snow,
-     // _["evatrans_mm"] = OUT_evatrans,
-     // _["soilwater_mm"] = OUT_soilwater,
-     // _["groundwater_mm"] = OUT_groundwater,
-     // _["snowice_mm"] = OUT_snowice,
-     // _["runoff_mm"] = OUT_landrunoff,
-     // _["baseflow_mm"] = OUT_groundbaseflow,
-     // _["riverwater_m3"] = OUT_riverwater,
+     _["streamflow_m3"] = RIVER_outflow_m3,
+     _["snowFall_mm"] = OUT_snow,
+     _["evatrans_mm"] = OUT_evatrans,
+     _["soilwater_mm"] = OUT_soilwater,
+     _["groundwater_mm"] = OUT_groundwater,
+     _["snowice_mm"] = OUT_snowice,
+     _["runoff_mm"] = OUT_landrunoff,
+     _["baseflow_mm"] = OUT_groundbaseflow,
+     _["riverwater_m3"] = OUT_riverwater,
      _["lakewater_m3"] = OUT_lakeWater,
      _["lakeEva_mm"] = OUT_lakeEvalake,
      _["riverlakwater_m3"] = OUT_riverlakWater,
