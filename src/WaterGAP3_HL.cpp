@@ -131,7 +131,7 @@ List WaterGAP3_HL(
    );
    NumericVector Lake_verticalInflow_mm = (subset_get(ATMOS_precipitation_mm(i, _), Lake_cellNumber_int) - Lake_evatrans_mm);
    NumericVector Lake_verticalInflow_m3 = Lake_verticalInflow_mm * Lake_area_km2 * 1000;
-   Lake_water_m3 = pmax(Lake_water_m3 + subset_get(CELL_verticalflow_m3, Lake_cellNumber_int) + Lake_verticalInflow_m3, 0.);
+   Lake_water_m3 = pmax(Lake_water_m3 + subset_get(CELL_verticalflow_m3, Lake_cellNumber_int) + Lake_verticalInflow_m3, 0.01);
 
 
 
