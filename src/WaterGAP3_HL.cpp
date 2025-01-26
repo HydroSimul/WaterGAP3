@@ -142,7 +142,7 @@ List WaterGAP3_HL(
      subset_get(param_Lake_acp_gamma, Lake_cellNumber_int)
    );
 
-   Lake_water_m3 += Lake_Outflow_m3;
+   Lake_water_m3 += -Lake_Outflow_m3;
 
    subset_put(CELL_verticalflow_m3, Lake_cellNumber_int, Lake_Outflow_m3);
 
