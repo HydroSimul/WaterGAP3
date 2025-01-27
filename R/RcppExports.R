@@ -3,7 +3,7 @@
 
 #' WaterGAP3
 #' @name WaterGAP3_H
-#' @inheritParams all_vari
+#' @inheritParams HydroGallery::all_vari
 #' @return streamflow m3
 #' @export
 WaterGAP3_H <- function(n_time, n_spat, ATMOS_precipitation_mm, ATMOS_temperature_Cel, ATMOS_potentialEvatrans_mm, Upstream_cellNumber_int, Upstream_streamflow_m3, SNOW_ice_mm, LAND_builtRatio_1, LAND_interceptWater_mm, LAND_interceptCapacity_mm, SOIL_water_mm, SOIL_capacity_mm, SOIL_potentialPercola_mm, GROUND_water_mm, RIVER_water_m3, RIVER_length_km, RIVER_velocity_km, CELL_landArea_km2, CELL_cellNumberStep_int, CELL_inflowCellNumberStep_int, param_ATMOS_thr_Ts, param_SNOW_fac_f, param_SNOW_fac_Tmelt, param_EVATRANS_sup_k, param_EVATRANS_sup_gamma, param_EVATRANS_wat_petmax, param_INFILT_hbv_beta, param_PERCOLA_wat_01, param_PERCOLA_wat_k, param_PERCOLA_wat_thresh, param_BASEFLOW_sur_k, if_allVariExport = FALSE) {
@@ -12,7 +12,7 @@ WaterGAP3_H <- function(n_time, n_spat, ATMOS_precipitation_mm, ATMOS_temperatur
 
 #' WaterGAP3
 #' @name WaterGAP3_HL
-#' @inheritParams all_vari
+#' @inheritParams HydroGallery::all_vari
 #' @param param_Evalake_vic_gamma same as param_EVATRANS_vic_gamma
 #' @return streamflow m3
 #' @export

@@ -182,7 +182,7 @@ NumericVector module_lake_WaterGAP3(
   Lake_water_m3 = pmin(Lake_water_m3, Lake_capacity_m3);
 
   // Step 4: Calculate Lake outflow in m3
-  NumericVector Lake_Outflow_m3 = lake_AcceptPow(
+  NumericVector Lake_Outflow_m3 = lakeout_AcceptPow(
     Lake_water_m3,
     Lake_capacity_m3,
     param_Lake_acp_storeFactor,

@@ -4,7 +4,7 @@
 
 //' WaterGAP3
 //' @name WaterGAP3_H
-//' @inheritParams all_vari
+//' @inheritParams HydroGallery::all_vari
 //' @return streamflow m3
 //' @export
 // [[Rcpp::export]]
