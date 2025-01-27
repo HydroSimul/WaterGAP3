@@ -110,34 +110,6 @@ WaterGAP3_HL(
 
 \item{Riverlak_capacity_m3}{(m3) total capacity of the river-lake system}
 
-\item{param_ATMOS_thr_Ts}{<-1, 3> (Cel) threshold air temperature that snow, parameter for [atmosSnow_ThresholdT()]}
-
-\item{param_SNOW_fac_f}{<0.05, 2> (mm/m2/h/Cel) potential melt volum per Cel per hour parameter for [snowMelt_Factor()]}
-
-\item{param_SNOW_fac_Tmelt}{<0, 3> (Cel) snow melt temperature parameter for [snowMelt_Factor()]}
-
-\item{param_EVATRANS_sup_k}{<0.1, 1> parameter for [evatransActual_SupplyPow()], ratio of this method}
-
-\item{param_EVATRANS_sup_gamma}{<.1, 5> parameter for [evatransActual_SupplyPow()], exponent of this method}
-
-\item{param_EVATRANS_wat_petmax}{<10, 20> parameter for [evatransActual_WaterGAP()], 10 for arid area, 20 for humid area}
-
-\item{param_INFILT_hbv_beta}{<0.001, 5> parameters for [infilt_HBV()]}
-
-\item{param_PERCOLA_wat_01}{<0, 1> 0: percolation, 1: non percolation [percola_WaterGAP3()]}
-
-\item{param_PERCOLA_wat_k}{<0.1, 1> exponential parameter for [percola_WaterGAP3()]}
-
-\item{param_PERCOLA_wat_thresh}{<10, 15> coefficient parameter for [percola_WaterGAP3()]}
-
-\item{param_BASEFLOW_sur_k}{<0.01, 1> coefficient parameter for [baseflow_SupplyRatio()]}
-
-\item{param_Lake_acp_storeFactor}{<uknow> parameter for [lake_AcceptPow()],}
-
-\item{param_Lake_acp_gamma}{<uknow> parameter for [lake_AcceptPow()],}
-
-\item{param_Riverlak_lin_storeFactor}{<uknow> parameter for [riverlak_LinearResorvoir()],}
-
 \item{if_allVariExport}{(bool) whether export all the state variables (default in false)}
 
 \item{param_Evalake_vic_gamma}{same as param_EVATRANS_vic_gamma}

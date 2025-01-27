@@ -1,10 +1,9 @@
-#include "WaterGAP3_Process.h"
+#include "WaterGAP3_Module.h"
 // [[Rcpp::interfaces(r, cpp)]]
 
 //' WaterGAP3
 //' @name WaterGAP3_HL
 //' @inheritParams all_vari
-//' @inheritParams process
 //' @param param_Evalake_vic_gamma same as param_EVATRANS_vic_gamma
 //' @return streamflow m3
 //' @export

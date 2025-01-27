@@ -1,10 +1,10 @@
-#include "WaterGAP3_Process.h"
+#include "00utilis.h"
+#include "WaterGAP3_Module.h"
 // [[Rcpp::interfaces(r, cpp)]]
 
 //' WaterGAP3
 //' @name WaterGAP3_H
 //' @inheritParams all_vari
-//' @inheritParams process
 //' @return streamflow m3
 //' @export
 // [[Rcpp::export]]

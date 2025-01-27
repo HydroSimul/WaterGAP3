@@ -1,13 +1,13 @@
 Package: WaterGAP3
 Type: Package
 Title: WaterGAP3 Hydro
-Version: 1.0
+Version: 1.0.1
 Date: 2024-08-22
 Author: Kan Lei
 Maintainer: Kan Lei <kan.lei@rub.de>
 Description: One paragraph description of what the package does as one or more full sentences.
 License: GPL (>= 2)
-Imports: Rcpp (>= 1.0.7)
-LinkingTo: Rcpp
+Imports: Rcpp (>= 1.0.7), HydroGallery
+LinkingTo: Rcpp, HydroGallery
 RoxygenNote: 7.3.2
 Encoding: UTF-8
