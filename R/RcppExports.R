@@ -65,6 +65,22 @@ read_nc_dim_WG3 <- function(path_File, dim_name) {
     .Call(`_WaterGAP3_read_nc_dim_WG3`, path_File, dim_name)
 }
 
+#' @rdname nc
+#'
+#' @description Combine multiple NetCDF files along the time dimension
+#'
+#' This function reads multiple NetCDF files with the same spatial dimension but different
+#' time steps, combines them along the time dimension, and writes the result to a new NetCDF file.
+#'
+#' @param path_FilesBind A character vector of paths to the input NetCDF files
+#' @param path_Out Path to the output NetCDF file
+#' @param name_Variable Name of the variable to combine
+#' @return None (writes a NetCDF file to disk)
+#' @export
+bind_nc_WG3 <- function(path_FilesBind, path_Out, name_Variable) {
+    invisible(.Call(`_WaterGAP3_bind_nc_WG3`, path_FilesBind, path_Out, name_Variable))
+}
+
 # Register entry points for exported C++ functions
 methods::setLoadAction(function(ns) {
     .Call(`_WaterGAP3_RcppExport_registerCCallable`)

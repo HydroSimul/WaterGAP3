@@ -295,3 +295,317 @@ Rcpp::IntegerVector read_nc_dim_WG3(std::string path_File, std::string dim_name)
 
   return dim_indices;
 }
+
+
+//' @rdname nc
+//'
+//' @description Combine multiple NetCDF files along the time dimension
+//'
+//' This function reads multiple NetCDF files with the same spatial dimension but different
+//' time steps, combines them along the time dimension, and writes the result to a new NetCDF file.
+//'
+//' @param path_FilesBind A character vector of paths to the input NetCDF files
+//' @param path_Out Path to the output NetCDF file
+//' @param name_Variable Name of the variable to combine
+//' @return None (writes a NetCDF file to disk)
+//' @export
+// [[Rcpp::export]]
+void bind_nc_WG3(std::vector<std::string> path_FilesBind,
+                std::string path_Out,
+                std::string name_Variable) {
+ if (path_FilesBind.empty()) {
+   stop("No input files provided");
+ }
+
+ // Open first file to get dimensions and attributes
+ int ncid_first, status;
+ status = nc_open(path_FilesBind[0].c_str(), NC_NOWRITE, &ncid_first);
+ if (status != NC_NOERR) {
+   stop("Failed to open first NetCDF file: " + std::string(nc_strerror(status)));
+ }
+ NCFileCloser firstCloser(ncid_first);
+
+ // Get dimensions from first file
+ int timeDimID_first, spatDimID_first;
+ size_t timeLen_first, spatLen_first;
+
+ status = nc_inq_dimid(ncid_first, "time", &timeDimID_first);
+ if (status != NC_NOERR) {
+   stop("Failed to get time dimension ID from first file: " + std::string(nc_strerror(status)));
+ }
+ status = nc_inq_dimlen(ncid_first, timeDimID_first, &timeLen_first);
+ if (status != NC_NOERR) {
+   stop("Failed to get time dimension length from first file: " + std::string(nc_strerror(status)));
+ }
+
+ status = nc_inq_dimid(ncid_first, "spat", &spatDimID_first);
+ if (status != NC_NOERR) {
+   stop("Failed to get spatial dimension ID from first file: " + std::string(nc_strerror(status)));
+ }
+ status = nc_inq_dimlen(ncid_first, spatDimID_first, &spatLen_first);
+ if (status != NC_NOERR) {
+   stop("Failed to get spatial dimension length from first file: " + std::string(nc_strerror(status)));
+ }
+
+ // Get time and spatial values from first file
+ std::vector<int> all_time_values;
+ std::vector<int> time_values_first(timeLen_first);
+ int timeVarID_first;
+ status = nc_inq_varid(ncid_first, "time", &timeVarID_first);
+ if (status == NC_NOERR) {
+   status = nc_get_var_int(ncid_first, timeVarID_first, time_values_first.data());
+   if (status != NC_NOERR) {
+     stop("Failed to read time values from first file: " + std::string(nc_strerror(status)));
+   }
+   all_time_values.insert(all_time_values.end(), time_values_first.begin(), time_values_first.end());
+ } else {
+   // If time variable doesn't exist, create sequential values
+   for (size_t i = 0; i < timeLen_first; i++) {
+     all_time_values.push_back(i);
+   }
+ }
+
+ std::vector<int> spat_values(spatLen_first);
+ int spatVarID_first;
+ status = nc_inq_varid(ncid_first, "spat", &spatVarID_first);
+ if (status == NC_NOERR) {
+   status = nc_get_var_int(ncid_first, spatVarID_first, spat_values.data());
+   if (status != NC_NOERR) {
+     stop("Failed to read spatial values from first file: " + std::string(nc_strerror(status)));
+   }
+ } else {
+   // If spatial variable doesn't exist, create sequential values
+   for (size_t i = 0; i < spatLen_first; i++) {
+     spat_values[i] = i;
+   }
+ }
+
+ // Read data from first file
+ int dataVarID_first;
+ status = nc_inq_varid(ncid_first, name_Variable.c_str(), &dataVarID_first);
+ if (status != NC_NOERR) {
+   stop("Failed to get variable ID from first file: " + std::string(nc_strerror(status)));
+ }
+
+ std::vector<double> combined_data(timeLen_first * spatLen_first);
+ status = nc_get_var_double(ncid_first, dataVarID_first, combined_data.data());
+ if (status != NC_NOERR) {
+   stop("Failed to read data from first file: " + std::string(nc_strerror(status)));
+ }
+
+ // Process remaining files
+ for (size_t f = 1; f < path_FilesBind.size(); f++) {
+   int ncid, status;
+   status = nc_open(path_FilesBind[f].c_str(), NC_NOWRITE, &ncid);
+   if (status != NC_NOERR) {
+     stop("Failed to open NetCDF file " + path_FilesBind[f] + ": " + std::string(nc_strerror(status)));
+   }
+   NCFileCloser closer(ncid);
+
+   // Check dimensions match
+   int timeDimID, spatDimID;
+   size_t timeLen, spatLen;
+
+   status = nc_inq_dimid(ncid, "time", &timeDimID);
+   if (status != NC_NOERR) {
+     stop("Failed to get time dimension ID from file " + path_FilesBind[f] + ": " + std::string(nc_strerror(status)));
+   }
+   status = nc_inq_dimlen(ncid, timeDimID, &timeLen);
+   if (status != NC_NOERR) {
+     stop("Failed to get time dimension length from file " + path_FilesBind[f] + ": " + std::string(nc_strerror(status)));
+   }
+
+   status = nc_inq_dimid(ncid, "spat", &spatDimID);
+   if (status != NC_NOERR) {
+     stop("Failed to get spatial dimension ID from file " + path_FilesBind[f] + ": " + std::string(nc_strerror(status)));
+   }
+   status = nc_inq_dimlen(ncid, spatDimID, &spatLen);
+   if (status != NC_NOERR) {
+     stop("Failed to get spatial dimension length from file " + path_FilesBind[f] + ": " + std::string(nc_strerror(status)));
+   }
+
+   if (spatLen != spatLen_first) {
+     stop("Spatial dimension length mismatch in file " + path_FilesBind[f]);
+   }
+
+   // Get time values
+   std::vector<int> time_values(timeLen);
+   int timeVarID;
+   status = nc_inq_varid(ncid, "time", &timeVarID);
+   if (status == NC_NOERR) {
+     status = nc_get_var_int(ncid, timeVarID, time_values.data());
+     if (status != NC_NOERR) {
+       stop("Failed to read time values from file " + path_FilesBind[f] + ": " + std::string(nc_strerror(status)));
+     }
+     all_time_values.insert(all_time_values.end(), time_values.begin(), time_values.end());
+   } else {
+     // If time variable doesn't exist, create sequential values
+     size_t current_size = all_time_values.size();
+     for (size_t i = 0; i < timeLen; i++) {
+       all_time_values.push_back(current_size + i);
+     }
+   }
+
+   // Read data
+   int dataVarID;
+   status = nc_inq_varid(ncid, name_Variable.c_str(), &dataVarID);
+   if (status != NC_NOERR) {
+     stop("Failed to get variable ID from file " + path_FilesBind[f] + ": " + std::string(nc_strerror(status)));
+   }
+
+   std::vector<double> file_data(timeLen * spatLen);
+   status = nc_get_var_double(ncid, dataVarID, file_data.data());
+   if (status != NC_NOERR) {
+     stop("Failed to read data from file " + path_FilesBind[f] + ": " + std::string(nc_strerror(status)));
+   }
+
+   // Append data to combined_data
+   combined_data.insert(combined_data.end(), file_data.begin(), file_data.end());
+ }
+
+ // Create output file
+ int ncid_out, status_out;
+ status_out = nc_create(path_Out.c_str(), NC_CLOBBER, &ncid_out);
+ if (status_out != NC_NOERR) {
+   stop("Failed to create output NetCDF file: " + std::string(nc_strerror(status_out)));
+ }
+ NCFileCloser outCloser(ncid_out);
+
+ // Define dimensions
+ int timeDimID_out, spatDimID_out;
+ size_t total_time_len = all_time_values.size();
+
+ status_out = nc_def_dim(ncid_out, "time", total_time_len, &timeDimID_out);
+ if (status_out != NC_NOERR) {
+   stop("Failed to define time dimension in output file: " + std::string(nc_strerror(status_out)));
+ }
+
+ status_out = nc_def_dim(ncid_out, "spat", spatLen_first, &spatDimID_out);
+ if (status_out != NC_NOERR) {
+   stop("Failed to define spatial dimension in output file: " + std::string(nc_strerror(status_out)));
+ }
+
+ // Define variables
+ int timeVarID_out;
+ status_out = nc_def_var(ncid_out, "time", NC_INT, 1, &timeDimID_out, &timeVarID_out);
+ if (status_out != NC_NOERR) {
+   stop("Failed to define time variable in output file: " + std::string(nc_strerror(status_out)));
+ }
+
+ int spatVarID_out;
+ status_out = nc_def_var(ncid_out, "spat", NC_INT, 1, &spatDimID_out, &spatVarID_out);
+ if (status_out != NC_NOERR) {
+   stop("Failed to define spatial variable in output file: " + std::string(nc_strerror(status_out)));
+ }
+
+ int dimids[2] = {timeDimID_out, spatDimID_out};
+ int dataVarID_out;
+ status_out = nc_def_var(ncid_out, name_Variable.c_str(), NC_DOUBLE, 2, dimids, &dataVarID_out);
+ if (status_out != NC_NOERR) {
+   stop("Failed to define data variable in output file: " + std::string(nc_strerror(status_out)));
+ }
+
+ // Copy attributes from first file's data variable
+ int dataVarID_first_attrs;
+ status = nc_inq_varid(ncid_first, name_Variable.c_str(), &dataVarID_first_attrs);
+ if (status == NC_NOERR) {
+   // Copy units attribute if it exists
+   size_t units_len;
+   status = nc_inq_attlen(ncid_first, dataVarID_first_attrs, "units", &units_len);
+   if (status == NC_NOERR) {
+     std::vector<char> units(units_len + 1);
+     status = nc_get_att_text(ncid_first, dataVarID_first_attrs, "units", units.data());
+     if (status == NC_NOERR) {
+       units[units_len] = '\0';
+       status_out = nc_put_att_text(ncid_out, dataVarID_out, "units", units_len, units.data());
+       if (status_out != NC_NOERR) {
+         Rcerr << "Warning: Failed to copy units attribute to output file: " << nc_strerror(status_out) << std::endl;
+       }
+     }
+   }
+
+   // Copy long_name attribute if it exists
+   size_t long_name_len;
+   status = nc_inq_attlen(ncid_first, dataVarID_first_attrs, "long_name", &long_name_len);
+   if (status == NC_NOERR) {
+     std::vector<char> long_name(long_name_len + 1);
+     status = nc_get_att_text(ncid_first, dataVarID_first_attrs, "long_name", long_name.data());
+     if (status == NC_NOERR) {
+       long_name[long_name_len] = '\0';
+       status_out = nc_put_att_text(ncid_out, dataVarID_out, "long_name", long_name_len, long_name.data());
+       if (status_out != NC_NOERR) {
+         Rcerr << "Warning: Failed to copy long_name attribute to output file: " << nc_strerror(status_out) << std::endl;
+       }
+     }
+   }
+ }
+
+ // Copy global attributes from first file
+ int ngatts;
+ status = nc_inq_natts(ncid_first, &ngatts);
+ if (status == NC_NOERR) {
+   for (int i = 0; i < ngatts; i++) {
+     char name[NC_MAX_NAME + 1];
+     status = nc_inq_attname(ncid_first, NC_GLOBAL, i, name);
+     if (status == NC_NOERR) {
+       nc_type type;
+       size_t len;
+       status = nc_inq_att(ncid_first, NC_GLOBAL, name, &type, &len);
+       if (status == NC_NOERR) {
+         if (type == NC_CHAR) {
+           std::vector<char> value(len + 1);
+           status = nc_get_att_text(ncid_first, NC_GLOBAL, name, value.data());
+           if (status == NC_NOERR) {
+             value[len] = '\0';
+             status_out = nc_put_att_text(ncid_out, NC_GLOBAL, name, len, value.data());
+           }
+         } else if (type == NC_INT) {
+           std::vector<int> value(len);
+           status = nc_get_att_int(ncid_first, NC_GLOBAL, name, value.data());
+           if (status == NC_NOERR) {
+             status_out = nc_put_att_int(ncid_out, NC_GLOBAL, name, type, len, value.data());
+           }
+         } else if (type == NC_DOUBLE) {
+           std::vector<double> value(len);
+           status = nc_get_att_double(ncid_first, NC_GLOBAL, name, value.data());
+           if (status == NC_NOERR) {
+             status_out = nc_put_att_double(ncid_out, NC_GLOBAL, name, type, len, value.data());
+           }
+         }
+
+         if (status_out != NC_NOERR) {
+           Rcerr << "Warning: Failed to copy global attribute " << name << " to output file: " << nc_strerror(status_out) << std::endl;
+         }
+       }
+     }
+   }
+ }
+
+ status_out = nc_enddef(ncid_out);
+ if (status_out != NC_NOERR) {
+   stop("Failed to end definition mode in output file: " + std::string(nc_strerror(status_out)));
+ }
+
+ // Write data to output file
+ status_out = nc_put_var_int(ncid_out, timeVarID_out, all_time_values.data());
+ if (status_out != NC_NOERR) {
+   stop("Failed to write time values to output file: " + std::string(nc_strerror(status_out)));
+ }
+
+ status_out = nc_put_var_int(ncid_out, spatVarID_out, spat_values.data());
+ if (status_out != NC_NOERR) {
+   stop("Failed to write spatial values to output file: " + std::string(nc_strerror(status_out)));
+ }
+
+ status_out = nc_put_var_double(ncid_out, dataVarID_out, combined_data.data());
+ if (status_out != NC_NOERR) {
+   stop("Failed to write data to output file: " + std::string(nc_strerror(status_out)));
+ }
+
+ Rcout << "Successfully combined " << path_FilesBind.size() << " files into " << path_Out << std::endl;
+}
+
+
+
+
+

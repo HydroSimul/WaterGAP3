@@ -5,6 +5,7 @@
 \alias{write_nc_WG3}
 \alias{read_nc_WG3}
 \alias{read_nc_dim_WG3}
+\alias{bind_nc_WG3}
 \title{Write data to a NetCDF file in WaterGAP3 format}
 \usage{
 write_nc_WG3(
@@ -20,6 +21,8 @@ write_nc_WG3(
 read_nc_WG3(path_File, name_Variable)
 
 read_nc_dim_WG3(path_File, dim_name)
+
+bind_nc_WG3(path_FilesBind, path_Out, name_Variable)
 }
 \arguments{
 \item{mat_Data_WG3}{A numeric matrix containing the data to be written. Rows represent time steps, columns represent spatial units.}
@@ -30,11 +33,15 @@ read_nc_dim_WG3(path_File, dim_name)
 
 \item{path_File}{A string specifying the directory path where the NetCDF file will be created, for [write_nc_WG3] it is the folder path, for [read_nc_WG3] it should be the file path.}
 
-\item{name_Variable}{A string specifying the variable name (must be one of: "airTemprature_Cel", "solarRadition_MJ", "precipatation_mm", "discharge_m3s", "runoff_mm").}
+\item{name_Variable}{Name of the variable to combine}
 
 \item{str_Continent}{A string specifying the continent code (must be one of: "eu", "af", "as", "au", "na", "sa").}
 
 \item{suffix_File}{A string to be appended to the filename (typically indicating time period or version).}
+
+\item{path_FilesBind}{A character vector of paths to the input NetCDF files}
+
+\item{path_Out}{Path to the output NetCDF file}
 }
 \value{
 None (creates a NetCDF file on disk) / Matrix
@@ -42,11 +49,14 @@ None (creates a NetCDF file on disk) / Matrix
 A numeric matrix containing the data from the NetCDF file, with rows representing time steps and columns representing spatial units.
 
 A numeric vector containing the data from the NetCDF file, with rows representing time steps and columns representing spatial units.
+
+None (writes a NetCDF file to disk)
 }
 \description{
-Write data to a NetCDF file in WaterGAP3 format
+Combine multiple NetCDF files along the time dimension
 
-Read data from a NetCDF file in WaterGAP3 format
+This function reads multiple NetCDF files with the same spatial dimension but different
+time steps, combines them along the time dimension, and writes the result to a new NetCDF file.
 }
 \examples{
 \dontrun{
