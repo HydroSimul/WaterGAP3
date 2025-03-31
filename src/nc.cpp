@@ -5,6 +5,7 @@
 #include <ctime>
 #include <stdexcept>
 using namespace Rcpp;
+
 // [[Rcpp::interfaces(r, cpp)]]
 
 // RAII wrapper for NetCDF file closing
@@ -70,6 +71,7 @@ const std::map<std::string, std::pair<std::string, std::string>> VAR_ATTRIBUTES 
 //' data_matrix <- matrix(rnorm(100), nrow=10, ncol=10)
 //' write_nc_WG3(data_matrix, 1:10, 1:10, "/path/to/save", "airTemprature_Cel", "eu", "v1")
 //' }
+//' @export
 // [[Rcpp::export]]
 void write_nc_WG3(NumericMatrix mat_Data_WG3, IntegerVector dim_Time, IntegerVector dim_Spat,
                  std::string path_File, std::string name_Variable, std::string str_Continent, std::string suffix_File) {
@@ -173,6 +175,7 @@ void write_nc_WG3(NumericMatrix mat_Data_WG3, IntegerVector dim_Time, IntegerVec
 //' \dontrun{
 //' data <- read_nc_WG3("/path/to/file.nc", "airTemprature_Cel")
 //' }
+//' @export
 // [[Rcpp::export]]
 NumericMatrix read_nc_WG3(std::string path_File, std::string name_Variable) {
  int ncid, timeDimID, spatDimID, dataVarID;
@@ -230,6 +233,7 @@ NumericMatrix read_nc_WG3(std::string path_File, std::string name_Variable) {
 //' \dontrun{
 //' data <- read_nc_dim_WG3("/path/to/file.nc", "time")
 //' }
+//' @export
 // [[Rcpp::export]]
 Rcpp::IntegerVector read_nc_dim_WG3(std::string path_File, std::string dim_name) {
   int ncid, dimID, varID;

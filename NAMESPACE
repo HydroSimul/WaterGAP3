@@ -2,5 +2,8 @@
 
 export(WaterGAP3_H)
 export(WaterGAP3_HL)
+export(read_nc_WG3)
+export(read_nc_dim_WG3)
+export(write_nc_WG3)
 importFrom(Rcpp,sourceCpp)
 useDynLib(WaterGAP3, .registration = TRUE)

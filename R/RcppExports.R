@@ -36,6 +36,7 @@ WaterGAP3_HL <- function(n_time, n_spat, ATMOS_precipitation_mm, ATMOS_temperatu
 #' data_matrix <- matrix(rnorm(100), nrow=10, ncol=10)
 #' write_nc_WG3(data_matrix, 1:10, 1:10, "/path/to/save", "airTemprature_Cel", "eu", "v1")
 #' }
+#' @export
 write_nc_WG3 <- function(mat_Data_WG3, dim_Time, dim_Spat, path_File, name_Variable, str_Continent, suffix_File) {
     invisible(.Call(`_WaterGAP3_write_nc_WG3`, mat_Data_WG3, dim_Time, dim_Spat, path_File, name_Variable, str_Continent, suffix_File))
 }
@@ -48,6 +49,7 @@ write_nc_WG3 <- function(mat_Data_WG3, dim_Time, dim_Spat, path_File, name_Varia
 #' \dontrun{
 #' data <- read_nc_WG3("/path/to/file.nc", "airTemprature_Cel")
 #' }
+#' @export
 read_nc_WG3 <- function(path_File, name_Variable) {
     .Call(`_WaterGAP3_read_nc_WG3`, path_File, name_Variable)
 }
@@ -58,6 +60,7 @@ read_nc_WG3 <- function(path_File, name_Variable) {
 #' \dontrun{
 #' data <- read_nc_dim_WG3("/path/to/file.nc", "time")
 #' }
+#' @export
 read_nc_dim_WG3 <- function(path_File, dim_name) {
     .Call(`_WaterGAP3_read_nc_dim_WG3`, path_File, dim_name)
 }
