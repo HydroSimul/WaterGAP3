@@ -158,6 +158,46 @@ RcppExport SEXP _WaterGAP3_WaterGAP3_HL(SEXP n_timeSEXP, SEXP n_spatSEXP, SEXP A
     UNPROTECT(1);
     return rcpp_result_gen;
 }
+// write_nc_WG3
+void write_nc_WG3(NumericMatrix mat_Data_WG3, IntegerVector dim_Time, IntegerVector dim_Spat, std::string path_File, std::string name_Variable, std::string str_Continent, std::string suffix_File);
+RcppExport SEXP _WaterGAP3_write_nc_WG3(SEXP mat_Data_WG3SEXP, SEXP dim_TimeSEXP, SEXP dim_SpatSEXP, SEXP path_FileSEXP, SEXP name_VariableSEXP, SEXP str_ContinentSEXP, SEXP suffix_FileSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type mat_Data_WG3(mat_Data_WG3SEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type dim_Time(dim_TimeSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type dim_Spat(dim_SpatSEXP);
+    Rcpp::traits::input_parameter< std::string >::type path_File(path_FileSEXP);
+    Rcpp::traits::input_parameter< std::string >::type name_Variable(name_VariableSEXP);
+    Rcpp::traits::input_parameter< std::string >::type str_Continent(str_ContinentSEXP);
+    Rcpp::traits::input_parameter< std::string >::type suffix_File(suffix_FileSEXP);
+    write_nc_WG3(mat_Data_WG3, dim_Time, dim_Spat, path_File, name_Variable, str_Continent, suffix_File);
+    return R_NilValue;
+END_RCPP
+}
+// read_nc_WG3
+NumericMatrix read_nc_WG3(std::string path_File, std::string name_Variable);
+RcppExport SEXP _WaterGAP3_read_nc_WG3(SEXP path_FileSEXP, SEXP name_VariableSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< std::string >::type path_File(path_FileSEXP);
+    Rcpp::traits::input_parameter< std::string >::type name_Variable(name_VariableSEXP);
+    rcpp_result_gen = Rcpp::wrap(read_nc_WG3(path_File, name_Variable));
+    return rcpp_result_gen;
+END_RCPP
+}
+// read_nc_dim_WG3
+Rcpp::IntegerVector read_nc_dim_WG3(std::string path_File, std::string dim_name);
+RcppExport SEXP _WaterGAP3_read_nc_dim_WG3(SEXP path_FileSEXP, SEXP dim_nameSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< std::string >::type path_File(path_FileSEXP);
+    Rcpp::traits::input_parameter< std::string >::type dim_name(dim_nameSEXP);
+    rcpp_result_gen = Rcpp::wrap(read_nc_dim_WG3(path_File, dim_name));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 // validate (ensure exported C++ functions exist before calling them)
 static int _WaterGAP3_RcppExport_validate(const char* sig) { 
@@ -180,6 +220,9 @@ RcppExport SEXP _WaterGAP3_RcppExport_registerCCallable() {
 static const R_CallMethodDef CallEntries[] = {
     {"_WaterGAP3_WaterGAP3_H", (DL_FUNC) &_WaterGAP3_WaterGAP3_H, 33},
     {"_WaterGAP3_WaterGAP3_HL", (DL_FUNC) &_WaterGAP3_WaterGAP3_HL, 46},
+    {"_WaterGAP3_write_nc_WG3", (DL_FUNC) &_WaterGAP3_write_nc_WG3, 7},
+    {"_WaterGAP3_read_nc_WG3", (DL_FUNC) &_WaterGAP3_read_nc_WG3, 2},
+    {"_WaterGAP3_read_nc_dim_WG3", (DL_FUNC) &_WaterGAP3_read_nc_dim_WG3, 2},
     {"_WaterGAP3_RcppExport_registerCCallable", (DL_FUNC) &_WaterGAP3_RcppExport_registerCCallable, 0},
     {NULL, NULL, 0}
 };

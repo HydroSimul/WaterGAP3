@@ -20,6 +20,48 @@ WaterGAP3_HL <- function(n_time, n_spat, ATMOS_precipitation_mm, ATMOS_temperatu
     .Call(`_WaterGAP3_WaterGAP3_HL`, n_time, n_spat, ATMOS_precipitation_mm, ATMOS_temperature_Cel, ATMOS_potentialEvatrans_mm, Upstream_cellNumber_int, Upstream_streamflow_m3, SNOW_ice_mm, LAND_builtRatio_1, LAND_interceptWater_mm, LAND_interceptCapacity_mm, SOIL_water_mm, SOIL_capacity_mm, SOIL_potentialPercola_mm, GROUND_water_mm, RIVER_water_m3, RIVER_length_km, RIVER_velocity_km, CELL_landArea_km2, CELL_cellNumberStep_int, CELL_inflowCellNumberStep_int, Lake_cellNumber_int, Lake_water_m3, Lake_area_km2, Lake_capacity_m3, Riverlak_cellNumber_int, Riverlak_water_m3, Riverlak_area_km2, Riverlak_capacity_m3, param_ATMOS_thr_Ts, param_SNOW_fac_f, param_SNOW_fac_Tmelt, param_EVATRANS_sup_k, param_EVATRANS_sup_gamma, param_EVATRANS_wat_petmax, param_INFILT_hbv_beta, param_PERCOLA_wat_01, param_PERCOLA_wat_k, param_PERCOLA_wat_thresh, param_BASEFLOW_sur_k, param_Lake_Eva_vic_gamma, param_Lake_acp_storeFactor, param_Lake_acp_gamma, param_Riverlak_Eva_vic_gamma, param_Riverlak_lin_storeFactor, if_allVariExport)
 }
 
+#' Write data to a NetCDF file in WaterGAP3 format
+#'
+#' @name nc
+#' @param mat_Data_WG3 A numeric matrix containing the data to be written. Rows represent time steps, columns represent spatial units.
+#' @param dim_Time An integer vector specifying the time dimension values.
+#' @param dim_Spat An integer vector specifying the spatial dimension values.
+#' @param path_File A string specifying the directory path where the NetCDF file will be created, for [write_nc_WG3] it is the folder path, for [read_nc_WG3] it should be the file path.
+#' @param name_Variable A string specifying the variable name (must be one of: "airTemprature_Cel", "solarRadition_MJ", "precipatation_mm", "discharge_m3s", "runoff_mm").
+#' @param str_Continent A string specifying the continent code (must be one of: "eu", "af", "as", "au", "na", "sa").
+#' @param suffix_File A string to be appended to the filename (typically indicating time period or version).
+#' @return None (creates a NetCDF file on disk) / Matrix
+#' @examples
+#' \dontrun{
+#' data_matrix <- matrix(rnorm(100), nrow=10, ncol=10)
+#' write_nc_WG3(data_matrix, 1:10, 1:10, "/path/to/save", "airTemprature_Cel", "eu", "v1")
+#' }
+write_nc_WG3 <- function(mat_Data_WG3, dim_Time, dim_Spat, path_File, name_Variable, str_Continent, suffix_File) {
+    invisible(.Call(`_WaterGAP3_write_nc_WG3`, mat_Data_WG3, dim_Time, dim_Spat, path_File, name_Variable, str_Continent, suffix_File))
+}
+
+#' Read data from a NetCDF file in WaterGAP3 format
+#'
+#' @rdname nc
+#' @return A numeric matrix containing the data from the NetCDF file, with rows representing time steps and columns representing spatial units.
+#' @examples
+#' \dontrun{
+#' data <- read_nc_WG3("/path/to/file.nc", "airTemprature_Cel")
+#' }
+read_nc_WG3 <- function(path_File, name_Variable) {
+    .Call(`_WaterGAP3_read_nc_WG3`, path_File, name_Variable)
+}
+
+#' @rdname nc
+#' @return A numeric vector containing the data from the NetCDF file, with rows representing time steps and columns representing spatial units.
+#' @examples
+#' \dontrun{
+#' data <- read_nc_dim_WG3("/path/to/file.nc", "time")
+#' }
+read_nc_dim_WG3 <- function(path_File, dim_name) {
+    .Call(`_WaterGAP3_read_nc_dim_WG3`, path_File, dim_name)
+}
+
 # Register entry points for exported C++ functions
 methods::setLoadAction(function(ns) {
     .Call(`_WaterGAP3_RcppExport_registerCCallable`)
