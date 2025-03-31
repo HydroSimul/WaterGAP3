@@ -66,6 +66,68 @@ namespace WaterGAP3 {
         return Rcpp::as<List >(rcpp_result_gen);
     }
 
+    inline void write_nc_WG3(NumericMatrix mat_Data_WG3, IntegerVector dim_Time, IntegerVector dim_Spat, std::string path_File, std::string name_Variable, std::string str_Continent, std::string suffix_File) {
+        typedef SEXP(*Ptr_write_nc_WG3)(SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP);
+        static Ptr_write_nc_WG3 p_write_nc_WG3 = NULL;
+        if (p_write_nc_WG3 == NULL) {
+            validateSignature("void(*write_nc_WG3)(NumericMatrix,IntegerVector,IntegerVector,std::string,std::string,std::string,std::string)");
+            p_write_nc_WG3 = (Ptr_write_nc_WG3)R_GetCCallable("WaterGAP3", "_WaterGAP3_write_nc_WG3");
+        }
+        RObject rcpp_result_gen;
+        {
+            RNGScope RCPP_rngScope_gen;
+            rcpp_result_gen = p_write_nc_WG3(Shield<SEXP>(Rcpp::wrap(mat_Data_WG3)), Shield<SEXP>(Rcpp::wrap(dim_Time)), Shield<SEXP>(Rcpp::wrap(dim_Spat)), Shield<SEXP>(Rcpp::wrap(path_File)), Shield<SEXP>(Rcpp::wrap(name_Variable)), Shield<SEXP>(Rcpp::wrap(str_Continent)), Shield<SEXP>(Rcpp::wrap(suffix_File)));
+        }
+        if (rcpp_result_gen.inherits("interrupted-error"))
+            throw Rcpp::internal::InterruptedException();
+        if (Rcpp::internal::isLongjumpSentinel(rcpp_result_gen))
+            throw Rcpp::LongjumpException(rcpp_result_gen);
+        if (rcpp_result_gen.inherits("try-error"))
+            throw Rcpp::exception(Rcpp::as<std::string>(rcpp_result_gen).c_str());
+    }
+
+    inline NumericMatrix read_nc_WG3(std::string path_File, std::string name_Variable) {
+        typedef SEXP(*Ptr_read_nc_WG3)(SEXP,SEXP);
+        static Ptr_read_nc_WG3 p_read_nc_WG3 = NULL;
+        if (p_read_nc_WG3 == NULL) {
+            validateSignature("NumericMatrix(*read_nc_WG3)(std::string,std::string)");
+            p_read_nc_WG3 = (Ptr_read_nc_WG3)R_GetCCallable("WaterGAP3", "_WaterGAP3_read_nc_WG3");
+        }
+        RObject rcpp_result_gen;
+        {
+            RNGScope RCPP_rngScope_gen;
+            rcpp_result_gen = p_read_nc_WG3(Shield<SEXP>(Rcpp::wrap(path_File)), Shield<SEXP>(Rcpp::wrap(name_Variable)));
+        }
+        if (rcpp_result_gen.inherits("interrupted-error"))
+            throw Rcpp::internal::InterruptedException();
+        if (Rcpp::internal::isLongjumpSentinel(rcpp_result_gen))
+            throw Rcpp::LongjumpException(rcpp_result_gen);
+        if (rcpp_result_gen.inherits("try-error"))
+            throw Rcpp::exception(Rcpp::as<std::string>(rcpp_result_gen).c_str());
+        return Rcpp::as<NumericMatrix >(rcpp_result_gen);
+    }
+
+    inline Rcpp::IntegerVector read_nc_dim_WG3(std::string path_File, std::string dim_name) {
+        typedef SEXP(*Ptr_read_nc_dim_WG3)(SEXP,SEXP);
+        static Ptr_read_nc_dim_WG3 p_read_nc_dim_WG3 = NULL;
+        if (p_read_nc_dim_WG3 == NULL) {
+            validateSignature("Rcpp::IntegerVector(*read_nc_dim_WG3)(std::string,std::string)");
+            p_read_nc_dim_WG3 = (Ptr_read_nc_dim_WG3)R_GetCCallable("WaterGAP3", "_WaterGAP3_read_nc_dim_WG3");
+        }
+        RObject rcpp_result_gen;
+        {
+            RNGScope RCPP_rngScope_gen;
+            rcpp_result_gen = p_read_nc_dim_WG3(Shield<SEXP>(Rcpp::wrap(path_File)), Shield<SEXP>(Rcpp::wrap(dim_name)));
+        }
+        if (rcpp_result_gen.inherits("interrupted-error"))
+            throw Rcpp::internal::InterruptedException();
+        if (Rcpp::internal::isLongjumpSentinel(rcpp_result_gen))
+            throw Rcpp::LongjumpException(rcpp_result_gen);
+        if (rcpp_result_gen.inherits("try-error"))
+            throw Rcpp::exception(Rcpp::as<std::string>(rcpp_result_gen).c_str());
+        return Rcpp::as<Rcpp::IntegerVector >(rcpp_result_gen);
+    }
+
 }
 
 #endif // RCPP_WaterGAP3_RCPPEXPORTS_H_GEN_

@@ -160,9 +160,8 @@ RcppExport SEXP _WaterGAP3_WaterGAP3_HL(SEXP n_timeSEXP, SEXP n_spatSEXP, SEXP A
 }
 // write_nc_WG3
 void write_nc_WG3(NumericMatrix mat_Data_WG3, IntegerVector dim_Time, IntegerVector dim_Spat, std::string path_File, std::string name_Variable, std::string str_Continent, std::string suffix_File);
-RcppExport SEXP _WaterGAP3_write_nc_WG3(SEXP mat_Data_WG3SEXP, SEXP dim_TimeSEXP, SEXP dim_SpatSEXP, SEXP path_FileSEXP, SEXP name_VariableSEXP, SEXP str_ContinentSEXP, SEXP suffix_FileSEXP) {
+static SEXP _WaterGAP3_write_nc_WG3_try(SEXP mat_Data_WG3SEXP, SEXP dim_TimeSEXP, SEXP dim_SpatSEXP, SEXP path_FileSEXP, SEXP name_VariableSEXP, SEXP str_ContinentSEXP, SEXP suffix_FileSEXP) {
 BEGIN_RCPP
-    Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericMatrix >::type mat_Data_WG3(mat_Data_WG3SEXP);
     Rcpp::traits::input_parameter< IntegerVector >::type dim_Time(dim_TimeSEXP);
     Rcpp::traits::input_parameter< IntegerVector >::type dim_Spat(dim_SpatSEXP);
@@ -172,31 +171,101 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< std::string >::type suffix_File(suffix_FileSEXP);
     write_nc_WG3(mat_Data_WG3, dim_Time, dim_Spat, path_File, name_Variable, str_Continent, suffix_File);
     return R_NilValue;
-END_RCPP
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP _WaterGAP3_write_nc_WG3(SEXP mat_Data_WG3SEXP, SEXP dim_TimeSEXP, SEXP dim_SpatSEXP, SEXP path_FileSEXP, SEXP name_VariableSEXP, SEXP str_ContinentSEXP, SEXP suffix_FileSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(_WaterGAP3_write_nc_WG3_try(mat_Data_WG3SEXP, dim_TimeSEXP, dim_SpatSEXP, path_FileSEXP, name_VariableSEXP, str_ContinentSEXP, suffix_FileSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    bool rcpp_isLongjump_gen = Rcpp::internal::isLongjumpSentinel(rcpp_result_gen);
+    if (rcpp_isLongjump_gen) {
+        Rcpp::internal::resumeJump(rcpp_result_gen);
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error("%s", CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
 }
 // read_nc_WG3
 NumericMatrix read_nc_WG3(std::string path_File, std::string name_Variable);
-RcppExport SEXP _WaterGAP3_read_nc_WG3(SEXP path_FileSEXP, SEXP name_VariableSEXP) {
+static SEXP _WaterGAP3_read_nc_WG3_try(SEXP path_FileSEXP, SEXP name_VariableSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< std::string >::type path_File(path_FileSEXP);
     Rcpp::traits::input_parameter< std::string >::type name_Variable(name_VariableSEXP);
     rcpp_result_gen = Rcpp::wrap(read_nc_WG3(path_File, name_Variable));
     return rcpp_result_gen;
-END_RCPP
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP _WaterGAP3_read_nc_WG3(SEXP path_FileSEXP, SEXP name_VariableSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(_WaterGAP3_read_nc_WG3_try(path_FileSEXP, name_VariableSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    bool rcpp_isLongjump_gen = Rcpp::internal::isLongjumpSentinel(rcpp_result_gen);
+    if (rcpp_isLongjump_gen) {
+        Rcpp::internal::resumeJump(rcpp_result_gen);
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error("%s", CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
 }
 // read_nc_dim_WG3
 Rcpp::IntegerVector read_nc_dim_WG3(std::string path_File, std::string dim_name);
-RcppExport SEXP _WaterGAP3_read_nc_dim_WG3(SEXP path_FileSEXP, SEXP dim_nameSEXP) {
+static SEXP _WaterGAP3_read_nc_dim_WG3_try(SEXP path_FileSEXP, SEXP dim_nameSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< std::string >::type path_File(path_FileSEXP);
     Rcpp::traits::input_parameter< std::string >::type dim_name(dim_nameSEXP);
     rcpp_result_gen = Rcpp::wrap(read_nc_dim_WG3(path_File, dim_name));
     return rcpp_result_gen;
-END_RCPP
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP _WaterGAP3_read_nc_dim_WG3(SEXP path_FileSEXP, SEXP dim_nameSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(_WaterGAP3_read_nc_dim_WG3_try(path_FileSEXP, dim_nameSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    bool rcpp_isLongjump_gen = Rcpp::internal::isLongjumpSentinel(rcpp_result_gen);
+    if (rcpp_isLongjump_gen) {
+        Rcpp::internal::resumeJump(rcpp_result_gen);
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error("%s", CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
 }
 
 // validate (ensure exported C++ functions exist before calling them)
@@ -205,6 +274,9 @@ static int _WaterGAP3_RcppExport_validate(const char* sig) {
     if (signatures.empty()) {
         signatures.insert("List(*WaterGAP3_H)(int,int,NumericMatrix,NumericMatrix,NumericMatrix,IntegerVector,NumericMatrix,NumericVector,NumericVector,NumericVector,NumericMatrix,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,List,List,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,LogicalVector,NumericVector,NumericVector,NumericVector,bool)");
         signatures.insert("List(*WaterGAP3_HL)(int,int,NumericMatrix,NumericMatrix,NumericMatrix,IntegerVector,NumericMatrix,NumericVector,NumericVector,NumericVector,NumericMatrix,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,List,List,IntegerVector,NumericVector,NumericVector,NumericVector,IntegerVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,LogicalVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,bool)");
+        signatures.insert("void(*write_nc_WG3)(NumericMatrix,IntegerVector,IntegerVector,std::string,std::string,std::string,std::string)");
+        signatures.insert("NumericMatrix(*read_nc_WG3)(std::string,std::string)");
+        signatures.insert("Rcpp::IntegerVector(*read_nc_dim_WG3)(std::string,std::string)");
     }
     return signatures.find(sig) != signatures.end();
 }
@@ -213,6 +285,9 @@ static int _WaterGAP3_RcppExport_validate(const char* sig) {
 RcppExport SEXP _WaterGAP3_RcppExport_registerCCallable() { 
     R_RegisterCCallable("WaterGAP3", "_WaterGAP3_WaterGAP3_H", (DL_FUNC)_WaterGAP3_WaterGAP3_H_try);
     R_RegisterCCallable("WaterGAP3", "_WaterGAP3_WaterGAP3_HL", (DL_FUNC)_WaterGAP3_WaterGAP3_HL_try);
+    R_RegisterCCallable("WaterGAP3", "_WaterGAP3_write_nc_WG3", (DL_FUNC)_WaterGAP3_write_nc_WG3_try);
+    R_RegisterCCallable("WaterGAP3", "_WaterGAP3_read_nc_WG3", (DL_FUNC)_WaterGAP3_read_nc_WG3_try);
+    R_RegisterCCallable("WaterGAP3", "_WaterGAP3_read_nc_dim_WG3", (DL_FUNC)_WaterGAP3_read_nc_dim_WG3_try);
     R_RegisterCCallable("WaterGAP3", "_WaterGAP3_RcppExport_validate", (DL_FUNC)_WaterGAP3_RcppExport_validate);
     return R_NilValue;
 }
