@@ -5,6 +5,7 @@
 #include <ctime>
 #include <stdexcept>
 using namespace Rcpp;
+// [[Rcpp::interfaces(r, cpp)]]
 
 // RAII wrapper for NetCDF file closing
 struct NCFileCloser {
