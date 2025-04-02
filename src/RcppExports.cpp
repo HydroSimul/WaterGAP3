@@ -302,6 +302,74 @@ RcppExport SEXP _WaterGAP3_bind_nc_WG3(SEXP path_FilesBindSEXP, SEXP path_OutSEX
     UNPROTECT(1);
     return rcpp_result_gen;
 }
+// read_unf
+SEXP read_unf(std::string fn_UNF);
+static SEXP _WaterGAP3_read_unf_try(SEXP fn_UNFSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< std::string >::type fn_UNF(fn_UNFSEXP);
+    rcpp_result_gen = Rcpp::wrap(read_unf(fn_UNF));
+    return rcpp_result_gen;
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP _WaterGAP3_read_unf(SEXP fn_UNFSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(_WaterGAP3_read_unf_try(fn_UNFSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    bool rcpp_isLongjump_gen = Rcpp::internal::isLongjumpSentinel(rcpp_result_gen);
+    if (rcpp_isLongjump_gen) {
+        Rcpp::internal::resumeJump(rcpp_result_gen);
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error("%s", CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
+}
+// write_unf
+void write_unf(SEXP data_Export, std::string fn_UNF);
+static SEXP _WaterGAP3_write_unf_try(SEXP data_ExportSEXP, SEXP fn_UNFSEXP) {
+BEGIN_RCPP
+    Rcpp::traits::input_parameter< SEXP >::type data_Export(data_ExportSEXP);
+    Rcpp::traits::input_parameter< std::string >::type fn_UNF(fn_UNFSEXP);
+    write_unf(data_Export, fn_UNF);
+    return R_NilValue;
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP _WaterGAP3_write_unf(SEXP data_ExportSEXP, SEXP fn_UNFSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(_WaterGAP3_write_unf_try(data_ExportSEXP, fn_UNFSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    bool rcpp_isLongjump_gen = Rcpp::internal::isLongjumpSentinel(rcpp_result_gen);
+    if (rcpp_isLongjump_gen) {
+        Rcpp::internal::resumeJump(rcpp_result_gen);
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error("%s", CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
+}
 
 // validate (ensure exported C++ functions exist before calling them)
 static int _WaterGAP3_RcppExport_validate(const char* sig) { 
@@ -313,6 +381,8 @@ static int _WaterGAP3_RcppExport_validate(const char* sig) {
         signatures.insert("NumericMatrix(*read_nc_WG3)(std::string,std::string)");
         signatures.insert("Rcpp::IntegerVector(*read_nc_dim_WG3)(std::string,std::string)");
         signatures.insert("void(*bind_nc_WG3)(std::vector<std::string>,std::string,std::string)");
+        signatures.insert("SEXP(*read_unf)(std::string)");
+        signatures.insert("void(*write_unf)(SEXP,std::string)");
     }
     return signatures.find(sig) != signatures.end();
 }
@@ -325,6 +395,8 @@ RcppExport SEXP _WaterGAP3_RcppExport_registerCCallable() {
     R_RegisterCCallable("WaterGAP3", "_WaterGAP3_read_nc_WG3", (DL_FUNC)_WaterGAP3_read_nc_WG3_try);
     R_RegisterCCallable("WaterGAP3", "_WaterGAP3_read_nc_dim_WG3", (DL_FUNC)_WaterGAP3_read_nc_dim_WG3_try);
     R_RegisterCCallable("WaterGAP3", "_WaterGAP3_bind_nc_WG3", (DL_FUNC)_WaterGAP3_bind_nc_WG3_try);
+    R_RegisterCCallable("WaterGAP3", "_WaterGAP3_read_unf", (DL_FUNC)_WaterGAP3_read_unf_try);
+    R_RegisterCCallable("WaterGAP3", "_WaterGAP3_write_unf", (DL_FUNC)_WaterGAP3_write_unf_try);
     R_RegisterCCallable("WaterGAP3", "_WaterGAP3_RcppExport_validate", (DL_FUNC)_WaterGAP3_RcppExport_validate);
     return R_NilValue;
 }
@@ -336,6 +408,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_WaterGAP3_read_nc_WG3", (DL_FUNC) &_WaterGAP3_read_nc_WG3, 2},
     {"_WaterGAP3_read_nc_dim_WG3", (DL_FUNC) &_WaterGAP3_read_nc_dim_WG3, 2},
     {"_WaterGAP3_bind_nc_WG3", (DL_FUNC) &_WaterGAP3_bind_nc_WG3, 3},
+    {"_WaterGAP3_read_unf", (DL_FUNC) &_WaterGAP3_read_unf, 1},
+    {"_WaterGAP3_write_unf", (DL_FUNC) &_WaterGAP3_write_unf, 2},
     {"_WaterGAP3_RcppExport_registerCCallable", (DL_FUNC) &_WaterGAP3_RcppExport_registerCCallable, 0},
     {NULL, NULL, 0}
 };

@@ -148,6 +148,47 @@ namespace WaterGAP3 {
             throw Rcpp::exception(Rcpp::as<std::string>(rcpp_result_gen).c_str());
     }
 
+    inline SEXP read_unf(std::string fn_UNF) {
+        typedef SEXP(*Ptr_read_unf)(SEXP);
+        static Ptr_read_unf p_read_unf = NULL;
+        if (p_read_unf == NULL) {
+            validateSignature("SEXP(*read_unf)(std::string)");
+            p_read_unf = (Ptr_read_unf)R_GetCCallable("WaterGAP3", "_WaterGAP3_read_unf");
+        }
+        RObject rcpp_result_gen;
+        {
+            RNGScope RCPP_rngScope_gen;
+            rcpp_result_gen = p_read_unf(Shield<SEXP>(Rcpp::wrap(fn_UNF)));
+        }
+        if (rcpp_result_gen.inherits("interrupted-error"))
+            throw Rcpp::internal::InterruptedException();
+        if (Rcpp::internal::isLongjumpSentinel(rcpp_result_gen))
+            throw Rcpp::LongjumpException(rcpp_result_gen);
+        if (rcpp_result_gen.inherits("try-error"))
+            throw Rcpp::exception(Rcpp::as<std::string>(rcpp_result_gen).c_str());
+        return Rcpp::as<SEXP >(rcpp_result_gen);
+    }
+
+    inline void write_unf(SEXP data_Export, std::string fn_UNF) {
+        typedef SEXP(*Ptr_write_unf)(SEXP,SEXP);
+        static Ptr_write_unf p_write_unf = NULL;
+        if (p_write_unf == NULL) {
+            validateSignature("void(*write_unf)(SEXP,std::string)");
+            p_write_unf = (Ptr_write_unf)R_GetCCallable("WaterGAP3", "_WaterGAP3_write_unf");
+        }
+        RObject rcpp_result_gen;
+        {
+            RNGScope RCPP_rngScope_gen;
+            rcpp_result_gen = p_write_unf(Shield<SEXP>(Rcpp::wrap(data_Export)), Shield<SEXP>(Rcpp::wrap(fn_UNF)));
+        }
+        if (rcpp_result_gen.inherits("interrupted-error"))
+            throw Rcpp::internal::InterruptedException();
+        if (Rcpp::internal::isLongjumpSentinel(rcpp_result_gen))
+            throw Rcpp::LongjumpException(rcpp_result_gen);
+        if (rcpp_result_gen.inherits("try-error"))
+            throw Rcpp::exception(Rcpp::as<std::string>(rcpp_result_gen).c_str());
+    }
+
 }
 
 #endif // RCPP_WaterGAP3_RCPPEXPORTS_H_GEN_

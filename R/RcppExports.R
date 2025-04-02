@@ -81,6 +81,24 @@ bind_nc_WG3 <- function(path_FilesBind, path_Out, name_Variable) {
     invisible(.Call(`_WaterGAP3_bind_nc_WG3`, path_FilesBind, path_Out, name_Variable))
 }
 
+#' read_UNF - Read data from UNF file
+#' @name unf
+#' @param fn_UNF A string, name of the UNF file
+#' @return A numeric or integer vector by reading the UNF file
+#' @export
+read_unf <- function(fn_UNF) {
+    .Call(`_WaterGAP3_read_unf`, fn_UNF)
+}
+
+#'  write_UNF - Write data to UNF file
+#' @rdname unf
+#' @param data_Export A numeric or integer vector, data to be exported
+#' @param fn_UNF A string, name of the UNF file
+#' @export
+write_unf <- function(data_Export, fn_UNF) {
+    invisible(.Call(`_WaterGAP3_write_unf`, data_Export, fn_UNF))
+}
+
 # Register entry points for exported C++ functions
 methods::setLoadAction(function(ns) {
     .Call(`_WaterGAP3_RcppExport_registerCCallable`)
