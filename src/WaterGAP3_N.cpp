@@ -8,15 +8,18 @@
 //' @return streamflow m3
 //' @export
 // [[Rcpp::export]]
-List WaterGAP3_HL(
+List WaterGAP3_N(
    int n_time,
    int n_spat,
    NumericMatrix ATMOS_precipitation_mm,
    NumericMatrix ATMOS_temperature_Cel,
-   NumericMatrix ATMOS_potentialEvatrans_mm,
+   NumericMatrix ATMOS_solarRadiat_MJ,
+   NumericMatrix ATMOS_solarRadiatClearSky_MJ,
    IntegerVector Upstream_cellNumber_int,
    NumericMatrix Upstream_streamflow_m3,
    NumericVector SNOW_ice_mm,
+   NumericVector LAND_albedo_1,
+   NumericVector LAND_snowAlbedo_1,
    NumericVector LAND_builtRatio_1,
    NumericVector LAND_interceptWater_mm,
    NumericMatrix LAND_interceptCapacity_mm,
@@ -28,19 +31,24 @@ List WaterGAP3_HL(
    NumericVector RIVER_length_km,
    NumericVector RIVER_velocity_km,
    NumericVector CELL_landArea_km2,
+   NumericVector CELL_elevation_m,
    List CELL_cellNumberStep_int,
    List CELL_inflowCellNumberStep_int,
    IntegerVector Lake_cellNumber_int,
    NumericVector Lake_water_m3,
    NumericVector Lake_area_km2,
    NumericVector Lake_capacity_m3,
+   NumericVector Lake_albedo_1,
    IntegerVector Riverlak_cellNumber_int,
    NumericVector Riverlak_water_m3,
    NumericVector Riverlak_area_km2,
    NumericVector Riverlak_capacity_m3,
+   NumericVector Riverlak_albedo_1,
    NumericVector param_ATMOS_thr_Ts,
    NumericVector param_SNOW_fac_f,
    NumericVector param_SNOW_fac_Tmelt,
+   NumericVector param_EVATRANS_prt_alpha,
+   NumericVector param_EVATRANS_vic_gamma,
    NumericVector param_EVATRANS_sup_k,
    NumericVector param_EVATRANS_sup_gamma,
    NumericVector param_EVATRANS_wat_petmax,
@@ -86,6 +94,8 @@ List WaterGAP3_HL(
  OUT_lakeEvalake(n_time, n_Lake), OUT_riverlakEvalake(n_time, n_Riverlake);
 
 
+
+
  for (int i = 0; i < n_time; i++) {
 
 
@@ -93,9 +103,12 @@ List WaterGAP3_HL(
    CELL_verticalflow_m3 = module_land_WaterGAP3(
      ATMOS_precipitation_mm(i, _),
      ATMOS_temperature_Cel(i, _),
-     ATMOS_potentialEvatrans_mm(i, _),
+     ATMOS_solarRadiat_MJ(i, _),
+     ATMOS_solarRadiatClearSky_MJ(i, _),
      ATMOS_snowFall_mm,
      SNOW_ice_mm,
+     LAND_albedo_1,
+     LAND_snowAlbedo_1,
      LAND_builtRatio_1,
      LAND_interceptWater_mm,
      LAND_interceptCapacity_mm(i, _),
@@ -107,7 +120,9 @@ List WaterGAP3_HL(
      GROUND_water_mm,
      GROUND_basefloW_mm,
      CELL_landArea_km2,
+     CELL_elevation_m,
      param_ATMOS_thr_Ts,
+     param_EVATRANS_prt_alpha,
      param_EVATRANS_sup_k,
      param_EVATRANS_sup_gamma,
      param_EVATRANS_wat_petmax,
@@ -122,35 +137,53 @@ List WaterGAP3_HL(
 
 
    // Local Lake
-   NumericVector Lake_Outflow_m3 = module_lake_WaterGAP3(
+   NumericVector Lake_verticalInflow_m3 = module_waterbody_WaterGAP3(
      subset_get(ATMOS_precipitation_mm(i, _), Lake_cellNumber_int),
-     subset_get(ATMOS_potentialEvatrans_mm(i, _), Lake_cellNumber_int),
+     subset_get(ATMOS_temperature_Cel(i, _), Lake_cellNumber_int),
+     subset_get(ATMOS_solarRadiat_MJ(i, _), Lake_cellNumber_int),
+     subset_get(ATMOS_solarRadiatClearSky_MJ(i, _), Lake_cellNumber_int),
      Lake_water_m3,
      Lake_area_km2,
      Lake_capacity_m3,
-     subset_get(CELL_verticalflow_m3, Lake_cellNumber_int),
      Lake_evatrans_mm,
-     param_Lake_Eva_vic_gamma,
+     Lake_albedo_1,
+     CELL_elevation_m,
+     subset_get(param_EVATRANS_prt_alpha, Lake_cellNumber_int),
+     subset_get(param_EVATRANS_vic_gamma, Lake_cellNumber_int));
+
+
+   NumericVector Lake_Outflow_m3 = module_lake_WaterGAP3(
+     Lake_water_m3,
+     Lake_capacity_m3,
+     Lake_verticalInflow_m3,
+     subset_get(CELL_verticalflow_m3, Lake_cellNumber_int),
      param_Lake_acp_storeFactor,
      param_Lake_acp_gamma);
 
 
    subset_put(CELL_verticalflow_m3, Lake_cellNumber_int, Lake_Outflow_m3);
 
-   // confluen
-   RIVER_water_m3 += CELL_verticalflow_m3;
 
    // Riverlake
-   Riverlak_evatrans_mm = evatransActual_VIC(
-     subset_get(ATMOS_potentialEvatrans_mm(i, _), Riverlak_cellNumber_int),
+   NumericVector Riverlak_verticalInflow_m3 = module_waterbody_WaterGAP3(
+     subset_get(ATMOS_precipitation_mm(i, _), Riverlak_cellNumber_int),
+     subset_get(ATMOS_temperature_Cel(i, _), Riverlak_cellNumber_int),
+     subset_get(ATMOS_solarRadiat_MJ(i, _), Riverlak_cellNumber_int),
+     subset_get(ATMOS_solarRadiatClearSky_MJ(i, _), Riverlak_cellNumber_int),
      Riverlak_water_m3,
+     Riverlak_area_km2,
      Riverlak_capacity_m3,
-     param_Riverlak_Eva_vic_gamma
-   );
+     Riverlak_evatrans_mm,
+     Riverlak_albedo_1,
+     CELL_elevation_m,
+     subset_get(param_EVATRANS_prt_alpha, Riverlak_cellNumber_int),
+     subset_get(param_EVATRANS_vic_gamma, Riverlak_cellNumber_int));
 
-   NumericVector Riverlak_verticalInflow_mm = subset_get(ATMOS_precipitation_mm(i, _), Riverlak_cellNumber_int) - Riverlak_evatrans_mm;
-   NumericVector Riverlak_verticalInflow_m3 = Riverlak_verticalInflow_mm * Riverlak_area_km2 * 1000;
    Riverlak_water_m3 = pmax(Riverlak_water_m3 + subset_get(CELL_verticalflow_m3, Riverlak_cellNumber_int) + Riverlak_verticalInflow_m3, 0.);
+
+
+   // confluen
+   RIVER_water_m3 += CELL_verticalflow_m3;
 
    // Horizontal
    if (Upstream_cellNumber_int(0) != 0) {

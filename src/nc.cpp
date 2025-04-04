@@ -31,6 +31,7 @@ const std::map<std::string, std::pair<std::string, std::string>> VAR_ATTRIBUTES 
   {"airTemprature_Cel", {"degree Celsius", "Air Temperature"}},
   {"solarRadition_MJ", {"MJ per m2 per day", "Solar Radiation"}},
   {"netRadiat_MJ", {"MJ per m2 per day", "Net Radiation"}},
+  {"ATMOS_solarRadiatClearSky_MJ", {"MJ per m2 per day", "Net Radiation"}},
   {"relativeHumidity_1", {"ratio (0-1)", "Relative Humidity"}},
   {"vaporPress_kPa", {"kilopascal", "Vapor Pressure"}},
   {"saturatVaporPress_kPa", {"kilopascal", "Saturation Vapor Pressure"}},

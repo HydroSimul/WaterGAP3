@@ -2,17 +2,21 @@
 % Please edit documentation in R/RcppExports.R
 \name{WaterGAP3_HL}
 \alias{WaterGAP3_HL}
+\alias{WaterGAP3_N}
 \title{WaterGAP3}
 \usage{
-WaterGAP3_HL(
+WaterGAP3_N(
   n_time,
   n_spat,
   ATMOS_precipitation_mm,
   ATMOS_temperature_Cel,
-  ATMOS_potentialEvatrans_mm,
+  ATMOS_solarRadiat_MJ,
+  ATMOS_solarRadiatClearSky_MJ,
   Upstream_cellNumber_int,
   Upstream_streamflow_m3,
   SNOW_ice_mm,
+  LAND_albedo_1,
+  LAND_snowAlbedo_1,
   LAND_builtRatio_1,
   LAND_interceptWater_mm,
   LAND_interceptCapacity_mm,
@@ -24,19 +28,24 @@ WaterGAP3_HL(
   RIVER_length_km,
   RIVER_velocity_km,
   CELL_landArea_km2,
+  CELL_elevation_m,
   CELL_cellNumberStep_int,
   CELL_inflowCellNumberStep_int,
   Lake_cellNumber_int,
   Lake_water_m3,
   Lake_area_km2,
   Lake_capacity_m3,
+  Lake_albedo_1,
   Riverlak_cellNumber_int,
   Riverlak_water_m3,
   Riverlak_area_km2,
   Riverlak_capacity_m3,
+  Riverlak_albedo_1,
   param_ATMOS_thr_Ts,
   param_SNOW_fac_f,
   param_SNOW_fac_Tmelt,
+  param_EVATRANS_prt_alpha,
+  param_EVATRANS_vic_gamma,
   param_EVATRANS_sup_k,
   param_EVATRANS_sup_gamma,
   param_EVATRANS_wat_petmax,
@@ -62,13 +71,15 @@ WaterGAP3_HL(
 
 \item{ATMOS_temperature_Cel}{(Cel) the average air temperature in the time phase}
 
-\item{ATMOS_potentialEvatrans_mm}{(mm/m2/TS) **potential / reference** evapotranspiration}
+\item{ATMOS_solarRadiat_MJ}{(MJ/m2/TS) the solar radiation that actually reaches the earths surface}
 
 \item{Upstream_cellNumber_int}{Upstream cell number}
 
 \item{Upstream_streamflow_m3}{Upstream}
 
 \item{SNOW_ice_mm}{(mm/m2) water equivalent of **ice** in snowpack}
+
+\item{LAND_albedo_1}{<0, 1> albedo of the region}
 
 \item{LAND_interceptWater_mm}{(mm/m2) initial water volume that can be **intercepted**}
 
