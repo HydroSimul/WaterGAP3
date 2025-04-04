@@ -2,7 +2,7 @@
 // [[Rcpp::interfaces(r, cpp)]]
 
 //' WaterGAP3
-//' @name WaterGAP3_HL
+//' @name WaterGAP3
 //' @inheritParams HydroGallery::all_vari
 //' @param param_Evalake_vic_gamma same as param_EVATRANS_vic_gamma
 //' @return streamflow m3

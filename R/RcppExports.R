@@ -2,7 +2,7 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 #' WaterGAP3
-#' @name WaterGAP3_HL
+#' @name WaterGAP3
 #' @inheritParams HydroGallery::all_vari
 #' @param param_Evalake_vic_gamma same as param_EVATRANS_vic_gamma
 #' @return streamflow m3
