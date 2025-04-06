@@ -2,9 +2,12 @@
 
 export(WaterGAP3_N)
 export(bind_nc_WG3)
+export(bind_wgmat)
+export(load_wgmat)
 export(read_nc_WG3)
 export(read_nc_dim_WG3)
 export(read_unf)
+export(save_wgmat)
 export(write_nc_WG3)
 export(write_unf)
 importFrom(Rcpp,sourceCpp)

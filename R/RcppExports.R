@@ -46,17 +46,6 @@ read_nc_WG3 <- function(path_File, name_Variable) {
 }
 
 #' @rdname nc
-#' @return A numeric vector containing the data from the NetCDF file, with rows representing time steps and columns representing spatial units.
-#' @examples
-#' \dontrun{
-#' data <- read_nc_dim_WG3("/path/to/file.nc", "time")
-#' }
-#' @export
-read_nc_dim_WG3 <- function(path_File, dim_name) {
-    .Call(`_WaterGAP3_read_nc_dim_WG3`, path_File, dim_name)
-}
-
-#' @rdname nc
 #'
 #' @description Combine multiple NetCDF files along the time dimension
 #'
@@ -70,6 +59,17 @@ read_nc_dim_WG3 <- function(path_File, dim_name) {
 #' @export
 bind_nc_WG3 <- function(path_FilesBind, path_Out, name_Variable) {
     invisible(.Call(`_WaterGAP3_bind_nc_WG3`, path_FilesBind, path_Out, name_Variable))
+}
+
+#' @rdname nc
+#' @return A numeric vector containing the data from the NetCDF file, with rows representing time steps and columns representing spatial units.
+#' @examples
+#' \dontrun{
+#' data <- read_nc_dim_WG3("/path/to/file.nc", "time")
+#' }
+#' @export
+read_nc_dim_WG3 <- function(path_File, dim_name) {
+    .Call(`_WaterGAP3_read_nc_dim_WG3`, path_File, dim_name)
 }
 
 #' read_UNF - Read data from UNF file
@@ -88,6 +88,48 @@ read_unf <- function(fn_UNF) {
 #' @export
 write_unf <- function(data_Export, fn_UNF) {
     invisible(.Call(`_WaterGAP3_write_unf`, data_Export, fn_UNF))
+}
+
+#' Save a NumericMatrix to a binary file
+#'
+#' This function saves a NumericMatrix to a binary file, with the matrix
+#' data stored in a row-major order (transposed).
+#' @rdname wgmat
+#' @param matrix The NumericMatrix to be saved.
+#' @param filename The name of the binary file to save the matrix to.
+#'
+#' @export
+save_wgmat <- function(matrix, filename) {
+    invisible(.Call(`_WaterGAP3_save_wgmat`, matrix, filename))
+}
+
+#' Load a NumericMatrix from a binary file
+#'
+#' This function loads a NumericMatrix from a binary file that was saved
+#' using the `save_wgmat` function. The matrix is reconstructed in R's
+#' column-major order.
+#' @name wgmat
+#' @param filename The name of the binary file to load the matrix from.
+#'
+#' @return A NumericMatrix containing the data from the binary file.
+#' @export
+load_wgmat <- function(filename) {
+    .Call(`_WaterGAP3_load_wgmat`, filename)
+}
+
+#' Bind multiple matrices into a single binary file
+#'
+#' This function binds several matrices from binary files into a single
+#' matrix and saves it to a new binary file. All input matrices must have
+#' the same number of columns. The function validates the dimensions of
+#' the matrices before combining them.
+#' @name wgmat
+#' @param input_files A vector of file paths to the input binary files.
+#' @param output_file The file path to save the combined matrix.
+#'
+#' @export
+bind_wgmat <- function(input_files, output_file) {
+    invisible(.Call(`_WaterGAP3_bind_wgmat`, input_files, output_file))
 }
 
 # Register entry points for exported C++ functions

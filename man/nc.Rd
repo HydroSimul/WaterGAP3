@@ -4,8 +4,8 @@
 \alias{nc}
 \alias{write_nc_WG3}
 \alias{read_nc_WG3}
-\alias{read_nc_dim_WG3}
 \alias{bind_nc_WG3}
+\alias{read_nc_dim_WG3}
 \title{Write data to a NetCDF file in WaterGAP3 format}
 \usage{
 write_nc_WG3(
@@ -20,9 +20,9 @@ write_nc_WG3(
 
 read_nc_WG3(path_File, name_Variable)
 
-read_nc_dim_WG3(path_File, dim_name)
-
 bind_nc_WG3(path_FilesBind, path_Out, name_Variable)
+
+read_nc_dim_WG3(path_File, dim_name)
 }
 \arguments{
 \item{mat_Data_WG3}{A numeric matrix containing the data to be written. Rows represent time steps, columns represent spatial units.}
@@ -48,9 +48,9 @@ None (creates a NetCDF file on disk) / Matrix
 
 A numeric matrix containing the data from the NetCDF file, with rows representing time steps and columns representing spatial units.
 
-A numeric vector containing the data from the NetCDF file, with rows representing time steps and columns representing spatial units.
-
 None (writes a NetCDF file to disk)
+
+A numeric vector containing the data from the NetCDF file, with rows representing time steps and columns representing spatial units.
 }
 \description{
 Combine multiple NetCDF files along the time dimension
