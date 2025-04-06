@@ -144,7 +144,7 @@ List WaterGAP3_N(
      Lake_capacity_m3,
      Lake_evatrans_mm,
      Lake_albedo_1,
-     CELL_elevation_m,
+     subset_get(CELL_elevation_m, Lake_cellNumber_int),
      subset_get(param_EVATRANS_prt_alpha, Lake_cellNumber_int),
      subset_get(param_EVATRANS_vic_gamma, Lake_cellNumber_int));
 
@@ -172,7 +172,7 @@ List WaterGAP3_N(
      Riverlak_capacity_m3,
      Riverlak_evatrans_mm,
      Riverlak_albedo_1,
-     CELL_elevation_m,
+     subset_get(CELL_elevation_m, Riverlak_cellNumber_int),
      subset_get(param_EVATRANS_prt_alpha, Riverlak_cellNumber_int),
      subset_get(param_EVATRANS_vic_gamma, Riverlak_cellNumber_int));
 
