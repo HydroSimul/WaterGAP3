@@ -4,62 +4,65 @@
 //' WaterGAP3
 //' @name WaterGAP3
 //' @inheritParams HydroGallery::all_vari
+//' @param name_Project A short identifier for the current simulation or scenario (e.g., "baseline", "future2050"). Used to label output files.
+//' @param path_VariExport Directory path (as a string) where model output variables (e.g., soil moisture, runoff) will be saved.
 //' @return streamflow m3
 //' @export
 // [[Rcpp::export]]
-List WaterGAP3_N(
-   int n_time,
-   int n_spat,
-   NumericMatrix ATMOS_precipitation_mm,
-   NumericMatrix ATMOS_temperature_Cel,
-   NumericMatrix ATMOS_solarRadiat_MJ,
-   NumericMatrix ATMOS_solarRadiatClearSky_MJ,
-   IntegerVector Upstream_cellNumber_int,
-   NumericMatrix Upstream_streamflow_m3,
-   NumericVector SNOW_ice_mm,
-   NumericVector LAND_area_km2,
-   NumericVector LAND_albedo_1,
-   NumericVector LAND_snowAlbedo_1,
-   NumericVector LAND_builtRatio_1,
-   NumericVector LAND_interceptWater_mm,
-   NumericMatrix LAND_interceptCapacity_mm,
-   NumericVector SOIL_water_mm,
-   NumericVector SOIL_capacity_mm,
-   NumericVector SOIL_potentialPercola_mm,
-   NumericVector GROUND_water_mm,
-   NumericVector RIVER_water_m3,
-   NumericVector RIVER_length_km,
-   NumericVector RIVER_velocity_km,
-   NumericVector CELL_elevation_m,
-   List CELL_cellNumberStep_int,
-   List CELL_inflowCellNumberStep_int,
-   IntegerVector Lake_cellNumber_int,
-   NumericVector Lake_water_m3,
-   NumericVector Lake_area_km2,
-   NumericVector Lake_capacity_m3,
-   NumericVector Lake_albedo_1,
-   IntegerVector Riverlak_cellNumber_int,
-   NumericVector Riverlak_water_m3,
-   NumericVector Riverlak_area_km2,
-   NumericVector Riverlak_capacity_m3,
-   NumericVector Riverlak_albedo_1,
-   NumericVector param_ATMOS_thr_Ts,
-   NumericVector param_SNOW_fac_f,
-   NumericVector param_SNOW_fac_Tmelt,
-   NumericVector param_EVATRANS_prt_alpha,
-   NumericVector param_EVATRANS_vic_gamma,
-   NumericVector param_EVATRANS_sup_k,
-   NumericVector param_EVATRANS_sup_gamma,
-   NumericVector param_EVATRANS_wat_petmax,
-   NumericVector param_INFILT_hbv_beta,
-   LogicalVector param_PERCOLA_wat_01,
-   NumericVector param_PERCOLA_wat_k,
-   NumericVector param_PERCOLA_wat_thresh,
-   NumericVector param_BASEFLOW_sur_k,
-   NumericVector param_Lake_acp_storeFactor,
-   NumericVector param_Lake_acp_gamma,
-   NumericVector param_Riverlak_lin_storeFactor,
-   bool if_allVariExport = false
+NumericMatrix WaterGAP3_N(
+    std::string name_Project,
+    int n_time,
+    int n_spat,
+    NumericMatrix ATMOS_precipitation_mm,
+    NumericMatrix ATMOS_temperature_Cel,
+    NumericMatrix ATMOS_solarRadiat_MJ,
+    NumericMatrix ATMOS_solarRadiatClearSky_MJ,
+    IntegerVector Upstream_cellNumber_int,
+    NumericMatrix Upstream_streamflow_m3,
+    NumericVector SNOW_ice_mm,
+    NumericVector LAND_area_km2,
+    NumericVector LAND_albedo_1,
+    NumericVector LAND_snowAlbedo_1,
+    NumericVector LAND_builtRatio_1,
+    NumericVector LAND_interceptWater_mm,
+    NumericMatrix LAND_interceptCapacity_mm,
+    NumericVector SOIL_water_mm,
+    NumericVector SOIL_capacity_mm,
+    NumericVector SOIL_potentialPercola_mm,
+    NumericVector GROUND_water_mm,
+    NumericVector RIVER_water_m3,
+    NumericVector RIVER_length_km,
+    NumericVector RIVER_velocity_km,
+    NumericVector CELL_elevation_m,
+    List CELL_cellNumberStep_int,
+    List CELL_inflowCellNumberStep_int,
+    IntegerVector Lake_cellNumber_int,
+    NumericVector Lake_water_m3,
+    NumericVector Lake_area_km2,
+    NumericVector Lake_capacity_m3,
+    NumericVector Lake_albedo_1,
+    IntegerVector Riverlak_cellNumber_int,
+    NumericVector Riverlak_water_m3,
+    NumericVector Riverlak_area_km2,
+    NumericVector Riverlak_capacity_m3,
+    NumericVector Riverlak_albedo_1,
+    NumericVector param_ATMOS_thr_Ts,
+    NumericVector param_SNOW_fac_f,
+    NumericVector param_SNOW_fac_Tmelt,
+    NumericVector param_EVATRANS_prt_alpha,
+    NumericVector param_EVATRANS_vic_gamma,
+    NumericVector param_EVATRANS_sup_k,
+    NumericVector param_EVATRANS_sup_gamma,
+    NumericVector param_EVATRANS_wat_petmax,
+    NumericVector param_INFILT_hbv_beta,
+    LogicalVector param_PERCOLA_wat_01,
+    NumericVector param_PERCOLA_wat_k,
+    NumericVector param_PERCOLA_wat_thresh,
+    NumericVector param_BASEFLOW_sur_k,
+    NumericVector param_Lake_acp_storeFactor,
+    NumericVector param_Lake_acp_gamma,
+    NumericVector param_Riverlak_lin_storeFactor,
+    std::string path_VariExport = "NonExport"
 )
 {
 
@@ -199,7 +202,7 @@ List WaterGAP3_N(
      param_Riverlak_lin_storeFactor
    );
 
-   if (if_allVariExport) {
+   if (path_VariExport != "NonExport") {
      OUT_snow(i, _) = ATMOS_snowFall_mm;
      OUT_evatrans(i, _) = SOIL_evatrans_mm;
      OUT_landrunoff(i, _) = LAND_runoff_mm;
@@ -216,27 +219,22 @@ List WaterGAP3_N(
 
  }
 
- if (if_allVariExport) {
-   return List::create(
-     _["streamflow_m3"] = RIVER_outflow_m3,
-     _["snowFall_mm"] = OUT_snow,
-     _["evatrans_mm"] = OUT_evatrans,
-     _["soilwater_mm"] = OUT_soilwater,
-     _["groundwater_mm"] = OUT_groundwater,
-     _["snowice_mm"] = OUT_snowice,
-     _["runoff_mm"] = OUT_landrunoff,
-     _["baseflow_mm"] = OUT_groundbaseflow,
-     _["riverwater_m3"] = OUT_riverwater,
-     _["lakewater_m3"] = OUT_lakeWater,
-     _["lakeEva_mm"] = OUT_lakeEvalake,
-     _["riverlakwater_m3"] = OUT_riverlakWater,
-     _["riverlakEva_mm"] = OUT_riverlakEvalake
-   );
- } else{
-   return List::create(
-     _["streamflow_m3"] = RIVER_outflow_m3
-   );
+ if (path_VariExport != "NonExport") {
+   save_wgmat(OUT_snow,             path_VariExport + "ATMOS_snowFall_mm_"    + name_Project + ".gwmat");
+   save_wgmat(OUT_evatrans,         path_VariExport + "SOIL_evatrans_mm_"     + name_Project + ".gwmat");
+   save_wgmat(OUT_landrunoff,       path_VariExport + "LAND_runoff_mm_"       + name_Project + ".gwmat");
+   save_wgmat(OUT_soilwater,        path_VariExport + "SOIL_water_mm_"        + name_Project + ".gwmat");
+   save_wgmat(OUT_groundwater,      path_VariExport + "GROUND_water_mm_"      + name_Project + ".gwmat");
+   save_wgmat(OUT_groundbaseflow,   path_VariExport + "GROUND_baseflow_mm_"   + name_Project + ".gwmat");
+   save_wgmat(OUT_snowice,          path_VariExport + "SNOW_ice_mm_"          + name_Project + ".gwmat");
+   save_wgmat(OUT_riverwater,       path_VariExport + "RIVER_water_m3_"       + name_Project + ".gwmat");
+   save_wgmat(OUT_lakeWater,        path_VariExport + "Lake_water_m3_"        + name_Project + ".gwmat");
+   save_wgmat(OUT_lakeEvalake,      path_VariExport + "Lake_evatrans_mm_"     + name_Project + ".gwmat");
+   save_wgmat(OUT_riverlakWater,    path_VariExport + "Riverlak_water_m3_"    + name_Project + ".gwmat");
+   save_wgmat(OUT_riverlakEvalake,  path_VariExport + "Riverlak_evatrans_mm_" + name_Project + ".gwmat");
  }
+
+ return RIVER_outflow_m3;
 
 
 }

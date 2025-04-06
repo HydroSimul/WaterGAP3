@@ -6,6 +6,7 @@
 \title{WaterGAP3}
 \usage{
 WaterGAP3_N(
+  name_Project,
   n_time,
   n_spat,
   ATMOS_precipitation_mm,
@@ -57,10 +58,12 @@ WaterGAP3_N(
   param_Lake_acp_storeFactor,
   param_Lake_acp_gamma,
   param_Riverlak_lin_storeFactor,
-  if_allVariExport = FALSE
+  path_VariExport = "NonExport"
 )
 }
 \arguments{
+\item{name_Project}{A short identifier for the current simulation or scenario (e.g., "baseline", "future2050"). Used to label output files.}
+
 \item{n_time}{(int) number of time steps}
 
 \item{n_spat}{(int) number of spatial units}
@@ -117,7 +120,7 @@ WaterGAP3_N(
 
 \item{Riverlak_capacity_m3}{(m3) total capacity of the river-lake system}
 
-\item{if_allVariExport}{(bool) whether export all the state variables (default in false)}
+\item{path_VariExport}{Directory path (as a string) where model output variables (e.g., soil moisture, runoff) will be saved.}
 }
 \value{
 streamflow m3
