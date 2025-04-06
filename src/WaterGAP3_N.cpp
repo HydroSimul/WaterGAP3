@@ -220,6 +220,7 @@ NumericMatrix WaterGAP3_N(
  }
 
  if (path_VariExport != "NonExport") {
+   save_wgmat(RIVER_outflow_m3,     path_VariExport + "CELL_discharge_m3_"    + name_Project + ".gwmat");
    save_wgmat(OUT_snow,             path_VariExport + "ATMOS_snowFall_mm_"    + name_Project + ".gwmat");
    save_wgmat(OUT_evatrans,         path_VariExport + "SOIL_evatrans_mm_"     + name_Project + ".gwmat");
    save_wgmat(OUT_landrunoff,       path_VariExport + "LAND_runoff_mm_"       + name_Project + ".gwmat");
