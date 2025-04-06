@@ -4,7 +4,6 @@
 //' WaterGAP3
 //' @name WaterGAP3
 //' @inheritParams HydroGallery::all_vari
-//' @param param_Evalake_vic_gamma same as param_EVATRANS_vic_gamma
 //' @return streamflow m3
 //' @export
 // [[Rcpp::export]]
@@ -57,10 +56,8 @@ List WaterGAP3_N(
    NumericVector param_PERCOLA_wat_k,
    NumericVector param_PERCOLA_wat_thresh,
    NumericVector param_BASEFLOW_sur_k,
-   NumericVector param_Lake_Eva_vic_gamma,
    NumericVector param_Lake_acp_storeFactor,
    NumericVector param_Lake_acp_gamma,
-   NumericVector param_Riverlak_Eva_vic_gamma,
    NumericVector param_Riverlak_lin_storeFactor,
    bool if_allVariExport = false
 )

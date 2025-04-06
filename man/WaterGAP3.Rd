@@ -54,10 +54,8 @@ WaterGAP3_N(
   param_PERCOLA_wat_k,
   param_PERCOLA_wat_thresh,
   param_BASEFLOW_sur_k,
-  param_Lake_Eva_vic_gamma,
   param_Lake_acp_storeFactor,
   param_Lake_acp_gamma,
-  param_Riverlak_Eva_vic_gamma,
   param_Riverlak_lin_storeFactor,
   if_allVariExport = FALSE
 )
@@ -120,8 +118,6 @@ WaterGAP3_N(
 \item{Riverlak_capacity_m3}{(m3) total capacity of the river-lake system}
 
 \item{if_allVariExport}{(bool) whether export all the state variables (default in false)}
-
-\item{param_Evalake_vic_gamma}{same as param_EVATRANS_vic_gamma}
 }
 \value{
 streamflow m3
