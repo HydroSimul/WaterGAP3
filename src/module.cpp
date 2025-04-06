@@ -8,6 +8,7 @@ NumericVector module_land_WaterGAP3(
     NumericVector ATMOS_solarRadiatClearSky_MJ,
     NumericVector& ATMOS_snowFall_mm,
     NumericVector& SNOW_ice_mm,
+    NumericVector LAND_area_km2,
     NumericVector LAND_albedo_1,
     NumericVector LAND_snowAlbedo_1,
     NumericVector LAND_builtRatio_1,
@@ -20,7 +21,6 @@ NumericVector module_land_WaterGAP3(
     NumericVector& SOIL_evatrans_mm,
     NumericVector& GROUND_water_mm,
     NumericVector& GROUND_basefloW_mm,
-    NumericVector CELL_landArea_km2,
     NumericVector CELL_elevation_m,
     NumericVector param_ATMOS_thr_Ts,
     NumericVector param_EVATRANS_prt_alpha,
@@ -98,7 +98,7 @@ NumericVector module_land_WaterGAP3(
 
 
 
-  return (LAND_runoff_mm + GROUND_basefloW_mm) * CELL_landArea_km2 * 1000;
+  return (LAND_runoff_mm + GROUND_basefloW_mm) * LAND_area_km2 * 1000;
 }
 
 NumericVector module_waterbody_WaterGAP3(

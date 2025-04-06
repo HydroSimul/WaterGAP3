@@ -15,6 +15,7 @@ WaterGAP3_N(
   Upstream_cellNumber_int,
   Upstream_streamflow_m3,
   SNOW_ice_mm,
+  LAND_area_km2,
   LAND_albedo_1,
   LAND_snowAlbedo_1,
   LAND_builtRatio_1,
@@ -27,7 +28,6 @@ WaterGAP3_N(
   RIVER_water_m3,
   RIVER_length_km,
   RIVER_velocity_km,
-  CELL_landArea_km2,
   CELL_elevation_m,
   CELL_cellNumberStep_int,
   CELL_inflowCellNumberStep_int,
@@ -98,8 +98,6 @@ WaterGAP3_N(
 \item{RIVER_length_km}{(km) river length}
 
 \item{RIVER_velocity_km}{(km/TS) river velocity}
-
-\item{CELL_landArea_km2}{(km2) land area of the basin}
 
 \item{CELL_cellNumberStep_int}{(int) step number of basin cells}
 
