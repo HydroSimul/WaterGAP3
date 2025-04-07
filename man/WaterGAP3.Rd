@@ -6,7 +6,7 @@
 \title{WaterGAP3}
 \usage{
 WaterGAP3_N(
-  name_Project,
+  name_Region,
   n_time,
   n_spat,
   ATMOS_precipitation_mm,
@@ -58,11 +58,12 @@ WaterGAP3_N(
   param_Lake_acp_storeFactor,
   param_Lake_acp_gamma,
   param_Riverlak_lin_storeFactor,
+  path_FinalState = "NonExport",
   path_VariExport = "NonExport"
 )
 }
 \arguments{
-\item{name_Project}{A short identifier for the current simulation or scenario (e.g., "baseline", "future2050"). Used to label output files.}
+\item{name_Region}{A short identifier of continents: "eu", "af, "as", "au", "na", "sa".}
 
 \item{n_time}{(int) number of time steps}
 

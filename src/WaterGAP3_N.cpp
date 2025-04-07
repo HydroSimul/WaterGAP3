@@ -4,13 +4,13 @@
 //' WaterGAP3
 //' @name WaterGAP3
 //' @inheritParams HydroGallery::all_vari
-//' @param name_Project A short identifier for the current simulation or scenario (e.g., "baseline", "future2050"). Used to label output files.
+//' @param name_Region A short identifier of continents: "eu", "af, "as", "au", "na", "sa".
 //' @param path_VariExport Directory path (as a string) where model output variables (e.g., soil moisture, runoff) will be saved.
 //' @return streamflow m3
 //' @export
 // [[Rcpp::export]]
 NumericMatrix WaterGAP3_N(
-    std::string name_Project,
+    std::string name_Region,
     int n_time,
     int n_spat,
     NumericMatrix ATMOS_precipitation_mm,
@@ -62,6 +62,7 @@ NumericMatrix WaterGAP3_N(
     NumericVector param_Lake_acp_storeFactor,
     NumericVector param_Lake_acp_gamma,
     NumericVector param_Riverlak_lin_storeFactor,
+    std::string path_FinalState = "NonExport",
     std::string path_VariExport = "NonExport"
 )
 {
@@ -219,20 +220,30 @@ NumericMatrix WaterGAP3_N(
 
  }
 
+ if (path_FinalState != "NonExport") {
+   write_unf(SNOW_ice_mm,            path_FinalState + "SNOW_ice_mm_"            + name_Region + ".UNF0");
+   write_unf(LAND_interceptWater_mm, path_FinalState + "LAND_interceptWater_mm_" + name_Region + ".UNF0");
+   write_unf(SOIL_water_mm,          path_FinalState + "SOIL_water_mm_"          + name_Region + ".UNF0");
+   write_unf(GROUND_water_mm,        path_FinalState + "GROUND_water_mm_"        + name_Region + ".UNF0");
+   write_unf(RIVER_water_m3,         path_FinalState + "RIVER_water_m3_"         + name_Region + ".UNF0");
+   write_unf(Lake_water_m3,          path_FinalState + "Lake_water_m3_"          + name_Region + ".UNF0");
+   write_unf(Riverlak_water_m3,      path_FinalState + "Riverlak_water_m3_"      + name_Region + ".UNF0");
+ }
+
  if (path_VariExport != "NonExport") {
-   save_wgmat(RIVER_outflow_m3,     path_VariExport + "CELL_discharge_m3_"    + name_Project + ".wgmat");
-   save_wgmat(OUT_snow,             path_VariExport + "ATMOS_snowFall_mm_"    + name_Project + ".wgmat");
-   save_wgmat(OUT_evatrans,         path_VariExport + "SOIL_evatrans_mm_"     + name_Project + ".wgmat");
-   save_wgmat(OUT_landrunoff,       path_VariExport + "LAND_runoff_mm_"       + name_Project + ".wgmat");
-   save_wgmat(OUT_soilwater,        path_VariExport + "SOIL_water_mm_"        + name_Project + ".wgmat");
-   save_wgmat(OUT_groundwater,      path_VariExport + "GROUND_water_mm_"      + name_Project + ".wgmat");
-   save_wgmat(OUT_groundbaseflow,   path_VariExport + "GROUND_baseflow_mm_"   + name_Project + ".wgmat");
-   save_wgmat(OUT_snowice,          path_VariExport + "SNOW_ice_mm_"          + name_Project + ".wgmat");
-   save_wgmat(OUT_riverwater,       path_VariExport + "RIVER_water_m3_"       + name_Project + ".wgmat");
-   save_wgmat(OUT_lakeWater,        path_VariExport + "Lake_water_m3_"        + name_Project + ".wgmat");
-   save_wgmat(OUT_lakeEvalake,      path_VariExport + "Lake_evatrans_mm_"     + name_Project + ".wgmat");
-   save_wgmat(OUT_riverlakWater,    path_VariExport + "Riverlak_water_m3_"    + name_Project + ".wgmat");
-   save_wgmat(OUT_riverlakEvalake,  path_VariExport + "Riverlak_evatrans_mm_" + name_Project + ".wgmat");
+   save_wgmat(RIVER_outflow_m3,     path_VariExport + "CELL_discharge_m3_"    + name_Region + ".wgmat");
+   save_wgmat(OUT_snow,             path_VariExport + "ATMOS_snowFall_mm_"    + name_Region + ".wgmat");
+   save_wgmat(OUT_evatrans,         path_VariExport + "SOIL_evatrans_mm_"     + name_Region + ".wgmat");
+   save_wgmat(OUT_landrunoff,       path_VariExport + "LAND_runoff_mm_"       + name_Region + ".wgmat");
+   save_wgmat(OUT_soilwater,        path_VariExport + "SOIL_water_mm_"        + name_Region + ".wgmat");
+   save_wgmat(OUT_groundwater,      path_VariExport + "GROUND_water_mm_"      + name_Region + ".wgmat");
+   save_wgmat(OUT_groundbaseflow,   path_VariExport + "GROUND_baseflow_mm_"   + name_Region + ".wgmat");
+   save_wgmat(OUT_snowice,          path_VariExport + "SNOW_ice_mm_"          + name_Region + ".wgmat");
+   save_wgmat(OUT_riverwater,       path_VariExport + "RIVER_water_m3_"       + name_Region + ".wgmat");
+   save_wgmat(OUT_lakeWater,        path_VariExport + "Lake_water_m3_"        + name_Region + ".wgmat");
+   save_wgmat(OUT_lakeEvalake,      path_VariExport + "Lake_evatrans_mm_"     + name_Region + ".wgmat");
+   save_wgmat(OUT_riverlakWater,    path_VariExport + "Riverlak_water_m3_"    + name_Region + ".wgmat");
+   save_wgmat(OUT_riverlakEvalake,  path_VariExport + "Riverlak_evatrans_mm_" + name_Region + ".wgmat");
  }
 
  return RIVER_outflow_m3;
