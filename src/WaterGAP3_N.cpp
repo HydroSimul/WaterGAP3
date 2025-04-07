@@ -220,19 +220,19 @@ NumericMatrix WaterGAP3_N(
  }
 
  if (path_VariExport != "NonExport") {
-   save_wgmat(RIVER_outflow_m3,     path_VariExport + "CELL_discharge_m3_"    + name_Project + ".gwmat");
-   save_wgmat(OUT_snow,             path_VariExport + "ATMOS_snowFall_mm_"    + name_Project + ".gwmat");
-   save_wgmat(OUT_evatrans,         path_VariExport + "SOIL_evatrans_mm_"     + name_Project + ".gwmat");
-   save_wgmat(OUT_landrunoff,       path_VariExport + "LAND_runoff_mm_"       + name_Project + ".gwmat");
-   save_wgmat(OUT_soilwater,        path_VariExport + "SOIL_water_mm_"        + name_Project + ".gwmat");
-   save_wgmat(OUT_groundwater,      path_VariExport + "GROUND_water_mm_"      + name_Project + ".gwmat");
-   save_wgmat(OUT_groundbaseflow,   path_VariExport + "GROUND_baseflow_mm_"   + name_Project + ".gwmat");
-   save_wgmat(OUT_snowice,          path_VariExport + "SNOW_ice_mm_"          + name_Project + ".gwmat");
-   save_wgmat(OUT_riverwater,       path_VariExport + "RIVER_water_m3_"       + name_Project + ".gwmat");
-   save_wgmat(OUT_lakeWater,        path_VariExport + "Lake_water_m3_"        + name_Project + ".gwmat");
-   save_wgmat(OUT_lakeEvalake,      path_VariExport + "Lake_evatrans_mm_"     + name_Project + ".gwmat");
-   save_wgmat(OUT_riverlakWater,    path_VariExport + "Riverlak_water_m3_"    + name_Project + ".gwmat");
-   save_wgmat(OUT_riverlakEvalake,  path_VariExport + "Riverlak_evatrans_mm_" + name_Project + ".gwmat");
+   save_wgmat(RIVER_outflow_m3,     path_VariExport + "CELL_discharge_m3_"    + name_Project + ".wgmat");
+   save_wgmat(OUT_snow,             path_VariExport + "ATMOS_snowFall_mm_"    + name_Project + ".wgmat");
+   save_wgmat(OUT_evatrans,         path_VariExport + "SOIL_evatrans_mm_"     + name_Project + ".wgmat");
+   save_wgmat(OUT_landrunoff,       path_VariExport + "LAND_runoff_mm_"       + name_Project + ".wgmat");
+   save_wgmat(OUT_soilwater,        path_VariExport + "SOIL_water_mm_"        + name_Project + ".wgmat");
+   save_wgmat(OUT_groundwater,      path_VariExport + "GROUND_water_mm_"      + name_Project + ".wgmat");
+   save_wgmat(OUT_groundbaseflow,   path_VariExport + "GROUND_baseflow_mm_"   + name_Project + ".wgmat");
+   save_wgmat(OUT_snowice,          path_VariExport + "SNOW_ice_mm_"          + name_Project + ".wgmat");
+   save_wgmat(OUT_riverwater,       path_VariExport + "RIVER_water_m3_"       + name_Project + ".wgmat");
+   save_wgmat(OUT_lakeWater,        path_VariExport + "Lake_water_m3_"        + name_Project + ".wgmat");
+   save_wgmat(OUT_lakeEvalake,      path_VariExport + "Lake_evatrans_mm_"     + name_Project + ".wgmat");
+   save_wgmat(OUT_riverlakWater,    path_VariExport + "Riverlak_water_m3_"    + name_Project + ".wgmat");
+   save_wgmat(OUT_riverlakEvalake,  path_VariExport + "Riverlak_evatrans_mm_" + name_Project + ".wgmat");
  }
 
  return RIVER_outflow_m3;
