@@ -1,11 +1,12 @@
-#include "WaterGAP3_Module.h"
+#include "module.h"
 // [[Rcpp::interfaces(r, cpp)]]
 
 //' WaterGAP3
 //' @name WaterGAP3
 //' @inheritParams HydroGallery::all_vari
 //' @param name_Region A short identifier of continents: "eu", "af, "as", "au", "na", "sa".
-//' @param path_VariExport Directory path (as a string) where model output variables (e.g., soil moisture, runoff) will be saved.
+//' @param path_VariExport Directory path where model output variables (e.g., soil moisture, runoff) will be saved. If "NonExport", no variables will be exported.
+//' @param path_FinalState Directory path where final state variables will be saved. If "NonExport", final states will not be saved.
 //' @return streamflow m3
 //' @export
 // [[Rcpp::export]]

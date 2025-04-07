@@ -5,7 +5,8 @@
 #' @name WaterGAP3
 #' @inheritParams HydroGallery::all_vari
 #' @param name_Region A short identifier of continents: "eu", "af, "as", "au", "na", "sa".
-#' @param path_VariExport Directory path (as a string) where model output variables (e.g., soil moisture, runoff) will be saved.
+#' @param path_VariExport Directory path where model output variables (e.g., soil moisture, runoff) will be saved. If "NonExport", no variables will be exported.
+#' @param path_FinalState Directory path where final state variables will be saved. If "NonExport", final states will not be saved.
 #' @return streamflow m3
 #' @export
 WaterGAP3_N <- function(name_Region, n_time, n_spat, ATMOS_precipitation_mm, ATMOS_temperature_Cel, ATMOS_solarRadiat_MJ, ATMOS_solarRadiatClearSky_MJ, Upstream_cellNumber_int, Upstream_streamflow_m3, SNOW_ice_mm, LAND_area_km2, LAND_albedo_1, LAND_snowAlbedo_1, LAND_builtRatio_1, LAND_interceptWater_mm, LAND_interceptCapacity_mm, SOIL_water_mm, SOIL_capacity_mm, SOIL_potentialPercola_mm, GROUND_water_mm, RIVER_water_m3, RIVER_length_km, RIVER_velocity_km, CELL_elevation_m, CELL_cellNumberStep_int, CELL_inflowCellNumberStep_int, Lake_cellNumber_int, Lake_water_m3, Lake_area_km2, Lake_capacity_m3, Lake_albedo_1, Riverlak_cellNumber_int, Riverlak_water_m3, Riverlak_area_km2, Riverlak_capacity_m3, Riverlak_albedo_1, param_ATMOS_thr_Ts, param_SNOW_fac_f, param_SNOW_fac_Tmelt, param_EVATRANS_prt_alpha, param_EVATRANS_vic_gamma, param_EVATRANS_sup_k, param_EVATRANS_sup_gamma, param_EVATRANS_wat_petmax, param_INFILT_hbv_beta, param_PERCOLA_wat_01, param_PERCOLA_wat_k, param_PERCOLA_wat_thresh, param_BASEFLOW_sur_k, param_Lake_acp_storeFactor, param_Lake_acp_gamma, param_Riverlak_lin_storeFactor, path_FinalState = "NonExport", path_VariExport = "NonExport") {
@@ -71,6 +72,26 @@ bind_nc_WG3 <- function(path_FilesBind, path_Out, name_Variable) {
 #' @export
 read_nc_dim_WG3 <- function(path_File, dim_name) {
     .Call(`_WaterGAP3_read_nc_dim_WG3`, path_File, dim_name)
+}
+
+#' run_WaterGAP3
+#' @name run_WaterGAP3
+#' @inheritParams HydroGallery::WaterGAP3
+#' @description
+#' Run WaterGAP3_N hydrological model
+#'
+#' This function runs the WaterGAP3_N hydrological model for a specified region
+#' and time period, returning discharge calculations.
+#'
+#' @param path_MeteoInput Directory path containing meteorological input files.
+#' @param path_HydroParam Directory path containing hydrological parameter files.
+#' @param path_InitialState Directory path containing initial state files. If "UNKNOW", default initial states will be used.
+#' @param path_Boundary Directory path containing boundary condition files. If "UNKNOW", default boundary conditions will be used.
+#'
+#' @return A numeric matrix (CELL_discharge_m3) containing discharge values for each cell and time step.
+#' @export
+run_WaterGAP3_N <- function(n_Time, n_Spat, name_Region, path_MeteoInput, path_HydroParam, path_InitialState = "UNKNOW", path_Boundary = "UNKNOW", path_VariExport = "NonExport", path_FinalState = "NonExport") {
+    .Call(`_WaterGAP3_run_WaterGAP3_N`, n_Time, n_Spat, name_Region, path_MeteoInput, path_HydroParam, path_InitialState, path_Boundary, path_VariExport, path_FinalState)
 }
 
 #' read_UNF - Read data from UNF file

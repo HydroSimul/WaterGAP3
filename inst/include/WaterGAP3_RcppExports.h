@@ -127,6 +127,27 @@ namespace WaterGAP3 {
         return Rcpp::as<Rcpp::IntegerVector >(rcpp_result_gen);
     }
 
+    inline NumericMatrix run_WaterGAP3_N(int n_Time, int n_Spat, std::string name_Region, std::string path_MeteoInput, std::string path_HydroParam, std::string path_InitialState = "UNKNOW", std::string path_Boundary = "UNKNOW", std::string path_VariExport = "NonExport", std::string path_FinalState = "NonExport") {
+        typedef SEXP(*Ptr_run_WaterGAP3_N)(SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP);
+        static Ptr_run_WaterGAP3_N p_run_WaterGAP3_N = NULL;
+        if (p_run_WaterGAP3_N == NULL) {
+            validateSignature("NumericMatrix(*run_WaterGAP3_N)(int,int,std::string,std::string,std::string,std::string,std::string,std::string,std::string)");
+            p_run_WaterGAP3_N = (Ptr_run_WaterGAP3_N)R_GetCCallable("WaterGAP3", "_WaterGAP3_run_WaterGAP3_N");
+        }
+        RObject rcpp_result_gen;
+        {
+            RNGScope RCPP_rngScope_gen;
+            rcpp_result_gen = p_run_WaterGAP3_N(Shield<SEXP>(Rcpp::wrap(n_Time)), Shield<SEXP>(Rcpp::wrap(n_Spat)), Shield<SEXP>(Rcpp::wrap(name_Region)), Shield<SEXP>(Rcpp::wrap(path_MeteoInput)), Shield<SEXP>(Rcpp::wrap(path_HydroParam)), Shield<SEXP>(Rcpp::wrap(path_InitialState)), Shield<SEXP>(Rcpp::wrap(path_Boundary)), Shield<SEXP>(Rcpp::wrap(path_VariExport)), Shield<SEXP>(Rcpp::wrap(path_FinalState)));
+        }
+        if (rcpp_result_gen.inherits("interrupted-error"))
+            throw Rcpp::internal::InterruptedException();
+        if (Rcpp::internal::isLongjumpSentinel(rcpp_result_gen))
+            throw Rcpp::LongjumpException(rcpp_result_gen);
+        if (rcpp_result_gen.inherits("try-error"))
+            throw Rcpp::exception(Rcpp::as<std::string>(rcpp_result_gen).c_str());
+        return Rcpp::as<NumericMatrix >(rcpp_result_gen);
+    }
+
     inline SEXP read_unf(std::string fn_UNF) {
         typedef SEXP(*Ptr_read_unf)(SEXP);
         static Ptr_read_unf p_read_unf = NULL;

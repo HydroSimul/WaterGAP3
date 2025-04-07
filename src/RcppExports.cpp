@@ -244,6 +244,48 @@ RcppExport SEXP _WaterGAP3_read_nc_dim_WG3(SEXP path_FileSEXP, SEXP dim_nameSEXP
     UNPROTECT(1);
     return rcpp_result_gen;
 }
+// run_WaterGAP3_N
+NumericMatrix run_WaterGAP3_N(int n_Time, int n_Spat, std::string name_Region, std::string path_MeteoInput, std::string path_HydroParam, std::string path_InitialState, std::string path_Boundary, std::string path_VariExport, std::string path_FinalState);
+static SEXP _WaterGAP3_run_WaterGAP3_N_try(SEXP n_TimeSEXP, SEXP n_SpatSEXP, SEXP name_RegionSEXP, SEXP path_MeteoInputSEXP, SEXP path_HydroParamSEXP, SEXP path_InitialStateSEXP, SEXP path_BoundarySEXP, SEXP path_VariExportSEXP, SEXP path_FinalStateSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< int >::type n_Time(n_TimeSEXP);
+    Rcpp::traits::input_parameter< int >::type n_Spat(n_SpatSEXP);
+    Rcpp::traits::input_parameter< std::string >::type name_Region(name_RegionSEXP);
+    Rcpp::traits::input_parameter< std::string >::type path_MeteoInput(path_MeteoInputSEXP);
+    Rcpp::traits::input_parameter< std::string >::type path_HydroParam(path_HydroParamSEXP);
+    Rcpp::traits::input_parameter< std::string >::type path_InitialState(path_InitialStateSEXP);
+    Rcpp::traits::input_parameter< std::string >::type path_Boundary(path_BoundarySEXP);
+    Rcpp::traits::input_parameter< std::string >::type path_VariExport(path_VariExportSEXP);
+    Rcpp::traits::input_parameter< std::string >::type path_FinalState(path_FinalStateSEXP);
+    rcpp_result_gen = Rcpp::wrap(run_WaterGAP3_N(n_Time, n_Spat, name_Region, path_MeteoInput, path_HydroParam, path_InitialState, path_Boundary, path_VariExport, path_FinalState));
+    return rcpp_result_gen;
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP _WaterGAP3_run_WaterGAP3_N(SEXP n_TimeSEXP, SEXP n_SpatSEXP, SEXP name_RegionSEXP, SEXP path_MeteoInputSEXP, SEXP path_HydroParamSEXP, SEXP path_InitialStateSEXP, SEXP path_BoundarySEXP, SEXP path_VariExportSEXP, SEXP path_FinalStateSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(_WaterGAP3_run_WaterGAP3_N_try(n_TimeSEXP, n_SpatSEXP, name_RegionSEXP, path_MeteoInputSEXP, path_HydroParamSEXP, path_InitialStateSEXP, path_BoundarySEXP, path_VariExportSEXP, path_FinalStateSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    bool rcpp_isLongjump_gen = Rcpp::internal::isLongjumpSentinel(rcpp_result_gen);
+    if (rcpp_isLongjump_gen) {
+        Rcpp::internal::resumeJump(rcpp_result_gen);
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error("%s", CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
+}
 // read_unf
 SEXP read_unf(std::string fn_UNF);
 static SEXP _WaterGAP3_read_unf_try(SEXP fn_UNFSEXP) {
@@ -424,6 +466,7 @@ static int _WaterGAP3_RcppExport_validate(const char* sig) {
         signatures.insert("NumericMatrix(*read_nc_WG3)(std::string,std::string)");
         signatures.insert("void(*bind_nc_WG3)(std::vector<std::string>,std::string,std::string)");
         signatures.insert("Rcpp::IntegerVector(*read_nc_dim_WG3)(std::string,std::string)");
+        signatures.insert("NumericMatrix(*run_WaterGAP3_N)(int,int,std::string,std::string,std::string,std::string,std::string,std::string,std::string)");
         signatures.insert("SEXP(*read_unf)(std::string)");
         signatures.insert("void(*write_unf)(SEXP,std::string)");
         signatures.insert("void(*save_wgmat)(const NumericMatrix&,const std::string&)");
@@ -440,6 +483,7 @@ RcppExport SEXP _WaterGAP3_RcppExport_registerCCallable() {
     R_RegisterCCallable("WaterGAP3", "_WaterGAP3_read_nc_WG3", (DL_FUNC)_WaterGAP3_read_nc_WG3_try);
     R_RegisterCCallable("WaterGAP3", "_WaterGAP3_bind_nc_WG3", (DL_FUNC)_WaterGAP3_bind_nc_WG3_try);
     R_RegisterCCallable("WaterGAP3", "_WaterGAP3_read_nc_dim_WG3", (DL_FUNC)_WaterGAP3_read_nc_dim_WG3_try);
+    R_RegisterCCallable("WaterGAP3", "_WaterGAP3_run_WaterGAP3_N", (DL_FUNC)_WaterGAP3_run_WaterGAP3_N_try);
     R_RegisterCCallable("WaterGAP3", "_WaterGAP3_read_unf", (DL_FUNC)_WaterGAP3_read_unf_try);
     R_RegisterCCallable("WaterGAP3", "_WaterGAP3_write_unf", (DL_FUNC)_WaterGAP3_write_unf_try);
     R_RegisterCCallable("WaterGAP3", "_WaterGAP3_save_wgmat", (DL_FUNC)_WaterGAP3_save_wgmat_try);
@@ -455,6 +499,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_WaterGAP3_read_nc_WG3", (DL_FUNC) &_WaterGAP3_read_nc_WG3, 2},
     {"_WaterGAP3_bind_nc_WG3", (DL_FUNC) &_WaterGAP3_bind_nc_WG3, 3},
     {"_WaterGAP3_read_nc_dim_WG3", (DL_FUNC) &_WaterGAP3_read_nc_dim_WG3, 2},
+    {"_WaterGAP3_run_WaterGAP3_N", (DL_FUNC) &_WaterGAP3_run_WaterGAP3_N, 9},
     {"_WaterGAP3_read_unf", (DL_FUNC) &_WaterGAP3_read_unf, 1},
     {"_WaterGAP3_write_unf", (DL_FUNC) &_WaterGAP3_write_unf, 2},
     {"_WaterGAP3_save_wgmat", (DL_FUNC) &_WaterGAP3_save_wgmat, 2},

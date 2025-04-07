@@ -121,7 +121,9 @@ WaterGAP3_N(
 
 \item{Riverlak_capacity_m3}{(m3) total capacity of the river-lake system}
 
-\item{path_VariExport}{Directory path (as a string) where model output variables (e.g., soil moisture, runoff) will be saved.}
+\item{path_FinalState}{Directory path where final state variables will be saved. If "NonExport", final states will not be saved.}
+
+\item{path_VariExport}{Directory path where model output variables (e.g., soil moisture, runoff) will be saved. If "NonExport", no variables will be exported.}
 }
 \value{
 streamflow m3
