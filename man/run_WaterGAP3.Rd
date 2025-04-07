@@ -18,6 +18,8 @@ run_WaterGAP3_N(
 )
 }
 \arguments{
+\item{name_Region}{A short identifier of continents: "eu", "af, "as", "au", "na", "sa".}
+
 \item{path_MeteoInput}{Directory path containing meteorological input files.}
 
 \item{path_HydroParam}{Directory path containing hydrological parameter files.}
@@ -25,6 +27,10 @@ run_WaterGAP3_N(
 \item{path_InitialState}{Directory path containing initial state files. If "UNKNOW", default initial states will be used.}
 
 \item{path_Boundary}{Directory path containing boundary condition files. If "UNKNOW", default boundary conditions will be used.}
+
+\item{path_VariExport}{Directory path where model output variables (e.g., soil moisture, runoff) will be saved. If "NonExport", no variables will be exported.}
+
+\item{path_FinalState}{Directory path where final state variables will be saved. If "NonExport", final states will not be saved.}
 }
 \value{
 A numeric matrix (CELL_discharge_m3) containing discharge values for each cell and time step.

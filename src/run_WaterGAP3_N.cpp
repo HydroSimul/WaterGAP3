@@ -3,13 +3,13 @@
 
 //' run_WaterGAP3
 //' @name run_WaterGAP3
-//' @inheritParams HydroGallery::WaterGAP3
 //' @description
 //' Run WaterGAP3_N hydrological model
 //'
 //' This function runs the WaterGAP3_N hydrological model for a specified region
 //' and time period, returning discharge calculations.
 //'
+//' @inheritParams WaterGAP3
 //' @param path_MeteoInput Directory path containing meteorological input files.
 //' @param path_HydroParam Directory path containing hydrological parameter files.
 //' @param path_InitialState Directory path containing initial state files. If "UNKNOW", default initial states will be used.
