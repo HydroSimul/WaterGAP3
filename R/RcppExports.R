@@ -154,6 +154,63 @@ bind_wgmat <- function(input_files, output_file) {
     invisible(.Call(`_WaterGAP3_bind_wgmat`, input_files, output_file))
 }
 
+#' Withdraw water
+#' @rdname withdraw
+#'
+#' @description
+#' [withdraw_SingleCell] This function handles water withdrawal from a single cell's water storage.
+#' It updates the withdrawal deficit and the remaining water volume.
+#'
+#' @param CELL_withdrawal_m3 Vector of withdrawal requirements in cubic meters.
+#'   This represents water demand and will be updated to reflect remaining deficit.
+#' @param CELL_water_m3 Vector of available water volumes in cubic meters.
+#'   This will be updated to reflect remaining water after withdrawal.
+#' @return None. Parameters are updated by reference.
+#' @export
+withdraw_SingleCell <- function(CELL_withdrawal_m3, CELL_water_m3) {
+    invisible(.Call(`_WaterGAP3_withdraw_SingleCell`, CELL_withdrawal_m3, CELL_water_m3))
+}
+
+#' [withdrawSurface_AroundMax] This function identifies the surrounding cell with the maximum water availability
+#' and withdraws water from it to satisfy the demand.
+#' @name withdraw
+#' @param CELL_withdrawal_m3 Vector of water withdrawal requirements in cubic meters.
+#'   Will be updated to reflect remaining deficits after withdrawal.
+#' @param RIVER_water_m3 Vector of available river water volumes in cubic meters.
+#'   Will be updated to reflect remaining water after withdrawal.
+#' @param RESERVOIR_water_m3 Vector of available reservoir water volumes in cubic meters.
+#'   Will be updated to reflect remaining water after withdrawal.
+#' @param RIVERLAK_water_m3 Vector of available river-lake water volumes in cubic meters.
+#'   Will be updated to reflect remaining water after withdrawal.
+#' @param LAKE_water_m3 Vector of available lake water volumes in cubic meters.
+#'   Will be updated to reflect remaining water after withdrawal.
+#' @param CELL_cellNumberAround_int Matrix of cell indices that define surrounding cells.
+#'   Each column corresponds to a cell, with rows containing indices of surrounding cells.
+#' @return None. Parameters are updated by reference.
+#' @export
+withdrawSurface_AroundMax <- function(CELL_withdrawal_m3, RIVER_water_m3, RESERVOIR_water_m3, RIVERLAK_water_m3, LAKE_water_m3, CELL_cellNumberAround_int) {
+    invisible(.Call(`_WaterGAP3_withdrawSurface_AroundMax`, CELL_withdrawal_m3, RIVER_water_m3, RESERVOIR_water_m3, RIVERLAK_water_m3, LAKE_water_m3, CELL_cellNumberAround_int))
+}
+
+#' [withdrawSurface_Around] This function withdraws water from all surrounding cells proportionally
+#' based on their water availability.
+#' @name withdraw
+#' @export
+withdrawSurface_Around <- function(CELL_withdrawal_m3, RIVER_water_m3, RESERVOIR_water_m3, RIVERLAK_water_m3, LAKE_water_m3, CELL_cellNumberAround_int) {
+    invisible(.Call(`_WaterGAP3_withdrawSurface_Around`, CELL_withdrawal_m3, RIVER_water_m3, RESERVOIR_water_m3, RIVERLAK_water_m3, LAKE_water_m3, CELL_cellNumberAround_int))
+}
+
+#' [withdrawSurface_WithdrawNet] This function withdraws water by following a predefined network of cells
+#' from which water can be withdrawn.
+#' @name withdraw
+#' @param CELL_cellNumberWithdrawNet_int Matrix defining the withdrawal network.
+#'   Each column corresponds to a cell, with rows containing indices of cells
+#'   from which water can be withdrawn in order of priority.
+#' @export
+withdrawSurface_WithdrawNet <- function(CELL_withdrawal_m3, RIVER_water_m3, RESERVOIR_water_m3, RIVERLAK_water_m3, LAKE_water_m3, CELL_cellNumberWithdrawNet_int) {
+    invisible(.Call(`_WaterGAP3_withdrawSurface_WithdrawNet`, CELL_withdrawal_m3, RIVER_water_m3, RESERVOIR_water_m3, RIVERLAK_water_m3, LAKE_water_m3, CELL_cellNumberWithdrawNet_int))
+}
+
 # Register entry points for exported C++ functions
 methods::setLoadAction(function(ns) {
     .Call(`_WaterGAP3_RcppExport_registerCCallable`)
