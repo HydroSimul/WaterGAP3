@@ -7,6 +7,7 @@
 \usage{
 WaterGAP3_N(
   name_Region,
+  index_Time,
   n_time,
   n_spat,
   ATMOS_precipitation_mm,
@@ -64,6 +65,8 @@ WaterGAP3_N(
 }
 \arguments{
 \item{name_Region}{A short identifier of continents: "eu", "af, "as", "au", "na", "sa".}
+
+\item{index_Time}{A short identifier of time.}
 
 \item{n_time}{(int) number of time steps}
 

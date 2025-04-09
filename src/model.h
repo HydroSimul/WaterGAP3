@@ -5,6 +5,7 @@
 
 NumericMatrix WaterGAP3_N(
     std::string name_Region,
+    std::string index_Time,
     int n_time,
     int n_spat,
     NumericMatrix ATMOS_precipitation_mm,
