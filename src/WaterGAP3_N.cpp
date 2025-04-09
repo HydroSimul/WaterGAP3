@@ -5,7 +5,7 @@
 //' @name WaterGAP3
 //' @inheritParams HydroGallery::all_vari
 //' @param name_Region A short identifier of continents: "eu", "af, "as", "au", "na", "sa".
-//' @param index_Time A short identifier of time.
+//' @param mark_Time A short identifier of time.
 //' @param path_VariExport Directory path where model output variables (e.g., soil moisture, runoff) will be saved. If "NonExport", no variables will be exported.
 //' @param path_FinalState Directory path where final state variables will be saved. If "NonExport", final states will not be saved.
 //' @return streamflow m3
@@ -13,7 +13,7 @@
 // [[Rcpp::export]]
 NumericMatrix WaterGAP3_N(
     std::string name_Region,
-    std::string index_Time,
+    std::string mark_Time,
     int n_time,
     int n_spat,
     NumericMatrix ATMOS_precipitation_mm,
@@ -234,19 +234,19 @@ NumericMatrix WaterGAP3_N(
  }
 
  if (path_VariExport != "NonExport") {
-   save_wgmat(RIVER_outflow_m3,     path_VariExport + "CELL_discharge_m3_"    + name_Region + index_Time + ".wgmat");
-   save_wgmat(OUT_snow,             path_VariExport + "ATMOS_snowFall_mm_"    + name_Region + index_Time + ".wgmat");
-   save_wgmat(OUT_evatrans,         path_VariExport + "SOIL_evatrans_mm_"     + name_Region + index_Time + ".wgmat");
-   save_wgmat(OUT_landrunoff,       path_VariExport + "LAND_runoff_mm_"       + name_Region + index_Time + ".wgmat");
-   save_wgmat(OUT_soilwater,        path_VariExport + "SOIL_water_mm_"        + name_Region + index_Time + ".wgmat");
-   save_wgmat(OUT_groundwater,      path_VariExport + "GROUND_water_mm_"      + name_Region + index_Time + ".wgmat");
-   save_wgmat(OUT_groundbaseflow,   path_VariExport + "GROUND_baseflow_mm_"   + name_Region + index_Time + ".wgmat");
-   save_wgmat(OUT_snowice,          path_VariExport + "SNOW_ice_mm_"          + name_Region + index_Time + ".wgmat");
-   save_wgmat(OUT_riverwater,       path_VariExport + "RIVER_water_m3_"       + name_Region + index_Time + ".wgmat");
-   save_wgmat(OUT_lakeWater,        path_VariExport + "Lake_water_m3_"        + name_Region + index_Time + ".wgmat");
-   save_wgmat(OUT_lakeEvalake,      path_VariExport + "Lake_evatrans_mm_"     + name_Region + index_Time + ".wgmat");
-   save_wgmat(OUT_riverlakWater,    path_VariExport + "Riverlak_water_m3_"    + name_Region + index_Time + ".wgmat");
-   save_wgmat(OUT_riverlakEvalake,  path_VariExport + "Riverlak_evatrans_mm_" + name_Region + index_Time + ".wgmat");
+   save_wgmat(RIVER_outflow_m3,     path_VariExport + "CELL_discharge_m3_"    + name_Region + "_" + mark_Time + ".wgmat");
+   save_wgmat(OUT_snow,             path_VariExport + "ATMOS_snowFall_mm_"    + name_Region + "_" + mark_Time + ".wgmat");
+   save_wgmat(OUT_evatrans,         path_VariExport + "SOIL_evatrans_mm_"     + name_Region + "_" + mark_Time + ".wgmat");
+   save_wgmat(OUT_landrunoff,       path_VariExport + "LAND_runoff_mm_"       + name_Region + "_" + mark_Time + ".wgmat");
+   save_wgmat(OUT_soilwater,        path_VariExport + "SOIL_water_mm_"        + name_Region + "_" + mark_Time + ".wgmat");
+   save_wgmat(OUT_groundwater,      path_VariExport + "GROUND_water_mm_"      + name_Region + "_" + mark_Time + ".wgmat");
+   save_wgmat(OUT_groundbaseflow,   path_VariExport + "GROUND_baseflow_mm_"   + name_Region + "_" + mark_Time + ".wgmat");
+   save_wgmat(OUT_snowice,          path_VariExport + "SNOW_ice_mm_"          + name_Region + "_" + mark_Time + ".wgmat");
+   save_wgmat(OUT_riverwater,       path_VariExport + "RIVER_water_m3_"       + name_Region + "_" + mark_Time + ".wgmat");
+   save_wgmat(OUT_lakeWater,        path_VariExport + "Lake_water_m3_"        + name_Region + "_" + mark_Time + ".wgmat");
+   save_wgmat(OUT_lakeEvalake,      path_VariExport + "Lake_evatrans_mm_"     + name_Region + "_" + mark_Time + ".wgmat");
+   save_wgmat(OUT_riverlakWater,    path_VariExport + "Riverlak_water_m3_"    + name_Region + "_" + mark_Time + ".wgmat");
+   save_wgmat(OUT_riverlakEvalake,  path_VariExport + "Riverlak_evatrans_mm_" + name_Region + "_" + mark_Time + ".wgmat");
  }
 
  return RIVER_outflow_m3;

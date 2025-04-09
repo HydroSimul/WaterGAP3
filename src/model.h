@@ -1,3 +1,4 @@
+// Defines a header file containing function for WATERGAP3_Model/
 #ifndef __MODEL__
 #define __MODEL__
 

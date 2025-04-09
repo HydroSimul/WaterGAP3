@@ -6,10 +6,10 @@
 \title{run_WaterGAP3}
 \usage{
 run_WaterGAP3_N(
+  name_Region,
+  mark_Time,
   n_Time,
   n_Spat,
-  name_Region,
-  index_Time,
   path_MeteoInput,
   path_HydroParam,
   path_InitialState = "UNKNOW",
@@ -21,7 +21,7 @@ run_WaterGAP3_N(
 \arguments{
 \item{name_Region}{A short identifier of continents: "eu", "af, "as", "au", "na", "sa".}
 
-\item{index_Time}{A short identifier of time.}
+\item{mark_Time}{A short identifier of time.}
 
 \item{path_MeteoInput}{Directory path containing meteorological input files.}
 

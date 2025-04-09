@@ -18,7 +18,7 @@
 //' @return A numeric matrix (CELL_discharge_m3) containing discharge values for each cell and time step.
 //' @export
 // [[Rcpp::export]]
-NumericMatrix run_WaterGAP3_N(int n_Time, int n_Spat, std::string name_Region, std::string index_Time,
+NumericMatrix run_WaterGAP3_N(std::string name_Region, std::string mark_Time, int n_Time, int n_Spat,
                                   std::string path_MeteoInput, std::string path_HydroParam,
                                   std::string path_InitialState = "UNKNOW",
                                   std::string path_Boundary = "UNKNOW",
@@ -26,13 +26,13 @@ NumericMatrix run_WaterGAP3_N(int n_Time, int n_Spat, std::string name_Region, s
                                   std::string path_FinalState = "NonExport") {
 
  // Meteo Forcing Matrix
- NumericMatrix ATMOS_precipitation_mm = load_wgmat(path_MeteoInput + "ATMOS_precipitation_mm_" + name_Region + index_Time + ".wgmat");
- NumericMatrix ATMOS_temperature_Cel = load_wgmat(path_MeteoInput + "ATMOS_temperature_Cel_" + name_Region + index_Time + ".wgmat");
- NumericMatrix ATMOS_solarRadiat_MJ = load_wgmat(path_MeteoInput + "ATMOS_solarRadiat_MJ_" + name_Region + index_Time + ".wgmat");
- NumericMatrix ATMOS_solarRadiatClearSky_MJ = load_wgmat(path_MeteoInput + "ATMOS_solarRadiatClearSky_MJ_" + name_Region + index_Time + ".wgmat");
+ NumericMatrix ATMOS_precipitation_mm = load_wgmat(path_MeteoInput + "ATMOS_precipitation_mm_" + name_Region + "_" + mark_Time + ".wgmat");
+ NumericMatrix ATMOS_temperature_Cel = load_wgmat(path_MeteoInput + "ATMOS_temperature_Cel_" + name_Region + "_" + mark_Time + ".wgmat");
+ NumericMatrix ATMOS_solarRadiat_MJ = load_wgmat(path_MeteoInput + "ATMOS_solarRadiat_MJ_" + name_Region + "_" + mark_Time + ".wgmat");
+ NumericMatrix ATMOS_solarRadiatClearSky_MJ = load_wgmat(path_MeteoInput + "ATMOS_solarRadiatClearSky_MJ_" + name_Region + "_" + mark_Time + ".wgmat");
 
  // Calculate LAND_interceptCapacity_mm
- NumericMatrix LAND_leafAreaIndex_1 = load_wgmat(path_MeteoInput + "LAND_leafAreaIndex_1_" + name_Region + index_Time + ".wgmat");
+ NumericMatrix LAND_leafAreaIndex_1 = load_wgmat(path_MeteoInput + "LAND_leafAreaIndex_1_" + name_Region + "_" + mark_Time + ".wgmat");
  NumericMatrix LAND_interceptCapacity_mm = LAND_leafAreaIndex_1 * 0.3 + 0.01;
 
  // Upstream boundary
@@ -129,7 +129,7 @@ NumericMatrix run_WaterGAP3_N(int n_Time, int n_Spat, std::string name_Region, s
 
  // Call the main WaterGAP3_N function (this would need to be implemented in C++ as well)
  NumericMatrix CELL_discharge_m3 = WaterGAP3_N(name_Region,
-                                               index_Time,
+                                               mark_Time,
                                                n_Time,
                                                n_Spat,
                                                ATMOS_precipitation_mm,
@@ -181,8 +181,8 @@ NumericMatrix run_WaterGAP3_N(int n_Time, int n_Spat, std::string name_Region, s
                                                param_Lake_acp_storeFactor,
                                                param_Lake_acp_gamma,
                                                param_Riverlak_lin_storeFactor,
-                                               path_VariExport,
-                                               path_FinalState);
+                                               path_FinalState,
+                                               path_VariExport);
 
  // Return results
  return CELL_discharge_m3;
