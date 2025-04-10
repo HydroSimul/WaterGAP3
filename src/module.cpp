@@ -47,12 +47,12 @@ NumericVector module_land_WaterGAP3(
   ATMOS_rainFall_mm += -LAND_intercp;
 
   // // Potential Evapo
-  LAND_albedo_1 = ifelse(SNOW_ice_mm > 3, LAND_snowAlbedo_1, LAND_albedo_1);
+  NumericVector TEMP_albedo_1 = ifelse(SNOW_ice_mm > 3, LAND_snowAlbedo_1, LAND_albedo_1);
   NumericVector ATMOS_netRadiat_MJ = meteo_nettoRadiat_WaterGAP3(
     ATMOS_temperature_Cel,
     ATMOS_solarRadiat_MJ,
     ATMOS_solarRadiatClearSky_MJ,
-    LAND_albedo_1);
+    TEMP_albedo_1);
   ATMOS_potentialEvatrans_mm = evatransPotential_PriestleyTaylor(
     ATMOS_temperature_Cel,
     ATMOS_netRadiat_MJ,

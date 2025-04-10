@@ -26,13 +26,13 @@ NumericMatrix run_WaterGAP3_N(std::string name_Region, std::string mark_Time, in
                                   std::string path_FinalState = "NonExport") {
 
  // Meteo Forcing Matrix
- NumericMatrix ATMOS_precipitation_mm = load_wgmat(path_MeteoInput + "ATMOS_precipitation_mm_" + name_Region + "_" + mark_Time + ".wgmat");
- NumericMatrix ATMOS_temperature_Cel = load_wgmat(path_MeteoInput + "ATMOS_temperature_Cel_" + name_Region + "_" + mark_Time + ".wgmat");
- NumericMatrix ATMOS_solarRadiat_MJ = load_wgmat(path_MeteoInput + "ATMOS_solarRadiat_MJ_" + name_Region + "_" + mark_Time + ".wgmat");
- NumericMatrix ATMOS_solarRadiatClearSky_MJ = load_wgmat(path_MeteoInput + "ATMOS_solarRadiatClearSky_MJ_" + name_Region + "_" + mark_Time + ".wgmat");
+ NumericMatrix ATMOS_precipitation_mm = load_wgmat(path_MeteoInput + "ATMOS_precipitation_mm" + "_" + name_Region + "_" + mark_Time + ".wgmat");
+ NumericMatrix ATMOS_temperature_Cel = load_wgmat(path_MeteoInput + "ATMOS_temperature_Cel" + "_" + name_Region + "_" + mark_Time + ".wgmat");
+ NumericMatrix ATMOS_solarRadiat_MJ = load_wgmat(path_MeteoInput + "ATMOS_solarRadiat_MJ" + "_" + name_Region + "_" + mark_Time + ".wgmat");
+ NumericMatrix ATMOS_solarRadiatClearSky_MJ = load_wgmat(path_MeteoInput + "ATMOS_solarRadiatClearSky_MJ" + "_" + name_Region + "_" + mark_Time + ".wgmat");
 
  // Calculate LAND_interceptCapacity_mm
- NumericMatrix LAND_leafAreaIndex_1 = load_wgmat(path_MeteoInput + "LAND_leafAreaIndex_1_" + name_Region + "_" + mark_Time + ".wgmat");
+ NumericMatrix LAND_leafAreaIndex_1 = load_wgmat(path_MeteoInput + "LAND_leafAreaIndex_1" + "_" + name_Region + "_" + mark_Time + ".wgmat");
  NumericMatrix LAND_interceptCapacity_mm = LAND_leafAreaIndex_1 * 0.3 + 0.01;
 
  // Upstream boundary
@@ -47,40 +47,40 @@ NumericMatrix run_WaterGAP3_N(std::string name_Region, std::string mark_Time, in
    Upstream_streamflow_m3 = NumericMatrix(1, 1);
    Upstream_streamflow_m3(0, 0) = 0.0;
  } else {
-   Upstream_cellNumber_int = read_unf(path_Boundary + "Riverlak_cellNumber_int_" + name_Region + ".UNF4");
-   Upstream_streamflow_m3 = load_wgmat(path_Boundary + "Upstream_streamflow_m3_" + name_Region + ".wgmat");
+   Upstream_cellNumber_int = read_unf(path_Boundary + "Upstream_cellNumber_int" + "_" + name_Region + ".UNF4");
+   Upstream_streamflow_m3 = load_wgmat(path_Boundary + "Upstream_streamflow_m3" + "_" + name_Region + ".wgmat");
  }
  // Hydro Parameter Vector
  // LAND
- NumericVector LAND_area_km2 = read_unf(path_HydroParam + "LAND_area_km2_" + name_Region + ".UNF0");
- NumericVector LAND_albedo_1 = read_unf(path_HydroParam + "LAND_albedo_1_" + name_Region + ".UNF0");
- NumericVector LAND_snowAlbedo_1 = read_unf(path_HydroParam + "LAND_snowAlbedo_1_" + name_Region + ".UNF0");
- NumericVector LAND_builtRatio_1 = read_unf(path_HydroParam + "LAND_builtRatio_1_" + name_Region + ".UNF0");
+ NumericVector LAND_area_km2 = read_unf(path_HydroParam + "LAND_area_km2" + "_" + name_Region + ".UNF0");
+ NumericVector LAND_albedo_1 = read_unf(path_HydroParam + "LAND_albedo_1" + "_" + name_Region + ".UNF0");
+ NumericVector LAND_snowAlbedo_1 = read_unf(path_HydroParam + "LAND_snowAlbedo_1" + "_" + name_Region + ".UNF0");
+ NumericVector LAND_builtRatio_1 = read_unf(path_HydroParam + "LAND_builtRatio_1" + "_" + name_Region + ".UNF0");
 
  // SOIL
- NumericVector SOIL_capacity_mm = read_unf(path_HydroParam + "SOIL_capacity_mm_" + name_Region + ".UNF0");
- NumericVector SOIL_potentialPercola_mm = read_unf(path_HydroParam + "SOIL_potentialPercola_mm_" + name_Region + ".UNF0");
+ NumericVector SOIL_capacity_mm = read_unf(path_HydroParam + "SOIL_capacity_mm" + "_" + name_Region + ".UNF0");
+ NumericVector SOIL_potentialPercola_mm = read_unf(path_HydroParam + "SOIL_potentialPercola_mm" + "_" + name_Region + ".UNF0");
 
  // RIVER
- NumericVector RIVER_length_km = read_unf(path_HydroParam + "RIVER_length_km_" + name_Region + ".UNF0");
- NumericVector RIVER_velocity_km = read_unf(path_HydroParam + "RIVER_velocity_km_" + name_Region + ".UNF0");
+ NumericVector RIVER_length_km = read_unf(path_HydroParam + "RIVER_length_km" + "_" + name_Region + ".UNF0");
+ NumericVector RIVER_velocity_km = read_unf(path_HydroParam + "RIVER_velocity_km" + "_" + name_Region + ".UNF0");
 
  // CELL
- NumericVector CELL_elevation_m = read_unf(path_HydroParam + "CELL_elevation_m_" + name_Region + ".UNF0");
- List CELL_cellNumberStep_int = read_int_vector_list(path_HydroParam + "CELL_cellNumberStep_int_" + name_Region + ".bin");
- List CELL_inflowCellNumberStep_int = read_int_matrix_list(path_HydroParam + "CELL_inflowCellNumberStep_int_" + name_Region + ".bin");
+ NumericVector CELL_elevation_m = read_unf(path_HydroParam + "CELL_elevation_m" + "_" + name_Region + ".UNF0");
+ List CELL_cellNumberStep_int = read_int_vector_list(path_HydroParam + "CELL_cellNumberStep_int" + "_" + name_Region + ".bin");
+ List CELL_inflowCellNumberStep_int = read_int_matrix_list(path_HydroParam + "CELL_inflowCellNumberStep_int" + "_" + name_Region + ".bin");
 
  // Lake
- IntegerVector Lake_cellNumber_int = read_unf(path_HydroParam + "Lake_cellNumber_int_" + name_Region + ".UNF4");
- NumericVector Lake_area_km2 = read_unf(path_HydroParam + "Lake_area_km2_" + name_Region + ".UNF0");
- NumericVector Lake_capacity_m3 = read_unf(path_HydroParam + "Lake_capacity_m3_" + name_Region + ".UNF0");
- NumericVector Lake_albedo_1 = read_unf(path_HydroParam + "Lake_albedo_1_" + name_Region + ".UNF0");
+ IntegerVector Lake_cellNumber_int = read_unf(path_HydroParam + "Lake_cellNumber_int" + "_" + name_Region + ".UNF4");
+ NumericVector Lake_area_km2 = read_unf(path_HydroParam + "Lake_area_km2" + "_" + name_Region + ".UNF0");
+ NumericVector Lake_capacity_m3 = read_unf(path_HydroParam + "Lake_capacity_m3" + "_" + name_Region + ".UNF0");
+ NumericVector Lake_albedo_1 = read_unf(path_HydroParam + "Lake_albedo_1" + "_" + name_Region + ".UNF0");
 
  // Riverlak
- IntegerVector Riverlak_cellNumber_int = read_unf(path_HydroParam + "Riverlak_cellNumber_int_" + name_Region + ".UNF4");
- NumericVector Riverlak_area_km2 = read_unf(path_HydroParam + "Riverlak_area_km2_" + name_Region + ".UNF0");
- NumericVector Riverlak_capacity_m3 = read_unf(path_HydroParam + "Riverlak_capacity_m3_" + name_Region + ".UNF0");
- NumericVector Riverlak_albedo_1 = read_unf(path_HydroParam + "Riverlak_albedo_1_" + name_Region + ".UNF0");
+ IntegerVector Riverlak_cellNumber_int = read_unf(path_HydroParam + "Riverlak_cellNumber_int" + "_" + name_Region + ".UNF4");
+ NumericVector Riverlak_area_km2 = read_unf(path_HydroParam + "Riverlak_area_km2" + "_" + name_Region + ".UNF0");
+ NumericVector Riverlak_capacity_m3 = read_unf(path_HydroParam + "Riverlak_capacity_m3" + "_" + name_Region + ".UNF0");
+ NumericVector Riverlak_albedo_1 = read_unf(path_HydroParam + "Riverlak_albedo_1" + "_" + name_Region + ".UNF0");
 
  // Initial states
  NumericVector SNOW_ice_mm;
@@ -100,32 +100,32 @@ NumericMatrix run_WaterGAP3_N(std::string name_Region, std::string mark_Time, in
    Lake_water_m3 = Lake_capacity_m3 * 0.6;
    Riverlak_water_m3 = Riverlak_capacity_m3 * 0.6;
  } else {
-   SNOW_ice_mm = read_unf(path_InitialState + "SNOW_ice_mm_" + name_Region + ".UNF0");
-   LAND_interceptWater_mm = read_unf(path_InitialState + "LAND_interceptWater_mm_" + name_Region + ".UNF0");
-   SOIL_water_mm = read_unf(path_InitialState + "SOIL_water_mm_" + name_Region + ".UNF0");
-   GROUND_water_mm = read_unf(path_InitialState + "GROUND_water_mm_" + name_Region + ".UNF0");
-   RIVER_water_m3 = read_unf(path_InitialState + "RIVER_water_m3_" + name_Region + ".UNF0");
-   Lake_water_m3 = read_unf(path_InitialState + "Lake_water_m3_" + name_Region + ".UNF0");
-   Riverlak_water_m3 = read_unf(path_InitialState + "Riverlak_water_m3_" + name_Region + ".UNF0");
+   SNOW_ice_mm = read_unf(path_InitialState + "SNOW_ice_mm" + "_" + name_Region + ".UNF0");
+   LAND_interceptWater_mm = read_unf(path_InitialState + "LAND_interceptWater_mm" + "_" + name_Region + ".UNF0");
+   SOIL_water_mm = read_unf(path_InitialState + "SOIL_water_mm" + "_" + name_Region + ".UNF0");
+   GROUND_water_mm = read_unf(path_InitialState + "GROUND_water_mm" + "_" + name_Region + ".UNF0");
+   RIVER_water_m3 = read_unf(path_InitialState + "RIVER_water_m3" + "_" + name_Region + ".UNF0");
+   Lake_water_m3 = read_unf(path_InitialState + "Lake_water_m3" + "_" + name_Region + ".UNF0");
+   Riverlak_water_m3 = read_unf(path_InitialState + "Riverlak_water_m3" + "_" + name_Region + ".UNF0");
  }
 
  // Parameters
- NumericVector param_ATMOS_thr_Ts = read_unf(path_HydroParam + "param_ATMOS_thr_Ts_" + name_Region + ".UNF0");
- NumericVector param_SNOW_fac_f = read_unf(path_HydroParam + "param_SNOW_fac_f_" + name_Region + ".UNF0");
- NumericVector param_SNOW_fac_Tmelt = read_unf(path_HydroParam + "param_SNOW_fac_Tmelt_" + name_Region + ".UNF0");
- NumericVector param_EVATRANS_prt_alpha = read_unf(path_HydroParam + "param_EVATRANS_prt_alpha_" + name_Region + ".UNF0");
- NumericVector param_EVATRANS_vic_gamma = read_unf(path_HydroParam + "param_EVATRANS_vic_gamma_" + name_Region + ".UNF0");
- NumericVector param_EVATRANS_sup_k = read_unf(path_HydroParam + "param_EVATRANS_sup_k_" + name_Region + ".UNF0");
- NumericVector param_EVATRANS_sup_gamma = read_unf(path_HydroParam + "param_EVATRANS_sup_gamma_" + name_Region + ".UNF0");
- NumericVector param_EVATRANS_wat_petmax = read_unf(path_HydroParam + "param_EVATRANS_wat_petmax_" + name_Region + ".UNF0");
- NumericVector param_INFILT_hbv_beta = read_unf(path_HydroParam + "param_INFILT_hbv_beta_" + name_Region + ".UNF0");
- LogicalVector param_PERCOLA_wat_01 = read_unf(path_HydroParam + "param_PERCOLA_wat_01_" + name_Region + ".UNF1");
- NumericVector param_PERCOLA_wat_k = read_unf(path_HydroParam + "param_PERCOLA_wat_k_" + name_Region + ".UNF0");
- NumericVector param_PERCOLA_wat_thresh = read_unf(path_HydroParam + "param_PERCOLA_wat_thresh_" + name_Region + ".UNF0");
- NumericVector param_BASEFLOW_sur_k = read_unf(path_HydroParam + "param_BASEFLOW_sur_k_" + name_Region + ".UNF0");
- NumericVector param_Lake_acp_storeFactor = read_unf(path_HydroParam + "param_Lake_acp_storeFactor_" + name_Region + ".UNF0");
- NumericVector param_Lake_acp_gamma = read_unf(path_HydroParam + "param_Lake_acp_gamma_" + name_Region + ".UNF0");
- NumericVector param_Riverlak_lin_storeFactor = read_unf(path_HydroParam + "param_Riverlak_lin_storeFactor_" + name_Region + ".UNF0");
+ NumericVector param_ATMOS_thr_Ts = read_unf(path_HydroParam + "param_ATMOS_thr_Ts" + "_" + name_Region + ".UNF0");
+ NumericVector param_SNOW_fac_f = read_unf(path_HydroParam + "param_SNOW_fac_f" + "_" + name_Region + ".UNF0");
+ NumericVector param_SNOW_fac_Tmelt = read_unf(path_HydroParam + "param_SNOW_fac_Tmelt" + "_" + name_Region + ".UNF0");
+ NumericVector param_EVATRANS_prt_alpha = read_unf(path_HydroParam + "param_EVATRANS_prt_alpha" + "_" + name_Region + ".UNF0");
+ NumericVector param_EVATRANS_vic_gamma = read_unf(path_HydroParam + "param_EVATRANS_vic_gamma" + "_" + name_Region + ".UNF0");
+ NumericVector param_EVATRANS_sup_k = read_unf(path_HydroParam + "param_EVATRANS_sup_k" + "_" + name_Region + ".UNF0");
+ NumericVector param_EVATRANS_sup_gamma = read_unf(path_HydroParam + "param_EVATRANS_sup_gamma" + "_" + name_Region + ".UNF0");
+ NumericVector param_EVATRANS_wat_petmax = read_unf(path_HydroParam + "param_EVATRANS_wat_petmax" + "_" + name_Region + ".UNF0");
+ NumericVector param_INFILT_hbv_beta = read_unf(path_HydroParam + "param_INFILT_hbv_beta" + "_" + name_Region + ".UNF0");
+ LogicalVector param_PERCOLA_wat_01 = read_unf(path_HydroParam + "param_PERCOLA_wat_01" + "_" + name_Region + ".UNF1");
+ NumericVector param_PERCOLA_wat_k = read_unf(path_HydroParam + "param_PERCOLA_wat_k" + "_" + name_Region + ".UNF0");
+ NumericVector param_PERCOLA_wat_thresh = read_unf(path_HydroParam + "param_PERCOLA_wat_thresh" + "_" + name_Region + ".UNF0");
+ NumericVector param_BASEFLOW_sur_k = read_unf(path_HydroParam + "param_BASEFLOW_sur_k" + "_" + name_Region + ".UNF0");
+ NumericVector param_Lake_acp_storeFactor = read_unf(path_HydroParam + "param_Lake_acp_storeFactor" + "_" + name_Region + ".UNF0");
+ NumericVector param_Lake_acp_gamma = read_unf(path_HydroParam + "param_Lake_acp_gamma" + "_" + name_Region + ".UNF0");
+ NumericVector param_Riverlak_lin_storeFactor = read_unf(path_HydroParam + "param_Riverlak_lin_storeFactor" + "_" + name_Region + ".UNF0");
 
  // Call the main WaterGAP3_N function (this would need to be implemented in C++ as well)
  NumericMatrix CELL_discharge_m3 = WaterGAP3_N(name_Region,
