@@ -9,6 +9,7 @@ NumericVector module_land_WaterGAP3(
     NumericVector ATMOS_temperature_Cel,
     NumericVector ATMOS_solarRadiat_MJ,
     NumericVector ATMOS_solarRadiatClearSky_MJ,
+    NumericVector& ATMOS_potentialEvatrans_mm,
     NumericVector& ATMOS_snowFall_mm,
     NumericVector& SNOW_ice_mm,
     NumericVector LAND_area_km2,

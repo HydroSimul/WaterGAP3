@@ -6,6 +6,7 @@ NumericVector module_land_WaterGAP3(
     NumericVector ATMOS_temperature_Cel,
     NumericVector ATMOS_solarRadiat_MJ,
     NumericVector ATMOS_solarRadiatClearSky_MJ,
+    NumericVector& ATMOS_potentialEvatrans_mm,
     NumericVector& ATMOS_snowFall_mm,
     NumericVector& SNOW_ice_mm,
     NumericVector LAND_area_km2,
@@ -52,7 +53,7 @@ NumericVector module_land_WaterGAP3(
     ATMOS_solarRadiat_MJ,
     ATMOS_solarRadiatClearSky_MJ,
     LAND_albedo_1);
-  NumericVector ATMOS_potentialEvatrans_mm = evatransPotential_PriestleyTaylor(
+  ATMOS_potentialEvatrans_mm = evatransPotential_PriestleyTaylor(
     ATMOS_temperature_Cel,
     ATMOS_netRadiat_MJ,
     CELL_elevation_m,

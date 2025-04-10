@@ -70,7 +70,7 @@ NumericMatrix WaterGAP3_N(
 )
 {
 
- NumericVector ATMOS_rainFall_mm, ATMOS_snowFall_mm,
+ NumericVector ATMOS_rainFall_mm, ATMOS_snowFall_mm, ATMOS_potentialEvatrans_mm,
                SNOW_melt_mm,
                LAND_water_mm, LAND_runoff_mm,
                SOIL_evatrans_mm, SOIL_infilt_mm, SOIL_percola_mm,
@@ -85,7 +85,7 @@ NumericMatrix WaterGAP3_N(
    }
  }
 
- NumericMatrix OUT_snow(n_time, n_spat), OUT_evatrans(n_time, n_spat),
+ NumericMatrix OUT_snow(n_time, n_spat), OUT_evatrans(n_time, n_spat), OUT_potentialevatrans(n_time, n_spat),
  OUT_landrunoff(n_time, n_spat), OUT_groundbaseflow(n_time, n_spat),
  OUT_soilwater(n_time, n_spat), OUT_groundwater(n_time, n_spat),
  OUT_snowice(n_time, n_spat), OUT_snowmelt(n_time, n_spat),
@@ -109,6 +109,7 @@ NumericMatrix WaterGAP3_N(
      ATMOS_temperature_Cel(i, _),
      ATMOS_solarRadiat_MJ(i, _),
      ATMOS_solarRadiatClearSky_MJ(i, _),
+     ATMOS_potentialEvatrans_mm,
      ATMOS_snowFall_mm,
      SNOW_ice_mm,
      LAND_area_km2,
@@ -207,6 +208,7 @@ NumericMatrix WaterGAP3_N(
    );
 
    if (path_VariExport != "NonExport") {
+     OUT_potentialevatrans(i, _) = ATMOS_potentialEvatrans_mm;
      OUT_snow(i, _) = ATMOS_snowFall_mm;
      OUT_evatrans(i, _) = SOIL_evatrans_mm;
      OUT_landrunoff(i, _) = LAND_runoff_mm;
@@ -235,6 +237,7 @@ NumericMatrix WaterGAP3_N(
 
  if (path_VariExport != "NonExport") {
    save_wgmat(RIVER_outflow_m3,     path_VariExport + "CELL_discharge_m3_"    + name_Region + "_" + mark_Time + ".wgmat");
+   save_wgmat(OUT_potentialevatrans,path_VariExport + "ATMOS_potentialEvatrans_mm_"    + name_Region + "_" + mark_Time + ".wgmat");
    save_wgmat(OUT_snow,             path_VariExport + "ATMOS_snowFall_mm_"    + name_Region + "_" + mark_Time + ".wgmat");
    save_wgmat(OUT_evatrans,         path_VariExport + "SOIL_evatrans_mm_"     + name_Region + "_" + mark_Time + ".wgmat");
    save_wgmat(OUT_landrunoff,       path_VariExport + "LAND_runoff_mm_"       + name_Region + "_" + mark_Time + ".wgmat");
