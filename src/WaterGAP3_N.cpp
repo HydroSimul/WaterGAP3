@@ -206,6 +206,9 @@ NumericMatrix WaterGAP3_N(
      param_Riverlak_lin_storeFactor
    );
 
+   RIVER_water_m3 += -RIVER_outflow_m3(i, _);
+
+
    if (path_VariExport != "NonExport") {
      OUT_potentialevatrans(i, _) = ATMOS_potentialEvatrans_mm;
      OUT_snow(i, _) = ATMOS_snowFall_mm;
