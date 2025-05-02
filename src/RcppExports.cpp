@@ -314,62 +314,6 @@ RcppExport SEXP _WaterGAP3_bind_wgmat(SEXP input_filesSEXP, SEXP output_fileSEXP
     UNPROTECT(1);
     return rcpp_result_gen;
 }
-// withdraw_SingleCell
-void withdraw_SingleCell(NumericVector& CELL_withdrawal_m3, NumericVector& CELL_water_m3);
-RcppExport SEXP _WaterGAP3_withdraw_SingleCell(SEXP CELL_withdrawal_m3SEXP, SEXP CELL_water_m3SEXP) {
-BEGIN_RCPP
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector& >::type CELL_withdrawal_m3(CELL_withdrawal_m3SEXP);
-    Rcpp::traits::input_parameter< NumericVector& >::type CELL_water_m3(CELL_water_m3SEXP);
-    withdraw_SingleCell(CELL_withdrawal_m3, CELL_water_m3);
-    return R_NilValue;
-END_RCPP
-}
-// withdrawSurface_AroundMax
-void withdrawSurface_AroundMax(NumericVector& CELL_withdrawal_m3, NumericVector& RIVER_water_m3, NumericVector& RESERVOIR_water_m3, NumericVector& RIVERLAK_water_m3, NumericVector& LAKE_water_m3, IntegerMatrix CELL_cellNumberAround_int);
-RcppExport SEXP _WaterGAP3_withdrawSurface_AroundMax(SEXP CELL_withdrawal_m3SEXP, SEXP RIVER_water_m3SEXP, SEXP RESERVOIR_water_m3SEXP, SEXP RIVERLAK_water_m3SEXP, SEXP LAKE_water_m3SEXP, SEXP CELL_cellNumberAround_intSEXP) {
-BEGIN_RCPP
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector& >::type CELL_withdrawal_m3(CELL_withdrawal_m3SEXP);
-    Rcpp::traits::input_parameter< NumericVector& >::type RIVER_water_m3(RIVER_water_m3SEXP);
-    Rcpp::traits::input_parameter< NumericVector& >::type RESERVOIR_water_m3(RESERVOIR_water_m3SEXP);
-    Rcpp::traits::input_parameter< NumericVector& >::type RIVERLAK_water_m3(RIVERLAK_water_m3SEXP);
-    Rcpp::traits::input_parameter< NumericVector& >::type LAKE_water_m3(LAKE_water_m3SEXP);
-    Rcpp::traits::input_parameter< IntegerMatrix >::type CELL_cellNumberAround_int(CELL_cellNumberAround_intSEXP);
-    withdrawSurface_AroundMax(CELL_withdrawal_m3, RIVER_water_m3, RESERVOIR_water_m3, RIVERLAK_water_m3, LAKE_water_m3, CELL_cellNumberAround_int);
-    return R_NilValue;
-END_RCPP
-}
-// withdrawSurface_Around
-void withdrawSurface_Around(NumericVector& CELL_withdrawal_m3, NumericVector& RIVER_water_m3, NumericVector& RESERVOIR_water_m3, NumericVector& RIVERLAK_water_m3, NumericVector& LAKE_water_m3, IntegerMatrix CELL_cellNumberAround_int);
-RcppExport SEXP _WaterGAP3_withdrawSurface_Around(SEXP CELL_withdrawal_m3SEXP, SEXP RIVER_water_m3SEXP, SEXP RESERVOIR_water_m3SEXP, SEXP RIVERLAK_water_m3SEXP, SEXP LAKE_water_m3SEXP, SEXP CELL_cellNumberAround_intSEXP) {
-BEGIN_RCPP
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector& >::type CELL_withdrawal_m3(CELL_withdrawal_m3SEXP);
-    Rcpp::traits::input_parameter< NumericVector& >::type RIVER_water_m3(RIVER_water_m3SEXP);
-    Rcpp::traits::input_parameter< NumericVector& >::type RESERVOIR_water_m3(RESERVOIR_water_m3SEXP);
-    Rcpp::traits::input_parameter< NumericVector& >::type RIVERLAK_water_m3(RIVERLAK_water_m3SEXP);
-    Rcpp::traits::input_parameter< NumericVector& >::type LAKE_water_m3(LAKE_water_m3SEXP);
-    Rcpp::traits::input_parameter< IntegerMatrix >::type CELL_cellNumberAround_int(CELL_cellNumberAround_intSEXP);
-    withdrawSurface_Around(CELL_withdrawal_m3, RIVER_water_m3, RESERVOIR_water_m3, RIVERLAK_water_m3, LAKE_water_m3, CELL_cellNumberAround_int);
-    return R_NilValue;
-END_RCPP
-}
-// withdrawSurface_WithdrawNet
-void withdrawSurface_WithdrawNet(NumericVector& CELL_withdrawal_m3, NumericVector& RIVER_water_m3, NumericVector& RESERVOIR_water_m3, NumericVector& RIVERLAK_water_m3, NumericVector& LAKE_water_m3, IntegerMatrix CELL_cellNumberWithdrawNet_int);
-RcppExport SEXP _WaterGAP3_withdrawSurface_WithdrawNet(SEXP CELL_withdrawal_m3SEXP, SEXP RIVER_water_m3SEXP, SEXP RESERVOIR_water_m3SEXP, SEXP RIVERLAK_water_m3SEXP, SEXP LAKE_water_m3SEXP, SEXP CELL_cellNumberWithdrawNet_intSEXP) {
-BEGIN_RCPP
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector& >::type CELL_withdrawal_m3(CELL_withdrawal_m3SEXP);
-    Rcpp::traits::input_parameter< NumericVector& >::type RIVER_water_m3(RIVER_water_m3SEXP);
-    Rcpp::traits::input_parameter< NumericVector& >::type RESERVOIR_water_m3(RESERVOIR_water_m3SEXP);
-    Rcpp::traits::input_parameter< NumericVector& >::type RIVERLAK_water_m3(RIVERLAK_water_m3SEXP);
-    Rcpp::traits::input_parameter< NumericVector& >::type LAKE_water_m3(LAKE_water_m3SEXP);
-    Rcpp::traits::input_parameter< IntegerMatrix >::type CELL_cellNumberWithdrawNet_int(CELL_cellNumberWithdrawNet_intSEXP);
-    withdrawSurface_WithdrawNet(CELL_withdrawal_m3, RIVER_water_m3, RESERVOIR_water_m3, RIVERLAK_water_m3, LAKE_water_m3, CELL_cellNumberWithdrawNet_int);
-    return R_NilValue;
-END_RCPP
-}
 
 // validate (ensure exported C++ functions exist before calling them)
 static int _WaterGAP3_RcppExport_validate(const char* sig) { 
@@ -407,10 +351,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"_WaterGAP3_save_wgmat", (DL_FUNC) &_WaterGAP3_save_wgmat, 2},
     {"_WaterGAP3_load_wgmat", (DL_FUNC) &_WaterGAP3_load_wgmat, 1},
     {"_WaterGAP3_bind_wgmat", (DL_FUNC) &_WaterGAP3_bind_wgmat, 2},
-    {"_WaterGAP3_withdraw_SingleCell", (DL_FUNC) &_WaterGAP3_withdraw_SingleCell, 2},
-    {"_WaterGAP3_withdrawSurface_AroundMax", (DL_FUNC) &_WaterGAP3_withdrawSurface_AroundMax, 6},
-    {"_WaterGAP3_withdrawSurface_Around", (DL_FUNC) &_WaterGAP3_withdrawSurface_Around, 6},
-    {"_WaterGAP3_withdrawSurface_WithdrawNet", (DL_FUNC) &_WaterGAP3_withdrawSurface_WithdrawNet, 6},
     {"_WaterGAP3_RcppExport_registerCCallable", (DL_FUNC) &_WaterGAP3_RcppExport_registerCCallable, 0},
     {NULL, NULL, 0}
 };

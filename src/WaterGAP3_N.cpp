@@ -194,7 +194,7 @@ NumericMatrix WaterGAP3_N(
    if (Upstream_cellNumber_int(0) != 0) {
      subset_put(CELL_verticalflow_m3, Upstream_cellNumber_int, Upstream_streamflow_m3(i,_));
    }
-   RIVER_outflow_m3(i, _) = confluen_WaterGAP3_L(
+   RIVER_outflow_m3(i, _) = confluen_WaterGAP3_N(
      RIVER_water_m3,
      RIVER_length_km,
      RIVER_velocity_km,
@@ -202,7 +202,6 @@ NumericMatrix WaterGAP3_N(
      CELL_cellNumberStep_int,
      CELL_inflowCellNumberStep_int,
      Riverlak_cellNumber_int,
-     Riverlak_water_m3,
      Riverlak_capacity_m3,
      param_Riverlak_lin_storeFactor
    );
@@ -232,7 +231,7 @@ NumericMatrix WaterGAP3_N(
    write_unf(GROUND_water_mm,        path_FinalState + "GROUND_water_mm_"        + name_Region + ".UNF0");
    write_unf(RIVER_water_m3,         path_FinalState + "RIVER_water_m3_"         + name_Region + ".UNF0");
    write_unf(Lake_water_m3,          path_FinalState + "Lake_water_m3_"          + name_Region + ".UNF0");
-   write_unf(Riverlak_water_m3,      path_FinalState + "Riverlak_water_m3_"      + name_Region + ".UNF0");
+   // write_unf(Riverlak_water_m3,      path_FinalState + "Riverlak_water_m3_"      + name_Region + ".UNF0");
  }
 
  if (path_VariExport != "NonExport") {
@@ -248,7 +247,7 @@ NumericMatrix WaterGAP3_N(
    save_wgmat(OUT_riverwater,       path_VariExport + "RIVER_water_m3_"       + name_Region + "_" + mark_Time + ".wgmat");
    save_wgmat(OUT_lakeWater,        path_VariExport + "Lake_water_m3_"        + name_Region + "_" + mark_Time + ".wgmat");
    save_wgmat(OUT_lakeEvalake,      path_VariExport + "Lake_evatrans_mm_"     + name_Region + "_" + mark_Time + ".wgmat");
-   save_wgmat(OUT_riverlakWater,    path_VariExport + "Riverlak_water_m3_"    + name_Region + "_" + mark_Time + ".wgmat");
+   // save_wgmat(OUT_riverlakWater,    path_VariExport + "Riverlak_water_m3_"    + name_Region + "_" + mark_Time + ".wgmat");
    save_wgmat(OUT_riverlakEvalake,  path_VariExport + "Riverlak_evatrans_mm_" + name_Region + "_" + mark_Time + ".wgmat");
  }
 
