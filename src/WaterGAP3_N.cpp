@@ -207,7 +207,6 @@ NumericMatrix WaterGAP3_N(
    );
 
    RIVER_outflow_m3(i, _) = RIVER_outflow_m3_TEMP;
-   RIVER_water_m3 += -RIVER_outflow_m3_TEMP;
 
 
    if (path_VariExport != "NonExport") {
