@@ -188,7 +188,7 @@ NumericMatrix WaterGAP3_N(
 
 
    // confluen
-   RIVER_water_m3 += CELL_verticalflow_m3;
+   // RIVER_water_m3 += CELL_verticalflow_m3;
 
    // Horizontal
    if (Upstream_cellNumber_int(0) != 0) {
