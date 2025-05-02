@@ -2,6 +2,7 @@
 
 export(WaterGAP3_N)
 export(bind_wgmat)
+export(confluen_WaterGAP3_T)
 export(load_wgmat)
 export(read_unf)
 export(run_WaterGAP3_N)
