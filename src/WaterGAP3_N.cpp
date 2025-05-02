@@ -194,7 +194,7 @@ NumericMatrix WaterGAP3_N(
    if (Upstream_cellNumber_int(0) != 0) {
      subset_put(CELL_verticalflow_m3, Upstream_cellNumber_int, Upstream_streamflow_m3(i,_));
    }
-   RIVER_outflow_m3(i, _) = confluen_WaterGAP3_N(
+   NumericVector RIVER_outflow_m3_TEMP = confluen_WaterGAP3_N(
      RIVER_water_m3,
      RIVER_length_km,
      RIVER_velocity_km,
@@ -206,7 +206,8 @@ NumericMatrix WaterGAP3_N(
      param_Riverlak_lin_storeFactor
    );
 
-   RIVER_water_m3 += -RIVER_outflow_m3(i, _);
+   RIVER_outflow_m3(i, _) = RIVER_outflow_m3_TEMP;
+   RIVER_water_m3 += -RIVER_outflow_m3_TEMP;
 
 
    if (path_VariExport != "NonExport") {
