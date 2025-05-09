@@ -351,7 +351,7 @@ NumericMatrix run_WaterGAP3_N(std::string name_Region, std::string mark_Time, in
  NumericVector param_EVATRANS_sup_gamma = load_vecbin(path_HydroParam + "param_EVATRANS_sup_gamma" + "_" + name_Region + ".vecbin");
  NumericVector param_EVATRANS_wat_petmax = load_vecbin(path_HydroParam + "param_EVATRANS_wat_petmax" + "_" + name_Region + ".vecbin");
  NumericVector param_INFILT_hbv_beta = load_vecbin(path_HydroParam + "param_INFILT_hbv_beta" + "_" + name_Region + ".vecbin");
- LogicalVector param_PERCOLA_wat_01 = load_vecbin(path_HydroParam + "param_PERCOLA_wat_01" + "_" + name_Region + ".UNF1");
+ LogicalVector param_PERCOLA_wat_01 = load_vecbin(path_HydroParam + "param_PERCOLA_wat_01" + "_" + name_Region + ".vecbin");
  NumericVector param_PERCOLA_wat_k = load_vecbin(path_HydroParam + "param_PERCOLA_wat_k" + "_" + name_Region + ".vecbin");
  NumericVector param_PERCOLA_wat_thresh = load_vecbin(path_HydroParam + "param_PERCOLA_wat_thresh" + "_" + name_Region + ".vecbin");
  NumericVector param_BASEFLOW_sur_k = load_vecbin(path_HydroParam + "param_BASEFLOW_sur_k" + "_" + name_Region + ".vecbin");
