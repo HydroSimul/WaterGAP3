@@ -136,7 +136,8 @@ NumericVector module_waterbody_WaterGAP3(
   );
 
   // Step 2: Calculate vertical inflow in mm and convert to m3
-  return (ATMOS_precipitation_mm - Lake_evatrans_mm) * Lake_area_km2 * 1000; // can be negativ
+  NumericVector Lake_verticalFlow_m3 = (ATMOS_precipitation_mm - Lake_evatrans_mm) * Lake_area_km2 * 1000;
+  return pmax(Lake_verticalFlow_m3, -Lake_capacity_m3); // can be negativ
 
 }
 
