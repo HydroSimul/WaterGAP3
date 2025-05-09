@@ -138,7 +138,8 @@ NumericMatrix run_WaterGAP3_U(std::string name_Region, std::string mark_Time, in
    GROUND_water_mm = NumericVector(n_Spat, 0.1);
    RIVER_water_m3 = NumericVector(n_Spat, 0.1);
    Lake_water_m3 = Lake_capacity_m3 * 0.6;
-   Riverlak_water_m3 = Riverlak_capacity_m3 * 0.6;
+   subset_put(RIVER_water_m3, Riverlak_cellNumber_int, Riverlak_capacity_m3 * 0.6);
+   subset_put(RIVER_water_m3, Reservoi_cellNumber_int, Reservoi_capacity_m3 * 0.6);
  } else {
    SNOW_ice_mm = load_vecbin(path_InitialState + "SNOW_ice_mm" + "_" + name_Region + ".vecbin");
    LAND_interceptWater_mm = load_vecbin(path_InitialState + "LAND_interceptWater_mm" + "_" + name_Region + ".vecbin");
@@ -146,7 +147,6 @@ NumericMatrix run_WaterGAP3_U(std::string name_Region, std::string mark_Time, in
    GROUND_water_mm = load_vecbin(path_InitialState + "GROUND_water_mm" + "_" + name_Region + ".vecbin");
    RIVER_water_m3 = load_vecbin(path_InitialState + "RIVER_water_m3" + "_" + name_Region + ".vecbin");
    Lake_water_m3 = load_vecbin(path_InitialState + "Lake_water_m3" + "_" + name_Region + ".vecbin");
-   Riverlak_water_m3 = load_vecbin(path_InitialState + "Riverlak_water_m3" + "_" + name_Region + ".vecbin");
  }
 
  // Parameters
@@ -330,7 +330,7 @@ NumericMatrix run_WaterGAP3_N(std::string name_Region, std::string mark_Time, in
    GROUND_water_mm = NumericVector(n_Spat, 0.1);
    RIVER_water_m3 = NumericVector(n_Spat, 0.1);
    Lake_water_m3 = Lake_capacity_m3 * 0.6;
-   Riverlak_water_m3 = Riverlak_capacity_m3 * 0.6;
+   subset_put(RIVER_water_m3, Riverlak_cellNumber_int, Riverlak_capacity_m3 * 0.6);
  } else {
    SNOW_ice_mm = load_vecbin(path_InitialState + "SNOW_ice_mm" + "_" + name_Region + ".vecbin");
    LAND_interceptWater_mm = load_vecbin(path_InitialState + "LAND_interceptWater_mm" + "_" + name_Region + ".vecbin");
@@ -338,7 +338,6 @@ NumericMatrix run_WaterGAP3_N(std::string name_Region, std::string mark_Time, in
    GROUND_water_mm = load_vecbin(path_InitialState + "GROUND_water_mm" + "_" + name_Region + ".vecbin");
    RIVER_water_m3 = load_vecbin(path_InitialState + "RIVER_water_m3" + "_" + name_Region + ".vecbin");
    Lake_water_m3 = load_vecbin(path_InitialState + "Lake_water_m3" + "_" + name_Region + ".vecbin");
-   Riverlak_water_m3 = load_vecbin(path_InitialState + "Riverlak_water_m3" + "_" + name_Region + ".vecbin");
  }
 
  // Parameters
