@@ -111,7 +111,7 @@ NumericMatrix run_WaterGAP3_U(std::string name_Region, std::string mark_Time, in
  NumericVector Reservoi_meanDemand_m3 = load_vecbin(path_HydroParam + "Reservoi_meanDemand_m3" + "_" + name_Region + ".vecbin");
  NumericVector Reservoi_meanInflow_m3 = load_vecbin(path_HydroParam + "Reservoi_meanInflow_m3" + "_" + name_Region + ".vecbin");
  NumericVector Reservoi_releaseCoefficient_1 = load_vecbin(path_HydroParam + "Reservoi_releaseCoefficient_1" + "_" + name_Region + ".vecbin");
- NumericVector Reservoi_dayIrrigate_int = load_vecbin(path_HydroParam + "Reservoi_dayIrrigate_int" + "_" + name_Region + ".vecbin");
+ NumericVector Reservoi_dayControlStart_int = load_vecbin(path_HydroParam + "Reservoi_dayControlStart_int" + "_" + name_Region + ".vecbin");
 
  // // demand
  NumericMatrix Reservoi_demand_m3_READ = load_matbin(path_WateruseInput + "Reservoi_demand_m3" + "_" + name_Region + "_" + mark_Time + ".matbin");
@@ -220,7 +220,7 @@ NumericMatrix run_WaterGAP3_U(std::string name_Region, std::string mark_Time, in
                                              Reservoi_meanDemand_m3,
                                              Reservoi_meanInflow_m3,
                                              Reservoi_releaseCoefficient_1,
-                                             Reservoi_dayIrrigate_int,
+                                             Reservoi_dayControlStart_int,
                                              param_ATMOS_thr_Ts,
                                              param_SNOW_fac_f,
                                              param_SNOW_fac_Tmelt,

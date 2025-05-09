@@ -55,7 +55,7 @@ WaterGAP3_U(
   Reservoi_meanInflow_m3,
   Reservoi_meanDemand_m3,
   Reservoi_releaseCoefficient_1,
-  Reservoi_dayIrrigate_int,
+  Reservoi_dayControlStart_int,
   param_ATMOS_thr_Ts,
   param_SNOW_fac_f,
   param_SNOW_fac_Tmelt,

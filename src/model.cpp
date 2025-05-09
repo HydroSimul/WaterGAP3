@@ -61,7 +61,7 @@ NumericMatrix WaterGAP3_U(
     NumericVector Reservoi_meanInflow_m3,
     NumericVector Reservoi_meanDemand_m3,
     NumericVector Reservoi_releaseCoefficient_1,
-    NumericVector Reservoi_dayIrrigate_int,
+    NumericVector Reservoi_dayControlStart_int,
     NumericVector param_ATMOS_thr_Ts,
     NumericVector param_SNOW_fac_f,
     NumericVector param_SNOW_fac_Tmelt,
@@ -115,7 +115,7 @@ NumericMatrix WaterGAP3_U(
 
 
  for (int i = 0; i < n_time; i++) {
-  LogicalVector Reservoi_isIrrigate_01 = (Reservoi_dayIrrigate_int == i);
+  LogicalVector Reservoi_isIrrigate_01 = (Reservoi_dayControlStart_int == i);
 
 
    // Vertical
