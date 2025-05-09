@@ -260,7 +260,8 @@ NumericMatrix run_WaterGAP3_N(std::string name_Region, std::string mark_Time, in
  NumericMatrix ATMOS_precipitation_mm = load_matbin(path_MeteoInput + "ATMOS_precipitation_mm" + "_" + name_Region + "_" + mark_Time + ".matbin");
  NumericMatrix ATMOS_temperature_Cel = load_matbin(path_MeteoInput + "ATMOS_temperature_Cel" + "_" + name_Region + "_" + mark_Time + ".matbin");
  NumericMatrix ATMOS_solarRadiat_MJ = load_matbin(path_MeteoInput + "ATMOS_solarRadiat_MJ" + "_" + name_Region + "_" + mark_Time + ".matbin");
- NumericMatrix ATMOS_solarRadiatClearSky_MJ = load_matbin(path_HydroParam + "ATMOS_solarRadiatClearSky_MJ" + "_" + ".matbin");
+
+ NumericMatrix ATMOS_solarRadiatClearSky_MJ = load_matbin(path_HydroParam + "ATMOS_solarRadiatClearSky_MJ" + "_" + name_Region + ".matbin");
 
  // Calculate LAND_interceptCapacity_mm
  NumericMatrix LAND_leafAreaIndex_1 = load_matbin(path_MeteoInput + "LAND_leafAreaIndex_1" + "_" + name_Region + "_" + mark_Time + ".matbin");
